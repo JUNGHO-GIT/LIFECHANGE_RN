@@ -36,20 +36,6 @@
       android:permission="android.permission.BIND_REMOTEVIEWS">
     </service>
 
-    <!-- common widget -->
-    <receiver
-      android:name=".widget.CommonWidget"
-      android:exported="false"
-      android:label="CommonWidget">
-      <intent-filter>
-        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-        <action android:name="com.lifechange.WIDGET_CLICK" />
-      </intent-filter>
-      <meta-data
-        android:name="android.appwidget.provider"
-        android:resource="@xml/widget_common_provider" />
-    </receiver>
-
     <!-- detail widget -->
     <receiver
       android:name=".widget.DetailWidget"

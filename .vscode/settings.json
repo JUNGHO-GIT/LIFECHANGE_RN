@@ -34,4 +34,5 @@
     ".bundle": true,
     "yarn.lock": true
   },
+  "java.configuration.updateBuildConfiguration": "automatic",
 }
