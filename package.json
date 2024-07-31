@@ -9,7 +9,6 @@
     "start": "npx react-native start --reset-cache",
     "android": "npx react-native run-android",
     "build-clean": "cd android && gradlew clean && cd ..",
-    "build-sync": "cd android && taskkill /f /im java.exe && react-native run-android && cd .. && react-native bundle --platform android --dev true --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle",
     "resolve-load": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
     "kill-java": "taskkill /f /im java.exe",
     "push": "git add . && git commit -m 'update' && git push origin main"
