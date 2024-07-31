@@ -36,7 +36,7 @@ export const App = () => {
 
   const handlerBannerVisible = (newState: any) => {
     const {url} = newState;
-    if (url.includes("user") || url.includes("login")) {
+    if (url.includes("signup") || url.includes("login")) {
       setBannerVisible(false);
     }
     else {
