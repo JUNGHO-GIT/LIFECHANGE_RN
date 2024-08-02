@@ -40,7 +40,7 @@
     <receiver
       android:name=".widget.DetailWidget"
       android:exported="false"
-      android:label="DetailWidget">
+      android:label="오늘의 기록">
       <intent-filter>
         <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
         <action android:name="com.lifechange.WIDGET_CLICK" />

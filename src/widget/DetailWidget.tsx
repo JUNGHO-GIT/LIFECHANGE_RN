@@ -48,6 +48,14 @@ interface SleepProps {
 }
 
 // -------------------------------------------------------------------------------------------------
+const insertComma = (num: any) => {
+  if (num === "x") {
+    return "x";
+  }
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+// -------------------------------------------------------------------------------------------------
 const ExerciseSection  = ({ exercise }: ExerciseProps) => {
 
   const exercise_total_volume
@@ -85,7 +93,7 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
           imageWidth={20}
           imageHeight={20}
         />
-        <FlexWidget style={{width: 70, marginLeft: 20}}>
+        <FlexWidget style={{width: 60, marginLeft: 20}}>
           <TextWidget style={{fontSize: 16}}
             text={`볼륨`}
           />
@@ -98,13 +106,13 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
         {exercise_total_volume === "x" ? (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
             <TextWidget style={{fontSize: 16}}
-              text={`${exercise_total_volume}`}
+              text={`${insertComma(exercise_total_volume)}`}
             />
           </FlexWidget>
         ) : (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
             <TextWidget style={{fontSize: 16}}
-              text={`${exercise_total_volume}`}
+              text={`${insertComma(exercise_total_volume)}`}
             />
             <TextWidget style={{fontSize: 10, marginLeft: 10}}
               text={"vol"}
@@ -128,7 +136,7 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
           imageWidth={20}
           imageHeight={20}
         />
-        <FlexWidget style={{width: 70, marginLeft: 20}}>
+        <FlexWidget style={{width: 60, marginLeft: 20}}>
           <TextWidget style={{fontSize: 16}}
             text={`유산소`}
           />
@@ -170,7 +178,7 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
           imageWidth={20}
           imageHeight={20}
         />
-        <FlexWidget style={{width: 70, marginLeft: 20}}>
+        <FlexWidget style={{width: 60, marginLeft: 20}}>
           <TextWidget style={{fontSize: 16}}
             text={`체중`}
           />
@@ -183,13 +191,13 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
         {exercise_total_weight === "x" ? (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
             <TextWidget style={{fontSize: 16}}
-              text={`${exercise_total_weight}`}
+              text={`${insertComma(exercise_total_weight)}`}
             />
           </FlexWidget>
         ) : (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
             <TextWidget style={{fontSize: 16}}
-              text={`${exercise_total_weight}`}
+              text={`${insertComma(exercise_total_weight)}`}
             />
             <TextWidget style={{fontSize: 10, marginLeft: 10}}
               text={"kg"}
@@ -242,7 +250,7 @@ const FoodSection = ({ food }: FoodProps) => {
           imageWidth={20}
           imageHeight={20}
         />
-        <FlexWidget style={{width: 70, marginLeft: 20}}>
+        <FlexWidget style={{width: 60, marginLeft: 20}}>
           <TextWidget style={{fontSize: 16}}
             text={`칼로리`}
           />
@@ -255,13 +263,13 @@ const FoodSection = ({ food }: FoodProps) => {
         {food_total_kcal === "x" ? (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
             <TextWidget style={{fontSize: 16}}
-              text={`${food_total_kcal}`}
+              text={`${insertComma(food_total_kcal)}`}
             />
           </FlexWidget>
         ) : (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
             <TextWidget style={{fontSize: 16}}
-              text={`${food_total_kcal}`}
+              text={`${insertComma(food_total_kcal)}`}
             />
             <TextWidget style={{fontSize: 10, marginLeft: 10}}
               text={"kcal"}
@@ -285,8 +293,8 @@ const FoodSection = ({ food }: FoodProps) => {
           imageWidth={20}
           imageHeight={20}
         />
-        <FlexWidget style={{width: 70, marginLeft: 20}}>
-          <TextWidget style={{fontSize: 16}}
+        <FlexWidget style={{width: 60, marginLeft: 20}}>
+          <TextWidget style={{fontSize: 14}}
             text={`탄수화물`}
           />
         </FlexWidget>
@@ -298,13 +306,13 @@ const FoodSection = ({ food }: FoodProps) => {
         {food_total_carb === "x" ? (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
             <TextWidget style={{fontSize: 16}}
-              text={`${food_total_carb}`}
+              text={`${insertComma(food_total_carb)}`}
             />
           </FlexWidget>
         ) : (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
             <TextWidget style={{fontSize: 16}}
-              text={`${food_total_carb}`}
+              text={`${insertComma(food_total_carb)}`}
             />
             <TextWidget style={{fontSize: 10, marginLeft: 10}}
               text={"g"}
@@ -328,7 +336,7 @@ const FoodSection = ({ food }: FoodProps) => {
           imageWidth={20}
           imageHeight={20}
         />
-        <FlexWidget style={{width: 70, marginLeft: 20}}>
+        <FlexWidget style={{width: 60, marginLeft: 20}}>
           <TextWidget style={{fontSize: 16}}
             text={`단백질`}
           />
@@ -341,13 +349,13 @@ const FoodSection = ({ food }: FoodProps) => {
         {food_total_protein === "x" ? (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
             <TextWidget style={{fontSize: 16}}
-              text={`${food_total_protein}`}
+              text={`${insertComma(food_total_protein)}`}
             />
           </FlexWidget>
         ) : (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
             <TextWidget style={{fontSize: 16}}
-              text={`${food_total_protein}`}
+              text={`${insertComma(food_total_protein)}`}
             />
             <TextWidget style={{fontSize: 10, marginLeft: 10}}
               text={"g"}
@@ -370,7 +378,7 @@ const FoodSection = ({ food }: FoodProps) => {
           imageWidth={20}
           imageHeight={20}
         />
-        <FlexWidget style={{width: 70, marginLeft: 20}}>
+        <FlexWidget style={{width: 60, marginLeft: 20}}>
           <TextWidget style={{fontSize: 16}}
             text={`지방`}
           />
@@ -383,13 +391,13 @@ const FoodSection = ({ food }: FoodProps) => {
         {food_total_fat === "x" ? (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
             <TextWidget style={{fontSize: 16}}
-              text={`${food_total_fat}`}
+              text={`${insertComma(food_total_fat)}`}
             />
           </FlexWidget>
         ) : (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
             <TextWidget style={{fontSize: 16}}
-              text={`${food_total_fat}`}
+              text={`${insertComma(food_total_fat)}`}
             />
             <TextWidget style={{fontSize: 10, marginLeft: 10}}
               text={"g"}
@@ -436,7 +444,7 @@ const MoneySection = ({ money }: MoneyProps) => {
           imageWidth={20}
           imageHeight={20}
         />
-        <FlexWidget style={{width: 70, marginLeft: 20}}>
+        <FlexWidget style={{width: 40, marginLeft: 20}}>
           <TextWidget style={{fontSize: 16}}
             text={`수입`}
           />
@@ -449,7 +457,7 @@ const MoneySection = ({ money }: MoneyProps) => {
         {money_total_income === "x" ? (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
             <TextWidget style={{fontSize: 16}}
-              text={`${money_total_income}`}
+              text={`${insertComma(money_total_income)}`}
             />
           </FlexWidget>
         ) : (
@@ -458,7 +466,7 @@ const MoneySection = ({ money }: MoneyProps) => {
               text={"₩"}
             />
             <TextWidget style={{fontSize: 16}}
-              text={`${money_total_income}`}
+              text={`${insertComma(money_total_income)}`}
             />
           </FlexWidget>
         )}
@@ -478,7 +486,7 @@ const MoneySection = ({ money }: MoneyProps) => {
           imageWidth={20}
           imageHeight={20}
         />
-        <FlexWidget style={{width: 70, marginLeft: 20}}>
+        <FlexWidget style={{width: 40, marginLeft: 20}}>
           <TextWidget style={{fontSize: 16}}
             text={`지출`}
           />
@@ -491,7 +499,7 @@ const MoneySection = ({ money }: MoneyProps) => {
         {money_total_expense === "x" ? (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
             <TextWidget style={{fontSize: 16}}
-              text={`${money_total_expense}`}
+              text={`${insertComma(money_total_expense)}`}
             />
           </FlexWidget>
         ) : (
@@ -500,7 +508,7 @@ const MoneySection = ({ money }: MoneyProps) => {
               text={"₩"}
             />
             <TextWidget style={{fontSize: 16}}
-              text={`${money_total_expense}`}
+              text={`${insertComma(money_total_expense)}`}
             />
           </FlexWidget>
         )}
@@ -547,7 +555,7 @@ const SleepSection = ({ sleep }: SleepProps) => {
           imageWidth={20}
           imageHeight={20}
         />
-        <FlexWidget style={{width: 70, marginLeft: 20}}>
+        <FlexWidget style={{width: 40, marginLeft: 20}}>
           <TextWidget style={{fontSize: 16}}
             text={`취침`}
           />
@@ -590,7 +598,7 @@ const SleepSection = ({ sleep }: SleepProps) => {
           imageWidth={20}
           imageHeight={20}
         />
-        <FlexWidget style={{width: 70, marginLeft: 20}}>
+        <FlexWidget style={{width: 40, marginLeft: 20}}>
           <TextWidget style={{fontSize: 16}}
             text={`기상`}
           />
@@ -632,7 +640,7 @@ const SleepSection = ({ sleep }: SleepProps) => {
           imageWidth={20}
           imageHeight={20}
         />
-        <FlexWidget style={{width: 70, marginLeft: 20}}>
+        <FlexWidget style={{width: 40, marginLeft: 20}}>
           <TextWidget style={{fontSize: 16}}
             text={`수면`}
           />
