@@ -2,7 +2,6 @@
 
 import React, {type FC} from 'react';
 import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import {create} from "react-test-renderer";
 
 // -------------------------------------------------------------------------------------------------
 type Props = {
@@ -20,7 +19,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   alertContainer: {
-    width: 300,
+    width: 200,
     padding: 20,
     backgroundColor: 'white',
     borderRadius: 10,
@@ -33,7 +32,7 @@ const styles = StyleSheet.create({
   },
   message: {
     marginBottom: 20,
-    fontSize: 16,
+    fontSize: 17,
     textAlign: 'center',
     color: '#000000',
   },
