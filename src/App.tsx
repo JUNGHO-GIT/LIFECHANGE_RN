@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 // -------------------------------------------------------------------------------------------------
 export const App = () => {
   const [alertVisible, setAlertVisible] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");ddd
+  const [alertMessage, setAlertMessage] = useState("");
   const [bannerVisible, setBannerVisible] = useState(false);
   const [navigationEnabled, setNavigationEnabled] = useState(true);
 
@@ -29,7 +29,7 @@ export const App = () => {
     setNavigationEnabled(false);
   };
 
-  const handlerCloseAlert = () => {
+  const handlerAlertClose = () => {
     setAlertVisible(false);
     setNavigationEnabled(true);
   }
@@ -54,7 +54,7 @@ export const App = () => {
       <Alert
         alertVisible={alertVisible}
         alertMessage={alertMessage}
-        alertClose={handlerCloseAlert}
+        alertClose={handlerAlertClose}
       />
       {bannerVisible && <Banner />}
     </SafeAreaView>

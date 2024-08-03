@@ -35,4 +35,5 @@
     "yarn.lock": true
   },
   "java.configuration.updateBuildConfiguration": "automatic",
+  "typescript.tsdk": "node_modules\\typescript\\lib",
 }
