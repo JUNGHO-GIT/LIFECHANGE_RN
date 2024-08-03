@@ -18,7 +18,14 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
   const Widget = nameToWidget[widgetInfo.widgetName as keyof typeof nameToWidget] as any;
 
   const currentDate = moment().tz("Asia/Seoul").format("YYYY-MM-DD");
-  const currentDay = moment().tz("Asia/Seoul").format("ddd") === "Mon" ? "월" : moment().tz("Asia/Seoul").format("ddd") === "Tue" ? "화" : moment().tz("Asia/Seoul").format("ddd") === "Wed" ? "수" : moment().tz("Asia/Seoul").format("ddd") === "Thu" ? "목" : moment().tz("Asia/Seoul").format("ddd") === "Fri" ? "금" : moment().tz("Asia/Seoul").format("ddd") === "Sat" ? "토" : "일";
+  const currentDay
+    = moment().tz("Asia/Seoul").format("ddd") === "Mon" ? "월"
+    : moment().tz("Asia/Seoul").format("ddd") === "Tue" ? "화"
+    : moment().tz("Asia/Seoul").format("ddd") === "Wed" ? "수"
+    : moment().tz("Asia/Seoul").format("ddd") === "Thu" ? "목"
+    : moment().tz("Asia/Seoul").format("ddd") === "Fri" ? "금"
+    : moment().tz("Asia/Seoul").format("ddd") === "Sat" ? "토"
+    : "일";
   const currentTime = moment().tz("Asia/Seoul").format("HH:mm:ss");
 
   const URL = "https://www.junghomun.com";
@@ -109,7 +116,7 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
           sleep={sleep}
         />
       );
-      console.log(`WIDGET_ADDED ======================================${JSON.stringify(widgetInfo)}`);
+      console.log(`WIDGET_ADDED ${JSON.stringify(widgetInfo)}`);
       break;
 
     case 'WIDGET_RESIZED':
@@ -125,7 +132,7 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
           sleep={sleep}
         />
       );
-      console.log(`WIDGET_RESIZED ======================================${JSON.stringify(widgetInfo)}`);
+      console.log(`WIDGET_RESIZED ${JSON.stringify(widgetInfo)}`);
       break;
 
     case 'WIDGET_UPDATE':
@@ -141,7 +148,7 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
           sleep={sleep}
         />
       );
-      console.log(`WIDGET_UPDATE ======================================${JSON.stringify(widgetInfo)}`);
+      console.log(`WIDGET_UPDATE ${JSON.stringify(widgetInfo)}`);
       break;
 
     case 'WIDGET_CLICK':
@@ -158,11 +165,11 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
           sleep={sleep}
         />
       );
-      console.log(`WIDGET_CLICK ======================================${JSON.stringify(widgetInfo)}`);
+      console.log(`WIDGET_CLICK ${JSON.stringify(widgetInfo)}`);
       break;
 
     case 'WIDGET_DELETED':
-      console.log(`WIDGET_DELETED ======================================${JSON.stringify(widgetInfo)}`);
+      console.log(`WIDGET_DELETED ${JSON.stringify(widgetInfo)}`);
       break;
 
     default:

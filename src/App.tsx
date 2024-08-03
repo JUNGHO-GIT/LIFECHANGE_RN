@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 // -------------------------------------------------------------------------------------------------
 export const App = () => {
   const [alertVisible, setAlertVisible] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");
+  const [alertMessage, setAlertMessage] = useState("");ddd
   const [bannerVisible, setBannerVisible] = useState(false);
   const [navigationEnabled, setNavigationEnabled] = useState(true);
 

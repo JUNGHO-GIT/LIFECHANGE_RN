@@ -56,6 +56,53 @@ const insertComma = (num: any) => {
 }
 
 // -------------------------------------------------------------------------------------------------
+const SelectSection = ({isActive, iconName}: ActiveProps) => {
+  let imageLink = "";
+  if (iconName === "exercise") {
+    imageLink = require('../assets/images/exercise1.webp');
+  }
+  else if (iconName === "food") {
+    imageLink = require('../assets/images/food1.webp');
+  }
+  else if (iconName === "money") {
+    imageLink = require('../assets/images/money1.webp');
+  }
+  else if (iconName === "sleep") {
+    imageLink = require('../assets/images/sleep1.webp');
+  }
+  return (
+    <FlexWidget
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <FlexWidget
+        clickAction={iconName}
+        style={{
+          height: 40,
+          width: 40,
+          borderRadius: 12,
+          borderWidth: 1,
+          borderColor: "#c0c0c0",
+          backgroundColor: isActive ? "#b3e5fc" : "#ffffff",
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <ImageWidget
+          // @ts-ignore
+          image={imageLink}
+          imageHeight={25}
+          imageWidth={25}
+        />
+      </FlexWidget>
+    </FlexWidget>
+  );
+};
+
+// -------------------------------------------------------------------------------------------------
 const ExerciseSection  = ({ exercise }: ExerciseProps) => {
 
   const exercise_total_volume
@@ -70,20 +117,22 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
   return (
     <FlexWidget
       style={{
-        justifyContent: 'center',
-        alignItems: 'center',
         width: 'match_parent',
         height: 'match_parent',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
         padding: 10,
       }}
     >
       {/* exercise 1 */}
       <FlexWidget
         style={{
+          width: "wrap_content",
+          height: "wrap_content",
           flexDirection: 'row',
-          justifyContent: 'flex-start',
+          justifyContent: 'center',
           alignItems: "center",
-          width: 'match_parent',
           padding: 10,
           marginBottom: 10,
         }}
@@ -123,10 +172,11 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
       {/** exercise 2 */}
       <FlexWidget
         style={{
+          width: 'wrap_content',
+          height: 'wrap_content',
           flexDirection: 'row',
-          justifyContent: "flex-start",
+          justifyContent: 'center',
           alignItems: "center",
-          width: 'match_parent',
           padding: 10,
           marginBottom: 10,
         }}
@@ -166,11 +216,13 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
       {/* exercise 3 */}
       <FlexWidget
         style={{
+          width: 'wrap_content',
+          height: 'wrap_content',
           flexDirection: 'row',
-          justifyContent: "flex-start",
+          justifyContent: 'center',
           alignItems: "center",
-          width: 'match_parent',
           padding: 10,
+          marginBottom: 10,
         }}
       >
         <ImageWidget
@@ -227,20 +279,22 @@ const FoodSection = ({ food }: FoodProps) => {
   return (
     <FlexWidget
       style={{
-        justifyContent: 'center',
-        alignItems: 'center',
         width: 'match_parent',
         height: 'match_parent',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
         padding: 10,
       }}
     >
       {/* food 1 */}
       <FlexWidget
         style={{
+          width: 'wrap_content',
+          height: 'wrap_content',
           flexDirection: 'row',
-          justifyContent: 'flex-start',
+          justifyContent: 'center',
           alignItems: "center",
-          width: 'match_parent',
           padding: 10,
           marginBottom: 10,
         }}
@@ -280,10 +334,11 @@ const FoodSection = ({ food }: FoodProps) => {
       {/* food 2 */}
       <FlexWidget
         style={{
+          width: 'wrap_content',
+          height: 'wrap_content',
           flexDirection: 'row',
-          justifyContent: 'flex-start',
+          justifyContent: 'center',
           alignItems: "center",
-          width: 'match_parent',
           padding: 10,
           marginBottom: 10,
         }}
@@ -323,10 +378,11 @@ const FoodSection = ({ food }: FoodProps) => {
       {/* food 3 */}
       <FlexWidget
         style={{
+          width: 'wrap_content',
+          height: 'wrap_content',
           flexDirection: 'row',
-          justifyContent: 'flex-start',
+          justifyContent: 'center',
           alignItems: "center",
-          width: 'match_parent',
           padding: 10,
           marginBottom: 10,
         }}
@@ -366,11 +422,13 @@ const FoodSection = ({ food }: FoodProps) => {
       {/* food 4 */}
       <FlexWidget
         style={{
+          width: 'wrap_content',
+          height: 'wrap_content',
           flexDirection: 'row',
-          justifyContent: 'flex-start',
+          justifyContent: 'center',
           alignItems: "center",
-          width: 'match_parent',
           padding: 10,
+          marginBottom: 10,
         }}
       >
         <ImageWidget
@@ -421,20 +479,22 @@ const MoneySection = ({ money }: MoneyProps) => {
   return (
     <FlexWidget
       style={{
-        justifyContent: 'center',
-        alignItems: 'center',
         width: 'match_parent',
         height: 'match_parent',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
         padding: 10,
       }}
     >
       {/* money 1 */}
       <FlexWidget
         style={{
+          width: 'wrap_content',
+          height: 'wrap_content',
           flexDirection: 'row',
-          justifyContent: 'flex-start',
+          justifyContent: 'center',
           alignItems: "center",
-          width: 'match_parent',
           padding: 10,
           marginBottom: 10,
         }}
@@ -474,11 +534,13 @@ const MoneySection = ({ money }: MoneyProps) => {
       {/* money 2 */}
       <FlexWidget
         style={{
+          width: 'wrap_content',
+          height: 'wrap_content',
           flexDirection: 'row',
-          justifyContent: "flex-start",
+          justifyContent: 'center',
           alignItems: "center",
-          width: 'match_parent',
           padding: 10,
+          marginBottom: 10,
         }}
       >
         <ImageWidget
@@ -532,20 +594,22 @@ const SleepSection = ({ sleep }: SleepProps) => {
   return (
     <FlexWidget
       style={{
-        justifyContent: 'center',
-        alignItems: 'center',
         width: 'match_parent',
         height: 'match_parent',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
         padding: 10,
       }}
     >
       {/* sleep 1 */}
       <FlexWidget
         style={{
+          width: 'wrap_content',
+          height: 'wrap_content',
           flexDirection: 'row',
-          justifyContent: 'flex-start',
+          justifyContent: 'center',
           alignItems: "center",
-          width: 'match_parent',
           padding: 10,
           marginBottom: 10,
         }}
@@ -585,10 +649,11 @@ const SleepSection = ({ sleep }: SleepProps) => {
       {/* sleep 2 */}
       <FlexWidget
         style={{
+          width: 'wrap_content',
+          height: 'wrap_content',
           flexDirection: 'row',
-          justifyContent: "flex-start",
+          justifyContent: 'center',
           alignItems: "center",
-          width: 'match_parent',
           padding: 10,
           marginBottom: 10,
         }}
@@ -628,11 +693,13 @@ const SleepSection = ({ sleep }: SleepProps) => {
       {/* sleep 3 */}
       <FlexWidget
         style={{
+          width: 'wrap_content',
+          height: 'wrap_content',
           flexDirection: 'row',
-          justifyContent: "flex-start",
+          justifyContent: 'center',
           alignItems: "center",
-          width: 'match_parent',
           padding: 10,
+          marginBottom: 10,
         }}
       >
         <ImageWidget
@@ -672,53 +739,6 @@ const SleepSection = ({ sleep }: SleepProps) => {
 };
 
 // -------------------------------------------------------------------------------------------------
-const SelectSection = ({isActive, iconName}: ActiveProps) => {
-  let imageLink = "";
-  if (iconName === "exercise") {
-    imageLink = require('../assets/images/exercise1.webp');
-  }
-  else if (iconName === "food") {
-    imageLink = require('../assets/images/food1.webp');
-  }
-  else if (iconName === "money") {
-    imageLink = require('../assets/images/money1.webp');
-  }
-  else if (iconName === "sleep") {
-    imageLink = require('../assets/images/sleep1.webp');
-  }
-  return (
-    <FlexWidget
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <FlexWidget
-        clickAction={iconName}
-        style={{
-          height: 46,
-          width: 46,
-          borderRadius: 12,
-          borderWidth: 1,
-          borderColor: "#c0c0c0",
-          backgroundColor: isActive ? "#b3e5fc" : "#ffffff",
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <ImageWidget
-          // @ts-ignore
-          image={imageLink}
-          imageHeight={32}
-          imageWidth={32}
-        />
-      </FlexWidget>
-    </FlexWidget>
-  );
-};
-
-// -------------------------------------------------------------------------------------------------
 export const DetailWidget = (
   { activeView, currentDate, currentDay, currentTime, exercise, food, money, sleep } : ActiveViewProps & ExerciseProps & FoodProps & MoneyProps & SleepProps
 ) => {
@@ -728,10 +748,12 @@ export const DetailWidget = (
   return (
     <FlexWidget
       style={{
+        width: "match_parent",
+        height: "match_parent",
         flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: '#ffffff',
-        height: 'match_parent',
-        width: 'match_parent',
         borderRadius: 16,
         borderWidth: 1,
         borderColor: '#000',
@@ -739,11 +761,14 @@ export const DetailWidget = (
     >
       <FlexWidget
         style={{
+          width: 100,
+          height: 320,
           flexDirection: 'column',
-          width: "wrap_content",
-          height: 'match_parent',
+          justifyContent: 'center',
+          alignItems: 'center',
           borderRightWidth: 1,
           borderRightColor: "#000",
+          flex: 1,
           padding: 12,
         }}
       >
@@ -770,20 +795,22 @@ export const DetailWidget = (
       </FlexWidget>
       <FlexWidget
         style={{
+          width: 300,
+          height: 320,
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
           flex: 1,
           padding: 12,
-          width: 'wrap_content',
-          height: 'match_parent',
-          flexDirection: 'column',
         }}
       >
         <FlexWidget
           style={{
+            width: 'match_parent',
+            height: 'wrap_content',
             flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'center',
-            width: 'match_parent',
-            height: 'wrap_content',
             padding: 10,
             borderBottomWidth: 0.5,
             borderBottomColor: "#000",

@@ -24,7 +24,14 @@ const styles = StyleSheet.create({
 export const DetailScreen = () => {
 
   const currentDate = moment().tz("Asia/Seoul").format("YYYY-MM-DD");
-  const currentDay = moment().tz("Asia/Seoul").format("ddd") === "Mon" ? "월" : moment().tz("Asia/Seoul").format("ddd") === "Tue" ? "화" : moment().tz("Asia/Seoul").format("ddd") === "Wed" ? "수" : moment().tz("Asia/Seoul").format("ddd") === "Thu" ? "목" : moment().tz("Asia/Seoul").format("ddd") === "Fri" ? "금" : moment().tz("Asia/Seoul").format("ddd") === "Sat" ? "토" : "일";
+  const currentDay
+    = moment().tz("Asia/Seoul").format("ddd") === "Mon" ? "월"
+    : moment().tz("Asia/Seoul").format("ddd") === "Tue" ? "화"
+    : moment().tz("Asia/Seoul").format("ddd") === "Wed" ? "수"
+    : moment().tz("Asia/Seoul").format("ddd") === "Thu" ? "목"
+    : moment().tz("Asia/Seoul").format("ddd") === "Fri" ? "금"
+    : moment().tz("Asia/Seoul").format("ddd") === "Sat" ? "토"
+    : "일";
   const currentTime = moment().tz("Asia/Seoul").format("HH:mm:ss");
 
   const [key, setKey] = useState(0);
