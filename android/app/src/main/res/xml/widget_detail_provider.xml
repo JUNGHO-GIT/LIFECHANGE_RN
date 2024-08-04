@@ -5,7 +5,6 @@
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
   android:minWidth="300dp"
   android:minHeight="150dp"
-  android:updatePeriodMillis="86400000"
   android:initialLayout="@layout/rn_widget"
   android:previewImage="@drawable/detail_preview"
   android:resizeMode="horizontal|vertical"
