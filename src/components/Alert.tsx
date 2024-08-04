@@ -4,7 +4,7 @@ import React, {type FC} from 'react';
 import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 // -------------------------------------------------------------------------------------------------
-type Props = {
+type AlertProps = {
   alertVisible: boolean;
   alertMessage: string;
   alertClose: () => void;
@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   alertContainer: {
-    width: 200,
+    minWidth: 200,
+    width: "auto",
     padding: 20,
     backgroundColor: 'white',
     borderRadius: 10,
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
   },
   message: {
     marginBottom: 20,
-    fontSize: 17,
+    fontSize: 16,
     textAlign: 'center',
     color: '#000000',
   },
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
 });
 
 // -------------------------------------------------------------------------------------------------
-const Alert: React.FC<Props> = ({ alertVisible, alertMessage, alertClose }) => {
+const Alert = ({ alertVisible, alertMessage, alertClose }: AlertProps) => {
   return (
     <Modal
       transparent={true}

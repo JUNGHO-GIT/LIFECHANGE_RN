@@ -24,9 +24,11 @@ export const App = () => {
 
   const handlerOnMessage = (event: any) => {
     const { message } = JSON.parse(event.nativeEvent.data);
-    setAlertMessage(message);
-    setAlertVisible(true);
-    setNavigationEnabled(false);
+    if (message) {
+      setAlertMessage(message);
+      setAlertVisible(true);
+      setNavigationEnabled(false);
+    }
   };
 
   const handlerAlertClose = () => {
