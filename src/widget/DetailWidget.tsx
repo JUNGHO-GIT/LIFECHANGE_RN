@@ -811,24 +811,16 @@ export const DetailWidget = (
             borderBottomColor: '#c0c0c0',
           }}
         >
-          <FlexWidget
+          <ImageWidget
+            image={require('../assets/images/search.webp')}
+            imageWidth={20}
+            imageHeight={20}
             style={{
-              width: 25,
-              height: 25,
-              justifyContent: 'center',
-              alignItems: 'center',
+              marginRight: 20,
+              marginBottom: 3,
             }}
-          >
-            <ImageWidget
-              image={require('../assets/images/search.webp')}
-              imageWidth={20}
-              imageHeight={20}
-              style={{
-                marginRight: 20,
-              }}
-              clickAction={"OPEN_APP"}
-            />
-          </FlexWidget>
+            clickAction={"OPEN_APP"}
+          />
           <TextWidget
             style={{
               fontSize: 16,
