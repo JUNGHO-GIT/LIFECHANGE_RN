@@ -84,8 +84,8 @@ const SelectSection = ({isActive, iconName}: ActiveProps) => {
       <FlexWidget
         clickAction={iconName}
         style={{
-          width: 38,
-          height: 38,
+          width: 40,
+          height: 40,
           alignItems: 'center',
           justifyContent: 'center',
           borderRadius: 12,
@@ -137,7 +137,7 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
           justifyContent: 'center',
           alignItems: "center",
           padding: 5,
-          marginBottom: 10,
+          marginBottom: 20,
         }}
       >
         <ImageWidget
@@ -181,7 +181,7 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
           justifyContent: 'center',
           alignItems: "center",
           padding: 5,
-          marginBottom: 10,
+          marginBottom: 20,
         }}
       >
         <ImageWidget
@@ -225,7 +225,7 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
           justifyContent: 'center',
           alignItems: "center",
           padding: 5,
-          marginBottom: 10,
+          marginBottom: 0,
         }}
       >
         <ImageWidget
@@ -431,7 +431,7 @@ const FoodSection = ({ food }: FoodProps) => {
           justifyContent: 'center',
           alignItems: "center",
           padding: 5,
-          marginBottom: 5,
+          marginBottom: 0,
         }}
       >
         <ImageWidget
@@ -498,7 +498,7 @@ const MoneySection = ({ money }: MoneyProps) => {
           justifyContent: 'center',
           alignItems: "center",
           padding: 5,
-          marginBottom: 15,
+          marginBottom: 30,
         }}
       >
         <ImageWidget
@@ -542,7 +542,7 @@ const MoneySection = ({ money }: MoneyProps) => {
           justifyContent: 'center',
           alignItems: "center",
           padding: 5,
-          marginBottom: 15,
+          marginBottom: 0,
         }}
       >
         <ImageWidget
@@ -613,7 +613,7 @@ const SleepSection = ({ sleep }: SleepProps) => {
           justifyContent: 'center',
           alignItems: "center",
           padding: 5,
-          marginBottom: 10,
+          marginBottom: 20,
         }}
       >
         <ImageWidget
@@ -657,7 +657,7 @@ const SleepSection = ({ sleep }: SleepProps) => {
           justifyContent: 'center',
           alignItems: "center",
           padding: 5,
-          marginBottom: 10,
+          marginBottom: 20,
         }}
       >
         <ImageWidget
@@ -701,7 +701,7 @@ const SleepSection = ({ sleep }: SleepProps) => {
           justifyContent: 'center',
           alignItems: "center",
           padding: 5,
-          marginBottom: 10,
+          marginBottom: 0,
         }}
       >
         <ImageWidget
