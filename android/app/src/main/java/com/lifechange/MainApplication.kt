@@ -1,6 +1,6 @@
 // MainApplication.kt
 
-package com.lifechange
+package com.LIFECHANGE
 
 import android.app.Application
 import com.facebook.react.PackageList

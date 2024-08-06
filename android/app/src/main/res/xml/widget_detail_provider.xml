@@ -4,9 +4,12 @@
 
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
   android:minWidth="300dp"
-  android:minHeight="150dp"
+  android:maxWidth="400dp"
+  android:minHeight="100dp"
+  android:maxHeight="110dp"
+  android:updatePeriodMillis="60000"
   android:initialLayout="@layout/rn_widget"
   android:previewImage="@drawable/detail_preview"
-  android:resizeMode="horizontal|vertical"
+  android:resizeMode="horizontal"
   android:widgetCategory="home_screen">
 </appwidget-provider>

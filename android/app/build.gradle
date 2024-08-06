@@ -13,9 +13,9 @@ android {
   buildToolsVersion rootProject.ext.buildToolsVersion
   compileSdk rootProject.ext.compileSdkVersion
 
-  namespace "com.lifechange"
+  namespace "com.LIFECHANGE"
   defaultConfig {
-    applicationId "com.lifechange"
+    applicationId "com.LIFECHANGE"
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion rootProject.ext.targetSdkVersion
     versionCode 1
@@ -52,6 +52,18 @@ android {
       signingConfig signingConfigs.release
       minifyEnabled enableProguardInReleaseBuilds
       proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+    }
+  }
+  // app bundle
+  bundle {
+    language {
+      enableSplit = false
+    }
+    density {
+      enableSplit = false
+    }
+    abi {
+      enableSplit = true
     }
   }
   applicationVariants.all { variant ->

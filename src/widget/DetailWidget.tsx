@@ -75,7 +75,7 @@ const SelectSection = ({isActive, iconName}: ActiveProps) => {
       style={{
         flex: 1,
         width: 50,
-        height: 350,
+        height: 300,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
@@ -84,8 +84,8 @@ const SelectSection = ({isActive, iconName}: ActiveProps) => {
       <FlexWidget
         clickAction={iconName}
         style={{
-          width: 50,
-          height: 50,
+          width: 38,
+          height: 38,
           alignItems: 'center',
           justifyContent: 'center',
           borderRadius: 12,
@@ -97,8 +97,8 @@ const SelectSection = ({isActive, iconName}: ActiveProps) => {
         <ImageWidget
           // @ts-ignore
           image={imageLink}
-          imageHeight={30}
-          imageWidth={30}
+          imageHeight={25}
+          imageWidth={25}
         />
       </FlexWidget>
     </FlexWidget>
@@ -131,22 +131,22 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
       {/* exercise 1 */}
       <FlexWidget
         style={{
-          width: "wrap_content",
-          height: "wrap_content",
+          width: 'wrap_content',
+          height: 'wrap_content',
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 10,
+          padding: 5,
           marginBottom: 10,
         }}
       >
         <ImageWidget
           image={require('../assets/images/exercise3.webp')}
-          imageWidth={23}
-          imageHeight={23}
+          imageWidth={20}
+          imageHeight={20}
         />
         <FlexWidget style={{width: 60, marginLeft: 10}}>
-          <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+          <TextWidget style={{fontSize: 16, fontWeight: '500'}}
             text={`볼륨`}
           />
         </FlexWidget>
@@ -157,13 +157,13 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
         </FlexWidget>
         {exercise_total_volume === "x" ? (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${insertComma(exercise_total_volume)}`}
             />
           </FlexWidget>
         ) : (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${insertComma(exercise_total_volume)}`}
             />
             <TextWidget style={{fontSize: 10, marginLeft: 10}}
@@ -180,17 +180,17 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 10,
+          padding: 5,
           marginBottom: 10,
         }}
       >
         <ImageWidget
           image={require('../assets/images/exercise4.webp')}
-          imageWidth={23}
-          imageHeight={23}
+          imageWidth={20}
+          imageHeight={20}
         />
         <FlexWidget style={{width: 60, marginLeft: 10}}>
-          <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+          <TextWidget style={{fontSize: 16, fontWeight: '500'}}
             text={`유산소`}
           />
         </FlexWidget>
@@ -201,13 +201,13 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
         </FlexWidget>
         {exercise_total_cardio === "x" ? (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${exercise_total_cardio}`}
             />
           </FlexWidget>
         ) : (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${exercise_total_cardio}`}
             />
             <TextWidget style={{fontSize: 10, marginLeft: 10}}
@@ -224,17 +224,17 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 10,
+          padding: 5,
           marginBottom: 10,
         }}
       >
         <ImageWidget
           image={require('../assets/images/exercise5.webp')}
-          imageWidth={23}
-          imageHeight={23}
+          imageWidth={20}
+          imageHeight={20}
         />
         <FlexWidget style={{width: 60, marginLeft: 10}}>
-          <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+          <TextWidget style={{fontSize: 16, fontWeight: '500'}}
             text={`체중`}
           />
         </FlexWidget>
@@ -245,13 +245,13 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
         </FlexWidget>
         {exercise_total_weight === "x" ? (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${insertComma(exercise_total_weight)}`}
             />
           </FlexWidget>
         ) : (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${insertComma(exercise_total_weight)}`}
             />
             <TextWidget style={{fontSize: 10, marginLeft: 10}}
@@ -298,17 +298,17 @@ const FoodSection = ({ food }: FoodProps) => {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 10,
-          marginBottom: 10,
+          padding: 5,
+          marginBottom: 5,
         }}
       >
         <ImageWidget
           image={require('../assets/images/food2.webp')}
-          imageWidth={23}
-          imageHeight={23}
+          imageWidth={20}
+          imageHeight={20}
         />
         <FlexWidget style={{width: 60, marginLeft: 10}}>
-          <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+          <TextWidget style={{fontSize: 16, fontWeight: '500'}}
             text={`칼로리`}
           />
         </FlexWidget>
@@ -319,13 +319,13 @@ const FoodSection = ({ food }: FoodProps) => {
         </FlexWidget>
         {food_total_kcal === "x" ? (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${insertComma(food_total_kcal)}`}
             />
           </FlexWidget>
         ) : (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${insertComma(food_total_kcal)}`}
             />
             <TextWidget style={{fontSize: 10, marginLeft: 10}}
@@ -342,8 +342,8 @@ const FoodSection = ({ food }: FoodProps) => {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 10,
-          marginBottom: 10,
+          padding: 5,
+          marginBottom: 5,
         }}
       >
         <ImageWidget
@@ -363,13 +363,13 @@ const FoodSection = ({ food }: FoodProps) => {
         </FlexWidget>
         {food_total_carb === "x" ? (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${insertComma(food_total_carb)}`}
             />
           </FlexWidget>
         ) : (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${insertComma(food_total_carb)}`}
             />
             <TextWidget style={{fontSize: 10, marginLeft: 10}}
@@ -386,17 +386,17 @@ const FoodSection = ({ food }: FoodProps) => {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 10,
-          marginBottom: 10,
+          padding: 5,
+          marginBottom: 5,
         }}
       >
         <ImageWidget
           image={require('../assets/images/food4.webp')}
-          imageWidth={23}
-          imageHeight={23}
+          imageWidth={20}
+          imageHeight={20}
         />
         <FlexWidget style={{width: 60, marginLeft: 10}}>
-          <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+          <TextWidget style={{fontSize: 16, fontWeight: '500'}}
             text={`단백질`}
           />
         </FlexWidget>
@@ -407,13 +407,13 @@ const FoodSection = ({ food }: FoodProps) => {
         </FlexWidget>
         {food_total_protein === "x" ? (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${insertComma(food_total_protein)}`}
             />
           </FlexWidget>
         ) : (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${insertComma(food_total_protein)}`}
             />
             <TextWidget style={{fontSize: 10, marginLeft: 10}}
@@ -430,17 +430,17 @@ const FoodSection = ({ food }: FoodProps) => {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 10,
-          marginBottom: 10,
+          padding: 5,
+          marginBottom: 5,
         }}
       >
         <ImageWidget
           image={require('../assets/images/food5.webp')}
-          imageWidth={23}
-          imageHeight={23}
+          imageWidth={20}
+          imageHeight={20}
         />
         <FlexWidget style={{width: 60, marginLeft: 10}}>
-          <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+          <TextWidget style={{fontSize: 16, fontWeight: '500'}}
             text={`지방`}
           />
         </FlexWidget>
@@ -451,13 +451,13 @@ const FoodSection = ({ food }: FoodProps) => {
         </FlexWidget>
         {food_total_fat === "x" ? (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${insertComma(food_total_fat)}`}
             />
           </FlexWidget>
         ) : (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${insertComma(food_total_fat)}`}
             />
             <TextWidget style={{fontSize: 10, marginLeft: 10}}
@@ -487,7 +487,6 @@ const MoneySection = ({ money }: MoneyProps) => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 10,
       }}
     >
       {/* money 1 */}
@@ -498,17 +497,17 @@ const MoneySection = ({ money }: MoneyProps) => {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 10,
-          marginBottom: 10,
+          padding: 5,
+          marginBottom: 15,
         }}
       >
         <ImageWidget
           image={require('../assets/images/money2.webp')}
-          imageWidth={23}
-          imageHeight={23}
+          imageWidth={20}
+          imageHeight={20}
         />
         <FlexWidget style={{width: 60, marginLeft: 10}}>
-          <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+          <TextWidget style={{fontSize: 16, fontWeight: '500'}}
             text={`수입`}
           />
         </FlexWidget>
@@ -519,7 +518,7 @@ const MoneySection = ({ money }: MoneyProps) => {
         </FlexWidget>
         {money_total_income === "x" ? (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${insertComma(money_total_income)}`}
             />
           </FlexWidget>
@@ -528,7 +527,7 @@ const MoneySection = ({ money }: MoneyProps) => {
             <TextWidget style={{fontSize: 10, marginRight: 10}}
               text={"₩"}
             />
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${insertComma(money_total_income)}`}
             />
           </FlexWidget>
@@ -542,17 +541,17 @@ const MoneySection = ({ money }: MoneyProps) => {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 10,
-          marginBottom: 10,
+          padding: 5,
+          marginBottom: 15,
         }}
       >
         <ImageWidget
           image={require('../assets/images/money2.webp')}
-          imageWidth={23}
-          imageHeight={23}
+          imageWidth={20}
+          imageHeight={20}
         />
         <FlexWidget style={{width: 60, marginLeft: 10}}>
-          <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+          <TextWidget style={{fontSize: 16, fontWeight: '500'}}
             text={`지출`}
           />
         </FlexWidget>
@@ -563,7 +562,7 @@ const MoneySection = ({ money }: MoneyProps) => {
         </FlexWidget>
         {money_total_expense === "x" ? (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${insertComma(money_total_expense)}`}
             />
           </FlexWidget>
@@ -572,7 +571,7 @@ const MoneySection = ({ money }: MoneyProps) => {
             <TextWidget style={{fontSize: 10, marginRight: 10}}
               text={"₩"}
             />
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${insertComma(money_total_expense)}`}
             />
           </FlexWidget>
@@ -613,17 +612,17 @@ const SleepSection = ({ sleep }: SleepProps) => {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 10,
+          padding: 5,
           marginBottom: 10,
         }}
       >
         <ImageWidget
           image={require('../assets/images/sleep2.webp')}
-          imageWidth={23}
-          imageHeight={23}
+          imageWidth={20}
+          imageHeight={20}
         />
         <FlexWidget style={{width: 60, marginLeft: 10}}>
-          <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+          <TextWidget style={{fontSize: 16, fontWeight: '500'}}
             text={`취침`}
           />
         </FlexWidget>
@@ -634,13 +633,13 @@ const SleepSection = ({ sleep }: SleepProps) => {
         </FlexWidget>
         {sleep_bedTime === "x" ? (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${sleep_bedTime}`}
             />
           </FlexWidget>
         ) : (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${sleep_bedTime}`}
             />
             <TextWidget style={{fontSize: 10, marginLeft: 10}}
@@ -657,17 +656,17 @@ const SleepSection = ({ sleep }: SleepProps) => {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 10,
+          padding: 5,
           marginBottom: 10,
         }}
       >
         <ImageWidget
           image={require('../assets/images/sleep3.webp')}
-          imageWidth={23}
-          imageHeight={23}
+          imageWidth={20}
+          imageHeight={20}
         />
         <FlexWidget style={{width: 60, marginLeft: 10}}>
-          <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+          <TextWidget style={{fontSize: 16, fontWeight: '500'}}
             text={`기상`}
           />
         </FlexWidget>
@@ -678,13 +677,13 @@ const SleepSection = ({ sleep }: SleepProps) => {
         </FlexWidget>
         {sleep_wakeTime === "x" ? (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${sleep_wakeTime}`}
             />
           </FlexWidget>
         ) : (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${sleep_wakeTime}`}
             />
             <TextWidget style={{fontSize: 10, marginLeft: 10}}
@@ -701,17 +700,17 @@ const SleepSection = ({ sleep }: SleepProps) => {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 10,
+          padding: 5,
           marginBottom: 10,
         }}
       >
         <ImageWidget
           image={require('../assets/images/sleep4.webp')}
-          imageWidth={23}
-          imageHeight={23}
+          imageWidth={20}
+          imageHeight={20}
         />
         <FlexWidget style={{width: 60, marginLeft: 10}}>
-          <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+          <TextWidget style={{fontSize: 16, fontWeight: '500'}}
             text={`수면`}
           />
         </FlexWidget>
@@ -722,13 +721,13 @@ const SleepSection = ({ sleep }: SleepProps) => {
         </FlexWidget>
         {sleep_sleepTime === "x" ? (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${sleep_sleepTime}`}
             />
           </FlexWidget>
         ) : (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
-            <TextWidget style={{fontSize: 18, fontWeight: '500'}}
+            <TextWidget style={{fontSize: 16, fontWeight: '500'}}
               text={`${sleep_sleepTime}`}
             />
             <TextWidget style={{fontSize: 10, marginLeft: 10}}
