@@ -34,12 +34,12 @@ android {
         storePassword RN_WIDGET_STORE_PASSWORD
         keyAlias RN_WIDGET_KEY_ALIAS
         keyPassword RN_WIDGET_KEY_PASSWORD
-      }
-      if (project.hasProperty('APP_RELEASE_STORE_FILE')) {
-        storeFile file(APP_RELEASE_STORE_FILE)
-        storePassword APP_RELEASE_STORE_PASSWORD
-        keyAlias APP_RELEASE_KEY_ALIAS
-        keyPassword APP_RELEASE_KEY_PASSWORD
+        if (project.hasProperty('APP_RELEASE_STORE_FILE')) {
+          storeFile file(APP_RELEASE_STORE_FILE)
+          storePassword APP_RELEASE_STORE_PASSWORD
+          keyAlias APP_RELEASE_KEY_ALIAS
+          keyPassword APP_RELEASE_KEY_PASSWORD
+        }
       }
     }
   }
@@ -52,18 +52,6 @@ android {
       signingConfig signingConfigs.release
       minifyEnabled enableProguardInReleaseBuilds
       proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-    }
-  }
-  // app bundle
-  bundle {
-    language {
-      enableSplit = false
-    }
-    density {
-      enableSplit = false
-    }
-    abi {
-      enableSplit = true
     }
   }
   applicationVariants.all { variant ->
