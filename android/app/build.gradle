@@ -25,26 +25,27 @@ task incrementVersionCode {
     // 파일 읽기
     def content = new String(Files.readAllBytes(Paths.get(changelogFile.path)), charset)
 
-    // versionCode 찾기 및 증가
+    // versionCode 찾기 및 가장 큰 값 찾기
     def versionCodePattern = Pattern.compile('## versionCode: (\\d+)')
     def matcher = versionCodePattern.matcher(content)
     def newContent = content
-    def newVersionCode
+    def maxVersionCode = 0
 
-    if (matcher.find()) {
-      def currentVersionCode = matcher.group(1).toInteger()
-      newVersionCode = currentVersionCode + 1
+    while (matcher.find()) {
+      def versionCode = matcher.group(1).toInteger()
+      if (versionCode > maxVersionCode) {
+        maxVersionCode = versionCode
+      }
     }
-    else {
-      newVersionCode = 1
-    }
+
+    def newVersionCode = maxVersionCode + 1
 
     // 현재 시간 기록
     def now = LocalDateTime.now()
     def formatter = DateTimeFormatter.ofPattern('yyyy-MM-dd (HH:mm:ss)')
     def timestamp = now.format(formatter)
 
-    def newVersionSection = "\n## versionCode: " + newVersionCode + "\n  - " + timestamp + "\n"
+    def newVersionSection = "\n## versionCode: " + newVersionCode + "\n  - " + timestamp
 
     // 새 versionCode 섹션 추가
     newContent = newContent + newVersionSection
@@ -119,7 +120,7 @@ android {
   applicationVariants.all { variant ->
     if (variant.buildType.name == "release") {
       variant.outputs.all { output ->
-        def apkName = "LIFECHANGE-${variant.versionName}.apk"
+        def apkName = "LIFECHANGE-${variant.versionName}.${variant.versionCode}.apk"
         outputFileName = apkName
       }
     }
