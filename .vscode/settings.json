@@ -34,7 +34,7 @@
     ".bundle": true,
     "yarn.lock": true
   },
-  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.configuration.updateBuildConfiguration": "disabled",
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "explorerExclude.backup": {},
 }

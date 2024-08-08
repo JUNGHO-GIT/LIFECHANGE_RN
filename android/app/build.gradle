@@ -4,9 +4,72 @@ apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
 
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.nio.charset.StandardCharsets
+import java.util.regex.Pattern
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 react {}
 def enableProguardInReleaseBuilds = false
 def jscFlavor = 'org.webkit:android-jsc:+'
+def changeLogFile = file("../../changelog.md")
+
+// VersionCode 증가 및 changelog 기록
+task incrementVersionCode {
+  doLast {
+    def changelogFile = changeLogFile
+    def charset = StandardCharsets.UTF_8
+
+    // 파일 읽기
+    def content = new String(Files.readAllBytes(Paths.get(changelogFile.path)), charset)
+
+    // versionCode 찾기 및 증가
+    def versionCodePattern = Pattern.compile('## versionCode: (\\d+)')
+    def matcher = versionCodePattern.matcher(content)
+    def newContent = content
+    def newVersionCode
+
+    if (matcher.find()) {
+      def currentVersionCode = matcher.group(1).toInteger()
+      newVersionCode = currentVersionCode + 1
+    }
+    else {
+      newVersionCode = 1
+    }
+
+    // 현재 시간 기록
+    def now = LocalDateTime.now()
+    def formatter = DateTimeFormatter.ofPattern('yyyy-MM-dd (HH:mm:ss)')
+    def timestamp = now.format(formatter)
+
+    def newVersionSection = "\n## versionCode: " + newVersionCode + "\n  - " + timestamp + "\n"
+
+    // 새 versionCode 섹션 추가
+    newContent = newContent + newVersionSection
+
+    // 수정된 내용 저장
+    Files.write(Paths.get(changelogFile.path), newContent.getBytes(charset))
+
+    println "Version code has been incremented to " + newVersionCode + " and new version section added."
+  }
+}
+
+// versionCode 가져오기
+def getVersionCode() {
+  def changelogFile = changeLogFile
+  def charset = StandardCharsets.UTF_8
+  def content = new String(Files.readAllBytes(Paths.get(changelogFile.path)), charset)
+  def versionCodePattern = Pattern.compile('## versionCode: (\\d+)')
+  def matcher = versionCodePattern.matcher(content)
+  if (matcher.find()) {
+    return matcher.group(1).toInteger()
+  }
+  else {
+    return 1
+  }
+}
 
 android {
   ndkVersion rootProject.ext.ndkVersion
@@ -18,7 +81,7 @@ android {
     applicationId "com.LIFECHANGE"
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion rootProject.ext.targetSdkVersion
-    versionCode 1
+    versionCode getVersionCode()
     versionName "1.0"
   }
   signingConfigs {
@@ -34,12 +97,12 @@ android {
         storePassword RN_WIDGET_STORE_PASSWORD
         keyAlias RN_WIDGET_KEY_ALIAS
         keyPassword RN_WIDGET_KEY_PASSWORD
-        if (project.hasProperty('APP_RELEASE_STORE_FILE')) {
-          storeFile file(APP_RELEASE_STORE_FILE)
-          storePassword APP_RELEASE_STORE_PASSWORD
-          keyAlias APP_RELEASE_KEY_ALIAS
-          keyPassword APP_RELEASE_KEY_PASSWORD
-        }
+      }
+      if (project.hasProperty('APP_RELEASE_STORE_FILE')) {
+        storeFile file(APP_RELEASE_STORE_FILE)
+        storePassword APP_RELEASE_STORE_PASSWORD
+        keyAlias APP_RELEASE_KEY_ALIAS
+        keyPassword APP_RELEASE_KEY_PASSWORD
       }
     }
   }
@@ -48,7 +111,6 @@ android {
       signingConfig signingConfigs.debug
     }
     release {
-      // signingConfig signingConfigs.debug
       signingConfig signingConfigs.release
       minifyEnabled enableProguardInReleaseBuilds
       proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
@@ -73,6 +135,9 @@ dependencies {
     implementation jscFlavor
   }
 }
+
+// incrementVersionCode 태스크를 빌드 전에 실행하도록 설정
+preBuild.dependsOn incrementVersionCode
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle");
 applyNativeModulesAppBuildGradle(project)
