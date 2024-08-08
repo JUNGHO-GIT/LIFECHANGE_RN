@@ -4,87 +4,24 @@ apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
 
-import java.nio.file.Files
-import java.nio.file.Paths
-import java.nio.charset.StandardCharsets
-import java.util.regex.Pattern
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-
 react {}
 def enableProguardInReleaseBuilds = false
 def jscFlavor = 'org.webkit:android-jsc:+'
-def changeLogFile = file("../../changelog.md")
-
-// VersionCode 증가 및 changelog 기록
-task incrementVersionCode {
-  doLast {
-    def changelogFile = changeLogFile
-    def charset = StandardCharsets.UTF_8
-
-    // 파일 읽기
-    def content = new String(Files.readAllBytes(Paths.get(changelogFile.path)), charset)
-
-    // versionCode 찾기 및 가장 큰 값 찾기
-    def versionCodePattern = Pattern.compile('## versionCode: (\\d+)')
-    def matcher = versionCodePattern.matcher(content)
-    def newContent = content
-    def maxVersionCode = 0
-
-    while (matcher.find()) {
-      def versionCode = matcher.group(1).toInteger()
-      if (versionCode > maxVersionCode) {
-        maxVersionCode = versionCode
-      }
-    }
-
-    def newVersionCode = maxVersionCode + 1
-
-    // 현재 시간 기록
-    def now = LocalDateTime.now()
-    def formatter = DateTimeFormatter.ofPattern('yyyy-MM-dd (HH:mm:ss)')
-    def timestamp = now.format(formatter)
-
-    def newVersionSection = "\n## versionCode: " + newVersionCode + "\n  - " + timestamp
-
-    // 새 versionCode 섹션 추가
-    newContent = newContent + newVersionSection
-
-    // 수정된 내용 저장
-    Files.write(Paths.get(changelogFile.path), newContent.getBytes(charset))
-
-    println "Version code has been incremented to " + newVersionCode + " and new version section added."
-  }
-}
-
-// versionCode 가져오기
-def getVersionCode() {
-  def changelogFile = changeLogFile
-  def charset = StandardCharsets.UTF_8
-  def content = new String(Files.readAllBytes(Paths.get(changelogFile.path)), charset)
-  def versionCodePattern = Pattern.compile('## versionCode: (\\d+)')
-  def matcher = versionCodePattern.matcher(content)
-  if (matcher.find()) {
-    return matcher.group(1).toInteger()
-  }
-  else {
-    return 1
-  }
-}
 
 android {
+  namespace "com.LIFECHANGE"
   ndkVersion rootProject.ext.ndkVersion
   buildToolsVersion rootProject.ext.buildToolsVersion
   compileSdk rootProject.ext.compileSdkVersion
 
-  namespace "com.LIFECHANGE"
   defaultConfig {
     applicationId "com.LIFECHANGE"
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion rootProject.ext.targetSdkVersion
-    versionCode getVersionCode()
-    versionName "1.0"
+    versionCode rootProject.ext.versionCode
+    versionName rootProject.ext.versionName
   }
+
   signingConfigs {
     debug {
       storeFile file('debug.keystore')
@@ -118,11 +55,9 @@ android {
     }
   }
   applicationVariants.all { variant ->
-    if (variant.buildType.name == "release") {
-      variant.outputs.all { output ->
-        def apkName = "LIFECHANGE-${variant.versionName}.${variant.versionCode}.apk"
-        outputFileName = apkName
-      }
+    variant.outputs.all { output ->
+      def newApkName = "LIFECHANGE_${variant.versionName}.apk"
+      output.outputFileName = newApkName
     }
   }
 }
@@ -137,8 +72,5 @@ dependencies {
   }
 }
 
-// incrementVersionCode 태스크를 빌드 전에 실행하도록 설정
-preBuild.dependsOn incrementVersionCode
-
-apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle");
+apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle")
 applyNativeModulesAppBuildGradle(project)
