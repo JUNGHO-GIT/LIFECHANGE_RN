@@ -1,7 +1,7 @@
-// Webview.tsx
+// Webviews.tsx
 
-import React from 'react';
-import {StyleSheet, Dimensions} from 'react-native';
+import React, { forwardRef } from 'react';
+import { StyleSheet, Dimensions } from 'react-native';
 import WebView from 'react-native-webview';
 
 // -------------------------------------------------------------------------------------------------
@@ -21,36 +21,37 @@ const styles = StyleSheet.create({
 });
 
 // -------------------------------------------------------------------------------------------------
-const Webviews = (
-  {onMessage, bannerVisible, navigationEnabled}: Props
-) => {
-  const url = 'https://www.junghomun.com';
-  const injectedJavaScript = `
-    window.alert = function(msg) {
-      window.ReactNativeWebView.postMessage(JSON.stringify({ message: msg }));
-    };
-  `;
+const Webviews = forwardRef<WebView, Props>(
+  ({ onMessage, bannerVisible, navigationEnabled }, ref) => {
+    const url = 'https://www.junghomun.com';
+    const injectedJavaScript = `
+      window.alert = function(msg) {
+        window.ReactNativeWebView.postMessage(JSON.stringify({ message: msg }));
+      };
+    `;
 
-  return (
-    <WebView
-      style={styles.webviewContainer}
-      source={{uri: url}}
-      injectedJavaScript={injectedJavaScript}
-      onMessage={onMessage}
-      onNavigationStateChange={(newState: any) => {
-        if (navigationEnabled) {
-          bannerVisible(newState);
-        }
-      }}
-      onShouldStartLoadWithRequest={(request: any) => {
-        if (navigationEnabled) {
-          bannerVisible(request);
-          return true;
-        }
-        return false;
-      }}
-    />
-  );
-};
+    return (
+      <WebView
+        ref={ref}
+        style={styles.webviewContainer}
+        source={{ uri: url }}
+        injectedJavaScript={injectedJavaScript}
+        onMessage={onMessage}
+        onNavigationStateChange={(newState: any) => {
+          if (navigationEnabled) {
+            bannerVisible(newState);
+          }
+        }}
+        onShouldStartLoadWithRequest={(request: any) => {
+          if (navigationEnabled) {
+            bannerVisible(request);
+            return true;
+          }
+          return false;
+        }}
+      />
+    );
+  }
+);
 
 export default Webviews;

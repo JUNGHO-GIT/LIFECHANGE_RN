@@ -1,11 +1,9 @@
-// App.tsx
-
-import React, {useEffect, useRef, useState} from 'react';
-import {BackHandler, SafeAreaView, StyleSheet} from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { SafeAreaView, StyleSheet, BackHandler } from 'react-native';
 import Webviews from './components/Webviews.tsx';
 import Alert from './components/Alert.tsx';
 import Banner from './components/Banner.tsx';
-import type WebView from "react-native-webview";
+import { WebView } from 'react-native-webview';
 
 // -------------------------------------------------------------------------------------------------
 const styles = StyleSheet.create({
@@ -41,7 +39,7 @@ export const App = () => {
 
   const handlerBannerVisible = (newState: any) => {
     const { url } = newState;
-    setCurrentUrl(url);
+    setCurrentUrl(url); // 현재 URL 상태로 저장
     if (url.includes("signup") || url.includes("login")) {
       setBannerVisible(false);
     }
