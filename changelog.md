@@ -43,3 +43,11 @@
 ## versionCode = 11
 	- versionName = 1.0.11
 	- 2024-08-11 (21:28:26)
+
+## versionCode = 12
+	- versionName = 1.0.12
+	- 2024-08-11 (21:30:58)
+
+## versionCode = 13
+	- versionName = 1.0.13
+	- 2024-08-11 (21:43:05)

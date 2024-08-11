@@ -22,8 +22,24 @@ export const App = () => {
   const [alertMessage, setAlertMessage] = useState("");
   const [bannerVisible, setBannerVisible] = useState(false);
   const [navigationEnabled, setNavigationEnabled] = useState(true);
-  const [currentUrl, setCurrentUrl] = useState('');
   const webViewRef = useRef<WebView>(null);
+
+  useEffect(() => {
+    const onBackPress = () => {
+      if (webViewRef.current && navigationEnabled) {
+        webViewRef.current.goBack();
+        return true;
+      }
+      return false;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      onBackPress
+    );
+
+    return () => backHandler.remove();
+  }, [navigationEnabled]);
 
   const handlerOnMessage = (event: any) => {
     const { message } = JSON.parse(event.nativeEvent.data);
@@ -40,36 +56,14 @@ export const App = () => {
   }
 
   const handlerBannerVisible = (newState: any) => {
-    const { url } = newState;
-    setCurrentUrl(url);
-    if (url.includes("signup") || url.includes("login")) {
+    const {url} = newState;
+    if (url.includes("/user/signup") || url.includes("/user/login")) {
       setBannerVisible(false);
     }
     else {
       setBannerVisible(true);
     }
   }
-
-  useEffect(() => {
-    const onBackPress = () => {
-      if (webViewRef.current && navigationEnabled) {
-        // 로그인/회원가입 페이지로 뒤로가기 방지
-        if (currentUrl.includes("/user/login") || currentUrl.includes("/user/signup")) {
-          return true;
-        }
-        webViewRef.current.goBack();
-        return true;
-      }
-      return false;
-    };
-
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      onBackPress
-    );
-
-    return () => backHandler.remove();
-  }, [navigationEnabled, currentUrl]);
 
   return (
     <SafeAreaView style={styles.container}>
