@@ -1,8 +1,8 @@
 // Banner.tsx
 
-import { View, StyleSheet } from "react-native";
+import {View, StyleSheet} from "react-native";
 import {Dimensions} from 'react-native';
-import { BannerAd, BannerAdSize, TestIds } from "react-native-google-mobile-ads";
+import {BannerAd, BannerAdSize, TestIds} from "react-native-google-mobile-ads";
 
 // -------------------------------------------------------------------------------------------------
 const styles = StyleSheet.create({
