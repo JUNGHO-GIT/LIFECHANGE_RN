@@ -97,10 +97,17 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
   };
 
   const data = await fetchData();
+
   if (!data) {
     return;
   }
-  const { exercise, food, money, sleep } = data;
+
+  const {
+    exercise,
+    food,
+    money,
+    sleep
+  } = data;
 
   switch (props.widgetAction) {
     case 'WIDGET_ADDED':

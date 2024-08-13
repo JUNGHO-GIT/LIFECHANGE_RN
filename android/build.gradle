@@ -18,7 +18,7 @@ buildscript {
     versionCode=1
     versionName="1.0.1"
 
-    // Version code and name logic
+    // version code and name logic
     def changeLogFile = file("../changelog.md")
     def charset = StandardCharsets.UTF_8
 

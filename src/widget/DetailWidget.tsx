@@ -854,6 +854,16 @@ export const DetailWidget = (
             }}
             text={currentTime}
           />
+          <ImageWidget
+            image={require('../assets/images/refresh.webp')}
+            imageWidth={20}
+            imageHeight={20}
+            style={{
+              marginLeft: 20,
+              marginBottom: 3,
+            }}
+            clickAction={"WIDGET_UPDATE"}
+          />
         </FlexWidget>
         {active === "exercise" && <ExerciseSection exercise={exercise} />}
         {active === "food" && <FoodSection food={food} />}
