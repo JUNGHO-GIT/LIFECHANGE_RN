@@ -18,6 +18,7 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
   const Widget = nameToWidget[widgetInfo.widgetName as keyof typeof nameToWidget] as any;
 
   const currentDate = moment().tz("Asia/Seoul").format("YYYY-MM-DD");
+  const currentTime = moment().tz("Asia/Seoul").format("HH:mm:ss");
   const currentDay
     = moment().tz("Asia/Seoul").format("ddd") === "Mon" ? "월"
     : moment().tz("Asia/Seoul").format("ddd") === "Tue" ? "화"
@@ -26,7 +27,6 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
     : moment().tz("Asia/Seoul").format("ddd") === "Fri" ? "금"
     : moment().tz("Asia/Seoul").format("ddd") === "Sat" ? "토"
     : "일";
-  const currentTime = moment().tz("Asia/Seoul").format("HH:mm:ss");
 
   const URL = "https://www.junghomun.com";
   const userId = "junghomun00@gmail.com";
@@ -39,8 +39,31 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
     dateStart: moment().tz("Asia/Seoul").format("YYYY-MM-DD"),
     dateEnd: moment().tz("Asia/Seoul").format("YYYY-MM-DD"),
   };
+  const OBJECT_DEF = {
+    exercise: {
+      exercise_total_volume: "x",
+      exercise_total_cardio: "x",
+      exercise_total_weight: "x",
+    },
+    food: {
+      food_total_kcal: "x",
+      food_total_carb: "x",
+      food_total_protein: "x",
+      food_total_fat: "x",
+    },
+    money: {
+      money_total_income: "x",
+      money_total_expense: "x",
+    },
+    sleep: {
+      sleep_bedTime: "x",
+      sleep_wakeTime: "x",
+      sleep_sleepTime: "x",
+    }
+  };
+  const OBJECT = OBJECT_DEF;
 
-  const fetchData = async () => {
+  async () => {
     const [exerciseResponse, foodResponse, moneyResponse, sleepResponse] = await Promise.all([
       axios.get(`${URL}/api/exercise/list`, {
         params: {
@@ -72,42 +95,11 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
       }),
     ]);
 
-    return {
-      exercise: exerciseResponse.data.result?.[0] || {
-        exercise_total_volume: "x",
-        exercise_total_cardio: "x",
-        exercise_total_weight: "x",
-      },
-      food: foodResponse.data.result?.[0] || {
-        food_total_kcal: "x",
-        food_total_carb: "x",
-        food_total_protein: "x",
-        food_total_fat: "x",
-      },
-      money: moneyResponse.data.result?.[0] || {
-        money_total_income: "x",
-        money_total_expense: "x",
-      },
-      sleep: sleepResponse.data.result?.[0]?.sleep_section?.[0] || {
-        sleep_bedTime: "x",
-        sleep_wakeTime: "x",
-        sleep_sleepTime: "x",
-      }
-    };
+    OBJECT.exercise = exerciseResponse.data.result?.[0] || OBJECT_DEF.exercise;
+    OBJECT.food = foodResponse.data.result?.[0] || OBJECT_DEF.food;
+    OBJECT.money = moneyResponse.data.result?.[0] || OBJECT_DEF.money;
+    OBJECT.sleep = sleepResponse.data.result?.[0]?.sleep_section?.[0] || OBJECT_DEF.sleep;
   };
-
-  const data = await fetchData();
-
-  if (!data) {
-    return;
-  }
-
-  const {
-    exercise,
-    food,
-    money,
-    sleep
-  } = data;
 
   switch (props.widgetAction) {
     case 'WIDGET_ADDED':
@@ -117,10 +109,10 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
           currentDate={currentDate}
           currentDay={currentDay}
           currentTime={currentTime}
-          exercise={exercise}
-          food={food}
-          money={money}
-          sleep={sleep}
+          exercise={OBJECT.exercise}
+          food={OBJECT.food}
+          money={OBJECT.money}
+          sleep={OBJECT.sleep}
         />
       );
       console.log(`WIDGET_ADDED ${JSON.stringify(widgetInfo)}`);
@@ -133,28 +125,16 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
           currentDate={currentDate}
           currentDay={currentDay}
           currentTime={currentTime}
-          exercise={exercise}
-          food={food}
-          money={money}
-          sleep={sleep}
+          exercise={OBJECT.exercise}
+          food={OBJECT.food}
+          money={OBJECT.money}
+          sleep={OBJECT.sleep}
         />
       );
       console.log(`WIDGET_RESIZED ${JSON.stringify(widgetInfo)}`);
       break;
 
     case 'WIDGET_UPDATE':
-      props.renderWidget(
-        <Widget
-          {...widgetInfo}
-          currentDate={currentDate}
-          currentDay={currentDay}
-          currentTime={currentTime}
-          exercise={exercise}
-          food={food}
-          money={money}
-          sleep={sleep}
-        />
-      );
       console.log(`WIDGET_UPDATE ${JSON.stringify(widgetInfo)}`);
       break;
 
@@ -166,10 +146,10 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
           currentDate={currentDate}
           currentDay={currentDay}
           currentTime={currentTime}
-          exercise={exercise}
-          food={food}
-          money={money}
-          sleep={sleep}
+          exercise={OBJECT.exercise}
+          food={OBJECT.food}
+          money={OBJECT.money}
+          sleep={OBJECT.sleep}
         />
       );
       console.log(`WIDGET_CLICK ${JSON.stringify(widgetInfo)}`);

@@ -856,13 +856,18 @@ export const DetailWidget = (
           />
           <ImageWidget
             image={require('../assets/images/refresh.webp')}
-            imageWidth={20}
-            imageHeight={20}
+            imageWidth={23}
+            imageHeight={23}
             style={{
               marginLeft: 20,
               marginBottom: 3,
             }}
-            clickAction={"WIDGET_UPDATE"}
+            clickAction={
+              active === "exercise" ? "exercise" :
+              active === "food" ? "food" :
+              active === "money" ? "money" :
+              active === "sleep" ? "sleep" : "exercise"
+            }
           />
         </FlexWidget>
         {active === "exercise" && <ExerciseSection exercise={exercise} />}
