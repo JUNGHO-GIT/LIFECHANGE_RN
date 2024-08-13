@@ -17,19 +17,21 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
   const widgetInfo = props.widgetInfo;
   const Widget = nameToWidget[widgetInfo.widgetName as keyof typeof nameToWidget] as any;
 
-  const currentDate = moment().tz("Asia/Seoul").format("YYYY-MM-DD");
-  const currentTime = moment().tz("Asia/Seoul").format("HH:mm:ss");
-  const currentDay
-    = moment().tz("Asia/Seoul").format("ddd") === "Mon" ? "월"
-    : moment().tz("Asia/Seoul").format("ddd") === "Tue" ? "화"
-    : moment().tz("Asia/Seoul").format("ddd") === "Wed" ? "수"
-    : moment().tz("Asia/Seoul").format("ddd") === "Thu" ? "목"
-    : moment().tz("Asia/Seoul").format("ddd") === "Fri" ? "금"
-    : moment().tz("Asia/Seoul").format("ddd") === "Sat" ? "토"
-    : "일";
-
   const URL = "https://www.junghomun.com";
   const userId = "junghomun00@gmail.com";
+
+  const currentDate = moment().tz("Asia/Seoul").format("YYYY-MM-DD");
+  const currentTime = moment().tz("Asia/Seoul").format("HH:mm:ss");
+  const momentFormat = moment().tz("Asia/Seoul").format("ddd");
+  const currentDay
+    = momentFormat === "Mon" ? "월"
+    : momentFormat === "Tue" ? "화"
+    : momentFormat === "Wed" ? "수"
+    : momentFormat === "Thu" ? "목"
+    : momentFormat === "Fri" ? "금"
+    : momentFormat === "Sat" ? "토"
+    : "일";
+
   const PAGING = {
     sort: "asc",
     page: 1
@@ -61,45 +63,36 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
       sleep_sleepTime: "x",
     }
   };
-  const OBJECT = OBJECT_DEF;
+  const OBJECT = { ...OBJECT_DEF };
 
-  async () => {
+  await (async () => {
+    const params = {
+      user_id: userId,
+      PAGING: PAGING,
+      DATE: DATE
+    };
     const [exerciseResponse, foodResponse, moneyResponse, sleepResponse] = await Promise.all([
       axios.get(`${URL}/api/exercise/list`, {
-        params: {
-          user_id: userId,
-          PAGING: PAGING,
-          DATE: DATE
-        }
+        params: params
       }),
       axios.get(`${URL}/api/food/list`, {
-        params: {
-          user_id: userId,
-          PAGING: PAGING,
-          DATE: DATE
-        }
+        params: params
       }),
       axios.get(`${URL}/api/money/list`, {
-        params: {
-          user_id: userId,
-          PAGING: PAGING,
-          DATE: DATE
-        }
+        params: params
       }),
       axios.get(`${URL}/api/sleep/list`, {
-        params: {
-          user_id: userId,
-          PAGING: PAGING,
-          DATE: DATE
-        }
+        params: params
       }),
     ]);
 
-    OBJECT.exercise = exerciseResponse.data.result?.[0] || OBJECT_DEF.exercise;
-    OBJECT.food = foodResponse.data.result?.[0] || OBJECT_DEF.food;
-    OBJECT.money = moneyResponse.data.result?.[0] || OBJECT_DEF.money;
-    OBJECT.sleep = sleepResponse.data.result?.[0]?.sleep_section?.[0] || OBJECT_DEF.sleep;
-  };
+    Object.assign(OBJECT, {
+      exercise: exerciseResponse.data.result?.[0] || OBJECT_DEF.exercise,
+      food: foodResponse.data.result?.[0] || OBJECT_DEF.food,
+      money: moneyResponse.data.result?.[0] || OBJECT_DEF.money,
+      sleep: sleepResponse.data.result?.[0]?.sleep_section?.[0] || OBJECT_DEF.sleep,
+    });
+  })();
 
   switch (props.widgetAction) {
     case 'WIDGET_ADDED':
