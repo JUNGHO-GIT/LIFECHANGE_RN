@@ -51,3 +51,35 @@
 ## versionCode = 13
 	- versionName = 1.0.13
 	- 2024-08-11 (21:43:05)
+
+## versionCode = 14
+	- versionName = 1.0.14
+	- 2024-08-12 (03:14:53)
+
+## versionCode = 15
+	- versionName = 1.0.15
+	- 2024-08-12 (03:14:56)
+
+## versionCode = 16
+	- versionName = 1.0.16
+	- 2024-08-12 (22:43:43)
+
+## versionCode = 17
+	- versionName = 1.0.17
+	- 2024-08-12 (22:44:50)
+
+## versionCode = 18
+	- versionName = 1.0.18
+	- 2024-08-12 (22:45:37)
+
+## versionCode = 19
+	- versionName = 1.0.19
+	- 2024-08-14 (02:23:20)
+
+## versionCode = 20
+	- versionName = 1.0.20
+	- 2024-08-14 (02:23:21)
+
+## versionCode = 21
+	- versionName = 1.0.21
+	- 2024-08-14 (02:24:17)

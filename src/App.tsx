@@ -18,12 +18,15 @@ const styles = StyleSheet.create({
 
 // -------------------------------------------------------------------------------------------------
 export const App = () => {
+
+  // -----------------------------------------------------------------------------------------------
   const [alertVisible, setAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [bannerVisible, setBannerVisible] = useState(false);
   const [navigationEnabled, setNavigationEnabled] = useState(true);
   const webViewRef = useRef<WebView>(null);
 
+  // -----------------------------------------------------------------------------------------------
   useEffect(() => {
     const onBackPress = () => {
       if (webViewRef.current && navigationEnabled) {
@@ -41,6 +44,7 @@ export const App = () => {
     return () => backHandler.remove();
   }, [navigationEnabled]);
 
+  // -----------------------------------------------------------------------------------------------
   const handlerOnMessage = (event: any) => {
     const { message } = JSON.parse(event.nativeEvent.data);
     if (message) {
@@ -49,12 +53,10 @@ export const App = () => {
       setNavigationEnabled(false);
     }
   };
-
   const handlerAlertClose = () => {
     setAlertVisible(false);
     setNavigationEnabled(true);
-  }
-
+  };
   const handlerBannerVisible = (newState: any) => {
     const {url} = newState;
     if (url.includes("/user/signup") || url.includes("/user/login")) {
@@ -63,8 +65,9 @@ export const App = () => {
     else {
       setBannerVisible(true);
     }
-  }
+  };
 
+  // -----------------------------------------------------------------------------------------------
   return (
     <SafeAreaView style={styles.container}>
       <Webviews
