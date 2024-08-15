@@ -22,7 +22,7 @@ interface ExerciseProps {
   exercise: {
     exercise_total_volume: any;
     exercise_total_cardio: any;
-    exercise_total_weight: any;
+    exercise_body_weight: any;
   };
 }
 interface FoodProps {
@@ -57,7 +57,7 @@ const insertComma = (num: any) => {
 
 // -------------------------------------------------------------------------------------------------
 const SelectSection = ({isActive, iconName}: ActiveProps) => {
-  let imageLink = "";
+  let imageLink;
   if (iconName === "exercise") {
     imageLink = require('../assets/images/exercise1.webp');
   }
@@ -95,7 +95,6 @@ const SelectSection = ({isActive, iconName}: ActiveProps) => {
         }}
       >
         <ImageWidget
-          // @ts-ignore
           image={imageLink}
           imageHeight={25}
           imageWidth={25}
@@ -114,8 +113,8 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
   const exercise_total_cardio
     = exercise.exercise_total_cardio === "x" ? "x" : exercise.exercise_total_cardio;
 
-  const exercise_total_weight
-    = exercise.exercise_total_weight === "x" ? "x" : parseFloat(exercise.exercise_total_weight).toFixed(0);
+  const exercise_body_weight
+    = exercise.exercise_body_weight === "x" ? "x" : parseFloat(exercise.exercise_body_weight).toFixed(0);
 
   return (
     <FlexWidget
@@ -243,16 +242,16 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
             text={`:`}
           />
         </FlexWidget>
-        {exercise_total_weight === "x" ? (
+        {exercise_body_weight === "x" ? (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
             <TextWidget style={{fontSize: 16, fontWeight: '500'}}
-              text={`${insertComma(exercise_total_weight)}`}
+              text={`${exercise_body_weight}`}
             />
           </FlexWidget>
         ) : (
           <FlexWidget style={{width: 80, marginLeft: 20, flexDirection: 'row'}}>
             <TextWidget style={{fontSize: 16, fontWeight: '500'}}
-              text={`${insertComma(exercise_total_weight)}`}
+              text={`${exercise_body_weight}`}
             />
             <TextWidget style={{fontSize: 10, marginLeft: 10}}
               text={"kg"}

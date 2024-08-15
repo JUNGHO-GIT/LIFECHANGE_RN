@@ -52,7 +52,7 @@ export const DetailScreen = () => {
   const [exercise, setExercise] = useState({
     exercise_total_volume: "x",
     exercise_total_cardio: "x",
-    exercise_total_weight: "x",
+    exercise_body_weight: "x",
   });
   const [food, setFood] = useState({
     food_total_kcal: "x",
@@ -108,7 +108,7 @@ export const DetailScreen = () => {
     setExercise(exerciseResponse.data.result?.[0] || {
       exercise_total_volume: "x",
       exercise_total_cardio: "x",
-      exercise_total_weight: "x",
+      exercise_body_weight: "x",
     });
     setFood(foodResponse.data.result?.[0] || {
       food_total_kcal: "x",
