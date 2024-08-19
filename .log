@@ -1,0 +1,60 @@
+ *  작업 실행 중: npm run make-bundle
+
+
+
+> LIFECHANGE@1.0.0 make-bundle
+> cd android && gradlew bundleRelease && cd ..
+
+> Configure project :
+Version code has been incremented to 64 and new version section added.
+
+> Configure project :react-native-google-mobile-ads
+:react-native-google-mobile-ads package.json found at C:\JUNGHO\2.IDE\2.Vscode\Workspace\1.Project\LIFECHANGE\node_modules\react-native-google-mobile-ads\package.json
+:react-native-google-mobile-ads package.json found at C:\JUNGHO\2.IDE\2.Vscode\Workspace\1.Project\LIFECHANGE\node_modules\react-native-google-mobile-ads\package.json
+:react-native-google-mobile-ads:version set from package.json: 13.6.1 (13,6,1 - 13006001)
+:react-native-google-mobile-ads:android.compileSdk using custom value: 34
+:react-native-google-mobile-ads:android.targetSdk using custom value: 34
+:react-native-google-mobile-ads:android.minSdk using custom value: 23
+:react-native-google-mobile-ads:reactNativeAndroidDir C:\JUNGHO\2.IDE\2.Vscode\Workspace\1.Project\LIFECHANGE\node_modules\react-native\android
+The message received from the daemon indicates that the daemon has disappeared.
+Build request sent: Build{id=1e84d111-0417-49b6-bb62-bda300ba1452, currentDir=C:\JUNGHO\2.IDE\2.Vscode\Workspace\1.Project\LIFECHANGE\android}
+Attempting to read last messages from the daemon log...
+Daemon pid: 17600
+  log file: C:\Users\jungh\.gradle\daemon\8.6\daemon-17600.out.log
+----- Last  20 lines from daemon log file - daemon-17600.out.log -----
+2024-08-16T23:54:20.201+0900 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2024-08-16T23:54:20.202+0900 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2024-08-16T23:54:20.203+0900 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] resetting idle timer
+2024-08-16T23:54:20.203+0900 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2024-08-16T23:54:20.203+0900 [INFO] [org.gradle.launcher.daemon.server.exec.StartBuildOrRespondWithBusy] Daemon is about to start building Build{id=1e84d111-0417-49b6-bb62-bda300ba1452, currentDir=C:\JUNGHO\2.IDE\2.Vscode\Workspace\1.Project\LIFECHANGE\android}. Dispatching build started information...
+2024-08-16T23:54:20.203+0900 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 38: dispatching org.gradle.launcher.daemon.protocol.BuildStarted@3f0009af
+2024-08-16T23:54:20.204+0900 [DEBUG] [org.gradle.launcher.daemon.server.exec.EstablishBuildEnvironment] Configuring env variables: [OPENJ9_JAVA_COMMAND_LINE, npm_lifecycle_script, JAVA_TOOLS_OPTION, REBEL_BASE, SESSIONNAME, ALLUSERSPROFILE, NPM_PREFIX_JS, ANDROID_HOME, SystemDrive, COLORTERM, INIT_CWD, DIRNAME, USERNAME, VSCODE_GIT_ASKPASS_NODE, TERM_PROGRAM_VERSION, ProgramFiles(x86), ACSetupSvcPort, FPS_BROWSER_USER_PROFILE_STRING, DEFAULT_JVM_OPTS, PATHEXT, DriverData, NODE, npm_node_execpath, PYTHON_HOME, NPM_PREFIX_NPM_CLI_JS, HOMEPATH, PROCESSOR_IDENTIFIER, ProgramFiles, PUBLIC, npm_config_cache, windir, VSCODE_INSPECTOR_OPTIONS, ZES_ENABLE_SYSMAN, npm_config_node_gyp, FPS_BROWSER_APP_PROFILE_STRING, JAVA_HOME, npm_command, PROMPT, GOOGLE_APPLICATION_CREDENTIALS, RlsSvcPort, GRADLE_HOME, NPM_CLI_JS, GROOVY_HOME, =C:, APPDATA, JAVA_EXE, ChocolateyInstall, npm_config_userconfig, Path, NODE_HOME, TERM_PROGRAM, COMPUTERNAME, EnableLog, npm_config_user_agent, ComSpec, npm_package_name, APP_BASE_NAME, npm_config_global_prefix, HOMEDRIVE, NUMBER_OF_PROCESSORS, USERDOMAIN_ROAMINGPROFILE, GIT_HOME, npm_config_npm_version, PROCESSOR_LEVEL, JAVA_OPTS, PROCESSOR_ARCHITECTURE, VSCODE_GIT_IPC_HANDLE, PSModulePath, MAVEN_HOME, ACSvcPort, COLOR, npm_lifecycle_event, PHP_HOME, EFC_11432, GIT_ASKPASS, NODE_EXE, npm_package_version, APP_HOME, npm_config_noproxy, npm_config_prefix, npm_config_init_module, ORIGINAL_XDG_CURRENT_DESKTOP, ProgramData, ProgramW6432, MYSQL_HOME, POWERSHELL_DISTRIBUTION_CHANNEL, npm_package_json, IGCCSVC_DB, LOCALAPPDATA, USERDOMAIN, LOGONSERVER, NODE_OPTIONS, LANG, VSCODE_GIT_ASKPASS_MAIN, VSCODE_GIT_ASKPASS_EXTRA_ARGS, npm_execpath, GCP_HOME, CommonProgramFiles, npm_config_local_prefix, npm_config_globalconfig, OS, ANDROID_SDK_ROOT, PROCESSOR_REVISION, CLASSPATH, CommonProgramW6432, EDITOR, SystemRoot, TEMP, USERPROFILE, TMP, CommonProgramFiles(x86), npm_package_engines_node, MONGOD_HOME, HOME]
+2024-08-16T23:54:20.209+0900 [DEBUG] [org.gradle.launcher.daemon.server.exec.LogToClient] About to start relaying all logs to the client via the connection.
+2024-08-16T23:54:20.209+0900 [INFO] [org.gradle.launcher.daemon.server.exec.LogToClient] The client will now receive all logging from the daemon (pid: 17600). The daemon log file: C:\Users\jungh\.gradle\daemon\8.6\daemon-17600.out.log
+2024-08-16T23:54:20.209+0900 [INFO] [org.gradle.launcher.daemon.server.exec.LogAndCheckHealth] Starting 2nd build in daemon [uptime: 1 mins 9.056 secs, performance: 98%]
+2024-08-16T23:54:20.210+0900 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has started executing the build.
+2024-08-16T23:54:20.210+0900 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] Executing build with daemon context: DefaultDaemonContext[uid=2a289ad6-d178-4d4f-abc5-5c85d435408b,javaHome=C:\JUNGHO\1.Language\1.JAVA\3.jdk17,daemonRegistryDir=C:\Users\jungh\.gradle\daemon,pid=17600,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,daemonOpts=-XX:MaxMetaspaceSize=512m,--add-opens=java.base/java.util=ALL-UNNAMED,--add-opens=java.base/java.lang=ALL-UNNAMED,--add-opens=java.base/java.lang.invoke=ALL-UNNAMED,--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED,--add-opens=java.base/java.nio.charset=ALL-UNNAMED,--add-opens=java.base/java.net=ALL-UNNAMED,--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED,-Xmx2048m,-Dfile.encoding=UTF-8,-Duser.country=KR,-Duser.language=ko,-Duser.variant]
+Version code has been incremented to 64 and new version section added.
+:react-native-google-mobile-ads package.json found at C:\JUNGHO\2.IDE\2.Vscode\Workspace\1.Project\LIFECHANGE\node_modules\react-native-google-mobile-ads\package.json
+:react-native-google-mobile-ads package.json found at C:\JUNGHO\2.IDE\2.Vscode\Workspace\1.Project\LIFECHANGE\node_modules\react-native-google-mobile-ads\package.json
+:react-native-google-mobile-ads:version set from package.json: 13.6.1 (13,6,1 - 13006001)
+:react-native-google-mobile-ads:android.compileSdk using custom value: 34
+:react-native-google-mobile-ads:android.targetSdk using custom value: 34
+:react-native-google-mobile-ads:android.minSdk using custom value: 23
+:react-native-google-mobile-ads:reactNativeAndroidDir C:\JUNGHO\2.IDE\2.Vscode\Workspace\1.Project\LIFECHANGE\node_modules\react-native\android
+----- End of the daemon log -----
+
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Could not dispatch a message to the daemon.
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+ *  터미널 프로세스 "C:\Windows\System32\cmd.exe /d /c npm run make-bundle"이(가) 종료되었습니다(종료 코드: 1).
+ *  터미널이 작업에서 다시 사용됩니다. 닫으려면 아무 키나 누르세요.
