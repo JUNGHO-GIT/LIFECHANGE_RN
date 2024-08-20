@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   alertContainer: {
-    minWidth: 200,
     width: "auto",
+    minWidth: 200,
     padding: 20,
     backgroundColor: 'white',
     borderRadius: 10,
@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 14,
+    textAlign: 'center',
   },
 });
 
@@ -65,7 +66,7 @@ const Alert = ({ alertVisible, alertMessage, alertClose }: AlertProps) => {
           </Text>
           <TouchableOpacity onPress={alertClose} style={styles.button}>
             <Text style={styles.buttonText}>
-              OK
+              확인
             </Text>
           </TouchableOpacity>
         </View>

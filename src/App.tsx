@@ -4,7 +4,6 @@ import React, {useEffect, useRef, useState} from 'react';
 import {BackHandler, SafeAreaView, StyleSheet} from 'react-native';
 import Webviews from './components/Webviews.tsx';
 import Alert from './components/Alert.tsx';
-import Prompt from "./components/Prompt";
 import Banner from './components/Banner.tsx';
 import type WebView from "react-native-webview";
 
@@ -23,8 +22,6 @@ export const App = () => {
   // -----------------------------------------------------------------------------------------------
   const [alertVisible, setAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  const [promptVisible, setPromptVisible] = useState(false);
-  const [promptMessage, setPromptMessage] = useState("");
   const [bannerVisible, setBannerVisible] = useState(false);
   const [navigationEnabled, setNavigationEnabled] = useState(true);
   const webViewRef = useRef<WebView>(null);
@@ -49,15 +46,14 @@ export const App = () => {
 
   // -----------------------------------------------------------------------------------------------
   const handlerOnMessage = (event: any) => {
-    const { message, type } = JSON.parse(event.nativeEvent.data);
+    const parsedData = JSON.parse(event.nativeEvent.data);
+    const type: string = parsedData.type;
+    const message: string = parsedData.message;
 
-    if (type === 'alert' && message) {
-      setAlertMessage(message);
+    // Alert 처리 로직
+    if (type === 'alert') {
       setAlertVisible(true);
-      setNavigationEnabled(false);
-    } else if (type === 'prompt' && message) {
-      setPromptMessage(message);
-      setPromptVisible(true);
+      setAlertMessage(message);
       setNavigationEnabled(false);
     }
   };
@@ -67,23 +63,12 @@ export const App = () => {
     setNavigationEnabled(true);
   };
 
-  const handlerPromptSubmit = (value: string) => {
-    setPromptVisible(false);
-    setNavigationEnabled(true);
-    // 입력된 값 처리
-    console.log('Prompt response:', value);
-  };
-
-  const handlerPromptCancel = () => {
-    setPromptVisible(false);
-    setNavigationEnabled(true);
-  };
-
   const handlerBannerVisible = (newState: any) => {
     const { url } = newState;
-    if (url.includes('/user/signup') || url.includes('/user/login')) {
+    if (url.includes("/user/signup") || url.includes("/user/login")) {
       setBannerVisible(false);
-    } else {
+    }
+    else {
       setBannerVisible(true);
     }
   };
@@ -101,12 +86,6 @@ export const App = () => {
         alertVisible={alertVisible}
         alertMessage={alertMessage}
         alertClose={handlerAlertClose}
-      />
-      <Prompt
-        promptVisible={promptVisible}
-        promptMessage={promptMessage}
-        onSubmit={handlerPromptSubmit}
-        onCancel={handlerPromptCancel}
       />
       {bannerVisible && <Banner />}
     </SafeAreaView>

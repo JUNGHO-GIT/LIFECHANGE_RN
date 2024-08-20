@@ -26,7 +26,10 @@ const Webviews = forwardRef<WebView, Props>(
     const url = 'https://www.junghomun.com';
     const injectedJavaScript = `
       window.alert = function(msg) {
-        window.ReactNativeWebView.postMessage(JSON.stringify({ message: msg }));
+        window.ReactNativeWebView.postMessage(JSON.stringify({
+          type: 'alert',
+          message: msg
+        }));
       };
     `;
 
@@ -35,8 +38,10 @@ const Webviews = forwardRef<WebView, Props>(
         ref={ref}
         style={styles.webviewContainer}
         source={{ uri: url }}
-        injectedJavaScript={injectedJavaScript}
         onMessage={onMessage}
+        javaScriptEnabled={true}
+        domStorageEnabled={true}
+        injectedJavaScript={injectedJavaScript}
         onNavigationStateChange={(newState: any) => {
           if (navigationEnabled) {
             bannerVisible(newState);
