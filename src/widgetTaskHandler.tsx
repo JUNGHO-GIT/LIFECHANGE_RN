@@ -128,6 +128,19 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
       break;
 
     case 'WIDGET_UPDATE':
+      props.renderWidget(
+        <Widget
+          {...widgetInfo}
+          activeView={props.clickAction as any}
+          currentDate={currentDate}
+          currentDay={currentDay}
+          currentTime={currentTime}
+          exercise={OBJECT.exercise}
+          food={OBJECT.food}
+          money={OBJECT.money}
+          sleep={OBJECT.sleep}
+        />
+      );
       console.log(`WIDGET_UPDATE ${JSON.stringify(widgetInfo)}`);
       break;
 
