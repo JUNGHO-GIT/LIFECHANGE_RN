@@ -22,7 +22,7 @@ interface ExerciseProps {
   exercise: {
     exercise_total_volume: any;
     exercise_total_cardio: any;
-    exercise_body_weight: any;
+    exercise_total_weight: any;
   };
 }
 interface FoodProps {
@@ -106,14 +106,24 @@ const SelectSection = ({isActive, iconName}: ActiveProps) => {
 
 // -------------------------------------------------------------------------------------------------
 const ExerciseSection  = ({ exercise }: ExerciseProps) => {
+
   const exercise_total_volume
-    = exercise.exercise_total_volume === "x" ? "x" : parseFloat(exercise.exercise_total_volume).toFixed(0);
+    = exercise.exercise_total_volume === "x" ? "x" : exercise.exercise_total_volume;
+
+  const exercise_total_volume_color
+    = (exercise_total_volume === "x" || exercise_total_volume === "0") ? "#9CA3AF" : "#000000";
 
   const exercise_total_cardio
     = exercise.exercise_total_cardio === "x" ? "x" : exercise.exercise_total_cardio;
 
-  const exercise_body_weight
-    = exercise.exercise_body_weight === "x" ? "x" : exercise.exercise_body_weight;
+  const exercise_total_cardio_color
+    = (exercise_total_cardio === "x" || exercise_total_cardio === "00:00") ? "#9CA3AF" : "#000000";
+
+  const exercise_total_weight
+    = exercise.exercise_total_weight === "x" ? "x" : exercise.exercise_total_weight;
+
+  const exercise_total_weight_color
+    = (exercise_total_weight === "x" || exercise_total_weight === "0") ? "#9CA3AF" : "#000000";
 
   return (
     <FlexWidget
@@ -174,7 +184,7 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
               style={{
                 fontSize: 16,
                 fontWeight: '500',
-                color: "#9CA3AF",
+                color: exercise_total_volume_color,
               }}
               text={`${insertComma(exercise_total_volume)}`}
             />
@@ -190,7 +200,8 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
             <TextWidget
               style={{
                 fontSize: 16,
-                fontWeight: '500'
+                fontWeight: '500',
+                color: exercise_total_volume_color,
               }}
               text={`${insertComma(exercise_total_volume)}`}
             />
@@ -252,7 +263,7 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
               style={{
                 fontSize: 16,
                 fontWeight: '500',
-                color: "#9CA3AF",
+                color: exercise_total_cardio_color,
               }}
               text={`${exercise_total_cardio}`}
             />
@@ -268,7 +279,8 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
             <TextWidget
             style={{
               fontSize: 16,
-              fontWeight: '500'
+              fontWeight: '500',
+              color: exercise_total_cardio_color,
             }}
               text={`${exercise_total_cardio}`}
             />
@@ -318,7 +330,7 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
             text={`:`}
           />
         </FlexWidget>
-        {exercise_body_weight === "x" ? (
+        {exercise_total_weight === "x" ? (
           <FlexWidget
             style={{
               flexDirection: 'row',
@@ -330,9 +342,9 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
               style={{
                 fontSize: 16,
                 fontWeight: '500',
-                color: "#9CA3AF",
+                color: exercise_total_weight_color,
               }}
-              text={`${exercise_body_weight}`}
+              text={`${exercise_total_weight}`}
             />
           </FlexWidget>
         ) : (
@@ -346,9 +358,10 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
             <TextWidget
               style={{
                 fontSize: 16,
-                fontWeight: '500'
+                fontWeight: '500',
+                color: exercise_total_weight_color,
               }}
-              text={`${exercise_body_weight}`}
+              text={`${exercise_total_weight}`}
             />
             <TextWidget
               style={{
@@ -368,16 +381,28 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
 const FoodSection = ({ food }: FoodProps) => {
 
   const food_total_kcal
-    = food.food_total_kcal === "x" ? "x" : parseFloat(food.food_total_kcal).toFixed(0);
+    = food.food_total_kcal === "x" ? "x" : food.food_total_kcal;
+
+  const food_total_kcal_color
+    = (food_total_kcal === "x" || food_total_kcal === "0") ? "#9CA3AF" : "#000000";
 
   const food_total_carb
-    = food.food_total_carb === "x" ? "x" : parseFloat(food.food_total_carb).toFixed(0);
+    = food.food_total_carb === "x" ? "x" : food.food_total_carb;
+
+  const food_total_carb_color
+    = (food_total_carb === "x" || food_total_carb === "0") ? "#9CA3AF" : "#000000";
 
   const food_total_protein
-    = food.food_total_protein === "x" ? "x" : parseFloat(food.food_total_protein).toFixed(0);
+    = food.food_total_protein === "x" ? "x" : food.food_total_protein;
+
+  const food_total_protein_color
+    = (food_total_protein === "x" || food_total_protein === "0") ? "#9CA3AF" : "#000000";
 
   const food_total_fat
-    = food.food_total_fat === "x" ? "x" : parseFloat(food.food_total_fat).toFixed(0);
+    = food.food_total_fat === "x" ? "x" : food.food_total_fat;
+
+  const food_total_fat_color
+    = (food_total_fat === "x" || food_total_fat === "0") ? "#9CA3AF" : "#000000";
 
   return (
     <FlexWidget
@@ -438,7 +463,7 @@ const FoodSection = ({ food }: FoodProps) => {
               style={{
                 fontSize: 16,
                 fontWeight: '500',
-                color: "#9CA3AF",
+                color: food_total_kcal_color,
               }}
               text={`${insertComma(food_total_kcal)}`}
             />
@@ -454,7 +479,8 @@ const FoodSection = ({ food }: FoodProps) => {
             <TextWidget
             style={{
               fontSize: 16,
-              fontWeight: '500'
+              fontWeight: '500',
+              color: food_total_kcal_color,
             }}
               text={`${insertComma(food_total_kcal)}`}
             />
@@ -516,7 +542,7 @@ const FoodSection = ({ food }: FoodProps) => {
               style={{
                 fontSize: 16,
                 fontWeight: '500',
-                color: "#9CA3AF",
+                color: food_total_carb_color,
               }}
               text={`${insertComma(food_total_carb)}`}
             />
@@ -532,7 +558,8 @@ const FoodSection = ({ food }: FoodProps) => {
             <TextWidget
             style={{
               fontSize: 16,
-              fontWeight: '500'
+              fontWeight: '500',
+              color: food_total_carb_color,
             }}
               text={`${insertComma(food_total_carb)}`}
             />
@@ -594,7 +621,7 @@ const FoodSection = ({ food }: FoodProps) => {
               style={{
                 fontSize: 16,
                 fontWeight: '500',
-                color: "#9CA3AF",
+                color: food_total_protein_color,
               }}
               text={`${insertComma(food_total_protein)}`}
             />
@@ -610,7 +637,8 @@ const FoodSection = ({ food }: FoodProps) => {
             <TextWidget
             style={{
               fontSize: 16,
-              fontWeight: '500'
+              fontWeight: '500',
+              color: food_total_protein_color,
             }}
               text={`${insertComma(food_total_protein)}`}
             />
@@ -672,7 +700,7 @@ const FoodSection = ({ food }: FoodProps) => {
               style={{
                 fontSize: 16,
                 fontWeight: '500',
-                color: "#9CA3AF",
+                color: food_total_fat_color,
               }}
               text={`${insertComma(food_total_fat)}`}
             />
@@ -688,7 +716,8 @@ const FoodSection = ({ food }: FoodProps) => {
             <TextWidget
             style={{
               fontSize: 16,
-              fontWeight: '500'
+              fontWeight: '500',
+              color: food_total_fat_color,
             }}
               text={`${insertComma(food_total_fat)}`}
             />
@@ -710,10 +739,16 @@ const FoodSection = ({ food }: FoodProps) => {
 const MoneySection = ({ money }: MoneyProps) => {
 
   const money_total_income
-    = money.money_total_income === "x" ? "x" : parseFloat(money.money_total_income).toFixed(0);
+    = money.money_total_income === "x" ? "x" : money.money_total_income;
+
+  const money_total_income_color
+    = (money_total_income === "x" || money_total_income === "0") ? "#9CA3AF" : "#000000";
 
   const money_total_expense
-    = money.money_total_expense === "x" ? "x" : parseFloat(money.money_total_expense).toFixed(0);
+    = money.money_total_expense === "x" ? "x" : money.money_total_expense;
+
+  const money_total_expense_color
+    = (money_total_expense === "x" || money_total_expense === "0") ? "#9CA3AF" : "#000000";
 
   return (
     <FlexWidget
@@ -773,7 +808,7 @@ const MoneySection = ({ money }: MoneyProps) => {
               style={{
                 fontSize: 16,
                 fontWeight: '500',
-                color: "#9CA3AF",
+                color: money_total_income_color,
               }}
               text={`${insertComma(money_total_income)}`}
             />
@@ -788,17 +823,18 @@ const MoneySection = ({ money }: MoneyProps) => {
           >
             <TextWidget
               style={{
-                fontSize: 10,
-                marginRight: 10
+                fontSize: 16,
+                fontWeight: '500',
+                color: money_total_income_color,
               }}
-              text={"₩"}
+              text={`${insertComma(money_total_income)}`}
             />
             <TextWidget
-            style={{
-              fontSize: 16,
-              fontWeight: '500'
-            }}
-              text={`${insertComma(money_total_income)}`}
+              style={{
+                fontSize: 10,
+                marginLeft: 10
+              }}
+              text={"₩"}
             />
           </FlexWidget>
         )}
@@ -851,7 +887,7 @@ const MoneySection = ({ money }: MoneyProps) => {
               style={{
                 fontSize: 16,
                 fontWeight: '500',
-                color: "#9CA3AF",
+                color: money_total_expense_color,
               }}
               text={`${insertComma(money_total_expense)}`}
             />
@@ -866,17 +902,18 @@ const MoneySection = ({ money }: MoneyProps) => {
           >
             <TextWidget
               style={{
-                fontSize: 10,
-                marginRight: 10
+                fontSize: 16,
+                fontWeight: '500',
+                color: money_total_expense_color,
               }}
-              text={"₩"}
+              text={`${insertComma(money_total_expense)}`}
             />
             <TextWidget
               style={{
-                fontSize: 16,
-                fontWeight: '500'
+                fontSize: 10,
+                marginLeft: 10
               }}
-              text={`${insertComma(money_total_expense)}`}
+              text={"₩"}
             />
           </FlexWidget>
         )}
@@ -891,11 +928,20 @@ const SleepSection = ({ sleep }: SleepProps) => {
   const sleep_bedTime
     = sleep.sleep_bedTime === "x" ? "x" : sleep.sleep_bedTime;
 
+  const sleep_bedTime_color
+    = (sleep_bedTime === "x" || sleep_bedTime === "00:00") ? "#9CA3AF" : "#000000";
+
   const sleep_wakeTime
     = sleep.sleep_wakeTime === "x" ? "x" : sleep.sleep_wakeTime;
 
+  const sleep_wakeTime_color
+    = (sleep_wakeTime === "x" || sleep_wakeTime === "00:00") ? "#9CA3AF" : "#000000";
+
   const sleep_sleepTime
     = sleep.sleep_sleepTime === "x" ? "x" : sleep.sleep_sleepTime;
+
+  const sleep_sleepTime_color
+    = (sleep_sleepTime === "x" || sleep_sleepTime === "00:00") ? "#9CA3AF" : "#000000";
 
   return (
     <FlexWidget
@@ -956,7 +1002,7 @@ const SleepSection = ({ sleep }: SleepProps) => {
               style={{
                 fontSize: 16,
                 fontWeight: '500',
-                color: "#9CA3AF",
+                color: sleep_bedTime_color,
               }}
               text={`${sleep_bedTime}`}
             />
@@ -972,7 +1018,8 @@ const SleepSection = ({ sleep }: SleepProps) => {
             <TextWidget
             style={{
               fontSize: 16,
-              fontWeight: '500'
+              fontWeight: '500',
+              color: sleep_bedTime_color,
             }}
               text={`${sleep_bedTime}`}
             />
@@ -1034,7 +1081,7 @@ const SleepSection = ({ sleep }: SleepProps) => {
               style={{
                 fontSize: 16,
                 fontWeight: '500',
-                color: "#9CA3AF",
+                color: sleep_wakeTime_color,
               }}
               text={`${sleep_wakeTime}`}
             />
@@ -1050,7 +1097,8 @@ const SleepSection = ({ sleep }: SleepProps) => {
             <TextWidget
               style={{
                 fontSize: 16,
-                fontWeight: '500'
+                fontWeight: '500',
+                color: sleep_wakeTime_color,
               }}
               text={`${sleep_wakeTime}`}
             />
@@ -1112,7 +1160,7 @@ const SleepSection = ({ sleep }: SleepProps) => {
               style={{
                 fontSize: 16,
                 fontWeight: '500',
-                color: "#9CA3AF",
+                color: sleep_sleepTime_color,
               }}
               text={`${sleep_sleepTime}`}
             />
@@ -1128,7 +1176,8 @@ const SleepSection = ({ sleep }: SleepProps) => {
             <TextWidget
               style={{
                 fontSize: 16,
-                fontWeight: '500'
+                fontWeight: '500',
+                color: sleep_sleepTime_color,
               }}
               text={`${sleep_sleepTime}`}
             />

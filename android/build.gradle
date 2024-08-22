@@ -18,7 +18,7 @@ buildscript {
     versionCode=1
     versionName="1.0.1"
 
-    // version code and name logic
+    // version code and name
     def changeLogFile = file("../changelog.md")
     def charset = StandardCharsets.UTF_8
 
@@ -37,7 +37,15 @@ buildscript {
     }
 
     rootProject.ext.versionCode = maxVersionCode + 1
-    rootProject.ext.versionName = "1.0." + rootProject.ext.versionCode
+    if (rootProject.ext.versionCode >= 100) {
+      def firstStr = rootProject.ext.versionCode.toString().substring(0, 1)
+      def remainStr = rootProject.ext.versionCode.toString().substring(1)
+
+      rootProject.ext.versionName = "1." + firstStr + "." + remainStr
+    }
+    else {
+      rootProject.ext.versionName = "1.0." + rootProject.ext.versionCode
+    }
 
     def now = LocalDateTime.now()
     def formatter = DateTimeFormatter.ofPattern('yyyy-MM-dd (HH:mm:ss)')

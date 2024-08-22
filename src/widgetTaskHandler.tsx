@@ -45,7 +45,7 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
     exercise: {
       exercise_total_volume: "x",
       exercise_total_cardio: "x",
-      exercise_body_weight: "x",
+      exercise_total_weight: "x",
     },
     food: {
       food_total_kcal: "x",
