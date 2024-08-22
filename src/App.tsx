@@ -49,8 +49,6 @@ export const App = () => {
     const parsedData = JSON.parse(event.nativeEvent.data);
     const type: string = parsedData.type;
     const message: string = parsedData.message;
-
-    // Alert 처리 로직
     if (type === 'alert') {
       setAlertVisible(true);
       setAlertMessage(message);
