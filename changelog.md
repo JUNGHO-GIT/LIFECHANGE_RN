@@ -451,3 +451,23 @@
 ## versionCode = 113
 	- versionName = 1.1.13
 	- 2024-08-22 (23:07:56)
+
+## versionCode = 114
+	- versionName = 1.1.14
+	- 2024-08-22 (23:08:24)
+
+## versionCode = 115
+	- versionName = 1.1.15
+	- 2024-08-22 (23:08:26)
+
+## versionCode = 116
+	- versionName = 1.1.16
+	- 2024-08-22 (23:08:55)
+
+## versionCode = 117
+	- versionName = 1.1.17
+	- 2024-08-22 (23:10:30)
+
+## versionCode = 118
+	- versionName = 1.1.18
+	- 2024-08-22 (23:12:23)
