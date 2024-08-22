@@ -419,3 +419,35 @@
 ## versionCode = 105
 	- versionName = 1.1.05
 	- 2024-08-22 (23:00:36)
+
+## versionCode = 106
+	- versionName = 1.1.06
+	- 2024-08-22 (23:02:14)
+
+## versionCode = 107
+	- versionName = 1.1.07
+	- 2024-08-22 (23:03:51)
+
+## versionCode = 108
+	- versionName = 1.1.08
+	- 2024-08-22 (23:04:36)
+
+## versionCode = 109
+	- versionName = 1.1.09
+	- 2024-08-22 (23:05:14)
+
+## versionCode = 110
+	- versionName = 1.1.10
+	- 2024-08-22 (23:06:31)
+
+## versionCode = 111
+	- versionName = 1.1.11
+	- 2024-08-22 (23:07:49)
+
+## versionCode = 112
+	- versionName = 1.1.12
+	- 2024-08-22 (23:07:51)
+
+## versionCode = 113
+	- versionName = 1.1.13
+	- 2024-08-22 (23:07:56)

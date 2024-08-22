@@ -66,7 +66,7 @@ const Alert = ({ alertVisible, alertMessage, alertClose }: AlertProps) => {
           </Text>
           <TouchableOpacity onPress={alertClose} style={styles.button}>
             <Text style={styles.buttonText}>
-              확인
+              OK
             </Text>
           </TouchableOpacity>
         </View>
