@@ -48,12 +48,26 @@ interface SleepProps {
 }
 
 // -------------------------------------------------------------------------------------------------
-const insertComma = (num: any) => {
-  if (num === "x") {
-    return "x";
+const insertComma = (str: string) => {
+  // 'x'인 경우 그대로 반환
+  if (str === "x") {
+    return str;
   }
+
+  // 숫자로 변환 가능한지 체크
+  let num = parseFloat(str);
+
+  // 변환이 실패하면 그대로 반환
+  if (isNaN(num)) {
+    return str;
+  }
+
+  // 소수점 존재하는 경우 소수점 삭제
+  num = Math.floor(num);
+
+  // 3자리마다 콤마 추가하여 반환
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+};
 
 // -------------------------------------------------------------------------------------------------
 const SelectSection = ({isActive, iconName}: ActiveProps) => {
@@ -208,7 +222,8 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
             <TextWidget
               style={{
                 fontSize: 10,
-                marginLeft: 10
+                marginLeft: 10,
+                color: "#000000"
               }}
               text={"vol"}
             />
@@ -287,7 +302,8 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
             <TextWidget
               style={{
                 fontSize: 10,
-                marginLeft: 10
+                marginLeft: 10,
+                color: "#000000"
               }}
               text={"h:m"}
             />
@@ -366,7 +382,8 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
             <TextWidget
               style={{
                 fontSize: 10,
-                marginLeft: 10
+                marginLeft: 10,
+                color: "#000000"
               }}
               text={"kg"}
             />
@@ -487,7 +504,8 @@ const FoodSection = ({ food }: FoodProps) => {
             <TextWidget
               style={{
                 fontSize: 10,
-                marginLeft: 10
+                marginLeft: 10,
+                color: "#000000"
               }}
               text={"kcal"}
             />
@@ -566,7 +584,8 @@ const FoodSection = ({ food }: FoodProps) => {
             <TextWidget
               style={{
                 fontSize: 10,
-                marginLeft: 10
+                marginLeft: 10,
+                color: "#000000"
               }}
               text={"g"}
             />
@@ -645,7 +664,8 @@ const FoodSection = ({ food }: FoodProps) => {
             <TextWidget
               style={{
                 fontSize: 10,
-                marginLeft: 10
+                marginLeft: 10,
+                color: "#000000"
               }}
               text={"g"}
             />
@@ -724,7 +744,8 @@ const FoodSection = ({ food }: FoodProps) => {
             <TextWidget
               style={{
                 fontSize: 10,
-                marginLeft: 10
+                marginLeft: 10,
+                color: "#000000"
               }}
               text={"g"}
             />
@@ -832,7 +853,8 @@ const MoneySection = ({ money }: MoneyProps) => {
             <TextWidget
               style={{
                 fontSize: 10,
-                marginLeft: 10
+                marginLeft: 10,
+                color: "#000000"
               }}
               text={"₩"}
             />
@@ -911,7 +933,8 @@ const MoneySection = ({ money }: MoneyProps) => {
             <TextWidget
               style={{
                 fontSize: 10,
-                marginLeft: 10
+                marginLeft: 10,
+                color: "#000000"
               }}
               text={"₩"}
             />
@@ -1026,7 +1049,8 @@ const SleepSection = ({ sleep }: SleepProps) => {
             <TextWidget
               style={{
                 fontSize: 10,
-                marginLeft: 10
+                marginLeft: 10,
+                color: "#000000"
               }}
               text={"h:m"}
             />
@@ -1105,7 +1129,8 @@ const SleepSection = ({ sleep }: SleepProps) => {
             <TextWidget
               style={{
                 fontSize: 10,
-                marginLeft: 10
+                marginLeft: 10,
+                color: "#000000"
               }}
               text={"h:m"}
             />
@@ -1184,7 +1209,8 @@ const SleepSection = ({ sleep }: SleepProps) => {
             <TextWidget
               style={{
                 fontSize: 10,
-                marginLeft: 10
+                marginLeft: 10,
+                color: "#000000"
               }}
               text={"h:m"}
             />
