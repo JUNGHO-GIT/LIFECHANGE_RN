@@ -37,7 +37,7 @@ export const DetailScreen = () => {
   const [key, setKey] = useState(0);
   const [view, setView] = useState<"exercise" | "food" | "money" | "sleep">("exercise");
 
-  const URL = "https://www.junghomun.com";
+  const URL = "https://www.junghomun.com/JPAGE";
   const userId = "junghomun00@gmail.com";
   const PAGING = {
     sort: "asc",

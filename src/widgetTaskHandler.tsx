@@ -17,7 +17,7 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
   const widgetInfo = props.widgetInfo;
   const Widget = nameToWidget[widgetInfo.widgetName as keyof typeof nameToWidget] as any;
 
-  const URL = "https://www.junghomun.com";
+  const URL = "https://www.junghomun.com/JPAGE";
   const userId = "junghomun00@gmail.com";
 
   const currentDate = moment().tz("Asia/Seoul").format("YYYY-MM-DD");

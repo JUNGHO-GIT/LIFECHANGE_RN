@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 // -------------------------------------------------------------------------------------------------
 const Webviews = forwardRef<WebView, Props>(
   ({ onMessage, bannerVisible, navigationEnabled }, ref) => {
-    const url = 'https://www.junghomun.com';
+    const url = 'https://www.junghomun.com/JPAGE';
     const injectedJavaScript = `
       window.alert = function(msg) {
         window.ReactNativeWebView.postMessage(JSON.stringify({
