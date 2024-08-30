@@ -33,4 +33,5 @@
     ".watchmanconfig": true
   },
   "explorerExclude.backup": {},
+  "java.configuration.updateBuildConfiguration": "disabled",
 }
