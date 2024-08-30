@@ -42,7 +42,7 @@
 
     <!-- detail widget -->
     <receiver
-      android:name=".widget.DetailWidget"
+      android:name=".widgets.DetailWidget"
       android:exported="false"
       android:label="오늘의 기록"
     >

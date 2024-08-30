@@ -5,7 +5,7 @@ import axios from "axios";
 import moment from "moment-timezone";
 import { StyleSheet, SafeAreaView, View, Button } from 'react-native';
 import { WidgetPreview } from 'react-native-android-widget';
-import { DetailWidget } from '../widget/DetailWidget.tsx';
+import { DetailWidget } from '../widgets/DetailWidget.tsx';
 
 // -------------------------------------------------------------------------------------------------
 const styles = StyleSheet.create({

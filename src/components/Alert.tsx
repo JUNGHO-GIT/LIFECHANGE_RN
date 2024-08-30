@@ -1,6 +1,6 @@
 // Alert.tsx
 
-import React, {type FC} from 'react';
+import React from 'react';
 import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 // -------------------------------------------------------------------------------------------------

@@ -26,15 +26,11 @@
     "ios": true,
     ".eslintrc.js": true,
     ".prettierrc.js": true,
-    ".watchmanconfig": true,
-    "babel.config.js": true,
-    "metro.config.js": true,
     "jest.config.js": true,
     "Gemfile": true,
     ".bundle": true,
-    "yarn.lock": true
+    "yarn.lock": true,
+    ".watchmanconfig": true
   },
-  "java.configuration.updateBuildConfiguration": "disabled",
-  "typescript.tsdk": "node_modules\\typescript\\lib",
   "explorerExclude.backup": {},
 }
