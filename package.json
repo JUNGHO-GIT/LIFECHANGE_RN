@@ -14,7 +14,7 @@
     "build-clean": "cd android && gradlew clean --stacktrace",
     "resolve-load": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
     "kill-java": "taskkill /f /im java.exe",
-    "push": "git add . && git commit -m 'update' && git push origin main",
+    "git-push": "git add . && git commit -m 'update' && git push origin main",
     "npm-reset": "rd /s /q node_modules && del /f package-lock.json && npm cache clean --force && npm install",
     "npm-install": "npm install",
     "npm-clean": "npm cache clean --force"

@@ -1,11 +1,11 @@
 // DetailScreen.tsx
 
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect  } from 'react';
 import axios from "axios";
 import moment from "moment-timezone";
-import { StyleSheet, SafeAreaView, View, Button } from 'react-native';
-import { WidgetPreview } from 'react-native-android-widget';
-import { DetailWidget } from '../widgets/DetailWidget.tsx';
+import {  StyleSheet, SafeAreaView, View, Button  } from 'react-native';
+import {  WidgetPreview  } from 'react-native-android-widget';
+import {  DetailWidget  } from '../widgets/DetailWidget.tsx';
 
 // -------------------------------------------------------------------------------------------------
 const styles = StyleSheet.create({

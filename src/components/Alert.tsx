@@ -1,7 +1,7 @@
 // Alert.tsx
 
 import React from 'react';
-import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import {  Modal, View, Text, TouchableOpacity, StyleSheet  } from 'react-native';
 
 // -------------------------------------------------------------------------------------------------
 type AlertProps = {

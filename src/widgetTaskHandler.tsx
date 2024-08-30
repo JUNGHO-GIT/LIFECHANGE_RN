@@ -3,8 +3,8 @@
 import React from 'react';
 import axios from "axios";
 import moment from "moment-timezone";
-import type { WidgetTaskHandlerProps } from 'react-native-android-widget';
-import { DetailWidget } from './widgets/DetailWidget';
+import type { WidgetTaskHandlerProps  } from 'react-native-android-widget';
+import {  DetailWidget  } from './widgets/DetailWidget';
 
 // -------------------------------------------------------------------------------------------------
 const nameToWidget = {

@@ -1,17 +1,23 @@
 // Banner.tsx
 
-import {View, StyleSheet} from "react-native";
-import {Dimensions} from 'react-native';
-import {BannerAd, BannerAdSize, TestIds} from "react-native-google-mobile-ads";
+import { View, StyleSheet } from "react-native";
+import { Dimensions } from 'react-native';
+import { BannerAd, BannerAdSize, TestIds } from "react-native-google-mobile-ads";
 import { ADMOB_BANNER_ID } from "env";
 
 // -------------------------------------------------------------------------------------------------
 const styles = StyleSheet.create({
   adContainer: {
-    position: "absolute",
-    alignItems: 'center',
     width: Dimensions.get('window').width,
-    bottom: 0
+    height: 60,
+    backgroundColor: "white",
+    position: "absolute",
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: 'transparent',
+    bottom: 0,
+    borderWidth: 0,
+    padding: 0,
   },
 });
 
@@ -26,7 +32,7 @@ const Banner = () => {
       <BannerAd
         key={`admob-banner`}
         unitId={testId}
-        size={BannerAdSize.INLINE_ADAPTIVE_BANNER}
+        size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
       />
     </View>
   );

@@ -1,7 +1,7 @@
 // App.tsx
 
-import React, {useEffect, useRef, useState} from 'react';
-import {BackHandler, SafeAreaView, StyleSheet} from 'react-native';
+import React, {useEffect, useRef, useState } from 'react';
+import { BackHandler, SafeAreaView, StyleSheet } from 'react-native';
 import Webviews from './components/Webviews.tsx';
 import Alert from './components/Alert.tsx';
 import Banner from './components/Banner.tsx';
