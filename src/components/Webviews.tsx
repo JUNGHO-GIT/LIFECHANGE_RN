@@ -3,7 +3,6 @@
 import React, { forwardRef  } from 'react';
 import {  StyleSheet, Dimensions  } from 'react-native';
 import WebView from 'react-native-webview';
-import { ActivityIndicator } from 'react-native';
 
 // -------------------------------------------------------------------------------------------------
 type Props = {

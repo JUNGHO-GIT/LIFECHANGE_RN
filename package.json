@@ -10,7 +10,6 @@
     "android": "npx react-native run-android",
     "make-apk": "cd android && gradlew assembleRelease --stacktrace",
     "make-bundle": "cd android && gradlew bundleRelease --stacktrace",
-    "make-apk&bundle": "cd android && gradlew bundleRelease && gradlew assembleRelease --stacktrace",
     "build-clean": "cd android && gradlew clean --stacktrace",
     "resolve-load": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
     "kill-java": "taskkill /f /im java.exe",
