@@ -1,6 +1,8 @@
 // ImportWidgets.tsx
 
-import { DetailWidget } from "@widgets/DetailWidget";
+import {
+  DetailWidget
+} from "@widgets/DetailWidget";
 
 // -------------------------------------------------------------------------------------------------
 export {

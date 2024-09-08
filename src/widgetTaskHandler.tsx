@@ -14,7 +14,7 @@ import {
 
 import {
   SERVER_URL,
-} from "@imports/ImportEnvs";
+} from "@env";
 
 import {
   curDate, curTime, curFormat, curDay,

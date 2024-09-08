@@ -19,10 +19,25 @@
     ],
     "types": [
       "node",
-      "env",
       "alias",
-      "extension",
-      "global"
-    ]
-  }
+      "global",
+      "extension"
+    ],
+  },
+  "include": [
+    "index.js",
+    "src/**/*",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+    "**/*.d.ts",
+    "babel.config.*",
+    "metro.config.*",
+    "**/dist/index.d.ts",
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts",
+  ]
 }

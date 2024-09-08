@@ -18,7 +18,11 @@ import {
 } from "react-native-google-mobile-ads";
 
 import {
-  FlexWidget, TextWidget, ImageWidget, WidgetTaskHandlerProps,
+  FlexWidget, TextWidget, ImageWidget,
+} from "react-native-android-widget";
+
+import type {
+  WidgetTaskHandlerProps,
 } from "react-native-android-widget";
 
 import * as RNLocalize from 'react-native-localize';

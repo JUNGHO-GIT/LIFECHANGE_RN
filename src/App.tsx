@@ -1,7 +1,7 @@
 // App.tsx
 
 import {
-  useEffect, useRef, useState, BackHandler, SafeAreaView, StyleSheet, RNLocalize
+  useEffect, useRef, useState, BackHandler, SafeAreaView, StyleSheet,
 } from "@imports/ImportReacts";
 
 import {

@@ -1,5 +1,11 @@
 // alias.d.ts
 
+declare module "@env" {
+  export const SERVER_URL: string;
+  export const ADMOB_APP_ID: string;
+  export const ADMOB_BANNER_ID: string;
+}
+
 declare module "@assets/*" {
   const value: any;
   export default value;

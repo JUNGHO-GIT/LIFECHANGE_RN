@@ -6,7 +6,7 @@ import {
 
 import {
   ADMOB_BANNER_ID,
-} from "@imports/ImportEnvs";
+} from "@env";
 
 // -------------------------------------------------------------------------------------------------
 export const Banner = () => {
