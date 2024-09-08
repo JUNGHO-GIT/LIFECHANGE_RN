@@ -1,10 +1,10 @@
 {
+  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
-
-    /** 기본 설정 *********************************************************************************/
     "target": "ESNext",
-    "module": "CommonJS",
-    "lib": ["ESNext", "DOM", "WebWorker", "ScriptHost", "ESNext.AsyncIterable"],
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "lib": ["ESNext", "DOM", "DOM.Iterable", "ScriptHost", "ESNext.AsyncIterable"],
     "allowJs": true,
     "checkJs": true,
     "jsx": "react-native",
@@ -13,8 +13,7 @@
     "sourceMap": false,
     "composite": true,
     "incremental": true,
-
-    /** 타입 체크 *********************************************************************************/
+    "baseUrl": "./",
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -23,39 +22,19 @@
     "strictPropertyInitialization": true,
     "noImplicitThis": true,
     "alwaysStrict": true,
-
-    /** 추가 설정 *********************************************************************************/
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": false,
-
-    /** 모듈 해석 *********************************************************************************/
-    "baseUrl": ".",
-    "rootDir": ".",
-    "paths": {
-      "@env": ["./src/assets/types/env"]
-    },
-    "typeRoots": [
-      "./node_modules/@types",
-      "./src/assets/types"
-    ],
-    "types": [
-      "env"
-    ],
+    "noLib": false,
+    "preserveValueImports": false,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-
-    /** 소스 코드 관리 ****************************************************************************/
     "allowUmdGlobalAccess": false,
     "preserveSymlinks": true,
     "isolatedModules": false,
-
-    /** 컴파일러 경고 제어 ************************************************************************/
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-
-    /** 고급 설정 *********************************************************************************/
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "downlevelIteration": true,
@@ -69,8 +48,13 @@
     "allowImportingTsExtensions": true
   },
   "include": [
-    "./src/**/*",
-    "./src/assets/types/env.d.ts"
+    "index.ts",
+    "src/**/*",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+    "**/*.d.ts", "metro.config.cjs",
   ],
   "exclude": [
     "node_modules",

@@ -1,10 +1,11 @@
 // Alert.tsx
 
-import React from 'react';
-import {  Modal, View, Text, TouchableOpacity, StyleSheet  } from 'react-native';
+import {
+  Modal, View, Text, TouchableOpacity, StyleSheet,
+} from "@imports/ImportReacts";
 
 // -------------------------------------------------------------------------------------------------
-type AlertProps = {
+declare interface AlertProps {
   alertVisible: boolean;
   alertMessage: string;
   alertClose: () => void;
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
 });
 
 // -------------------------------------------------------------------------------------------------
-const Alert = ({ alertVisible, alertMessage, alertClose }: AlertProps) => {
+export const Alert = ({ alertVisible, alertMessage, alertClose }: AlertProps) => {
   return (
     <Modal
       transparent={true}
@@ -74,5 +75,3 @@ const Alert = ({ alertVisible, alertMessage, alertClose }: AlertProps) => {
     </Modal>
   );
 };
-
-export default Alert;

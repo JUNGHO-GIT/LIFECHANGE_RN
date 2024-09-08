@@ -1,31 +1,31 @@
 // Detail.tsx
 
-import React from 'react';
-import {  FlexWidget, TextWidget, ImageWidget  } from "react-native-android-widget";
+import {
+  FlexWidget, TextWidget, ImageWidget,
+} from "@imports/ImportReacts";
 
 // -------------------------------------------------------------------------------------------------
-interface ActiveProps {
+declare interface ActiveProps {
   isActive: boolean;
   iconName: string;
 }
-
 // -------------------------------------------------------------------------------------------------
-interface ActiveViewProps {
+declare interface ActiveViewProps {
   activeView: "exercise" | "food" | "money" | "sleep";
-  currentDate: string;
-  currentDay: string;
-  currentTime: string;
+  curDate: string;
+  curDay: string;
+  curTime: string;
 }
-
 // -------------------------------------------------------------------------------------------------
-interface ExerciseProps {
+declare interface ExerciseProps {
   exercise: {
     exercise_total_volume: any;
     exercise_total_cardio: any;
     exercise_total_weight: any;
   };
 }
-interface FoodProps {
+// -------------------------------------------------------------------------------------------------
+declare interface FoodProps {
   food: {
     food_total_kcal: any;
     food_total_carb:  any;
@@ -33,13 +33,15 @@ interface FoodProps {
     food_total_fat: any;
   };
 }
-interface MoneyProps {
+// -------------------------------------------------------------------------------------------------
+declare interface MoneyProps {
   money: {
     money_total_income: any;
     money_total_expense: any;
   };
 }
-interface SleepProps {
+// -------------------------------------------------------------------------------------------------
+declare interface SleepProps {
   sleep: {
     sleep_bedTime: any;
     sleep_wakeTime: any;
@@ -1223,7 +1225,7 @@ const SleepSection = ({ sleep }: SleepProps) => {
 
 // -------------------------------------------------------------------------------------------------
 export const DetailWidget = (
-  { activeView, currentDate, currentDay, currentTime, exercise, food, money, sleep } : ActiveViewProps & ExerciseProps & FoodProps & MoneyProps & SleepProps
+  { activeView, curDate, curDay, curTime, exercise, food, money, sleep } : ActiveViewProps & ExerciseProps & FoodProps & MoneyProps & SleepProps
 ) => {
 
   const active = activeView || "exercise";
@@ -1311,7 +1313,7 @@ export const DetailWidget = (
               marginRight: 10,
               letterSpacing: 1,
             }}
-            text={currentDate}
+            text={curDate}
           />
           <TextWidget
             style={{
@@ -1322,7 +1324,7 @@ export const DetailWidget = (
               marginRight: 10,
               letterSpacing: 1,
             }}
-            text={currentDay}
+            text={curDay}
           />
           <TextWidget
             style={{
@@ -1333,7 +1335,7 @@ export const DetailWidget = (
               marginLeft: 5,
               letterSpacing: 1,
             }}
-            text={currentTime}
+            text={curTime}
           />
           <ImageWidget
             image={require('../assets/images/refresh.webp')}

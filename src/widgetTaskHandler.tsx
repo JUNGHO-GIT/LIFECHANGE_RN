@@ -1,10 +1,28 @@
 // widgetTaskHandler.tsx
 
-import React from 'react';
-import axios from "axios";
-import moment from "moment-timezone";
-import type { WidgetTaskHandlerProps  } from 'react-native-android-widget';
-import {  DetailWidget  } from './widgets/DetailWidget';
+import {
+  WidgetTaskHandlerProps,
+} from "@imports/ImportReacts";
+
+import {
+  axios, moment,
+} from "@imports/ImportLibs";
+
+import {
+  DetailWidget,
+} from "@imports/ImportWidgets";
+
+import {
+  SERVER_URL,
+} from "@imports/ImportEnvs";
+
+import {
+  curDate, curTime, curFormat, curDay,
+} from "@imports/ImportScripts";
+
+import {
+  OBJECT, Exercise, Food, Money, Sleep,
+} from "@imports/ImportBases"
 
 // -------------------------------------------------------------------------------------------------
 const nameToWidget = {
@@ -12,25 +30,13 @@ const nameToWidget = {
 };
 
 // -------------------------------------------------------------------------------------------------
-export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
+export async function widgetTaskHandler(
+  props: WidgetTaskHandlerProps
+) {
 
   const widgetInfo = props.widgetInfo;
   const Widget = nameToWidget[widgetInfo.widgetName as keyof typeof nameToWidget] as any;
-
-  const URL = "https://www.junghomun.com/JPAGE";
   const userId = "junghomun00@gmail.com";
-
-  const currentDate = moment().tz("Asia/Seoul").format("YYYY-MM-DD");
-  const currentTime = moment().tz("Asia/Seoul").format("HH:mm:ss");
-  const momentFormat = moment().tz("Asia/Seoul").format("ddd");
-  const currentDay
-    = momentFormat === "Mon" ? "월"
-    : momentFormat === "Tue" ? "화"
-    : momentFormat === "Wed" ? "수"
-    : momentFormat === "Thu" ? "목"
-    : momentFormat === "Fri" ? "금"
-    : momentFormat === "Sat" ? "토"
-    : "일";
 
   const PAGING = {
     sort: "asc",
@@ -41,29 +47,6 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
     dateStart: moment().tz("Asia/Seoul").format("YYYY-MM-DD"),
     dateEnd: moment().tz("Asia/Seoul").format("YYYY-MM-DD"),
   };
-  const OBJECT_DEF = {
-    exercise: {
-      exercise_total_volume: "x",
-      exercise_total_cardio: "x",
-      exercise_total_weight: "x",
-    },
-    food: {
-      food_total_kcal: "x",
-      food_total_carb: "x",
-      food_total_protein: "x",
-      food_total_fat: "x",
-    },
-    money: {
-      money_total_income: "x",
-      money_total_expense: "x",
-    },
-    sleep: {
-      sleep_bedTime: "x",
-      sleep_wakeTime: "x",
-      sleep_sleepTime: "x",
-    }
-  };
-  const OBJECT = { ...OBJECT_DEF };
 
   await (async () => {
     const params = {
@@ -72,25 +55,24 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
       DATE: DATE
     };
     const [exerciseResponse, foodResponse, moneyResponse, sleepResponse] = await Promise.all([
-      axios.get(`${URL}/api/exercise/list`, {
+      axios.get(`${SERVER_URL}/api/exercise/list`, {
         params: params
       }),
-      axios.get(`${URL}/api/food/list`, {
+      axios.get(`${SERVER_URL}/api/food/list`, {
         params: params
       }),
-      axios.get(`${URL}/api/money/list`, {
+      axios.get(`${SERVER_URL}/api/money/list`, {
         params: params
       }),
-      axios.get(`${URL}/api/sleep/list`, {
+      axios.get(`${SERVER_URL}/api/sleep/list`, {
         params: params
       }),
     ]);
-
     Object.assign(OBJECT, {
-      exercise: exerciseResponse.data.result?.[0] || OBJECT_DEF.exercise,
-      food: foodResponse.data.result?.[0] || OBJECT_DEF.food,
-      money: moneyResponse.data.result?.[0] || OBJECT_DEF.money,
-      sleep: sleepResponse.data.result?.[0]?.sleep_section?.[0] || OBJECT_DEF.sleep,
+      exercise: exerciseResponse.data.result?.[0] || Exercise,
+      food: foodResponse.data.result?.[0] || Food,
+      money: moneyResponse.data.result?.[0] || Money,
+      sleep: sleepResponse.data.result?.[0]?.sleep_section?.[0] || Sleep,
     });
   })();
 
@@ -99,9 +81,9 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
       props.renderWidget(
         <Widget
           {...widgetInfo}
-          currentDate={currentDate}
-          currentDay={currentDay}
-          currentTime={currentTime}
+          curDate={curDate}
+          curDay={curDay}
+          curTime={curTime}
           exercise={OBJECT.exercise}
           food={OBJECT.food}
           money={OBJECT.money}
@@ -109,15 +91,15 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
         />
       );
       console.log(`WIDGET_ADDED ${JSON.stringify(widgetInfo)}`);
-      break;
+    break;
 
     case 'WIDGET_RESIZED':
       props.renderWidget(
         <Widget
           {...widgetInfo}
-          currentDate={currentDate}
-          currentDay={currentDay}
-          currentTime={currentTime}
+          curDate={curDate}
+          curDay={curDay}
+          curTime={curTime}
           exercise={OBJECT.exercise}
           food={OBJECT.food}
           money={OBJECT.money}
@@ -125,16 +107,16 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
         />
       );
       console.log(`WIDGET_RESIZED ${JSON.stringify(widgetInfo)}`);
-      break;
+    break;
 
     case 'WIDGET_UPDATE':
       props.renderWidget(
         <Widget
           {...widgetInfo}
           activeView={props.clickAction as any}
-          currentDate={currentDate}
-          currentDay={currentDay}
-          currentTime={currentTime}
+          curDate={curDate}
+          curDay={curDay}
+          curTime={curTime}
           exercise={OBJECT.exercise}
           food={OBJECT.food}
           money={OBJECT.money}
@@ -142,16 +124,16 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
         />
       );
       console.log(`WIDGET_UPDATE ${JSON.stringify(widgetInfo)}`);
-      break;
+    break;
 
     case 'WIDGET_CLICK':
       props.renderWidget(
         <Widget
           {...widgetInfo}
           activeView={props.clickAction as any}
-          currentDate={currentDate}
-          currentDay={currentDay}
-          currentTime={currentTime}
+          curDate={curDate}
+          curDay={curDay}
+          curTime={curTime}
           exercise={OBJECT.exercise}
           food={OBJECT.food}
           money={OBJECT.money}
@@ -159,11 +141,11 @@ export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
         />
       );
       console.log(`WIDGET_CLICK ${JSON.stringify(widgetInfo)}`);
-      break;
+    break;
 
     case 'WIDGET_DELETED':
       console.log(`WIDGET_DELETED ${JSON.stringify(widgetInfo)}`);
-      break;
+    break;
 
     default:
       break;

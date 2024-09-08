@@ -1,10 +1,15 @@
 // Banner.tsx
 
-import { BannerAd, BannerAdSize, TestIds } from "react-native-google-mobile-ads";
-import { ADMOB_BANNER_ID } from "env";
+import {
+  BannerAd, BannerAdSize, TestIds,
+} from "@imports/ImportReacts";
+
+import {
+  ADMOB_BANNER_ID,
+} from "@imports/ImportEnvs";
 
 // -------------------------------------------------------------------------------------------------
-const Banner = () => {
+export const Banner = () => {
 
   const realId = ADMOB_BANNER_ID;
   const testId = TestIds.BANNER;
@@ -17,5 +22,3 @@ const Banner = () => {
     />
   );
 }
-
-export default Banner;

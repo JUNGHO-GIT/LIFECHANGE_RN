@@ -1,11 +1,12 @@
 // App.tsx
 
-import React, {useEffect, useRef, useState } from 'react';
-import { BackHandler, SafeAreaView, StyleSheet } from 'react-native';
-import Webviews from './components/Webviews.tsx';
-import Alert from './components/Alert.tsx';
-import Banner from './components/Banner.tsx';
-import type WebView from "react-native-webview";
+import {
+  useEffect, useRef, useState, BackHandler, SafeAreaView, StyleSheet, RNLocalize
+} from "@imports/ImportReacts";
+
+import {
+  Alert, Banner, Webviews,
+} from "@imports/ImportContainers";
 
 // -------------------------------------------------------------------------------------------------
 const styles = StyleSheet.create({
@@ -24,9 +25,10 @@ export const App = () => {
   const [alertMessage, setAlertMessage] = useState("");
   const [bannerVisible, setBannerVisible] = useState(false);
   const [navigationEnabled, setNavigationEnabled] = useState(true);
-  const webViewRef = useRef<WebView>(null);
+  const webViewRef = useRef<any>(null);
 
   // -----------------------------------------------------------------------------------------------
+  // 뒤로가기 버튼 이벤트
   useEffect(() => {
     const onBackPress = () => {
       if (webViewRef.current && navigationEnabled) {

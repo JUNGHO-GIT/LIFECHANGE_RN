@@ -1,11 +1,11 @@
 // Webviews.tsx
 
-import React, { forwardRef  } from 'react';
-import {  StyleSheet, Dimensions  } from 'react-native';
-import WebView from 'react-native-webview';
+import {
+  forwardRef, StyleSheet, Dimensions, WebView,
+} from "@imports/ImportReacts";
 
 // -------------------------------------------------------------------------------------------------
-type Props = {
+declare type Props = {
   onMessage: (event: any) => void;
   bannerVisible: (newState: any) => void;
   navigationEnabled: boolean;
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 });
 
 // -------------------------------------------------------------------------------------------------
-const Webviews = forwardRef<WebView, Props>(
+export const Webviews = forwardRef<WebView, Props>(
   ({ onMessage, bannerVisible, navigationEnabled }, ref) => {
 
     const url = 'https://www.junghomun.com/JPAGE';
@@ -65,5 +65,3 @@ const Webviews = forwardRef<WebView, Props>(
     );
   }
 );
-
-export default Webviews;
