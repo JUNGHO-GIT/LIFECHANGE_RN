@@ -56,7 +56,7 @@ export const Alert = ({ alertVisible, alertMessage, alertClose }: AlertProps) =>
   return (
     <Modal
       transparent={true}
-      animationType="fade"
+      animationType={"fade"}
       visible={alertVisible}
       onRequestClose={alertClose}
     >

@@ -17,7 +17,7 @@ import {
 } from "@env";
 
 import {
-  curDate, curTime, curFormat, curDay,
+  curDate, curTime, curDay, curCurrency, isKorean,
 } from "@imports/ImportScripts";
 
 import {
@@ -44,8 +44,8 @@ export async function widgetTaskHandler(
   };
   const DATE = {
     dateType: "day",
-    dateStart: moment().tz("Asia/Seoul").format("YYYY-MM-DD"),
-    dateEnd: moment().tz("Asia/Seoul").format("YYYY-MM-DD"),
+    dateStart: curDate,
+    dateEnd: curDate,
   };
 
   await (async () => {
@@ -82,8 +82,10 @@ export async function widgetTaskHandler(
         <Widget
           {...widgetInfo}
           curDate={curDate}
-          curDay={curDay}
           curTime={curTime}
+          curDay={curDay}
+          curCurrency={curCurrency}
+          isKorean={isKorean}
           exercise={OBJECT.exercise}
           food={OBJECT.food}
           money={OBJECT.money}
@@ -98,8 +100,10 @@ export async function widgetTaskHandler(
         <Widget
           {...widgetInfo}
           curDate={curDate}
-          curDay={curDay}
           curTime={curTime}
+          curDay={curDay}
+          curCurrency={curCurrency}
+          isKorean={isKorean}
           exercise={OBJECT.exercise}
           food={OBJECT.food}
           money={OBJECT.money}
@@ -115,8 +119,10 @@ export async function widgetTaskHandler(
           {...widgetInfo}
           activeView={props.clickAction as any}
           curDate={curDate}
-          curDay={curDay}
           curTime={curTime}
+          curDay={curDay}
+          curCurrency={curCurrency}
+          isKorean={isKorean}
           exercise={OBJECT.exercise}
           food={OBJECT.food}
           money={OBJECT.money}
@@ -132,8 +138,10 @@ export async function widgetTaskHandler(
           {...widgetInfo}
           activeView={props.clickAction as any}
           curDate={curDate}
-          curDay={curDay}
           curTime={curTime}
+          curDay={curDay}
+          curCurrency={curCurrency}
+          isKorean={isKorean}
           exercise={OBJECT.exercise}
           food={OBJECT.food}
           money={OBJECT.money}

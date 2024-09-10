@@ -21,10 +21,11 @@ const styles = StyleSheet.create({
 export const App = () => {
 
   // -----------------------------------------------------------------------------------------------
-  const [alertVisible, setAlertVisible] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");
-  const [bannerVisible, setBannerVisible] = useState(false);
-  const [navigationEnabled, setNavigationEnabled] = useState(true);
+  const [alertVisible, setAlertVisible] = useState<boolean>(false);
+  const [alertMessage, setAlertMessage] = useState<string>("");
+  const [bannerVisible, setBannerVisible] = useState<boolean>(false);
+  const [navigationEnabled, setNavigationEnabled] = useState<boolean>(true);
+  const [sessionId, setSessionId] = useState<string>("");
   const webViewRef = useRef<any>(null);
 
   // -----------------------------------------------------------------------------------------------
@@ -48,9 +49,13 @@ export const App = () => {
 
   // -----------------------------------------------------------------------------------------------
   const handlerOnMessage = (event: any) => {
+
     const parsedData = JSON.parse(event.nativeEvent.data);
     const type: string = parsedData.type;
     const message: string = parsedData.message;
+
+    console.log("event.nativeEvent.data: ", event.nativeEvent.data);
+
     if (type === 'alert') {
       setAlertVisible(true);
       setAlertMessage(message);
@@ -58,11 +63,13 @@ export const App = () => {
     }
   };
 
+  // -----------------------------------------------------------------------------------------------
   const handlerAlertClose = () => {
     setAlertVisible(false);
     setNavigationEnabled(true);
   };
 
+  // -----------------------------------------------------------------------------------------------
   const handlerBannerVisible = (newState: any) => {
     const { url } = newState;
     if (url.includes("/user/signup") || url.includes("/user/login")) {

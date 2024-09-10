@@ -25,8 +25,6 @@ import type {
   WidgetTaskHandlerProps,
 } from "react-native-android-widget";
 
-import * as RNLocalize from 'react-native-localize';
-
 // -------------------------------------------------------------------------------------------------
 export {
   React,
@@ -58,5 +56,4 @@ export {
   TextWidget,
   ImageWidget,
   WidgetTaskHandlerProps,
-  RNLocalize,
 };

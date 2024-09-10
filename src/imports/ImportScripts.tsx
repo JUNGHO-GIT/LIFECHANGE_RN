@@ -1,8 +1,8 @@
 // ImportScripts.tsx
 
 import {
-  curDate, curTime, curFormat, curDay,
-} from "@scripts/date";
+  curDate, curTime, curFormat, curDay, curCurrency, isKorean,
+} from "@scripts/timeZone";
 
 // -------------------------------------------------------------------------------------------------
 export {
@@ -10,4 +10,6 @@ export {
   curTime,
   curFormat,
   curDay,
+  curCurrency,
+  isKorean,
 };

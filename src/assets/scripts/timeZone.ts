@@ -1,27 +1,24 @@
-// date.ts
+// timeZone.ts
 
 import {
-  React, useState, useEffect,
-} from "@imports/ImportReacts";
-
-import {
-  moment,
+  moment, Localization,
 } from "@imports/ImportLibs";
 
 // -------------------------------------------------------------------------------------------------
-const [clientTimeZone, setClientTimeZone] = useState("");
+const clientTimeZone = Localization.getTimeZone();
+const clientCurrency = Localization.getCurrencies()?.[0];
 
-// -------------------------------------------------------------------------------------------------
-useEffect(() => {
-  const userTimeZone = moment.tz.guess();
-  setClientTimeZone(userTimeZone);
-}, []);
-
-// -------------------------------------------------------------------------------------------------
 const curDate = moment().tz(clientTimeZone).format("YYYY-MM-DD");
 const curTime = moment().tz(clientTimeZone).format("HH:mm:ss");
 const curFormat = moment().tz(clientTimeZone).format("ddd");
-const curDay
+const curCurrency = clientCurrency;
+
+let isKorean: boolean = false;
+let curDay: string = "";
+
+if (clientTimeZone === "Asia/Seoul") {
+  isKorean = true;
+  curDay
   = curFormat === "Mon" ? "월"
   : curFormat === "Tue" ? "화"
   : curFormat === "Wed" ? "수"
@@ -29,6 +26,17 @@ const curDay
   : curFormat === "Fri" ? "금"
   : curFormat === "Sat" ? "토"
   : "일";
+}
+else {
+  isKorean = false;
+  curDay = curFormat;
+}
+
+console.log("clientTimeZone:", clientTimeZone);
+console.log("clientCurrency:", clientCurrency);
+console.log("curDate:", curDate);
+console.log("curTime:", curTime);
+console.log("curFormat:", curFormat);
 
 // -------------------------------------------------------------------------------------------------
 export {
@@ -36,4 +44,6 @@ export {
   curTime,
   curFormat,
   curDay,
+  curCurrency,
+  isKorean,
 };

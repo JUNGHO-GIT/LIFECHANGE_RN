@@ -13,11 +13,14 @@ declare interface ActiveProps {
 declare interface ActiveViewProps {
   activeView: "exercise" | "food" | "money" | "sleep";
   curDate: string;
-  curDay: string;
   curTime: string;
+  curDay: string;
+  curCurrency: string;
+  isKorean: boolean;
 }
 // -------------------------------------------------------------------------------------------------
 declare interface ExerciseProps {
+  isKorean: boolean;
   exercise: {
     exercise_total_volume: any;
     exercise_total_cardio: any;
@@ -26,6 +29,7 @@ declare interface ExerciseProps {
 }
 // -------------------------------------------------------------------------------------------------
 declare interface FoodProps {
+  isKorean: boolean;
   food: {
     food_total_kcal: any;
     food_total_carb:  any;
@@ -35,6 +39,8 @@ declare interface FoodProps {
 }
 // -------------------------------------------------------------------------------------------------
 declare interface MoneyProps {
+  isKorean: boolean;
+  curCurrency: string;
   money: {
     money_total_income: any;
     money_total_expense: any;
@@ -42,6 +48,7 @@ declare interface MoneyProps {
 }
 // -------------------------------------------------------------------------------------------------
 declare interface SleepProps {
+  isKorean: boolean;
   sleep: {
     sleep_bedTime: any;
     sleep_wakeTime: any;
@@ -121,25 +128,39 @@ const SelectSection = ({isActive, iconName}: ActiveProps) => {
 };
 
 // -------------------------------------------------------------------------------------------------
-const ExerciseSection  = ({ exercise }: ExerciseProps) => {
+const ExerciseSection  = (
+  { isKorean, exercise }: ExerciseProps
+) => {
 
+  // 1. volume
   const exercise_total_volume
     = exercise.exercise_total_volume === "x" ? "x" : exercise.exercise_total_volume;
 
   const exercise_total_volume_color
     = (exercise_total_volume === "x" || exercise_total_volume === "0") ? "#9CA3AF" : "#000000";
 
+  const exercise_total_volume_text
+    = isKorean ? "볼륨" : "Volume";
+
+  // 2. cardio
   const exercise_total_cardio
     = exercise.exercise_total_cardio === "x" ? "x" : exercise.exercise_total_cardio;
 
   const exercise_total_cardio_color
     = (exercise_total_cardio === "x" || exercise_total_cardio === "00:00") ? "#9CA3AF" : "#000000";
 
+  const exercise_total_cardio_text
+    = isKorean ? "유산소" : "Cardio";
+
+  // 3. weight
   const exercise_total_weight
     = exercise.exercise_total_weight === "x" ? "x" : exercise.exercise_total_weight;
 
   const exercise_total_weight_color
     = (exercise_total_weight === "x" || exercise_total_weight === "0") ? "#9CA3AF" : "#000000";
+
+  const exercise_total_weight_text
+    = isKorean ? "체중" : "Weight";
 
   return (
     <FlexWidget
@@ -180,7 +201,7 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
               fontSize: 16,
               fontWeight: '500'
             }}
-            text={`볼륨`}
+            text={exercise_total_volume_text}
           />
         </FlexWidget>
         <FlexWidget style={{width: 10}}>
@@ -260,7 +281,7 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
               fontSize: 16,
               fontWeight: '500'
             }}
-            text={`유산소`}
+            text={exercise_total_cardio_text}
           />
         </FlexWidget>
         <FlexWidget style={{width: 10}}>
@@ -340,7 +361,7 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
               fontSize: 16,
               fontWeight: '500'
             }}
-            text={`체중`}
+            text={exercise_total_weight_text}
           />
         </FlexWidget>
         <FlexWidget style={{width: 10}}>
@@ -397,31 +418,49 @@ const ExerciseSection  = ({ exercise }: ExerciseProps) => {
 };
 
 // -------------------------------------------------------------------------------------------------
-const FoodSection = ({ food }: FoodProps) => {
+const FoodSection = (
+  { isKorean, food }: FoodProps
+) => {
 
+  // 1. kcal
   const food_total_kcal
     = food.food_total_kcal === "x" ? "x" : food.food_total_kcal;
 
   const food_total_kcal_color
     = (food_total_kcal === "x" || food_total_kcal === "0") ? "#9CA3AF" : "#000000";
 
+  const food_total_kcal_text
+    = isKorean ? "칼로리" : "Kcal";
+
+  // 2. carb
   const food_total_carb
     = food.food_total_carb === "x" ? "x" : food.food_total_carb;
 
   const food_total_carb_color
     = (food_total_carb === "x" || food_total_carb === "0") ? "#9CA3AF" : "#000000";
 
+  const food_total_carb_text
+    = isKorean ? "탄수화물" : "Carb";
+
+  // 3. protein
   const food_total_protein
     = food.food_total_protein === "x" ? "x" : food.food_total_protein;
 
   const food_total_protein_color
     = (food_total_protein === "x" || food_total_protein === "0") ? "#9CA3AF" : "#000000";
 
+  const food_total_protein_text
+    = isKorean ? "단백질" : "Protein";
+
+  // 4. fat
   const food_total_fat
     = food.food_total_fat === "x" ? "x" : food.food_total_fat;
 
   const food_total_fat_color
     = (food_total_fat === "x" || food_total_fat === "0") ? "#9CA3AF" : "#000000";
+
+  const food_total_fat_text
+    = isKorean ? "지방" : "Fat";
 
   return (
     <FlexWidget
@@ -462,7 +501,7 @@ const FoodSection = ({ food }: FoodProps) => {
               fontSize: 16,
               fontWeight: '500'
             }}
-            text={`칼로리`}
+            text={food_total_kcal_text}
           />
         </FlexWidget>
         <FlexWidget style={{width: 10}}>
@@ -542,7 +581,7 @@ const FoodSection = ({ food }: FoodProps) => {
               fontSize: 16,
               fontWeight: '500'
             }}
-            text={`탄수화물`}
+            text={food_total_carb_text}
           />
         </FlexWidget>
         <FlexWidget style={{width: 10}}>
@@ -622,7 +661,7 @@ const FoodSection = ({ food }: FoodProps) => {
               fontSize: 16,
               fontWeight: '500'
             }}
-            text={`단백질`}
+            text={food_total_protein_text}
           />
         </FlexWidget>
         <FlexWidget style={{width: 10}}>
@@ -702,7 +741,7 @@ const FoodSection = ({ food }: FoodProps) => {
               fontSize: 16,
               fontWeight: '500'
             }}
-            text={`지방`}
+            text={food_total_fat_text}
           />
         </FlexWidget>
         <FlexWidget style={{width: 10}}>
@@ -759,19 +798,29 @@ const FoodSection = ({ food }: FoodProps) => {
 };
 
 // -------------------------------------------------------------------------------------------------
-const MoneySection = ({ money }: MoneyProps) => {
+const MoneySection = (
+  { isKorean, curCurrency, money }: MoneyProps
+) => {
 
+  // 1. income
   const money_total_income
     = money.money_total_income === "x" ? "x" : money.money_total_income;
 
   const money_total_income_color
     = (money_total_income === "x" || money_total_income === "0") ? "#9CA3AF" : "#000000";
 
+  const money_total_income_text
+    = isKorean ? "수입" : "Income";
+
+  // 2. expense
   const money_total_expense
     = money.money_total_expense === "x" ? "x" : money.money_total_expense;
 
   const money_total_expense_color
     = (money_total_expense === "x" || money_total_expense === "0") ? "#9CA3AF" : "#000000";
+
+  const money_total_expense_text
+    = isKorean ? "지출" : "Expense";
 
   return (
     <FlexWidget
@@ -811,7 +860,7 @@ const MoneySection = ({ money }: MoneyProps) => {
               fontSize: 16,
               fontWeight: '500'
             }}
-            text={`수입`}
+            text={money_total_income_text}
           />
         </FlexWidget>
         <FlexWidget style={{width: 10}}>
@@ -858,7 +907,7 @@ const MoneySection = ({ money }: MoneyProps) => {
                 marginLeft: 10,
                 color: "#000000"
               }}
-              text={"₩"}
+              text={curCurrency}
             />
           </FlexWidget>
         )}
@@ -891,7 +940,7 @@ const MoneySection = ({ money }: MoneyProps) => {
               fontSize: 16,
               fontWeight: '500'
             }}
-            text={`지출`}
+            text={money_total_expense_text}
           />
         </FlexWidget>
         <FlexWidget style={{width: 10}}>
@@ -938,7 +987,7 @@ const MoneySection = ({ money }: MoneyProps) => {
                 marginLeft: 10,
                 color: "#000000"
               }}
-              text={"₩"}
+              text={curCurrency}
             />
           </FlexWidget>
         )}
@@ -948,25 +997,39 @@ const MoneySection = ({ money }: MoneyProps) => {
 };
 
 // -------------------------------------------------------------------------------------------------
-const SleepSection = ({ sleep }: SleepProps) => {
+const SleepSection = (
+  { isKorean, sleep }: SleepProps
+) => {
 
+  // 1. bedTime
   const sleep_bedTime
     = sleep.sleep_bedTime === "x" ? "x" : sleep.sleep_bedTime;
 
   const sleep_bedTime_color
     = (sleep_bedTime === "x" || sleep_bedTime === "00:00") ? "#9CA3AF" : "#000000";
 
+  const sleep_bedTime_text
+    = isKorean ? "취침" : "Bed";
+
+  // 2. wakeTime
   const sleep_wakeTime
     = sleep.sleep_wakeTime === "x" ? "x" : sleep.sleep_wakeTime;
 
   const sleep_wakeTime_color
     = (sleep_wakeTime === "x" || sleep_wakeTime === "00:00") ? "#9CA3AF" : "#000000";
 
+  const sleep_wakeTime_text
+    = isKorean ? "기상" : "Wake";
+
+  // 3. sleepTime
   const sleep_sleepTime
     = sleep.sleep_sleepTime === "x" ? "x" : sleep.sleep_sleepTime;
 
   const sleep_sleepTime_color
     = (sleep_sleepTime === "x" || sleep_sleepTime === "00:00") ? "#9CA3AF" : "#000000";
+
+  const sleep_sleepTime_text
+    = isKorean ? "수면" : "Sleep";
 
   return (
     <FlexWidget
@@ -1007,7 +1070,7 @@ const SleepSection = ({ sleep }: SleepProps) => {
               fontSize: 16,
               fontWeight: '500'
             }}
-            text={`취침`}
+            text={sleep_bedTime_text}
           />
         </FlexWidget>
         <FlexWidget style={{width: 10}}>
@@ -1087,7 +1150,7 @@ const SleepSection = ({ sleep }: SleepProps) => {
               fontSize: 16,
               fontWeight: '500'
             }}
-            text={`기상`}
+            text={sleep_wakeTime_text}
           />
         </FlexWidget>
         <FlexWidget style={{width: 10}}>
@@ -1167,7 +1230,7 @@ const SleepSection = ({ sleep }: SleepProps) => {
               fontSize: 16,
               fontWeight: '500'
             }}
-            text={`수면`}
+            text={sleep_sleepTime_text}
           />
         </FlexWidget>
         <FlexWidget style={{width: 10}}>
@@ -1225,7 +1288,8 @@ const SleepSection = ({ sleep }: SleepProps) => {
 
 // -------------------------------------------------------------------------------------------------
 export const DetailWidget = (
-  { activeView, curDate, curDay, curTime, exercise, food, money, sleep } : ActiveViewProps & ExerciseProps & FoodProps & MoneyProps & SleepProps
+  { activeView, curDate, curTime, curDay, curCurrency, isKorean, exercise, food, money, sleep }:
+  ActiveViewProps & ExerciseProps & FoodProps & MoneyProps & SleepProps
 ) => {
 
   const active = activeView || "exercise";
@@ -1317,9 +1381,9 @@ export const DetailWidget = (
           />
           <TextWidget
             style={{
-              fontSize: 16,
+              fontSize: 14,
               color: '#5e5e5e',
-              fontWeight: '700',
+              fontWeight: '600',
               marginBottom: 5,
               marginRight: 10,
               letterSpacing: 1,
@@ -1353,10 +1417,30 @@ export const DetailWidget = (
             }
           />
         </FlexWidget>
-        {active === "exercise" && <ExerciseSection exercise={exercise} />}
-        {active === "food" && <FoodSection food={food} />}
-        {active === "money" && <MoneySection money={money} />}
-        {active === "sleep" && <SleepSection sleep={sleep} />}
+        {active === "exercise" ? (
+          <ExerciseSection
+            isKorean={isKorean}
+            exercise={exercise}
+          />
+        ) : active === "food" ? (
+          <FoodSection
+            isKorean={isKorean}
+            food={food}
+          />
+        ) : active === "money" ? (
+          <MoneySection
+            isKorean={isKorean}
+            curCurrency={curCurrency}
+            money={money}
+          />
+        ) : active === "sleep" ? (
+          <SleepSection
+            isKorean={isKorean}
+            sleep={sleep}
+          />
+        ) : (
+          null
+        )}
       </FlexWidget>
     </FlexWidget>
   );
