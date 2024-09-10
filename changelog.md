@@ -1255,3 +1255,15 @@
 ## versionCode = 314
 	- versionName = 1.3.14
 	- 2024-09-11 (00:58:08)
+
+## versionCode = 315
+	- versionName = 1.3.15
+	- 2024-09-11 (01:03:09)
+
+## versionCode = 316
+	- versionName = 1.3.16
+	- 2024-09-11 (01:04:30)
+
+## versionCode = 317
+	- versionName = 1.3.17
+	- 2024-09-11 (01:05:53)

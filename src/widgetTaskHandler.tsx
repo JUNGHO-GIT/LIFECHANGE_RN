@@ -38,6 +38,13 @@ export async function widgetTaskHandler(
   const Widget = nameToWidget[widgetInfo.widgetName as keyof typeof nameToWidget] as any;
   const userId = await AsyncStorage.getItem("sessionId");
 
+  console.log("curDate:", curDate);
+  console.log("curTime:", curTime);
+  console.log("curDay:", curDay);
+  console.log("curCurrency:", curCurrency);
+  console.log("isKorean:", isKorean);
+  console.log("userId:", userId);
+
   const PAGING = {
     sort: "asc",
     page: 1

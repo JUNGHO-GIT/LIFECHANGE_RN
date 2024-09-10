@@ -32,12 +32,6 @@ else {
   curDay = curFormat;
 }
 
-console.log("clientTimeZone:", clientTimeZone);
-console.log("clientCurrency:", clientCurrency);
-console.log("curDate:", curDate);
-console.log("curTime:", curTime);
-console.log("curFormat:", curFormat);
-
 // -------------------------------------------------------------------------------------------------
 export {
   curDate,
