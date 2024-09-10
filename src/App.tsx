@@ -8,6 +8,10 @@ import {
   Alert, Banner, Webviews,
 } from "@imports/ImportContainers";
 
+import {
+  AsyncStorage,
+} from "@imports/ImportLibs";
+
 // -------------------------------------------------------------------------------------------------
 const styles = StyleSheet.create({
   container: {
@@ -25,7 +29,6 @@ export const App = () => {
   const [alertMessage, setAlertMessage] = useState<string>("");
   const [bannerVisible, setBannerVisible] = useState<boolean>(false);
   const [navigationEnabled, setNavigationEnabled] = useState<boolean>(true);
-  const [sessionId, setSessionId] = useState<string>("");
   const webViewRef = useRef<any>(null);
 
   // -----------------------------------------------------------------------------------------------
@@ -53,13 +56,15 @@ export const App = () => {
     const parsedData = JSON.parse(event.nativeEvent.data);
     const type: string = parsedData.type;
     const message: string = parsedData.message;
-
-    console.log("event.nativeEvent.data: ", event.nativeEvent.data);
+    const sessionId: string = parsedData.sessionId;
 
     if (type === 'alert') {
       setAlertVisible(true);
       setAlertMessage(message);
       setNavigationEnabled(false);
+    }
+    if (type === 'sessionId') {
+      AsyncStorage.setItem("sessionId", sessionId);
     }
   };
 

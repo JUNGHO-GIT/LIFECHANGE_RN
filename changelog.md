@@ -1179,3 +1179,79 @@
 ## versionCode = 295
 	- versionName = 1.2.95
 	- 2024-09-10 (22:14:38)
+
+## versionCode = 296
+	- versionName = 1.2.96
+	- 2024-09-10 (23:26:11)
+
+## versionCode = 297
+	- versionName = 1.2.97
+	- 2024-09-10 (23:26:17)
+
+## versionCode = 298
+	- versionName = 1.2.98
+	- 2024-09-10 (23:54:25)
+
+## versionCode = 299
+	- versionName = 1.2.99
+	- 2024-09-10 (23:55:14)
+
+## versionCode = 300
+	- versionName = 1.3.00
+	- 2024-09-10 (23:55:17)
+
+## versionCode = 301
+	- versionName = 1.3.01
+	- 2024-09-10 (23:56:06)
+
+## versionCode = 302
+	- versionName = 1.3.02
+	- 2024-09-10 (23:57:12)
+
+## versionCode = 303
+	- versionName = 1.3.03
+	- 2024-09-11 (00:00:28)
+
+## versionCode = 304
+	- versionName = 1.3.04
+	- 2024-09-11 (00:00:29)
+
+## versionCode = 305
+	- versionName = 1.3.05
+	- 2024-09-11 (00:01:31)
+
+## versionCode = 306
+	- versionName = 1.3.06
+	- 2024-09-11 (00:04:20)
+
+## versionCode = 307
+	- versionName = 1.3.07
+	- 2024-09-11 (00:06:33)
+
+## versionCode = 308
+	- versionName = 1.3.08
+	- 2024-09-11 (00:09:27)
+
+## versionCode = 309
+	- versionName = 1.3.09
+	- 2024-09-11 (00:09:31)
+
+## versionCode = 310
+	- versionName = 1.3.10
+	- 2024-09-11 (00:09:33)
+
+## versionCode = 311
+	- versionName = 1.3.11
+	- 2024-09-11 (00:15:03)
+
+## versionCode = 312
+	- versionName = 1.3.12
+	- 2024-09-11 (00:15:10)
+
+## versionCode = 313
+	- versionName = 1.3.13
+	- 2024-09-11 (00:15:28)
+
+## versionCode = 314
+	- versionName = 1.3.14
+	- 2024-09-11 (00:58:08)

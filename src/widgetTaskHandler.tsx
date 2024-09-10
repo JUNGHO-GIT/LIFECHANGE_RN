@@ -5,7 +5,7 @@ import {
 } from "@imports/ImportReacts";
 
 import {
-  axios, moment,
+  axios, AsyncStorage,
 } from "@imports/ImportLibs";
 
 import {
@@ -36,7 +36,7 @@ export async function widgetTaskHandler(
 
   const widgetInfo = props.widgetInfo;
   const Widget = nameToWidget[widgetInfo.widgetName as keyof typeof nameToWidget] as any;
-  const userId = "junghomun00@gmail.com";
+  const userId = await AsyncStorage.getItem("sessionId");
 
   const PAGING = {
     sort: "asc",

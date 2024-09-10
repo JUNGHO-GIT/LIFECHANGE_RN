@@ -30,7 +30,8 @@
     "Gemfile": true,
     ".bundle": true,
     "yarn.lock": true,
-    ".watchmanconfig": true
+    ".watchmanconfig": true,
+    ".idea": true,
   },
   "explorerExclude.backup": {},
 }

@@ -11,12 +11,10 @@
     "make-bundle": "cd android && gradlew bundleRelease --stacktrace",
     "resolve-load": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
     "kill-java": "taskkill /f /im java.exe",
-    "push": "git add . && git commit -m 'update' && git push origin main",
-    "npm-install": "npm install",
-    "npm-clean": "npm cache clean --force",
-    "npm-reset": "rd /s /q node_modules && del /f package-lock.json && npm cache clean --force && npm install"
+    "push": "git add . && git commit -m 'update' && git push origin main"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^2.0.0",
     "axios": "^1.7.7",
     "moment-timezone": "^0.5.45",
     "react": "18.2.0",
