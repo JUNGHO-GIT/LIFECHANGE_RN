@@ -77,7 +77,11 @@ export const App = () => {
   // -----------------------------------------------------------------------------------------------
   const handlerBannerVisible = (newState: any) => {
     const { url } = newState;
-    if (url.includes("/user/signup") || url.includes("/user/login")) {
+    if (
+      url.includes("/user/signup") ||
+      url.includes("/user/login") ||
+      url.includes("/user/resetPw")
+    ) {
       setBannerVisible(false);
     }
     else {
