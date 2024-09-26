@@ -31,7 +31,8 @@
     ".bundle": true,
     "yarn.lock": true,
     ".watchmanconfig": true,
-    ".idea": true,
+    ".idea": true
   },
   "explorerExclude.backup": {},
+  "java.configuration.updateBuildConfiguration": "disabled",
 }
