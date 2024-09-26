@@ -1275,3 +1275,11 @@
 ## versionCode = 319
 	- versionName = 1.3.19
 	- 2024-09-11 (01:13:25)
+
+## versionCode = 320
+	- versionName = 1.3.20
+	- 2024-09-26 (15:59:58)
+
+## versionCode = 321
+	- versionName = 1.3.21
+	- 2024-09-26 (16:00:01)

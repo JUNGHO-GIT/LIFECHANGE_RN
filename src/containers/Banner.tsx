@@ -1,12 +1,22 @@
 // Banner.tsx
 
 import {
-  BannerAd, BannerAdSize, TestIds,
+  BannerAd, BannerAdSize, TestIds, StyleSheet, View,
 } from "@imports/ImportReacts";
 
 import {
   ADMOB_BANNER_ID,
 } from "@env";
+
+// -------------------------------------------------------------------------------------------------
+const styles = StyleSheet.create({
+  bannerContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ffffff',
+  },
+});
 
 // -------------------------------------------------------------------------------------------------
 export const Banner = () => {
@@ -15,10 +25,12 @@ export const Banner = () => {
   const testId = TestIds.BANNER;
 
   return (
-    <BannerAd
-      key={`admob-banner`}
-      unitId={testId}
-      size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
-    />
+    <View style={styles.bannerContainer}>
+      <BannerAd
+        key={`admob-banner`}
+        unitId={testId}
+        size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+      />
+    </View>
   );
 }
