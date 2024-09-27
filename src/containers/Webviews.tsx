@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 export const Webviews = forwardRef<WebView, Props>(
   ({ onMessage, bannerVisible, navigationEnabled }, ref) => {
 
-    const userAgent = "Mozilla/5.0 (Linux; Android 10; Android SDK built for x86 Build/LMY48X) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/81.0.4044.117 Mobile Safari/608.2.11";
+    const userAgent = "Mozilla/5.0 (Linux; Android 8.0.0; SM-G935S Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Mobile Safari/537.36";
 
     const injectedJavaScript = /* javascript */`
       (function() {
@@ -75,6 +75,7 @@ export const Webviews = forwardRef<WebView, Props>(
         style={styles.webviewContainer}
         source={{ uri: SERVER_URL }}
         onMessage={onMessage}
+        originWhitelist={['*']}
         userAgent={userAgent}
         allowFileAccess={true}
         cacheEnabled={true}

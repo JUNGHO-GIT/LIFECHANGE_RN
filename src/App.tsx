@@ -80,7 +80,8 @@ export const App = () => {
     if (
       url.includes("/user/signup") ||
       url.includes("/user/login") ||
-      url.includes("/user/resetPw")
+      url.includes("/user/resetPw") ||
+      url.includes("accounts.google.com")
     ) {
       setBannerVisible(false);
     }
