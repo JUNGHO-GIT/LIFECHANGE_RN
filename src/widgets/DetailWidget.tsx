@@ -133,34 +133,37 @@ const ExerciseSection  = (
 ) => {
 
   // 1. volume
-  const exercise_total_volume
-    = exercise.exercise_total_volume === "x" ? "x" : exercise.exercise_total_volume;
-
-  const exercise_total_volume_color
-    = (exercise_total_volume === "x" || exercise_total_volume === "0") ? "#9CA3AF" : "#000000";
-
-  const exercise_total_volume_text
-    = isKorean ? "볼륨" : "Volume";
+  const exercise_total_volume = (
+    exercise.exercise_total_volume === "x" ? "x" : exercise.exercise_total_volume
+  );
+  const exercise_total_volume_color = (
+    (exercise_total_volume === "x" || exercise_total_volume === "0") ? "#9CA3AF" : "#000000"
+  );
+  const exercise_total_volume_text = (
+    isKorean ? "볼륨" : "Volume"
+  );
 
   // 2. cardio
-  const exercise_total_cardio
-    = exercise.exercise_total_cardio === "x" ? "x" : exercise.exercise_total_cardio;
-
-  const exercise_total_cardio_color
-    = (exercise_total_cardio === "x" || exercise_total_cardio === "00:00") ? "#9CA3AF" : "#000000";
-
-  const exercise_total_cardio_text
-    = isKorean ? "유산소" : "Cardio";
+  const exercise_total_cardio = (
+    exercise.exercise_total_cardio === "x" ? "x" : exercise.exercise_total_cardio
+  );
+  const exercise_total_cardio_color = (
+    (exercise_total_cardio === "x" || exercise_total_cardio === "00:00") ? "#9CA3AF" : "#000000"
+  );
+  const exercise_total_cardio_text = (
+    isKorean ? "유산소" : "Cardio"
+  );
 
   // 3. weight
-  const exercise_total_weight
-    = exercise.exercise_total_weight === "x" ? "x" : exercise.exercise_total_weight;
-
-  const exercise_total_weight_color
-    = (exercise_total_weight === "x" || exercise_total_weight === "0") ? "#9CA3AF" : "#000000";
-
-  const exercise_total_weight_text
-    = isKorean ? "체중" : "Weight";
+  const exercise_total_weight = (
+    exercise.exercise_total_weight === "x" ? "x" : exercise.exercise_total_weight
+  );
+  const exercise_total_weight_color = (
+    (exercise_total_weight === "x" || exercise_total_weight === "0") ? "#9CA3AF" : "#000000"
+  );
+  const exercise_total_weight_text = (
+    isKorean ? "체중" : "Weight"
+  );
 
   return (
     <FlexWidget
@@ -423,44 +426,48 @@ const FoodSection = (
 ) => {
 
   // 1. kcal
-  const food_total_kcal
-    = food.food_total_kcal === "x" ? "x" : food.food_total_kcal;
-
-  const food_total_kcal_color
-    = (food_total_kcal === "x" || food_total_kcal === "0") ? "#9CA3AF" : "#000000";
-
-  const food_total_kcal_text
-    = isKorean ? "칼로리" : "Kcal";
+  const food_total_kcal = (
+    food.food_total_kcal === "x" ? "x" : food.food_total_kcal
+  );
+  const food_total_kcal_color = (
+    (food_total_kcal === "x" || food_total_kcal === "0") ? "#9CA3AF" : "#000000"
+  );
+  const food_total_kcal_text = (
+    isKorean ? "칼로리" : "Kcal"
+  );
 
   // 2. carb
-  const food_total_carb
-    = food.food_total_carb === "x" ? "x" : food.food_total_carb;
-
-  const food_total_carb_color
-    = (food_total_carb === "x" || food_total_carb === "0") ? "#9CA3AF" : "#000000";
-
-  const food_total_carb_text
-    = isKorean ? "탄수화물" : "Carb";
+  const food_total_carb = (
+    food.food_total_carb === "x" ? "x" : food.food_total_carb
+  );
+  const food_total_carb_color = (
+    (food_total_carb === "x" || food_total_carb === "0") ? "#9CA3AF" : "#000000"
+  );
+  const food_total_carb_text = (
+    isKorean ? "탄수화물" : "Carb"
+  );
 
   // 3. protein
-  const food_total_protein
-    = food.food_total_protein === "x" ? "x" : food.food_total_protein;
-
-  const food_total_protein_color
-    = (food_total_protein === "x" || food_total_protein === "0") ? "#9CA3AF" : "#000000";
-
-  const food_total_protein_text
-    = isKorean ? "단백질" : "Protein";
+  const food_total_protein = (
+    food.food_total_protein === "x" ? "x" : food.food_total_protein
+  );
+  const food_total_protein_color = (
+    (food_total_protein === "x" || food_total_protein === "0") ? "#9CA3AF" : "#000000"
+  );
+  const food_total_protein_text = (
+    isKorean ? "단백질" : "Protein"
+  );
 
   // 4. fat
-  const food_total_fat
-    = food.food_total_fat === "x" ? "x" : food.food_total_fat;
-
-  const food_total_fat_color
-    = (food_total_fat === "x" || food_total_fat === "0") ? "#9CA3AF" : "#000000";
-
-  const food_total_fat_text
-    = isKorean ? "지방" : "Fat";
+  const food_total_fat = (
+    food.food_total_fat === "x" ? "x" : food.food_total_fat
+  );
+  const food_total_fat_color = (
+    (food_total_fat === "x" || food_total_fat === "0") ? "#9CA3AF" : "#000000"
+  );
+  const food_total_fat_text = (
+    isKorean ? "지방" : "Fat"
+  );
 
   return (
     <FlexWidget
@@ -803,24 +810,26 @@ const MoneySection = (
 ) => {
 
   // 1. income
-  const money_total_income
-    = money.money_total_income === "x" ? "x" : money.money_total_income;
-
-  const money_total_income_color
-    = (money_total_income === "x" || money_total_income === "0") ? "#9CA3AF" : "#000000";
-
-  const money_total_income_text
-    = isKorean ? "수입" : "Income";
+  const money_total_income = (
+    money.money_total_income === "x" ? "x" : money.money_total_income
+  );
+  const money_total_income_color = (
+    (money_total_income === "x" || money_total_income === "0") ? "#9CA3AF" : "#000000"
+  );
+  const money_total_income_text = (
+    isKorean ? "수입" : "Income"
+  );
 
   // 2. expense
-  const money_total_expense
-    = money.money_total_expense === "x" ? "x" : money.money_total_expense;
-
-  const money_total_expense_color
-    = (money_total_expense === "x" || money_total_expense === "0") ? "#9CA3AF" : "#000000";
-
-  const money_total_expense_text
-    = isKorean ? "지출" : "Expense";
+  const money_total_expense = (
+    money.money_total_expense === "x" ? "x" : money.money_total_expense
+  );
+  const money_total_expense_color = (
+    (money_total_expense === "x" || money_total_expense === "0") ? "#9CA3AF" : "#000000"
+  );
+  const money_total_expense_text = (
+    isKorean ? "지출" : "Expense"
+  );
 
   return (
     <FlexWidget
@@ -1002,34 +1011,37 @@ const SleepSection = (
 ) => {
 
   // 1. bedTime
-  const sleep_bedTime
-    = sleep.sleep_bedTime === "x" ? "x" : sleep.sleep_bedTime;
-
-  const sleep_bedTime_color
-    = (sleep_bedTime === "x" || sleep_bedTime === "00:00") ? "#9CA3AF" : "#000000";
-
-  const sleep_bedTime_text
-    = isKorean ? "취침" : "Bed";
+  const sleep_bedTime = (
+    sleep.sleep_bedTime === "x" ? "x" : sleep.sleep_bedTime
+  );
+  const sleep_bedTime_color = (
+    (sleep_bedTime === "x" || sleep_bedTime === "00:00") ? "#9CA3AF" : "#000000"
+  );
+  const sleep_bedTime_text = (
+    isKorean ? "취침" : "Bed"
+  );
 
   // 2. wakeTime
-  const sleep_wakeTime
-    = sleep.sleep_wakeTime === "x" ? "x" : sleep.sleep_wakeTime;
-
-  const sleep_wakeTime_color
-    = (sleep_wakeTime === "x" || sleep_wakeTime === "00:00") ? "#9CA3AF" : "#000000";
-
-  const sleep_wakeTime_text
-    = isKorean ? "기상" : "Wake";
+  const sleep_wakeTime = (
+    sleep.sleep_wakeTime === "x" ? "x" : sleep.sleep_wakeTime
+  );
+  const sleep_wakeTime_color = (
+    (sleep_wakeTime === "x" || sleep_wakeTime === "00:00") ? "#9CA3AF" : "#000000"
+  );
+  const sleep_wakeTime_text = (
+    isKorean ? "기상" : "Wake"
+  );
 
   // 3. sleepTime
-  const sleep_sleepTime
-    = sleep.sleep_sleepTime === "x" ? "x" : sleep.sleep_sleepTime;
-
-  const sleep_sleepTime_color
-    = (sleep_sleepTime === "x" || sleep_sleepTime === "00:00") ? "#9CA3AF" : "#000000";
-
-  const sleep_sleepTime_text
-    = isKorean ? "수면" : "Sleep";
+  const sleep_sleepTime = (
+    sleep.sleep_sleepTime === "x" ? "x" : sleep.sleep_sleepTime
+  );
+  const sleep_sleepTime_color = (
+    (sleep_sleepTime === "x" || sleep_sleepTime === "00:00") ? "#9CA3AF" : "#000000"
+  );
+  const sleep_sleepTime_text = (
+    isKorean ? "수면" : "Sleep"
+  );
 
   return (
     <FlexWidget
