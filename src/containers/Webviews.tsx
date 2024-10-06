@@ -32,13 +32,6 @@ export const Webviews = forwardRef<WebView, Props>(
 
     const injectedJavaScript = /* javascript */`
       (function() {
-        // window.alert 오버라이드
-        window.alert = function(msg) {
-          window.ReactNativeWebView.postMessage(JSON.stringify({
-            type: 'alert',
-            message: msg
-          }));
-        };
 
         // 세션 스토리지 변경 감시 설정
         const originalSetItem = sessionStorage.setItem;

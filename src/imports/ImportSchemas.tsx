@@ -1,9 +1,9 @@
-// ImportPages.tsx
+// ImportSchemas.tsx
 
-import { Exercise } from "@bases/Exercise";
-import { Food } from "@bases/Food";
-import { Money } from "@bases/Money";
-import { Sleep } from "@bases/Sleep";
+import { Exercise } from "@schemas/Exercise";
+import { Food } from "@schemas/Food";
+import { Money } from "@schemas/Money";
+import { Sleep } from "@schemas/Sleep";
 
 // -------------------------------------------------------------------------------------------------
 const OBJECT = {
@@ -19,5 +19,5 @@ export {
   Food,
   Money,
   Sleep,
-  OBJECT,
+  OBJECT
 };

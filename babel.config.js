@@ -27,7 +27,7 @@ module.exports = {
         "@scripts": "./src/assets/scripts",
         "@styles": "./src/assets/styles",
         "@types": "./src/assets/types",
-        "@bases": "./src/bases",
+        "@schemas": "./src/schemas",
         "@containers": "./src/containers",
         "@widgets": "./src/widgets",
         "@imports": "./src/imports"

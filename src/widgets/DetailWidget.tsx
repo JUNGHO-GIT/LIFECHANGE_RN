@@ -1329,22 +1329,22 @@ export const DetailWidget = (
         }}
       >
         <SelectSection
-          key={activeView}
+          key={active}
           iconName={"exercise"}
           isActive={active === "exercise"}
         />
         <SelectSection
-          key={activeView}
+          key={active}
           iconName={"food"}
           isActive={active === "food"}
         />
         <SelectSection
-          key={activeView}
+          key={active}
           iconName={"money"}
           isActive={active === "money"}
         />
         <SelectSection
-          key={activeView}
+          key={active}
           iconName={"sleep"}
           isActive={active === "sleep"}
         />
@@ -1380,7 +1380,7 @@ export const DetailWidget = (
             }}
             clickAction={"OPEN_APP"}
           />
-          <TextWidget
+          {/* <TextWidget
             style={{
               fontSize: 16,
               color: '#000000',
@@ -1401,7 +1401,7 @@ export const DetailWidget = (
               letterSpacing: 1,
             }}
             text={curDay}
-          />
+          /> */}
           <TextWidget
             style={{
               fontSize: 10,

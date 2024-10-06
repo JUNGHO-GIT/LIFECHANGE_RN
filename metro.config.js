@@ -9,7 +9,7 @@ const config = {
       "@scripts": `${__dirname}/src/assets/scripts`,
       "@styles": `${__dirname}/src/assets/styles`,
       "@types": `${__dirname}/src/assets/types`,
-      "@bases": `${__dirname}/src/bases`,
+      "@schemas": `${__dirname}/src/schemas`,
       "@containers": `${__dirname}/src/containers`,
       "@widgets": `${__dirname}/src/widgets`,
       "@imports": `${__dirname}/src/imports`

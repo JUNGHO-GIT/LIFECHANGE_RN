@@ -5,12 +5,12 @@ import {
 } from "@imports/ImportReacts";
 
 import {
-  Alert, Banner, Webviews,
+  Banner, Webviews,
 } from "@imports/ImportContainers";
 
 import {
   AsyncStorage,
-} from "@imports/ImportLibs";
+} from "@imports/ImportUtils";
 
 // -------------------------------------------------------------------------------------------------
 const styles = StyleSheet.create({
@@ -25,10 +25,8 @@ const styles = StyleSheet.create({
 export const App = () => {
 
   // -----------------------------------------------------------------------------------------------
-  const [alertVisible, setAlertVisible] = useState<boolean>(false);
-  const [alertMessage, setAlertMessage] = useState<string>("");
-  const [bannerVisible, setBannerVisible] = useState<boolean>(false);
-  const [navigationEnabled, setNavigationEnabled] = useState<boolean>(true);
+  const [bannerVisible, setBannerVisible] = useState(false);
+  const [navigationEnabled, setNavigationEnabled] = useState(true);
   const webViewRef = useRef<any>(null);
 
   // -----------------------------------------------------------------------------------------------
@@ -52,42 +50,22 @@ export const App = () => {
 
   // -----------------------------------------------------------------------------------------------
   const handlerOnMessage = (event: any) => {
-
-    const parsedData = JSON.parse(event.nativeEvent.data);
-    const type: string = parsedData.type;
-    const message: string = parsedData.message;
-    const sessionId: string = parsedData.sessionId;
-
-    if (type === 'alert') {
-      setAlertVisible(true);
-      setAlertMessage(message);
-      setNavigationEnabled(false);
+    try {
+      const parsedData = JSON.parse(event.nativeEvent.data);
+      if (parsedData.type === 'sessionId') {
+        AsyncStorage.setItem("sessionId", parsedData.sessionId);
+      }
     }
-    if (type === 'sessionId') {
-      AsyncStorage.setItem("sessionId", sessionId);
+    catch (error) {
+      console.error("Failed to parse onMessage event data:", error);
     }
   };
 
   // -----------------------------------------------------------------------------------------------
-  const handlerAlertClose = () => {
-    setAlertVisible(false);
-    setNavigationEnabled(true);
-  };
-
-  // -----------------------------------------------------------------------------------------------
-  const handlerBannerVisible = (newState: any) => {
-    const { url } = newState;
-    if (
-      url.includes("/user/signup") ||
-      url.includes("/user/login") ||
-      url.includes("/user/resetPw") ||
-      url.includes("accounts.google.com")
-    ) {
-      setBannerVisible(false);
-    }
-    else {
-      setBannerVisible(true);
-    }
+  const handlerBannerVisible = ({ url }: any) => {
+    const hideBannerUrls = ["/user/signup", "/user/login", "/user/resetPw", "accounts.google.com"];
+    const shouldHideBanner = hideBannerUrls.some(hideUrl => url.includes(hideUrl));
+    setBannerVisible(!shouldHideBanner);
   };
 
   // -----------------------------------------------------------------------------------------------
@@ -98,11 +76,6 @@ export const App = () => {
         bannerVisible={handlerBannerVisible}
         navigationEnabled={navigationEnabled}
         ref={webViewRef}
-      />
-      <Alert
-        alertVisible={alertVisible}
-        alertMessage={alertMessage}
-        alertClose={handlerAlertClose}
       />
       {bannerVisible && <Banner />}
     </SafeAreaView>

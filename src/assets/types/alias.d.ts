@@ -28,7 +28,7 @@ declare module "@types/*" {
   export default value;
 }
 
-declare module "@bases/*" {
+declare module "@schemas/*" {
   const value: any;
   export default value;
 }

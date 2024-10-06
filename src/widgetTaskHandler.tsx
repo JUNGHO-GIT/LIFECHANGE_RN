@@ -5,8 +5,8 @@ import {
 } from "@imports/ImportReacts";
 
 import {
-  axios, AsyncStorage,
-} from "@imports/ImportLibs";
+  axios, AsyncStorage, moment, Localization,
+} from "@imports/ImportUtils";
 
 import {
   DetailWidget,
@@ -17,12 +17,8 @@ import {
 } from "@env";
 
 import {
-  curDate, curTime, curDay, curCurrency, isKorean,
-} from "@imports/ImportScripts";
-
-import {
   OBJECT, Exercise, Food, Money, Sleep,
-} from "@imports/ImportBases"
+} from "@imports/ImportSchemas";
 
 // -------------------------------------------------------------------------------------------------
 const nameToWidget = {
@@ -38,12 +34,41 @@ export async function widgetTaskHandler(
   const Widget = nameToWidget[widgetInfo.widgetName as keyof typeof nameToWidget] as any;
   const userId = await AsyncStorage.getItem("sessionId");
 
-  console.log("curDate:", curDate);
-  console.log("curTime:", curTime);
-  console.log("curDay:", curDay);
-  console.log("curCurrency:", curCurrency);
-  console.log("isKorean:", isKorean);
-  console.log("userId:", userId);
+  const clientTimeZone = Localization.getTimeZone();
+  const clientCurrency = Localization.getCurrencies()?.[0];
+
+  const curDate = moment().tz(clientTimeZone).format("YYYY-MM-DD");
+  const curTime = moment().tz(clientTimeZone).format("HH:mm:ss");
+  const curFormat = moment().tz(clientTimeZone).format("ddd");
+  const curCurrency = clientCurrency;
+
+  let isKorean: boolean = false;
+  let curDay: string = "";
+
+  if (clientTimeZone === "Asia/Seoul") {
+    isKorean = true;
+    curDay
+    = curFormat === "Mon" ? "월"
+    : curFormat === "Tue" ? "화"
+    : curFormat === "Wed" ? "수"
+    : curFormat === "Thu" ? "목"
+    : curFormat === "Fri" ? "금"
+    : curFormat === "Sat" ? "토"
+    : "일";
+  }
+  else {
+    isKorean = false;
+    curDay = curFormat;
+  }
+
+  console.log(`
+    curDate: ${curDate},
+    curTime: ${curTime},
+    curDay: ${curDay},
+    curCurrency: ${curCurrency},
+    isKorean: ${isKorean},
+    userId: ${userId}
+  `);
 
   const PAGING = {
     sort: "asc",
@@ -124,7 +149,7 @@ export async function widgetTaskHandler(
       props.renderWidget(
         <Widget
           {...widgetInfo}
-          activeView={props.clickAction as any}
+          activeView={props.clickAction as string}
           curDate={curDate}
           curTime={curTime}
           curDay={curDay}
@@ -143,7 +168,7 @@ export async function widgetTaskHandler(
       props.renderWidget(
         <Widget
           {...widgetInfo}
-          activeView={props.clickAction as any}
+          activeView={props.clickAction as string}
           curDate={curDate}
           curTime={curTime}
           curDay={curDay}
