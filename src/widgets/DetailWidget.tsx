@@ -1380,7 +1380,7 @@ export const DetailWidget = (
             }}
             clickAction={"OPEN_APP"}
           />
-          {/* <TextWidget
+          <TextWidget
             style={{
               fontSize: 16,
               color: '#000000',
@@ -1401,7 +1401,7 @@ export const DetailWidget = (
               letterSpacing: 1,
             }}
             text={curDay}
-          /> */}
+          />
           <TextWidget
             style={{
               fontSize: 10,
