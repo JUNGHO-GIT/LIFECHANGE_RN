@@ -52,19 +52,30 @@ export const App = () => {
   const handlerOnMessage = (event: any) => {
     try {
       const parsedData = JSON.parse(event.nativeEvent.data);
+
+      // 세션아이디는 단일 string
       if (parsedData.type === 'sessionId') {
         AsyncStorage.setItem("sessionId", parsedData.sessionId);
       }
+
+      // 로케일은 객체
+      else if (parsedData.type === 'localeSetting') {
+        AsyncStorage.setItem("localeSetting", JSON.stringify(parsedData.localeSetting));
+      }
     }
-    catch (error) {
-      console.error("Failed to parse onMessage event data:", error);
+    catch (err: any) {
+      console.error("onMessage event error:", err);
     }
   };
 
   // -----------------------------------------------------------------------------------------------
   const handlerBannerVisible = ({ url }: any) => {
-    const hideBannerUrls = ["/user/signup", "/user/login", "/user/resetPw", "accounts.google.com"];
-    const shouldHideBanner = hideBannerUrls.some(hideUrl => url.includes(hideUrl));
+    const hideBannerUrls = [
+      "/user/signup", "/user/login", "/user/resetPw", "accounts.google.com"
+    ];
+    const shouldHideBanner = hideBannerUrls.some((hideUrl) => (
+      url.includes(hideUrl)
+    ));
     setBannerVisible(!shouldHideBanner);
   };
 

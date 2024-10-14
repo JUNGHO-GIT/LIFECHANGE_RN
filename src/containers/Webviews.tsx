@@ -31,34 +31,57 @@ export const Webviews = forwardRef<WebView, Props>(
     const userAgent = "Mozilla/5.0 (Linux; Android 8.0.0; SM-G935S Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Mobile Safari/537.36";
 
     const injectedJavaScript = /* javascript */`
-      (function() {
+      // 세션 스토리지 변경 감시 설정
+      const ogSessionSetItem = window.sessionStorage.setItem;
+      const ogSessionRemoveItem = window.sessionStorage.removeItem;
 
-        // 세션 스토리지 변경 감시 설정
-        const originalSetItem = sessionStorage.setItem;
-        const originalRemoveItem = sessionStorage.removeItem;
+      // 세션 스토리지 setItem 오버라이드
+      window.sessionStorage.setItem = function(key, value) {
+        ogSessionSetItem.call(window.sessionStorage, key, value);
+        if (key === '${TITLE}_sessionId') {
+          window.ReactNativeWebView.postMessage(JSON.stringify({
+            type: 'sessionId',
+            sessionId: value
+          }));
+        }
+      };
 
-        // sessionStorage setItem 오버라이드 (특정 키 'sessionId'만 감지)
-        sessionStorage.setItem = function(key, value) {
-          originalSetItem.apply(this, arguments);
-          if (key === '${TITLE}_sessionId') {
-            window.ReactNativeWebView.postMessage(JSON.stringify({
-              type: 'sessionId',
-              sessionId: value
-            }));
-          }
-        };
+      // 세션 스토리지 removeItem 오버라이드
+      window.sessionStorage.removeItem = function(key) {
+        ogSessionRemoveItem.call(window.sessionStorage, key);
+        if (key === '${TITLE}_sessionId') {
+          window.ReactNativeWebView.postMessage(JSON.stringify({
+            type: 'sessionId',
+            sessionId: null
+          }));
+        }
+      };
 
-        // sessionStorage removeItem 오버라이드 (특정 키 'sessionId'만 감지)
-        sessionStorage.removeItem = function(key) {
-          originalRemoveItem.apply(this, arguments);
-          if (key === '${TITLE}_sessionId') {
-            window.ReactNativeWebView.postMessage(JSON.stringify({
-              type: 'sessionId',
-              sessionId: null
-            }));
-          }
-        };
-      })();
+      // 로컬 스토리지 변경 감시 설정
+      const ogLocalSetItem = window.localStorage.setItem;
+      const ogLocalRemoveItem = window.localStorage.removeItem;
+
+      // 로컬 스토리지 setItem 오버라이드
+      window.localStorage.setItem = function(key, value) {
+        ogLocalSetItem.call(window.localStorage, key, value);
+        if (key === '${TITLE}_localeSetting') {
+          window.ReactNativeWebView.postMessage(JSON.stringify({
+            type: 'localeSetting',
+            localeSetting: JSON.parse(value)
+          }));
+        }
+      };
+
+      // 로컬 스토리지 removeItem 오버라이드
+      window.localStorage.removeItem = function(key) {
+        ogLocalRemoveItem.call(window.localStorage, key);
+        if (key === '${TITLE}_localeSetting') {
+          window.ReactNativeWebView.postMessage(JSON.stringify({
+            type: 'localeSetting',
+            localeSetting: null
+          }));
+        }
+      };
     `;
 
     // 10. return ----------------------------------------------------------------------------------

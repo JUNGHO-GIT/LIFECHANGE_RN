@@ -5,22 +5,22 @@ import {
 } from "@imports/ImportReacts";
 
 // -------------------------------------------------------------------------------------------------
-declare interface ActiveProps {
+declare type DetailProps = {
+  activeView: "exercise" | "food" | "money" | "sleep";
+  clientLanguage: string;
+  clientCurrency: string;
+  clientDate: string;
+  clientTime: string;
+  clientDay: string;
+}
+// -------------------------------------------------------------------------------------------------
+declare type ActiveProps = {
   isActive: boolean;
   iconName: string;
 }
 // -------------------------------------------------------------------------------------------------
-declare interface ActiveViewProps {
-  activeView: "exercise" | "food" | "money" | "sleep";
-  curDate: string;
-  curTime: string;
-  curDay: string;
-  curCurrency: string;
-  isKorean: boolean;
-}
-// -------------------------------------------------------------------------------------------------
-declare interface ExerciseProps {
-  isKorean: boolean;
+declare type ExerciseProps = {
+  clientLanguage: string;
   exercise: {
     exercise_total_volume: any;
     exercise_total_cardio: any;
@@ -28,8 +28,8 @@ declare interface ExerciseProps {
   };
 }
 // -------------------------------------------------------------------------------------------------
-declare interface FoodProps {
-  isKorean: boolean;
+declare type FoodProps = {
+  clientLanguage: string;
   food: {
     food_total_kcal: any;
     food_total_carb:  any;
@@ -38,17 +38,17 @@ declare interface FoodProps {
   };
 }
 // -------------------------------------------------------------------------------------------------
-declare interface MoneyProps {
-  isKorean: boolean;
-  curCurrency: string;
+declare type MoneyProps = {
+  clientLanguage: string;
+  clientCurrency: string;
   money: {
     money_total_income: any;
     money_total_expense: any;
   };
 }
 // -------------------------------------------------------------------------------------------------
-declare interface SleepProps {
-  isKorean: boolean;
+declare type SleepProps = {
+  clientLanguage: string;
   sleep: {
     sleep_bedTime: any;
     sleep_wakeTime: any;
@@ -79,7 +79,9 @@ const insertComma = (str: string) => {
 };
 
 // -------------------------------------------------------------------------------------------------
-const SelectSection = ({isActive, iconName}: ActiveProps) => {
+const SelectSection = (
+  {isActive, iconName}: ActiveProps
+) => {
   let imageLink;
   if (iconName === "exercise") {
     imageLink = require('../assets/images/exercise1.webp');
@@ -129,40 +131,55 @@ const SelectSection = ({isActive, iconName}: ActiveProps) => {
 
 // -------------------------------------------------------------------------------------------------
 const ExerciseSection  = (
-  { isKorean, exercise }: ExerciseProps
+  { clientLanguage, exercise }: ExerciseProps
 ) => {
 
   // 1. volume
-  const exercise_total_volume = (
+  const exercise_total_volume_text = (
+    clientLanguage === "ko" ? "볼륨" : "Volume"
+  );
+  const exercise_total_volume_value = (
     exercise.exercise_total_volume === "x" ? "x" : exercise.exercise_total_volume
   );
   const exercise_total_volume_color = (
-    (exercise_total_volume === "x" || exercise_total_volume === "0") ? "#9CA3AF" : "#000000"
+    (exercise_total_volume_value === "x" || exercise_total_volume_value === "0")
+    ? "#9CA3AF"
+    : "#000000"
   );
-  const exercise_total_volume_text = (
-    isKorean ? "볼륨" : "Volume"
+  const exercise_total_volume_end = (
+    exercise_total_volume_value === "x" ? "" : "vol"
   );
 
   // 2. cardio
-  const exercise_total_cardio = (
+  const exercise_total_cardio_text = (
+    clientLanguage === "ko" ? "유산소" : "Cardio"
+  );
+  const exercise_total_cardio_value = (
     exercise.exercise_total_cardio === "x" ? "x" : exercise.exercise_total_cardio
   );
   const exercise_total_cardio_color = (
-    (exercise_total_cardio === "x" || exercise_total_cardio === "00:00") ? "#9CA3AF" : "#000000"
+    (exercise_total_cardio_value === "x" || exercise_total_cardio_value === "00:00")
+    ? "#9CA3AF"
+    : "#000000"
   );
-  const exercise_total_cardio_text = (
-    isKorean ? "유산소" : "Cardio"
+  const exercise_total_cardio_end = (
+    exercise_total_cardio_value === "x" ? "" : "h:m"
   );
 
   // 3. weight
-  const exercise_total_weight = (
+  const exercise_total_weight_text = (
+    clientLanguage === "ko" ? "체중" : "Weight"
+  );
+  const exercise_total_weight_value = (
     exercise.exercise_total_weight === "x" ? "x" : exercise.exercise_total_weight
   );
   const exercise_total_weight_color = (
-    (exercise_total_weight === "x" || exercise_total_weight === "0") ? "#9CA3AF" : "#000000"
+    (exercise_total_weight_value === "x" || exercise_total_weight_value === "0")
+    ? "#9CA3AF"
+    : "#000000"
   );
-  const exercise_total_weight_text = (
-    isKorean ? "체중" : "Weight"
+  const exercise_total_weight_end = (
+    exercise_total_weight_value === "x" ? "" : "kg"
   );
 
   return (
@@ -172,8 +189,7 @@ const ExerciseSection  = (
         height: 'match_parent',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
-        padding: 10,
+        alignItems: 'flex-start',
       }}
     >
       {/* exercise 1 */}
@@ -184,79 +200,46 @@ const ExerciseSection  = (
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 5,
-          marginBottom: 20,
+          marginBottom: 30,
         }}
       >
         <ImageWidget
           image={require('../assets/images/exercise3.webp')}
           imageWidth={20}
           imageHeight={20}
-        />
-        <FlexWidget
           style={{
-            width: 60,
-            marginLeft: 10
+            marginRight: 10,
           }}
-        >
-          <TextWidget
-            style={{
-              fontSize: 16,
-              fontWeight: '500'
-            }}
-            text={exercise_total_volume_text}
-          />
-        </FlexWidget>
-        <FlexWidget style={{width: 10}}>
-          <TextWidget style={{fontSize: 16}}
-            text={`:`}
-          />
-        </FlexWidget>
-        {exercise_total_volume === "x" ? (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-              style={{
-                fontSize: 16,
-                fontWeight: '500',
-                color: exercise_total_volume_color,
-              }}
-              text={`${insertComma(exercise_total_volume)}`}
-            />
-          </FlexWidget>
-        ) : (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-              style={{
-                fontSize: 16,
-                fontWeight: '500',
-                color: exercise_total_volume_color,
-              }}
-              text={`${insertComma(exercise_total_volume)}`}
-            />
-            <TextWidget
-              style={{
-                fontSize: 10,
-                marginLeft: 10,
-                color: "#000000"
-              }}
-              text={"vol"}
-            />
-          </FlexWidget>
-        )}
+        />
+        <TextWidget
+          style={{
+            fontSize: 14,
+            fontWeight: '500',
+            marginRight: 10,
+            color: "#000000"
+          }}
+          text={`${exercise_total_volume_text} : `}
+        />
+        <TextWidget
+          style={{
+            fontSize: 16,
+            fontWeight: '500',
+            marginRight: 10,
+            color: exercise_total_volume_color,
+          }}
+          text={`${insertComma(exercise_total_volume_value)}`}
+        />
+        <TextWidget
+          style={{
+            fontSize: 8,
+            fontWeight: '400',
+            marginRight: 0,
+            color: "#434343"
+          }}
+          text={`${exercise_total_volume_end}`}
+        />
       </FlexWidget>
-      {/** exercise 2 */}
+      {/* exercise 2 */}
       <FlexWidget
         style={{
           width: 'wrap_content',
@@ -264,77 +247,44 @@ const ExerciseSection  = (
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 5,
-          marginBottom: 20,
+          marginBottom: 30,
         }}
       >
         <ImageWidget
           image={require('../assets/images/exercise4.webp')}
           imageWidth={20}
           imageHeight={20}
-        />
-        <FlexWidget
           style={{
-            width: 60,
-            marginLeft: 10
+            marginRight: 10,
           }}
-        >
-          <TextWidget
-            style={{
-              fontSize: 16,
-              fontWeight: '500'
-            }}
-            text={exercise_total_cardio_text}
-          />
-        </FlexWidget>
-        <FlexWidget style={{width: 10}}>
-          <TextWidget style={{fontSize: 16}}
-            text={`:`}
-          />
-        </FlexWidget>
-        {exercise_total_cardio === "x" ? (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-              style={{
-                fontSize: 16,
-                fontWeight: '500',
-                color: exercise_total_cardio_color,
-              }}
-              text={`${exercise_total_cardio}`}
-            />
-          </FlexWidget>
-        ) : (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-            style={{
-              fontSize: 16,
-              fontWeight: '500',
-              color: exercise_total_cardio_color,
-            }}
-              text={`${exercise_total_cardio}`}
-            />
-            <TextWidget
-              style={{
-                fontSize: 10,
-                marginLeft: 10,
-                color: "#000000"
-              }}
-              text={"h:m"}
-            />
-          </FlexWidget>
-        )}
+        />
+        <TextWidget
+          style={{
+            fontSize: 14,
+            fontWeight: '500',
+            marginRight: 10,
+            color: "#000000"
+          }}
+          text={`${exercise_total_cardio_text} : `}
+        />
+        <TextWidget
+          style={{
+            fontSize: 16,
+            fontWeight: '500',
+            marginRight: 10,
+            color: exercise_total_cardio_color,
+          }}
+          text={`${insertComma(exercise_total_cardio_value)}`}
+        />
+        <TextWidget
+          style={{
+            fontSize: 8,
+            fontWeight: '400',
+            marginRight: 0,
+            color: "#434343"
+          }}
+          text={`${exercise_total_cardio_end}`}
+        />
       </FlexWidget>
       {/* exercise 3 */}
       <FlexWidget
@@ -344,7 +294,6 @@ const ExerciseSection  = (
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 5,
           marginBottom: 0,
         }}
       >
@@ -352,69 +301,37 @@ const ExerciseSection  = (
           image={require('../assets/images/exercise5.webp')}
           imageWidth={20}
           imageHeight={20}
-        />
-        <FlexWidget
           style={{
-            width: 60,
-            marginLeft: 10
+            marginRight: 10,
           }}
-        >
-          <TextWidget
-            style={{
-              fontSize: 16,
-              fontWeight: '500'
-            }}
-            text={exercise_total_weight_text}
-          />
-        </FlexWidget>
-        <FlexWidget style={{width: 10}}>
-          <TextWidget style={{fontSize: 16}}
-            text={`:`}
-          />
-        </FlexWidget>
-        {exercise_total_weight === "x" ? (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-              style={{
-                fontSize: 16,
-                fontWeight: '500',
-                color: exercise_total_weight_color,
-              }}
-              text={`${exercise_total_weight}`}
-            />
-          </FlexWidget>
-        ) : (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-              style={{
-                fontSize: 16,
-                fontWeight: '500',
-                color: exercise_total_weight_color,
-              }}
-              text={`${exercise_total_weight}`}
-            />
-            <TextWidget
-              style={{
-                fontSize: 10,
-                marginLeft: 10,
-                color: "#000000"
-              }}
-              text={"kg"}
-            />
-          </FlexWidget>
-        )}
+        />
+        <TextWidget
+          style={{
+            fontSize: 14,
+            fontWeight: '500',
+            marginRight: 10,
+            color: "#000000"
+          }}
+          text={`${exercise_total_weight_text} : `}
+        />
+        <TextWidget
+          style={{
+            fontSize: 16,
+            fontWeight: '500',
+            marginRight: 10,
+            color: exercise_total_weight_color,
+          }}
+          text={`${insertComma(exercise_total_weight_value)}`}
+        />
+        <TextWidget
+          style={{
+            fontSize: 8,
+            fontWeight: '400',
+            marginRight: 0,
+            color: "#434343"
+          }}
+          text={`${exercise_total_weight_end}`}
+        />
       </FlexWidget>
     </FlexWidget>
   );
@@ -422,51 +339,71 @@ const ExerciseSection  = (
 
 // -------------------------------------------------------------------------------------------------
 const FoodSection = (
-  { isKorean, food }: FoodProps
+  { clientLanguage, food }: FoodProps
 ) => {
 
   // 1. kcal
-  const food_total_kcal = (
+  const food_total_kcal_text = (
+    clientLanguage === "ko" ? "칼로리" : "Kcal"
+  );
+  const food_total_kcal_value = (
     food.food_total_kcal === "x" ? "x" : food.food_total_kcal
   );
   const food_total_kcal_color = (
-    (food_total_kcal === "x" || food_total_kcal === "0") ? "#9CA3AF" : "#000000"
+    (food_total_kcal_value === "x" || food_total_kcal_value === "0")
+    ? "#9CA3AF"
+    : "#000000"
   );
-  const food_total_kcal_text = (
-    isKorean ? "칼로리" : "Kcal"
+  const food_total_kcal_end = (
+    food_total_kcal_value === "x" ? "" : "kcal"
   );
 
   // 2. carb
-  const food_total_carb = (
+  const food_total_carb_text = (
+    clientLanguage === "ko" ? "탄수화물" : "Carb"
+  );
+  const food_total_carb_value = (
     food.food_total_carb === "x" ? "x" : food.food_total_carb
   );
   const food_total_carb_color = (
-    (food_total_carb === "x" || food_total_carb === "0") ? "#9CA3AF" : "#000000"
+    (food_total_carb_value === "x" || food_total_carb_value === "0")
+    ? "#9CA3AF"
+    : "#000000"
   );
-  const food_total_carb_text = (
-    isKorean ? "탄수화물" : "Carb"
+  const food_total_carb_end = (
+    food_total_carb_value === "x" ? "" : "g"
   );
 
   // 3. protein
-  const food_total_protein = (
+  const food_total_protein_text = (
+    clientLanguage === "ko" ? "단백질" : "Protein"
+  );
+  const food_total_protein_value = (
     food.food_total_protein === "x" ? "x" : food.food_total_protein
   );
   const food_total_protein_color = (
-    (food_total_protein === "x" || food_total_protein === "0") ? "#9CA3AF" : "#000000"
+    (food_total_protein_value === "x" || food_total_protein_value === "0")
+    ? "#9CA3AF"
+    : "#000000"
   );
-  const food_total_protein_text = (
-    isKorean ? "단백질" : "Protein"
+  const food_total_protein_end = (
+    food_total_protein_value === "x" ? "" : "g"
   );
 
   // 4. fat
-  const food_total_fat = (
+  const food_total_fat_text = (
+    clientLanguage === "ko" ? "지방" : "Fat"
+  );
+  const food_total_fat_value = (
     food.food_total_fat === "x" ? "x" : food.food_total_fat
   );
   const food_total_fat_color = (
-    (food_total_fat === "x" || food_total_fat === "0") ? "#9CA3AF" : "#000000"
+    (food_total_fat_value === "x" || food_total_fat_value === "0")
+    ? "#9CA3AF"
+    : "#000000"
   );
-  const food_total_fat_text = (
-    isKorean ? "지방" : "Fat"
+  const food_total_fat_end = (
+    food_total_fat_value === "x" ? "" : "g"
   );
 
   return (
@@ -476,8 +413,7 @@ const FoodSection = (
         height: 'match_parent',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
-        padding: 10,
+        alignItems: 'flex-start',
       }}
     >
       {/* food 1 */}
@@ -488,77 +424,44 @@ const FoodSection = (
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 5,
-          marginBottom: 5,
+          marginBottom: 30,
         }}
       >
         <ImageWidget
           image={require('../assets/images/food2.webp')}
           imageWidth={20}
           imageHeight={20}
-        />
-        <FlexWidget
           style={{
-            width: 60,
-            marginLeft: 10
+            marginRight: 10,
           }}
-        >
-          <TextWidget
-            style={{
-              fontSize: 16,
-              fontWeight: '500'
-            }}
-            text={food_total_kcal_text}
-          />
-        </FlexWidget>
-        <FlexWidget style={{width: 10}}>
-          <TextWidget style={{fontSize: 16}}
-            text={`:`}
-          />
-        </FlexWidget>
-        {food_total_kcal === "x" ? (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-              style={{
-                fontSize: 16,
-                fontWeight: '500',
-                color: food_total_kcal_color,
-              }}
-              text={`${insertComma(food_total_kcal)}`}
-            />
-          </FlexWidget>
-        ) : (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-            style={{
-              fontSize: 16,
-              fontWeight: '500',
-              color: food_total_kcal_color,
-            }}
-              text={`${insertComma(food_total_kcal)}`}
-            />
-            <TextWidget
-              style={{
-                fontSize: 10,
-                marginLeft: 10,
-                color: "#000000"
-              }}
-              text={"kcal"}
-            />
-          </FlexWidget>
-        )}
+        />
+        <TextWidget
+          style={{
+            fontSize: 14,
+            fontWeight: '500',
+            marginRight: 10,
+            color: "#000000"
+          }}
+          text={`${food_total_kcal_text} : `}
+        />
+        <TextWidget
+          style={{
+            fontSize: 16,
+            fontWeight: '500',
+            marginRight: 10,
+            color: food_total_kcal_color,
+          }}
+          text={`${insertComma(food_total_kcal_value)}`}
+        />
+        <TextWidget
+          style={{
+            fontSize: 8,
+            fontWeight: '400',
+            marginRight: 0,
+            color: "#434343"
+          }}
+          text={`${food_total_kcal_end}`}
+        />
       </FlexWidget>
       {/* food 2 */}
       <FlexWidget
@@ -568,77 +471,44 @@ const FoodSection = (
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 5,
-          marginBottom: 5,
+          marginBottom: 30,
         }}
       >
         <ImageWidget
           image={require('../assets/images/food3.webp')}
           imageWidth={20}
           imageHeight={20}
-        />
-        <FlexWidget
           style={{
-            width: 60,
-            marginLeft: 10
+            marginRight: 10,
           }}
-        >
-          <TextWidget
-            style={{
-              fontSize: 16,
-              fontWeight: '500'
-            }}
-            text={food_total_carb_text}
-          />
-        </FlexWidget>
-        <FlexWidget style={{width: 10}}>
-          <TextWidget style={{fontSize: 16}}
-            text={`:`}
-          />
-        </FlexWidget>
-        {food_total_carb === "x" ? (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-              style={{
-                fontSize: 16,
-                fontWeight: '500',
-                color: food_total_carb_color,
-              }}
-              text={`${insertComma(food_total_carb)}`}
-            />
-          </FlexWidget>
-        ) : (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-            style={{
-              fontSize: 16,
-              fontWeight: '500',
-              color: food_total_carb_color,
-            }}
-              text={`${insertComma(food_total_carb)}`}
-            />
-            <TextWidget
-              style={{
-                fontSize: 10,
-                marginLeft: 10,
-                color: "#000000"
-              }}
-              text={"g"}
-            />
-          </FlexWidget>
-        )}
+        />
+        <TextWidget
+          style={{
+            fontSize: 14,
+            fontWeight: '500',
+            marginRight: 10,
+            color: "#000000"
+          }}
+          text={`${food_total_carb_text} : `}
+        />
+        <TextWidget
+          style={{
+            fontSize: 16,
+            fontWeight: '500',
+            marginRight: 10,
+            color: food_total_carb_color,
+          }}
+          text={`${insertComma(food_total_carb_value)}`}
+        />
+        <TextWidget
+          style={{
+            fontSize: 8,
+            fontWeight: '400',
+            marginRight: 0,
+            color: "#434343"
+          }}
+          text={`${food_total_carb_end}`}
+        />
       </FlexWidget>
       {/* food 3 */}
       <FlexWidget
@@ -648,77 +518,44 @@ const FoodSection = (
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 5,
-          marginBottom: 5,
+          marginBottom: 30,
         }}
       >
         <ImageWidget
           image={require('../assets/images/food4.webp')}
           imageWidth={20}
           imageHeight={20}
-        />
-        <FlexWidget
           style={{
-            width: 60,
-            marginLeft: 10
+            marginRight: 10,
           }}
-        >
-          <TextWidget
-            style={{
-              fontSize: 16,
-              fontWeight: '500'
-            }}
-            text={food_total_protein_text}
-          />
-        </FlexWidget>
-        <FlexWidget style={{width: 10}}>
-          <TextWidget style={{fontSize: 16}}
-            text={`:`}
-          />
-        </FlexWidget>
-        {food_total_protein === "x" ? (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-              style={{
-                fontSize: 16,
-                fontWeight: '500',
-                color: food_total_protein_color,
-              }}
-              text={`${insertComma(food_total_protein)}`}
-            />
-          </FlexWidget>
-        ) : (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-            style={{
-              fontSize: 16,
-              fontWeight: '500',
-              color: food_total_protein_color,
-            }}
-              text={`${insertComma(food_total_protein)}`}
-            />
-            <TextWidget
-              style={{
-                fontSize: 10,
-                marginLeft: 10,
-                color: "#000000"
-              }}
-              text={"g"}
-            />
-          </FlexWidget>
-        )}
+        />
+        <TextWidget
+          style={{
+            fontSize: 14,
+            fontWeight: '500',
+            marginRight: 10,
+            color: "#000000"
+          }}
+          text={`${food_total_protein_text} : `}
+        />
+        <TextWidget
+          style={{
+            fontSize: 16,
+            fontWeight: '500',
+            marginRight: 10,
+            color: food_total_protein_color,
+          }}
+          text={`${insertComma(food_total_protein_value)}`}
+        />
+        <TextWidget
+          style={{
+            fontSize: 8,
+            fontWeight: '400',
+            marginRight: 0,
+            color: "#434343"
+          }}
+          text={`${food_total_protein_end}`}
+        />
       </FlexWidget>
       {/* food 4 */}
       <FlexWidget
@@ -728,7 +565,6 @@ const FoodSection = (
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 5,
           marginBottom: 0,
         }}
       >
@@ -736,69 +572,37 @@ const FoodSection = (
           image={require('../assets/images/food5.webp')}
           imageWidth={20}
           imageHeight={20}
-        />
-        <FlexWidget
           style={{
-            width: 60,
-            marginLeft: 10
+            marginRight: 10,
           }}
-        >
-          <TextWidget
-            style={{
-              fontSize: 16,
-              fontWeight: '500'
-            }}
-            text={food_total_fat_text}
-          />
-        </FlexWidget>
-        <FlexWidget style={{width: 10}}>
-          <TextWidget style={{fontSize: 16}}
-            text={`:`}
-          />
-        </FlexWidget>
-        {food_total_fat === "x" ? (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-              style={{
-                fontSize: 16,
-                fontWeight: '500',
-                color: food_total_fat_color,
-              }}
-              text={`${insertComma(food_total_fat)}`}
-            />
-          </FlexWidget>
-        ) : (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-            style={{
-              fontSize: 16,
-              fontWeight: '500',
-              color: food_total_fat_color,
-            }}
-              text={`${insertComma(food_total_fat)}`}
-            />
-            <TextWidget
-              style={{
-                fontSize: 10,
-                marginLeft: 10,
-                color: "#000000"
-              }}
-              text={"g"}
-            />
-          </FlexWidget>
-        )}
+        />
+        <TextWidget
+          style={{
+            fontSize: 14,
+            fontWeight: '500',
+            marginRight: 10,
+            color: "#000000"
+          }}
+          text={`${food_total_fat_text} : `}
+        />
+        <TextWidget
+          style={{
+            fontSize: 16,
+            fontWeight: '500',
+            marginRight: 10,
+            color: food_total_fat_color,
+          }}
+          text={`${insertComma(food_total_fat_value)}`}
+        />
+        <TextWidget
+          style={{
+            fontSize: 8,
+            fontWeight: '400',
+            marginRight: 0,
+            color: "#434343"
+          }}
+          text={`${food_total_fat_end}`}
+        />
       </FlexWidget>
     </FlexWidget>
   );
@@ -806,29 +610,39 @@ const FoodSection = (
 
 // -------------------------------------------------------------------------------------------------
 const MoneySection = (
-  { isKorean, curCurrency, money }: MoneyProps
+  { clientLanguage, clientCurrency, money }: MoneyProps
 ) => {
 
   // 1. income
-  const money_total_income = (
+  const money_total_income_text = (
+    clientLanguage === "ko" ? "수입" : "Income"
+  );
+  const money_total_income_value = (
     money.money_total_income === "x" ? "x" : money.money_total_income
   );
   const money_total_income_color = (
-    (money_total_income === "x" || money_total_income === "0") ? "#9CA3AF" : "#000000"
+    (money_total_income_value === "x" || money_total_income_value === "0")
+    ? "#9CA3AF"
+    : "#000000"
   );
-  const money_total_income_text = (
-    isKorean ? "수입" : "Income"
+  const money_total_income_end = (
+    money_total_income_value === "x" ? "" : clientCurrency
   );
 
   // 2. expense
-  const money_total_expense = (
+  const money_total_expense_text = (
+    clientLanguage === "ko" ? "지출" : "Expense"
+  );
+  const money_total_expense_value = (
     money.money_total_expense === "x" ? "x" : money.money_total_expense
   );
   const money_total_expense_color = (
-    (money_total_expense === "x" || money_total_expense === "0") ? "#9CA3AF" : "#000000"
+    (money_total_expense_value === "x" || money_total_expense_value === "0")
+    ? "#9CA3AF"
+    : "#000000"
   );
-  const money_total_expense_text = (
-    isKorean ? "지출" : "Expense"
+  const money_total_expense_end = (
+    money_total_expense_value === "x" ? "" : clientCurrency
   );
 
   return (
@@ -838,7 +652,7 @@ const MoneySection = (
         height: 'match_parent',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'flex-start',
       }}
     >
       {/* money 1 */}
@@ -849,7 +663,6 @@ const MoneySection = (
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 5,
           marginBottom: 30,
         }}
       >
@@ -857,69 +670,37 @@ const MoneySection = (
           image={require('../assets/images/money2.webp')}
           imageWidth={20}
           imageHeight={20}
-        />
-        <FlexWidget
           style={{
-            width: 60,
-            marginLeft: 10
+            marginRight: 10,
           }}
-        >
-          <TextWidget
-            style={{
-              fontSize: 16,
-              fontWeight: '500'
-            }}
-            text={money_total_income_text}
-          />
-        </FlexWidget>
-        <FlexWidget style={{width: 10}}>
-          <TextWidget style={{fontSize: 16}}
-            text={`:`}
-          />
-        </FlexWidget>
-        {money_total_income === "x" ? (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-              style={{
-                fontSize: 16,
-                fontWeight: '500',
-                color: money_total_income_color,
-              }}
-              text={`${insertComma(money_total_income)}`}
-            />
-          </FlexWidget>
-        ) : (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-              style={{
-                fontSize: 16,
-                fontWeight: '500',
-                color: money_total_income_color,
-              }}
-              text={`${insertComma(money_total_income)}`}
-            />
-            <TextWidget
-              style={{
-                fontSize: 10,
-                marginLeft: 10,
-                color: "#000000"
-              }}
-              text={curCurrency}
-            />
-          </FlexWidget>
-        )}
+        />
+        <TextWidget
+          style={{
+            fontSize: 14,
+            fontWeight: '500',
+            marginRight: 10,
+            color: "#000000"
+          }}
+          text={`${money_total_income_text} : `}
+        />
+        <TextWidget
+          style={{
+            fontSize: 16,
+            fontWeight: '500',
+            marginRight: 10,
+            color: money_total_income_color,
+          }}
+          text={`${insertComma(money_total_income_value)}`}
+        />
+        <TextWidget
+          style={{
+            fontSize: 8,
+            fontWeight: '400',
+            marginRight: 0,
+            color: "#434343"
+          }}
+          text={`${money_total_income_end}`}
+        />
       </FlexWidget>
       {/* money 2 */}
       <FlexWidget
@@ -929,7 +710,6 @@ const MoneySection = (
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 5,
           marginBottom: 0,
         }}
       >
@@ -937,69 +717,37 @@ const MoneySection = (
           image={require('../assets/images/money2.webp')}
           imageWidth={20}
           imageHeight={20}
-        />
-        <FlexWidget
           style={{
-            width: 60,
-            marginLeft: 10
+            marginRight: 10,
           }}
-        >
-          <TextWidget
-            style={{
-              fontSize: 16,
-              fontWeight: '500'
-            }}
-            text={money_total_expense_text}
-          />
-        </FlexWidget>
-        <FlexWidget style={{width: 10}}>
-          <TextWidget style={{fontSize: 16}}
-            text={`:`}
-          />
-        </FlexWidget>
-        {money_total_expense === "x" ? (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-              style={{
-                fontSize: 16,
-                fontWeight: '500',
-                color: money_total_expense_color,
-              }}
-              text={`${insertComma(money_total_expense)}`}
-            />
-          </FlexWidget>
-        ) : (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-              style={{
-                fontSize: 16,
-                fontWeight: '500',
-                color: money_total_expense_color,
-              }}
-              text={`${insertComma(money_total_expense)}`}
-            />
-            <TextWidget
-              style={{
-                fontSize: 10,
-                marginLeft: 10,
-                color: "#000000"
-              }}
-              text={curCurrency}
-            />
-          </FlexWidget>
-        )}
+        />
+        <TextWidget
+          style={{
+            fontSize: 14,
+            fontWeight: '500',
+            marginRight: 10,
+            color: "#000000"
+          }}
+          text={`${money_total_expense_text} : `}
+        />
+        <TextWidget
+          style={{
+            fontSize: 16,
+            fontWeight: '500',
+            marginRight: 10,
+            color: money_total_expense_color,
+          }}
+          text={`${insertComma(money_total_expense_value)}`}
+        />
+        <TextWidget
+          style={{
+            fontSize: 8,
+            fontWeight: '400',
+            marginRight: 0,
+            color: "#434343"
+          }}
+          text={`${money_total_expense_end}`}
+        />
       </FlexWidget>
     </FlexWidget>
   );
@@ -1007,40 +755,55 @@ const MoneySection = (
 
 // -------------------------------------------------------------------------------------------------
 const SleepSection = (
-  { isKorean, sleep }: SleepProps
+  { clientLanguage, sleep }: SleepProps
 ) => {
 
   // 1. bedTime
-  const sleep_bedTime = (
+  const sleep_bedTime_text = (
+    clientLanguage === "ko" ? "취침" : "Bed"
+  );
+  const sleep_bedTime_value = (
     sleep.sleep_bedTime === "x" ? "x" : sleep.sleep_bedTime
   );
   const sleep_bedTime_color = (
-    (sleep_bedTime === "x" || sleep_bedTime === "00:00") ? "#9CA3AF" : "#000000"
+    (sleep_bedTime_value === "x" || sleep_bedTime_value === "00:00")
+    ? "#9CA3AF"
+    : "#000000"
   );
-  const sleep_bedTime_text = (
-    isKorean ? "취침" : "Bed"
+  const sleep_bedTime_end = (
+    sleep_bedTime_value === "x" ? "" : "h:m"
   );
 
   // 2. wakeTime
-  const sleep_wakeTime = (
+  const sleep_wakeTime_text = (
+    clientLanguage === "ko" ? "기상" : "Wake"
+  );
+  const sleep_wakeTime_value = (
     sleep.sleep_wakeTime === "x" ? "x" : sleep.sleep_wakeTime
   );
   const sleep_wakeTime_color = (
-    (sleep_wakeTime === "x" || sleep_wakeTime === "00:00") ? "#9CA3AF" : "#000000"
+    (sleep_wakeTime_value === "x" || sleep_wakeTime_value === "00:00")
+    ? "#9CA3AF"
+    : "#000000"
   );
-  const sleep_wakeTime_text = (
-    isKorean ? "기상" : "Wake"
+  const sleep_wakeTime_end = (
+    sleep_wakeTime_value === "x" ? "" : "h:m"
   );
 
   // 3. sleepTime
-  const sleep_sleepTime = (
+  const sleep_sleepTime_text = (
+    clientLanguage === "ko" ? "수면" : "Sleep"
+  );
+  const sleep_sleepTime_value = (
     sleep.sleep_sleepTime === "x" ? "x" : sleep.sleep_sleepTime
   );
   const sleep_sleepTime_color = (
-    (sleep_sleepTime === "x" || sleep_sleepTime === "00:00") ? "#9CA3AF" : "#000000"
+    (sleep_sleepTime_value === "x" || sleep_sleepTime_value === "00:00")
+    ? "#9CA3AF"
+    : "#000000"
   );
-  const sleep_sleepTime_text = (
-    isKorean ? "수면" : "Sleep"
+  const sleep_sleepTime_end = (
+    sleep_sleepTime_value === "x" ? "" : "h:m"
   );
 
   return (
@@ -1050,8 +813,7 @@ const SleepSection = (
         height: 'match_parent',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
-        padding: 10,
+        alignItems: 'flex-start',
       }}
     >
       {/* sleep 1 */}
@@ -1062,77 +824,44 @@ const SleepSection = (
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 5,
-          marginBottom: 20,
+          marginBottom: 30,
         }}
       >
         <ImageWidget
           image={require('../assets/images/sleep2.webp')}
           imageWidth={20}
           imageHeight={20}
-        />
-        <FlexWidget
           style={{
-            width: 60,
-            marginLeft: 10
+            marginRight: 10,
           }}
-        >
-          <TextWidget
-            style={{
-              fontSize: 16,
-              fontWeight: '500'
-            }}
-            text={sleep_bedTime_text}
-          />
-        </FlexWidget>
-        <FlexWidget style={{width: 10}}>
-          <TextWidget style={{fontSize: 16}}
-            text={`:`}
-          />
-        </FlexWidget>
-        {sleep_bedTime === "x" ? (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-              style={{
-                fontSize: 16,
-                fontWeight: '500',
-                color: sleep_bedTime_color,
-              }}
-              text={`${sleep_bedTime}`}
-            />
-          </FlexWidget>
-        ) : (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-            style={{
-              fontSize: 16,
-              fontWeight: '500',
-              color: sleep_bedTime_color,
-            }}
-              text={`${sleep_bedTime}`}
-            />
-            <TextWidget
-              style={{
-                fontSize: 10,
-                marginLeft: 10,
-                color: "#000000"
-              }}
-              text={"h:m"}
-            />
-          </FlexWidget>
-        )}
+        />
+        <TextWidget
+          style={{
+            fontSize: 14,
+            fontWeight: '500',
+            marginRight: 10,
+            color: "#000000"
+          }}
+          text={`${sleep_bedTime_text} : `}
+        />
+        <TextWidget
+          style={{
+            fontSize: 16,
+            fontWeight: '500',
+            marginRight: 10,
+            color: sleep_bedTime_color,
+          }}
+          text={`${sleep_bedTime_value}`}
+        />
+        <TextWidget
+          style={{
+            fontSize: 8,
+            fontWeight: '400',
+            marginRight: 0,
+            color: "#434343"
+          }}
+          text={`${sleep_bedTime_end}`}
+        />
       </FlexWidget>
       {/* sleep 2 */}
       <FlexWidget
@@ -1142,77 +871,44 @@ const SleepSection = (
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 5,
-          marginBottom: 20,
+          marginBottom: 30,
         }}
       >
         <ImageWidget
           image={require('../assets/images/sleep3.webp')}
           imageWidth={20}
           imageHeight={20}
-        />
-        <FlexWidget
           style={{
-            width: 60,
-            marginLeft: 10
+            marginRight: 10,
           }}
-        >
-          <TextWidget
-            style={{
-              fontSize: 16,
-              fontWeight: '500'
-            }}
-            text={sleep_wakeTime_text}
-          />
-        </FlexWidget>
-        <FlexWidget style={{width: 10}}>
-          <TextWidget style={{fontSize: 16}}
-            text={`:`}
-          />
-        </FlexWidget>
-        {sleep_wakeTime === "x" ? (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-              style={{
-                fontSize: 16,
-                fontWeight: '500',
-                color: sleep_wakeTime_color,
-              }}
-              text={`${sleep_wakeTime}`}
-            />
-          </FlexWidget>
-        ) : (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-              style={{
-                fontSize: 16,
-                fontWeight: '500',
-                color: sleep_wakeTime_color,
-              }}
-              text={`${sleep_wakeTime}`}
-            />
-            <TextWidget
-              style={{
-                fontSize: 10,
-                marginLeft: 10,
-                color: "#000000"
-              }}
-              text={"h:m"}
-            />
-          </FlexWidget>
-        )}
+        />
+        <TextWidget
+          style={{
+            fontSize: 14,
+            fontWeight: '500',
+            marginRight: 10,
+            color: "#000000"
+          }}
+          text={`${sleep_wakeTime_text} : `}
+        />
+        <TextWidget
+          style={{
+            fontSize: 16,
+            fontWeight: '500',
+            marginRight: 10,
+            color: sleep_wakeTime_color,
+          }}
+          text={`${sleep_wakeTime_value}`}
+        />
+        <TextWidget
+          style={{
+            fontSize: 8,
+            fontWeight: '400',
+            marginRight: 0,
+            color: "#434343"
+          }}
+          text={`${sleep_wakeTime_end}`}
+        />
       </FlexWidget>
       {/* sleep 3 */}
       <FlexWidget
@@ -1222,7 +918,6 @@ const SleepSection = (
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          padding: 5,
           marginBottom: 0,
         }}
       >
@@ -1230,69 +925,37 @@ const SleepSection = (
           image={require('../assets/images/sleep4.webp')}
           imageWidth={20}
           imageHeight={20}
-        />
-        <FlexWidget
           style={{
-            width: 60,
-            marginLeft: 10
+            marginRight: 10,
           }}
-        >
-          <TextWidget
-            style={{
-              fontSize: 16,
-              fontWeight: '500'
-            }}
-            text={sleep_sleepTime_text}
-          />
-        </FlexWidget>
-        <FlexWidget style={{width: 10}}>
-          <TextWidget style={{fontSize: 16}}
-            text={`:`}
-          />
-        </FlexWidget>
-        {sleep_sleepTime === "x" ? (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-              style={{
-                fontSize: 16,
-                fontWeight: '500',
-                color: sleep_sleepTime_color,
-              }}
-              text={`${sleep_sleepTime}`}
-            />
-          </FlexWidget>
-        ) : (
-          <FlexWidget
-            style={{
-              flexDirection: 'row',
-              width: 80,
-              marginLeft: 20,
-            }}
-          >
-            <TextWidget
-              style={{
-                fontSize: 16,
-                fontWeight: '500',
-                color: sleep_sleepTime_color,
-              }}
-              text={`${sleep_sleepTime}`}
-            />
-            <TextWidget
-              style={{
-                fontSize: 10,
-                marginLeft: 10,
-                color: "#000000"
-              }}
-              text={"h:m"}
-            />
-          </FlexWidget>
-        )}
+        />
+        <TextWidget
+          style={{
+            fontSize: 14,
+            fontWeight: '500',
+            marginRight: 10,
+            color: "#000000"
+          }}
+          text={`${sleep_sleepTime_text} : `}
+        />
+        <TextWidget
+          style={{
+            fontSize: 16,
+            fontWeight: '500',
+            marginRight: 10,
+            color: sleep_sleepTime_color,
+          }}
+          text={`${sleep_sleepTime_value}`}
+        />
+        <TextWidget
+          style={{
+            fontSize: 8,
+            fontWeight: '400',
+            marginRight: 0,
+            color: "#434343"
+          }}
+          text={`${sleep_sleepTime_end}`}
+        />
       </FlexWidget>
     </FlexWidget>
   );
@@ -1300,8 +963,18 @@ const SleepSection = (
 
 // -------------------------------------------------------------------------------------------------
 export const DetailWidget = (
-  { activeView, curDate, curTime, curDay, curCurrency, isKorean, exercise, food, money, sleep }:
-  ActiveViewProps & ExerciseProps & FoodProps & MoneyProps & SleepProps
+  {
+    activeView,
+    clientCurrency,
+    clientLanguage,
+    clientDate,
+    clientDay,
+    clientTime,
+    exercise,
+    food,
+    money,
+    sleep
+  }: DetailProps & ExerciseProps & FoodProps & MoneyProps & SleepProps
 ) => {
 
   const active = activeView || "exercise";
@@ -1309,23 +982,29 @@ export const DetailWidget = (
   return (
     <FlexWidget
       style={{
-        flexDirection: 'row',
-        backgroundColor: '#ffffff',
         height: 'match_parent',
         width: 'match_parent',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#ffffff',
         borderRadius: 16,
         borderWidth: 1,
         borderColor: '#000',
       }}
     >
+      {/** select section */}
       <FlexWidget
         style={{
           width: "wrap_content",
           height: 'match_parent',
           flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
           borderRightWidth: 1,
           borderRightColor: "#5e5e5e",
-          padding: 12,
+          paddingVertical: 10,
+          paddingHorizontal: 10,
         }}
       >
         <SelectSection
@@ -1349,78 +1028,73 @@ export const DetailWidget = (
           isActive={active === "sleep"}
         />
       </FlexWidget>
+      {/** detail section */}
       <FlexWidget
         style={{
-          flex: 1,
-          padding: 12,
-          width: 'wrap_content',
+          width: 'match_parent',
           height: 'match_parent',
           flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
+        {/** header section */}
         <FlexWidget
           style={{
+            width: 'match_parent',
+            height: 'wrap_content',
             flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'center',
-            width: 'match_parent',
-            height: 'wrap_content',
-            padding: 10,
             borderBottomWidth: 1,
             borderBottomColor: '#c0c0c0',
+            paddingVertical: 20,
+            paddingHorizontal: 20,
           }}
         >
           <ImageWidget
             image={require('../assets/images/search.webp')}
             imageWidth={20}
             imageHeight={20}
-            style={{
-              marginRight: 20,
-              marginBottom: 3,
-            }}
             clickAction={"OPEN_APP"}
+            style={{
+              marginRight: 15,
+            }}
           />
           <TextWidget
             style={{
               fontSize: 16,
               color: '#000000',
               fontWeight: '700',
-              marginBottom: 5,
               marginRight: 10,
               letterSpacing: 1,
             }}
-            text={curDate}
+            text={clientDate}
           />
           <TextWidget
             style={{
               fontSize: 14,
               color: '#5e5e5e',
               fontWeight: '600',
-              marginBottom: 5,
               marginRight: 10,
               letterSpacing: 1,
             }}
-            text={curDay}
+            text={clientDay}
           />
           <TextWidget
             style={{
               fontSize: 10,
               color: '#000000',
               fontWeight: '500',
-              marginBottom: 5,
-              marginLeft: 5,
+              marginRight: 15,
               letterSpacing: 1,
             }}
-            text={curTime}
+            text={clientTime}
           />
           <ImageWidget
             image={require('../assets/images/refresh.webp')}
-            imageWidth={23}
-            imageHeight={23}
-            style={{
-              marginLeft: 20,
-              marginBottom: 3,
-            }}
+            imageWidth={16}
+            imageHeight={16}
             clickAction={
               active === "exercise" ? "exercise" :
               active === "food" ? "food" :
@@ -1429,30 +1103,44 @@ export const DetailWidget = (
             }
           />
         </FlexWidget>
-        {active === "exercise" ? (
-          <ExerciseSection
-            isKorean={isKorean}
-            exercise={exercise}
-          />
-        ) : active === "food" ? (
-          <FoodSection
-            isKorean={isKorean}
-            food={food}
-          />
-        ) : active === "money" ? (
-          <MoneySection
-            isKorean={isKorean}
-            curCurrency={curCurrency}
-            money={money}
-          />
-        ) : active === "sleep" ? (
-          <SleepSection
-            isKorean={isKorean}
-            sleep={sleep}
-          />
-        ) : (
-          null
-        )}
+        {/** detail section */}
+        <FlexWidget
+          style={{
+            width: 'match_parent',
+            height: 'match_parent',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingVertical: 20,
+            paddingHorizontal: 50,
+          }}
+        >
+          {active === "exercise" && (
+            <ExerciseSection
+              clientLanguage={clientLanguage}
+              exercise={exercise}
+            />
+          )}
+          {active === "food" && (
+            <FoodSection
+              clientLanguage={clientLanguage}
+              food={food}
+            />
+          )}
+          {active === "money" && (
+            <MoneySection
+              clientLanguage={clientLanguage}
+              clientCurrency={clientCurrency}
+              money={money}
+            />
+          )}
+          {active === "sleep" && (
+            <SleepSection
+              clientLanguage={clientLanguage}
+              sleep={sleep}
+            />
+          )}
+        </FlexWidget>
       </FlexWidget>
     </FlexWidget>
   );
