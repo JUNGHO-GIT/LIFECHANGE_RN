@@ -213,6 +213,7 @@ const ExerciseSection  = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 14,
             fontWeight: '500',
             marginRight: 10,
@@ -222,6 +223,7 @@ const ExerciseSection  = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
@@ -231,6 +233,7 @@ const ExerciseSection  = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 8,
             fontWeight: '400',
             marginRight: 0,
@@ -260,6 +263,7 @@ const ExerciseSection  = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 14,
             fontWeight: '500',
             marginRight: 10,
@@ -269,6 +273,7 @@ const ExerciseSection  = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
@@ -278,6 +283,7 @@ const ExerciseSection  = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 8,
             fontWeight: '400',
             marginRight: 0,
@@ -307,6 +313,7 @@ const ExerciseSection  = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 14,
             fontWeight: '500',
             marginRight: 10,
@@ -316,6 +323,7 @@ const ExerciseSection  = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
@@ -325,6 +333,7 @@ const ExerciseSection  = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 8,
             fontWeight: '400',
             marginRight: 0,
@@ -437,6 +446,7 @@ const FoodSection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 14,
             fontWeight: '500',
             marginRight: 10,
@@ -446,6 +456,7 @@ const FoodSection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
@@ -455,6 +466,7 @@ const FoodSection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 8,
             fontWeight: '400',
             marginRight: 0,
@@ -484,6 +496,7 @@ const FoodSection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 14,
             fontWeight: '500',
             marginRight: 10,
@@ -493,6 +506,7 @@ const FoodSection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
@@ -502,6 +516,7 @@ const FoodSection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 8,
             fontWeight: '400',
             marginRight: 0,
@@ -531,6 +546,7 @@ const FoodSection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 14,
             fontWeight: '500',
             marginRight: 10,
@@ -540,6 +556,7 @@ const FoodSection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
@@ -549,6 +566,7 @@ const FoodSection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 8,
             fontWeight: '400',
             marginRight: 0,
@@ -578,6 +596,7 @@ const FoodSection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 14,
             fontWeight: '500',
             marginRight: 10,
@@ -587,6 +606,7 @@ const FoodSection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
@@ -596,6 +616,7 @@ const FoodSection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 8,
             fontWeight: '400',
             marginRight: 0,
@@ -676,6 +697,7 @@ const MoneySection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 14,
             fontWeight: '500',
             marginRight: 10,
@@ -685,6 +707,7 @@ const MoneySection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
@@ -694,6 +717,7 @@ const MoneySection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 8,
             fontWeight: '400',
             marginRight: 0,
@@ -723,6 +747,7 @@ const MoneySection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 14,
             fontWeight: '500',
             marginRight: 10,
@@ -732,6 +757,7 @@ const MoneySection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
@@ -741,6 +767,7 @@ const MoneySection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 8,
             fontWeight: '400',
             marginRight: 0,
@@ -837,6 +864,7 @@ const SleepSection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 14,
             fontWeight: '500',
             marginRight: 10,
@@ -846,6 +874,7 @@ const SleepSection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
@@ -855,6 +884,7 @@ const SleepSection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 8,
             fontWeight: '400',
             marginRight: 0,
@@ -884,6 +914,7 @@ const SleepSection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 14,
             fontWeight: '500',
             marginRight: 10,
@@ -893,6 +924,7 @@ const SleepSection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
@@ -902,6 +934,7 @@ const SleepSection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 8,
             fontWeight: '400',
             marginRight: 0,
@@ -931,6 +964,7 @@ const SleepSection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 14,
             fontWeight: '500',
             marginRight: 10,
@@ -940,6 +974,7 @@ const SleepSection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
@@ -949,6 +984,7 @@ const SleepSection = (
         />
         <TextWidget
           style={{
+            textAlign: "center",
             fontSize: 8,
             fontWeight: '400',
             marginRight: 0,
@@ -1063,9 +1099,10 @@ export const DetailWidget = (
           />
           <TextWidget
             style={{
+              textAlign: "center",
               fontSize: 16,
-              color: '#000000',
               fontWeight: '700',
+              color: '#000000',
               marginRight: 10,
               letterSpacing: 1,
             }}
@@ -1073,9 +1110,10 @@ export const DetailWidget = (
           />
           <TextWidget
             style={{
+              textAlign: "center",
               fontSize: 14,
-              color: '#5e5e5e',
               fontWeight: '600',
+              color: '#5e5e5e',
               marginRight: 10,
               letterSpacing: 1,
             }}
@@ -1083,9 +1121,10 @@ export const DetailWidget = (
           />
           <TextWidget
             style={{
+              textAlign: "center",
               fontSize: 10,
-              color: '#000000',
               fontWeight: '500',
+              color: '#000000',
               marginRight: 15,
               letterSpacing: 1,
             }}

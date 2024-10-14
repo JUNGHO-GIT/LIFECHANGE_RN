@@ -37,8 +37,8 @@
     <!-- Widget Collection Service -->
     <service
       android:name="com.reactnativeandroidwidget.RNWidgetCollectionService"
-      android:permission="android.permission.BIND_REMOTEVIEWS">
-    </service>
+      android:permission="android.permission.BIND_REMOTEVIEWS"
+    />
 
     <!-- detail widget -->
     <receiver
@@ -52,7 +52,8 @@
       </intent-filter>
       <meta-data
         android:name="android.appwidget.provider"
-        android:resource="@xml/widget_detail_provider" />
+        android:resource="@xml/widget_detail_provider"
+      />
     </receiver>
 
     <!-- calendar widget -->
@@ -67,7 +68,8 @@
       </intent-filter>
       <meta-data
         android:name="android.appwidget.provider"
-        android:resource="@xml/widget_calendar_provider" />
+        android:resource="@xml/widget_calendar_provider"
+      />
     </receiver>
 
   </application>

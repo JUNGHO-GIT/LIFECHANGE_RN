@@ -90,11 +90,8 @@ export async function widgetTaskHandler(
     const [calendarResponse] = await Promise.all([
       axios.get(`${SERVER_URL}/api/calendar/list`, {
         params: params
-      }),
-    ]);
-
-    console.log("calendarResponse", calendarResponse.data.result);
-
+      })
+    ])
     OBJECT.calendar = calendarResponse.data.result || Calendar;
   })();
 
