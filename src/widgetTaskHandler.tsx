@@ -73,70 +73,37 @@ export async function widgetTaskHandler(
     clientTime: ${clientTime},
   `);
 
-  // fetch 데이터 (일정) ---------------------------------------------------------------------------
-  await (async () => {
-    const params = {
-      user_id: sessionId,
-      PAGING: {
-        sort: "asc",
-        page: 1
-      },
-      DATE: {
-        dateType: "",
-        dateStart: clientMonthStart,
-        dateEnd: clientMonthEnd,
-      },
-    };
-    const [calendarResponse] = await Promise.all([
-      axios.get(`${SERVER_URL}/api/calendar/list`, {
-        params: params
-      })
-    ])
-    OBJECT.calendar = calendarResponse.data.result || Calendar;
-  })();
-
-  // fetch 데이터 (운동, 식사, 지출, 수면) ---------------------------------------------------------
-  await (async () => {
-    const params = {
-      user_id: sessionId,
-      PAGING: {
-        sort: "asc",
-        page: 1
-      },
-      DATE: {
-        dateType: "day",
-        dateStart: clientDate,
-        dateEnd: clientDate,
-      },
-    };
-    const [exerciseResponse, foodResponse, moneyResponse, sleepResponse] = await Promise.all([
-      axios.get(`${SERVER_URL}/api/exercise/list`, {
-        params: params
-      }),
-      axios.get(`${SERVER_URL}/api/food/list`, {
-        params: params
-      }),
-      axios.get(`${SERVER_URL}/api/money/list`, {
-        params: params
-      }),
-      axios.get(`${SERVER_URL}/api/sleep/list`, {
-        params: params
-      }),
-    ]);
-    OBJECT.exercise = exerciseResponse.data.result?.[0] || Exercise;
-    OBJECT.food = foodResponse.data.result?.[0] || Food;
-    OBJECT.money = moneyResponse.data.result?.[0] || Money;
-    OBJECT.sleep = sleepResponse.data.result?.[0]?.sleep_section?.[0] || Sleep;
-  })();
-
   // 일정 위젯인 경우 ------------------------------------------------------------------------------
   if (widgetInfo.widgetName === "CalendarWidget") {
+
+    // fetch 데이터 (일정)
+    await (async () => {
+      const params = {
+        user_id: sessionId,
+        PAGING: {
+          sort: "asc",
+          page: 1
+        },
+        DATE: {
+          dateType: "",
+          dateStart: clientMonthStart,
+          dateEnd: clientMonthEnd,
+        },
+      };
+      const [calendarResponse] = await Promise.all([
+        axios.get(`${SERVER_URL}/api/calendar/list`, {
+          params: params
+        })
+      ])
+      OBJECT.calendar = calendarResponse.data.result || Calendar;
+    })();
+
+    // 위젯 액션에 따른 렌더링
     if (props.widgetAction === 'WIDGET_ADDED') {
       props.renderWidget(
         <Widget
           {...widgetInfo}
           clientLanguage={clientLanguage}
-          clientCurrency={clientCurrency}
           clientDate={clientDate}
           clientDay={clientDay}
           clientTime={clientTime}
@@ -149,7 +116,6 @@ export async function widgetTaskHandler(
         <Widget
           {...widgetInfo}
           clientLanguage={clientLanguage}
-          clientCurrency={clientCurrency}
           clientDate={clientDate}
           clientDay={clientDay}
           clientTime={clientTime}
@@ -161,9 +127,7 @@ export async function widgetTaskHandler(
       props.renderWidget(
         <Widget
           {...widgetInfo}
-          activeView={props.clickAction as string}
           clientLanguage={clientLanguage}
-          clientCurrency={clientCurrency}
           clientDate={clientDate}
           clientDay={clientDay}
           clientTime={clientTime}
@@ -175,9 +139,7 @@ export async function widgetTaskHandler(
       props.renderWidget(
         <Widget
           {...widgetInfo}
-          activeView={props.clickAction as string}
           clientLanguage={clientLanguage}
-          clientCurrency={clientCurrency}
           clientDate={clientDate}
           clientDay={clientDay}
           clientTime={clientTime}
@@ -190,6 +152,42 @@ export async function widgetTaskHandler(
 
   // 상세 위젯인 경우 ------------------------------------------------------------------------------
   else if (widgetInfo.widgetName === "DetailWidget") {
+
+    // fetch 데이터 (운동, 식사, 지출, 수면)
+    await (async () => {
+      const params = {
+        user_id: sessionId,
+        PAGING: {
+          sort: "asc",
+          page: 1
+        },
+        DATE: {
+          dateType: "day",
+          dateStart: clientDate,
+          dateEnd: clientDate,
+        },
+      };
+      const [exerciseResponse, foodResponse, moneyResponse, sleepResponse] = await Promise.all([
+        axios.get(`${SERVER_URL}/api/exercise/list`, {
+          params: params
+        }),
+        axios.get(`${SERVER_URL}/api/food/list`, {
+          params: params
+        }),
+        axios.get(`${SERVER_URL}/api/money/list`, {
+          params: params
+        }),
+        axios.get(`${SERVER_URL}/api/sleep/list`, {
+          params: params
+        }),
+      ]);
+      OBJECT.exercise = exerciseResponse.data.result?.[0] || Exercise;
+      OBJECT.food = foodResponse.data.result?.[0] || Food;
+      OBJECT.money = moneyResponse.data.result?.[0] || Money;
+      OBJECT.sleep = sleepResponse.data.result?.[0]?.sleep_section?.[0] || Sleep;
+    })();
+
+    // 위젯 액션에 따른 렌더링
     if (props.widgetAction === 'WIDGET_ADDED') {
       props.renderWidget(
         <Widget

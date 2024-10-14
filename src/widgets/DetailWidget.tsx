@@ -5,7 +5,7 @@ import {
 } from "@imports/ImportReacts";
 
 // -------------------------------------------------------------------------------------------------
-declare type DetailProps = {
+declare type DetailWidgetProps = {
   activeView: "exercise" | "food" | "money" | "sleep";
   clientLanguage: string;
   clientCurrency: string;
@@ -1010,7 +1010,7 @@ export const DetailWidget = (
     food,
     money,
     sleep
-  }: DetailProps & ExerciseProps & FoodProps & MoneyProps & SleepProps
+  }: DetailWidgetProps & ExerciseProps & FoodProps & MoneyProps & SleepProps
 ) => {
 
   const active = activeView || "exercise";
