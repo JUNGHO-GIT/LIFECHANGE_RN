@@ -23,7 +23,7 @@ import {
 // -------------------------------------------------------------------------------------------------
 const nameToWidget = {
   DetailWidget: DetailWidget,
-  CalendarWidget: CalendarWidget,
+  /* CalendarWidget: CalendarWidget, */
 };
 
 // -------------------------------------------------------------------------------------------------
