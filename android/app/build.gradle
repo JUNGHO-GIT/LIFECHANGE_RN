@@ -63,12 +63,13 @@ android {
 }
 
 dependencies {
-  implementation("com.facebook.react:react-android")
-  if (hermesEnabled.toBoolean()) {
-    implementation("com.facebook.react:hermes-android")
-  }
-  else {
-    implementation jscFlavor
+  implementation("com.facebook.react:react-android:0.75.4") {
+    if (hermesEnabled.toBoolean()) {
+      implementation("com.facebook.react:hermes-android:0.75.4")
+    }
+    else {
+      implementation jscFlavor
+    }
   }
 }
 

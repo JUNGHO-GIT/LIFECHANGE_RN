@@ -24,7 +24,7 @@ module.exports = {
       alias: {
         "@assets": "./src/assets",
         "@images": "./src/assets/images",
-        "@scripts": "./src/assets/scripts",
+        "@types": "./src/assets/types",
         "@schemas": "./src/schemas",
         "@containers": "./src/containers",
         "@widgets": "./src/widgets",

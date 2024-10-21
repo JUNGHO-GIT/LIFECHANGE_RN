@@ -15,14 +15,6 @@ declare module "@images/*" {
   const value: any;
   export default value;
 }
-declare module "@scripts/*" {
-  const value: any;
-  export default value;
-}
-declare module "@styles/*" {
-  const value: any;
-  export default value;
-}
 declare module "@types/*" {
   const value: any;
   export default value;

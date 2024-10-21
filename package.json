@@ -9,6 +9,7 @@
     "make-apk": "cd android && gradlew assembleRelease --stacktrace",
     "make-bundle": "cd android && gradlew bundleRelease --stacktrace",
     "kill-java": "taskkill /f /im java.exe",
+    "npm-install": "cd android && npm install",
     "push": "git add . && git commit -m 'update' && git push origin main"
   },
   "dependencies": {
@@ -36,7 +37,7 @@
     "@types/react-test-renderer": "^18.2.0",
     "babel-jest": "^29.7.0",
     "babel-plugin-module-resolver": "^5.0.2",
-    "eslint": "^9.13.0",
+    "eslint": "^9.12.0",
     "jest": "^29.7.0",
     "metro-react-native-babel-preset": "^0.77.0",
     "prettier": "3.3.3",

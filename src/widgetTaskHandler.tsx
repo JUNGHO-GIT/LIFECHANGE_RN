@@ -60,18 +60,6 @@ export async function widgetTaskHandler(
     : "일"
   ) : clientFormat;
 
-  // 콘솔 로그 -------------------------------------------------------------------------------------
-  console.log(`
-    sessionId: ${sessionId},
-    clientTimeZone: ${clientTimeZone},
-    clientLanguage: ${clientLanguage},
-    clientCurrency: ${clientCurrency},
-    clientDate: ${clientDate},
-    clientMonthStart: ${clientMonthStart},
-    clientMonthEnd: ${clientMonthEnd},
-    clientDay: ${clientDay},
-    clientTime: ${clientTime},
-  `);
 
   // 상세 위젯인 경우 ------------------------------------------------------------------------------
   if (widgetInfo.widgetName === "DetailWidget") {
@@ -135,7 +123,6 @@ export async function widgetTaskHandler(
         );
       break;
     }
-    console.log(`${props.widgetAction} ${JSON.stringify(widgetInfo)}`);
   }
 
   // 일정 위젯인 경우 ------------------------------------------------------------------------------
@@ -182,6 +169,19 @@ export async function widgetTaskHandler(
         );
       break;
     }
-    console.log(`${props.widgetAction} ${JSON.stringify(widgetInfo)}`);
   }
+
+  // 콘솔 로그 -------------------------------------------------------------------------------------
+  console.log(`
+    sessionId: ${sessionId},
+    clientTimeZone: ${clientTimeZone},
+    clientLanguage: ${clientLanguage},
+    clientCurrency: ${clientCurrency},
+    clientDate: ${clientDate},
+    clientMonthStart: ${clientMonthStart},
+    clientMonthEnd: ${clientMonthEnd},
+    clientDay: ${clientDay},
+    clientTime: ${clientTime},
+    ${props.widgetAction}: ${JSON.stringify(widgetInfo)}
+  `);
 };
