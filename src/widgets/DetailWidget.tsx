@@ -20,6 +20,7 @@ declare type ActiveProps = {
 }
 // -------------------------------------------------------------------------------------------------
 declare type ExerciseProps = {
+  widgetHeight: number;
   clientLanguage: string;
   exercise: {
     exercise_total_volume: any;
@@ -29,6 +30,7 @@ declare type ExerciseProps = {
 }
 // -------------------------------------------------------------------------------------------------
 declare type FoodProps = {
+  widgetHeight: number;
   clientLanguage: string;
   food: {
     food_total_kcal: any;
@@ -39,6 +41,7 @@ declare type FoodProps = {
 }
 // -------------------------------------------------------------------------------------------------
 declare type MoneyProps = {
+  widgetHeight: number;
   clientLanguage: string;
   clientCurrency: string;
   money: {
@@ -48,6 +51,7 @@ declare type MoneyProps = {
 }
 // -------------------------------------------------------------------------------------------------
 declare type SleepProps = {
+  widgetHeight: number;
   clientLanguage: string;
   sleep: {
     sleep_bedTime: any;
@@ -131,8 +135,11 @@ const SelectSection = (
 
 // -------------------------------------------------------------------------------------------------
 const ExerciseSection  = (
-  { clientLanguage, exercise }: ExerciseProps
+  { widgetHeight, clientLanguage, exercise }: ExerciseProps
 ) => {
+
+  // 0. height
+  const height = (widgetHeight - 100) / 3 > 60 ? 60 : (widgetHeight - 100) / 3;
 
   // 1. volume
   const exercise_total_volume_text = (
@@ -189,18 +196,17 @@ const ExerciseSection  = (
         height: 'match_parent',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'flex-start',
+        alignItems: "flex-start",
       }}
     >
       {/* exercise 1 */}
       <FlexWidget
         style={{
           width: 'wrap_content',
-          height: 'wrap_content',
+          height: height,
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          marginBottom: 30,
         }}
       >
         <ImageWidget
@@ -214,7 +220,7 @@ const ExerciseSection  = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
@@ -246,11 +252,10 @@ const ExerciseSection  = (
       <FlexWidget
         style={{
           width: 'wrap_content',
-          height: 'wrap_content',
+          height: height,
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          marginBottom: 30,
         }}
       >
         <ImageWidget
@@ -264,7 +269,7 @@ const ExerciseSection  = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
@@ -296,11 +301,10 @@ const ExerciseSection  = (
       <FlexWidget
         style={{
           width: 'wrap_content',
-          height: 'wrap_content',
+          height: height,
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          marginBottom: 0,
         }}
       >
         <ImageWidget
@@ -314,7 +318,7 @@ const ExerciseSection  = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
@@ -348,8 +352,11 @@ const ExerciseSection  = (
 
 // -------------------------------------------------------------------------------------------------
 const FoodSection = (
-  { clientLanguage, food }: FoodProps
+  { widgetHeight, clientLanguage, food }: FoodProps
 ) => {
+
+  // 0. height
+  const height = (widgetHeight - 100) / 4 > 60 ? 60 : (widgetHeight - 100) / 4;
 
   // 1. kcal
   const food_total_kcal_text = (
@@ -422,18 +429,17 @@ const FoodSection = (
         height: 'match_parent',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'flex-start',
+        alignItems: "flex-start",
       }}
     >
       {/* food 1 */}
       <FlexWidget
         style={{
           width: 'wrap_content',
-          height: 'wrap_content',
+          height: height,
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          marginBottom: 30,
         }}
       >
         <ImageWidget
@@ -447,7 +453,7 @@ const FoodSection = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
@@ -479,11 +485,10 @@ const FoodSection = (
       <FlexWidget
         style={{
           width: 'wrap_content',
-          height: 'wrap_content',
+          height: height,
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          marginBottom: 30,
         }}
       >
         <ImageWidget
@@ -497,7 +502,7 @@ const FoodSection = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
@@ -529,11 +534,10 @@ const FoodSection = (
       <FlexWidget
         style={{
           width: 'wrap_content',
-          height: 'wrap_content',
+          height: height,
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          marginBottom: 30,
         }}
       >
         <ImageWidget
@@ -547,7 +551,7 @@ const FoodSection = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
@@ -579,11 +583,10 @@ const FoodSection = (
       <FlexWidget
         style={{
           width: 'wrap_content',
-          height: 'wrap_content',
+          height: height,
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          marginBottom: 0,
         }}
       >
         <ImageWidget
@@ -597,7 +600,7 @@ const FoodSection = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
@@ -631,8 +634,11 @@ const FoodSection = (
 
 // -------------------------------------------------------------------------------------------------
 const MoneySection = (
-  { clientLanguage, clientCurrency, money }: MoneyProps
+  { widgetHeight, clientLanguage, clientCurrency, money}: MoneyProps
 ) => {
+
+  // 0. height
+  const height = (widgetHeight - 100) / 2 > 60 ? 60 : (widgetHeight - 100) / 2;
 
   // 1. income
   const money_total_income_text = (
@@ -673,18 +679,17 @@ const MoneySection = (
         height: 'match_parent',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'flex-start',
+        alignItems: "flex-start",
       }}
     >
       {/* money 1 */}
       <FlexWidget
         style={{
           width: 'wrap_content',
-          height: 'wrap_content',
+          height: height,
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          marginBottom: 30,
         }}
       >
         <ImageWidget
@@ -698,7 +703,7 @@ const MoneySection = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
@@ -730,11 +735,10 @@ const MoneySection = (
       <FlexWidget
         style={{
           width: 'wrap_content',
-          height: 'wrap_content',
+          height: height,
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          marginBottom: 0,
         }}
       >
         <ImageWidget
@@ -748,7 +752,7 @@ const MoneySection = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
@@ -782,8 +786,11 @@ const MoneySection = (
 
 // -------------------------------------------------------------------------------------------------
 const SleepSection = (
-  { clientLanguage, sleep }: SleepProps
+  { widgetHeight, clientLanguage, sleep }: SleepProps
 ) => {
+
+  // 0. height
+  const height = (widgetHeight - 100) / 3 > 60 ? 60 : (widgetHeight - 100) / 3;
 
   // 1. bedTime
   const sleep_bedTime_text = (
@@ -840,18 +847,17 @@ const SleepSection = (
         height: 'match_parent',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'flex-start',
+        alignItems: "flex-start",
       }}
     >
       {/* sleep 1 */}
       <FlexWidget
         style={{
           width: 'wrap_content',
-          height: 'wrap_content',
+          height: height,
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          marginBottom: 30,
         }}
       >
         <ImageWidget
@@ -865,7 +871,7 @@ const SleepSection = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
@@ -897,11 +903,10 @@ const SleepSection = (
       <FlexWidget
         style={{
           width: 'wrap_content',
-          height: 'wrap_content',
+          height: height,
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          marginBottom: 30,
         }}
       >
         <ImageWidget
@@ -915,7 +920,7 @@ const SleepSection = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
@@ -947,11 +952,10 @@ const SleepSection = (
       <FlexWidget
         style={{
           width: 'wrap_content',
-          height: 'wrap_content',
+          height: height,
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: "center",
-          marginBottom: 0,
         }}
       >
         <ImageWidget
@@ -965,7 +969,7 @@ const SleepSection = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
@@ -1000,6 +1004,7 @@ const SleepSection = (
 // -------------------------------------------------------------------------------------------------
 export const DetailWidget = (
   {
+    widgetHeight,
     activeView,
     clientCurrency,
     clientLanguage,
@@ -1150,24 +1155,29 @@ export const DetailWidget = (
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            paddingVertical: 20,
-            paddingHorizontal: 50,
+            paddingTop: 10,
+            paddingBottom: 10,
+            paddingLeft: 50,
+            paddingRight: 10,
           }}
         >
           {active === "exercise" && (
             <ExerciseSection
+              widgetHeight={widgetHeight}
               clientLanguage={clientLanguage}
               exercise={exercise}
             />
           )}
           {active === "food" && (
             <FoodSection
+              widgetHeight={widgetHeight}
               clientLanguage={clientLanguage}
               food={food}
             />
           )}
           {active === "money" && (
             <MoneySection
+              widgetHeight={widgetHeight}
               clientLanguage={clientLanguage}
               clientCurrency={clientCurrency}
               money={money}
@@ -1175,6 +1185,7 @@ export const DetailWidget = (
           )}
           {active === "sleep" && (
             <SleepSection
+              widgetHeight={widgetHeight}
               clientLanguage={clientLanguage}
               sleep={sleep}
             />

@@ -73,85 +73,8 @@ export async function widgetTaskHandler(
     clientTime: ${clientTime},
   `);
 
-  // 일정 위젯인 경우 ------------------------------------------------------------------------------
-  if (widgetInfo.widgetName === "CalendarWidget") {
-
-    // fetch 데이터 (일정)
-    await (async () => {
-      const params = {
-        user_id: sessionId,
-        PAGING: {
-          sort: "asc",
-          page: 1
-        },
-        DATE: {
-          dateType: "",
-          dateStart: clientMonthStart,
-          dateEnd: clientMonthEnd,
-        },
-      };
-      const [calendarResponse] = await Promise.all([
-        axios.get(`${SERVER_URL}/api/calendar/list`, {
-          params: params
-        })
-      ])
-      OBJECT.calendar = calendarResponse.data.result || Calendar;
-    })();
-
-    // 위젯 액션에 따른 렌더링
-    if (props.widgetAction === 'WIDGET_ADDED') {
-      props.renderWidget(
-        <Widget
-          {...widgetInfo}
-          clientLanguage={clientLanguage}
-          clientDate={clientDate}
-          clientDay={clientDay}
-          clientTime={clientTime}
-          calendar={OBJECT.calendar}
-        />
-      );
-    }
-    else if (props.widgetAction === 'WIDGET_RESIZED') {
-      props.renderWidget(
-        <Widget
-          {...widgetInfo}
-          clientLanguage={clientLanguage}
-          clientDate={clientDate}
-          clientDay={clientDay}
-          clientTime={clientTime}
-          calendar={OBJECT.calendar}
-        />
-      );
-    }
-    else if (props.widgetAction === 'WIDGET_UPDATE') {
-      props.renderWidget(
-        <Widget
-          {...widgetInfo}
-          clientLanguage={clientLanguage}
-          clientDate={clientDate}
-          clientDay={clientDay}
-          clientTime={clientTime}
-          calendar={OBJECT.calendar}
-        />
-      );
-    }
-    else if (props.widgetAction === 'WIDGET_CLICK') {
-      props.renderWidget(
-        <Widget
-          {...widgetInfo}
-          clientLanguage={clientLanguage}
-          clientDate={clientDate}
-          clientDay={clientDay}
-          clientTime={clientTime}
-          calendar={OBJECT.calendar}
-        />
-      );
-    }
-    console.log(`${props.widgetAction} ${JSON.stringify(widgetInfo)}`);
-  }
-
   // 상세 위젯인 경우 ------------------------------------------------------------------------------
-  else if (widgetInfo.widgetName === "DetailWidget") {
+  if (widgetInfo.widgetName === "DetailWidget") {
 
     // fetch 데이터 (운동, 식사, 지출, 수면)
     await (async () => {
@@ -188,71 +111,76 @@ export async function widgetTaskHandler(
     })();
 
     // 위젯 액션에 따른 렌더링
-    if (props.widgetAction === 'WIDGET_ADDED') {
-      props.renderWidget(
-        <Widget
-          {...widgetInfo}
-          clientLanguage={clientLanguage}
-          clientCurrency={clientCurrency}
-          clientDate={clientDate}
-          clientDay={clientDay}
-          clientTime={clientTime}
-          exercise={OBJECT.exercise}
-          food={OBJECT.food}
-          money={OBJECT.money}
-          sleep={OBJECT.sleep}
-        />
-      );
+    switch (props.widgetAction) {
+      case 'WIDGET_ADDED':
+      case 'WIDGET_RESIZED':
+      case 'WIDGET_UPDATE':
+      case 'WIDGET_CLICK':
+      case 'WIDGET_DELETED':
+        props.renderWidget(
+          <Widget
+            {...widgetInfo}
+            widgetHeight={widgetInfo.height as number}
+            activeView={props.clickAction as string}
+            clientLanguage={clientLanguage}
+            clientCurrency={clientCurrency}
+            clientDate={clientDate}
+            clientDay={clientDay}
+            clientTime={clientTime}
+            exercise={OBJECT.exercise}
+            food={OBJECT.food}
+            money={OBJECT.money}
+            sleep={OBJECT.sleep}
+          />
+        );
+      break;
     }
-    else if (props.widgetAction === 'WIDGET_RESIZED') {
-      props.renderWidget(
-        <Widget
-          {...widgetInfo}
-          clientLanguage={clientLanguage}
-          clientCurrency={clientCurrency}
-          clientDate={clientDate}
-          clientDay={clientDay}
-          clientTime={clientTime}
-          exercise={OBJECT.exercise}
-          food={OBJECT.food}
-          money={OBJECT.money}
-          sleep={OBJECT.sleep}
-        />
-      );
-    }
-    else if (props.widgetAction === 'WIDGET_UPDATE') {
-      props.renderWidget(
-        <Widget
-          {...widgetInfo}
-          activeView={props.clickAction as string}
-          clientLanguage={clientLanguage}
-          clientCurrency={clientCurrency}
-          clientDate={clientDate}
-          clientDay={clientDay}
-          clientTime={clientTime}
-          exercise={OBJECT.exercise}
-          food={OBJECT.food}
-          money={OBJECT.money}
-          sleep={OBJECT.sleep}
-        />
-      );
-    }
-    else if (props.widgetAction === 'WIDGET_CLICK') {
-      props.renderWidget(
-        <Widget
-          {...widgetInfo}
-          activeView={props.clickAction as string}
-          clientLanguage={clientLanguage}
-          clientCurrency={clientCurrency}
-          clientDate={clientDate}
-          clientDay={clientDay}
-          clientTime={clientTime}
-          exercise={OBJECT.exercise}
-          food={OBJECT.food}
-          money={OBJECT.money}
-          sleep={OBJECT.sleep}
-        />
-      );
+    console.log(`${props.widgetAction} ${JSON.stringify(widgetInfo)}`);
+  }
+
+  // 일정 위젯인 경우 ------------------------------------------------------------------------------
+  else if (widgetInfo.widgetName === "CalendarWidget") {
+
+    // fetch 데이터 (일정)
+    await (async () => {
+      const params = {
+        user_id: sessionId,
+        PAGING: {
+          sort: "asc",
+          page: 1
+        },
+        DATE: {
+          dateType: "",
+          dateStart: clientMonthStart,
+          dateEnd: clientMonthEnd,
+        },
+      };
+      const [calendarResponse] = await Promise.all([
+        axios.get(`${SERVER_URL}/api/calendar/list`, {
+          params: params
+        })
+      ])
+      OBJECT.calendar = calendarResponse.data.result || Calendar;
+    })();
+
+    // 위젯 액션에 따른 렌더링
+    switch (props.widgetAction) {
+      case 'WIDGET_ADDED':
+      case 'WIDGET_RESIZED':
+      case 'WIDGET_UPDATE':
+      case 'WIDGET_CLICK':
+      case 'WIDGET_DELETED':
+        props.renderWidget(
+          <Widget
+            {...widgetInfo}
+            clientLanguage={clientLanguage}
+            clientDate={clientDate}
+            clientDay={clientDay}
+            clientTime={clientTime}
+            calendar={OBJECT.calendar}
+          />
+        );
+      break;
     }
     console.log(`${props.widgetAction} ${JSON.stringify(widgetInfo)}`);
   }
