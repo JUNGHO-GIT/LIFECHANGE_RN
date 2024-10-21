@@ -31,6 +31,7 @@ export const Webviews = forwardRef<WebView, Props>(
     const userAgent = "Mozilla/5.0 (Linux; Android 8.0.0; SM-G935S Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Mobile Safari/537.36";
 
     const injectedJavaScript = /* javascript */`
+
       // 세션 스토리지 변경 감시 설정
       const ogSessionSetItem = window.sessionStorage.setItem;
       const ogSessionRemoveItem = window.sessionStorage.removeItem;

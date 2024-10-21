@@ -33,7 +33,7 @@ export const App = () => {
   // 뒤로가기 버튼 이벤트
   useEffect(() => {
     const onBackPress = () => {
-      if (webViewRef.current && navigationEnabled) {
+      if (webViewRef.current && navigationEnabled && webViewRef.current.canGoBack()) {
         webViewRef.current.goBack();
         return true;
       }
@@ -77,6 +77,14 @@ export const App = () => {
       url.includes(hideUrl)
     ));
     setBannerVisible(!shouldHideBanner);
+
+    // 특정 URL에 따라 navigationEnabled 상태 업데이트
+    if (url.includes("/user/signup") || url.includes("/user/login")) {
+      setNavigationEnabled(false);
+    }
+    else {
+      setNavigationEnabled(true);
+    }
   };
 
   // -----------------------------------------------------------------------------------------------
