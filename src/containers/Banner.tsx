@@ -28,8 +28,8 @@ export const Banner = () => {
   return (
     <View style={styles.bannerContainer}>
       <BannerAd
-        key={`admob-banner`}
-        unitId={realId}
+        key={`banner-${realId}`}
+        unitId={`${realId}`}
         size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
       />
     </View>

@@ -28,7 +28,9 @@ const styles = StyleSheet.create({
 export const Webviews = forwardRef<WebView, Props>(
   ({ onMessage, bannerVisible, navigationEnabled }, ref) => {
 
-    const userAgent = "Mozilla/5.0 (Linux; Android 8.0.0; SM-G935S Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Mobile Safari/537.36";
+    const userAgent = (
+      "Mozilla/5.0 (Linux; Android 8.0.0; SM-G935S Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Mobile Safari/537.36"
+    );
 
     const injectedJavaScript = /* javascript */`
 
@@ -85,7 +87,6 @@ export const Webviews = forwardRef<WebView, Props>(
       };
     `;
 
-    // 10. return ----------------------------------------------------------------------------------
     return (
       <WebView
         ref={ref}
@@ -94,18 +95,18 @@ export const Webviews = forwardRef<WebView, Props>(
         onMessage={onMessage}
         originWhitelist={['*']}
         userAgent={userAgent}
-        allowFileAccess={true}
-        cacheEnabled={true}
-        javaScriptEnabled={true}
-        domStorageEnabled={true}
+        allowFileAccess
+        cacheEnabled
+        javaScriptEnabled
+        domStorageEnabled
         injectedJavaScript={injectedJavaScript}
         allowsBackForwardNavigationGestures={true}
-        onNavigationStateChange={(newState: any) => {
+        onNavigationStateChange={(newState) => {
           if (navigationEnabled) {
             bannerVisible(newState);
           }
         }}
-        onShouldStartLoadWithRequest={(request: any) => {
+        onShouldStartLoadWithRequest={(request) => {
           if (navigationEnabled) {
             bannerVisible(request);
             return true;

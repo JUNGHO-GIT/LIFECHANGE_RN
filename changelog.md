@@ -1575,3 +1575,31 @@
 ## versionCode = 394
 	- versionName = 1.3.94
 	- 2024-10-21 (22:28:55)
+
+## versionCode = 395
+	- versionName = 1.3.95
+	- 2024-10-21 (22:32:08)
+
+## versionCode = 396
+	- versionName = 1.3.96
+	- 2024-10-21 (22:32:52)
+
+## versionCode = 397
+	- versionName = 1.3.97
+	- 2024-10-21 (22:33:40)
+
+## versionCode = 398
+	- versionName = 1.3.98
+	- 2024-10-21 (22:53:21)
+
+## versionCode = 399
+	- versionName = 1.3.99
+	- 2024-10-21 (22:56:22)
+
+## versionCode = 400
+	- versionName = 1.4.00
+	- 2024-10-21 (22:59:28)
+
+## versionCode = 401
+	- versionName = 1.4.01
+	- 2024-10-21 (22:59:28)

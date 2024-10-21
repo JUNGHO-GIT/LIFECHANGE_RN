@@ -26,45 +26,36 @@ export const App = () => {
 
   // -----------------------------------------------------------------------------------------------
   const [bannerVisible, setBannerVisible] = useState(false);
-  const [navigationEnabled, setNavigationEnabled] = useState(true);
+  const [navigationEnabled, _setNavigationEnabled] = useState(true);
   const webViewRef = useRef<any>(null);
 
   // -----------------------------------------------------------------------------------------------
   // 뒤로가기 버튼 이벤트
   useEffect(() => {
     const onBackPress = () => {
-      if (webViewRef.current && navigationEnabled && webViewRef.current.canGoBack()) {
+      if (webViewRef.current?.canGoBack() && navigationEnabled) {
         webViewRef.current.goBack();
         return true;
       }
       return false;
     };
 
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      onBackPress
-    );
-
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', onBackPress);
     return () => backHandler.remove();
   }, [navigationEnabled]);
 
   // -----------------------------------------------------------------------------------------------
   const handlerOnMessage = (event: any) => {
-    try {
-      const parsedData = JSON.parse(event.nativeEvent.data);
+    const parsedData = JSON.parse(event.nativeEvent.data);
 
-      // 세션아이디는 단일 string
-      if (parsedData.type === 'sessionId') {
-        AsyncStorage.setItem("sessionId", parsedData.sessionId);
-      }
-
-      // 로케일은 객체
-      else if (parsedData.type === 'localeSetting') {
-        AsyncStorage.setItem("localeSetting", JSON.stringify(parsedData.localeSetting));
-      }
+    // 세션아이디는 단일 string
+    if (parsedData.type === 'sessionId') {
+      AsyncStorage.setItem("sessionId", parsedData.sessionId);
     }
-    catch (err: any) {
-      console.error("onMessage event error:", err);
+
+    // 로케일은 객체
+    else if (parsedData.type === 'localeSetting') {
+      AsyncStorage.setItem("localeSetting", JSON.stringify(parsedData.localeSetting));
     }
   };
 
@@ -77,14 +68,6 @@ export const App = () => {
       url.includes(hideUrl)
     ));
     setBannerVisible(!shouldHideBanner);
-
-    // 특정 URL에 따라 navigationEnabled 상태 업데이트
-    if (url.includes("/user/signup") || url.includes("/user/login")) {
-      setNavigationEnabled(false);
-    }
-    else {
-      setNavigationEnabled(true);
-    }
   };
 
   // -----------------------------------------------------------------------------------------------

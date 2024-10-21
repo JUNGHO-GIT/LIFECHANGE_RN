@@ -6,8 +6,6 @@ const config = {
     extraNodeModules: {
       "@assets": `${__dirname}/src/assets`,
       "@images": `${__dirname}/src/assets/images`,
-      "@scripts": `${__dirname}/src/assets/scripts`,
-      "@styles": `${__dirname}/src/assets/styles`,
       "@types": `${__dirname}/src/assets/types`,
       "@schemas": `${__dirname}/src/schemas`,
       "@containers": `${__dirname}/src/containers`,

@@ -11,6 +11,7 @@ declare type CalendarWidgetProps = {
   clientTime: string;
   clientDay: string;
 };
+// -------------------------------------------------------------------------------------------------
 declare type CalendarProps = {
   clientLanguage: string;
   clientDate: string;
