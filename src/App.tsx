@@ -33,40 +33,38 @@ export const App = () => {
   // 뒤로가기 버튼 이벤트
   useEffect(() => {
     const onBackPress = () => {
-      if (webViewRef.current?.canGoBack() && navigationEnabled) {
+      if (webViewRef.current && navigationEnabled) {
         webViewRef.current.goBack();
         return true;
       }
       return false;
     };
 
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', onBackPress);
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      onBackPress
+    );
+
     return () => backHandler.remove();
   }, [navigationEnabled]);
 
   // -----------------------------------------------------------------------------------------------
   const handlerOnMessage = (event: any) => {
-    const parsedData = JSON.parse(event.nativeEvent.data);
-
-    // 세션아이디는 단일 string
-    if (parsedData.type === 'sessionId') {
-      AsyncStorage.setItem("sessionId", parsedData.sessionId);
+    try {
+      const parsedData = JSON.parse(event.nativeEvent.data);
+      if (parsedData.type === 'sessionId') {
+        AsyncStorage.setItem("sessionId", parsedData.sessionId);
+      }
     }
-
-    // 로케일은 객체
-    else if (parsedData.type === 'localeSetting') {
-      AsyncStorage.setItem("localeSetting", JSON.stringify(parsedData.localeSetting));
+    catch (error) {
+      console.error("Failed to parse onMessage event data:", error);
     }
   };
 
   // -----------------------------------------------------------------------------------------------
   const handlerBannerVisible = ({ url }: any) => {
-    const hideBannerUrls = [
-      "/user/signup", "/user/login", "/user/resetPw", "accounts.google.com"
-    ];
-    const shouldHideBanner = hideBannerUrls.some((hideUrl) => (
-      url.includes(hideUrl)
-    ));
+    const hideBannerUrls = ["/user/signup", "/user/login", "/user/resetPw", "accounts.google.com"];
+    const shouldHideBanner = hideBannerUrls.some(hideUrl => url.includes(hideUrl));
     setBannerVisible(!shouldHideBanner);
   };
 
