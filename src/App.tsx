@@ -71,7 +71,7 @@ export const App = () => {
   // -----------------------------------------------------------------------------------------------
   const handlerBannerVisible = ({ url }: any) => {
     const hideBannerUrls = [
-      "/user/signup", "/user/login", "/user/resetPw", "accounts.google.com"
+      "user/signup", "user/login", "user/resetPw", "accounts.google.com"
     ];
     const shouldHideBanner = hideBannerUrls.some((hideUrl) => (
       url.includes(hideUrl)
