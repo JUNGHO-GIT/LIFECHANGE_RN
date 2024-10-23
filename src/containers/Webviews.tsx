@@ -38,53 +38,67 @@ export const Webviews = forwardRef<WebView, Props>(
       const ogSessionSetItem = window.sessionStorage.setItem;
       const ogSessionRemoveItem = window.sessionStorage.removeItem;
 
+      const sessionTitle = window.sessionStorage.getItem(TITLE);
+      const parsedTitle = JSON.parse(sessionTitle);
+      const sessionId = parsedTitle?.setting?.id?.sessionId;
+
       // 세션 스토리지 setItem 오버라이드
-      window.sessionStorage.setItem = function(key, value) {
+      window.sessionStorage.setItem = function (key, value) {
         ogSessionSetItem.call(window.sessionStorage, key, value);
-        if (key === '${TITLE}_sessionId') {
+        const updatedTitle = JSON.parse(value);
+        const updatedSessionId = updatedTitle?.setting?.id?.sessionId;
+
+        if (sessionId !== updatedSessionId) {
           window.ReactNativeWebView.postMessage(JSON.stringify({
             type: 'sessionId',
-            sessionId: value
+            sessionId: updatedSessionId
           }));
         }
-      };
+      }
 
       // 세션 스토리지 removeItem 오버라이드
       window.sessionStorage.removeItem = function(key) {
         ogSessionRemoveItem.call(window.sessionStorage, key);
-        if (key === '${TITLE}_sessionId') {
+        if (key === TITLE) {
           window.ReactNativeWebView.postMessage(JSON.stringify({
             type: 'sessionId',
             sessionId: null
           }));
         }
-      };
+      }
 
       // 로컬 스토리지 변경 감시 설정
       const ogLocalSetItem = window.localStorage.setItem;
       const ogLocalRemoveItem = window.localStorage.removeItem;
 
+      const localTitle = window.localStorage.getItem(TITLE);
+      const parsedLocalTitle = JSON.parse(localTitle);
+      const localeSetting = parsedLocalTitle?.setting?.locale;
+
       // 로컬 스토리지 setItem 오버라이드
       window.localStorage.setItem = function(key, value) {
         ogLocalSetItem.call(window.localStorage, key, value);
-        if (key === '${TITLE}_localeSetting') {
+        const updatedTitle = JSON.parse(value);
+        const updatedLocaleSetting = updatedTitle?.setting?.locale;
+
+        if (localeSetting !== updatedLocaleSetting) {
           window.ReactNativeWebView.postMessage(JSON.stringify({
             type: 'localeSetting',
-            localeSetting: JSON.parse(value)
+            localeSetting: updatedLocaleSetting
           }));
         }
-      };
+      }
 
       // 로컬 스토리지 removeItem 오버라이드
       window.localStorage.removeItem = function(key) {
         ogLocalRemoveItem.call(window.localStorage, key);
-        if (key === '${TITLE}_localeSetting') {
+        if (key === TITLE) {
           window.ReactNativeWebView.postMessage(JSON.stringify({
             type: 'localeSetting',
             localeSetting: null
           }));
         }
-      };
+      }
     `;
 
     return (
