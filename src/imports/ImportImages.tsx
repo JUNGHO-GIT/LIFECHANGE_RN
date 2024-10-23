@@ -22,6 +22,8 @@ import sleep4 from "@images/sleep4.webp";
 
 import refresh from "@images/refresh.webp";
 import search from "@images/search.webp";
+import arrowLeft from "@images/arrowLeft.webp";
+import arrowRight from "@images/arrowRight.webp";
 
 // -------------------------------------------------------------------------------------------------
 export {
@@ -43,4 +45,6 @@ export {
   sleep4,
   refresh,
   search,
+  arrowLeft,
+  arrowRight,
 };

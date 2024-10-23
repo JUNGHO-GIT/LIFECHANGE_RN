@@ -56,5 +56,21 @@
       />
     </receiver>
 
+    <!-- calendar widget -->
+    <receiver
+      android:name=".widgets.CalendarWidget"
+      android:exported="false"
+      android:label="일정"
+    >
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+        <action android:name="com.LIFECHANGE.WIDGET_CLICK" />
+      </intent-filter>
+      <meta-data
+        android:name="android.appwidget.provider"
+        android:resource="@xml/widget_calendar_provider"
+      />
+    </receiver>
+
   </application>
 </manifest>

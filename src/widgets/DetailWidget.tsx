@@ -1018,7 +1018,7 @@ export const DetailWidget = (
   }: DetailWidgetProps & ExerciseProps & FoodProps & MoneyProps & SleepProps
 ) => {
 
-  const active = activeView || "exercise";
+  const active = activeView ?? "exercise";
 
   return (
     <FlexWidget

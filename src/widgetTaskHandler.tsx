@@ -23,7 +23,7 @@ import {
 // -------------------------------------------------------------------------------------------------
 const nameToWidget = {
   DetailWidget: DetailWidget,
-  /* CalendarWidget: CalendarWidget, */
+  CalendarWidget: CalendarWidget,
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -45,9 +45,10 @@ export async function widgetTaskHandler(
   const clientCurrency: string = JSON.parse(localeSetting).currency;
 
   // 현재 시간 및 날짜, 요일 -----------------------------------------------------------------------
-  const clientDate = moment().tz(clientTimeZone).format("YYYY-MM-DD");
-  const clientMonthStart = moment().tz(clientTimeZone).startOf('month').format("YYYY-MM-DD");
-  const clientMonthEnd = moment().tz(clientTimeZone).endOf('month').format("YYYY-MM-DD");
+  let clientDate = moment().tz(clientTimeZone).format("YYYY-MM-DD");
+  let clientMonthStart = moment().tz(clientTimeZone).startOf('month').format("YYYY-MM-DD");
+  let clientMonthEnd = moment().tz(clientTimeZone).endOf('month').format("YYYY-MM-DD");
+
   const clientTime = moment().tz(clientTimeZone).format("HH:mm:ss");
   const clientFormat = moment().tz(clientTimeZone).format("ddd");
   const clientDay = clientTimeZone === "Asia/Seoul" ? (
@@ -60,11 +61,10 @@ export async function widgetTaskHandler(
     : "일"
   ) : clientFormat;
 
-
   // 상세 위젯인 경우 ------------------------------------------------------------------------------
   if (widgetInfo.widgetName === "DetailWidget") {
 
-    // fetch 데이터 (운동, 식사, 지출, 수면)
+    // fetch 데이터
     await (async () => {
       const params = {
         user_id: sessionId,
@@ -99,36 +99,50 @@ export async function widgetTaskHandler(
     })();
 
     // 위젯 액션에 따른 렌더링
-    switch (props.widgetAction) {
-      case 'WIDGET_ADDED':
-      case 'WIDGET_RESIZED':
-      case 'WIDGET_UPDATE':
-      case 'WIDGET_CLICK':
-      case 'WIDGET_DELETED':
-        props.renderWidget(
-          <Widget
-            {...widgetInfo}
-            widgetHeight={widgetInfo.height as number}
-            activeView={props.clickAction as string}
-            clientLanguage={clientLanguage}
-            clientCurrency={clientCurrency}
-            clientDate={clientDate}
-            clientDay={clientDay}
-            clientTime={clientTime}
-            exercise={OBJECT.exercise}
-            food={OBJECT.food}
-            money={OBJECT.money}
-            sleep={OBJECT.sleep}
-          />
-        );
-      break;
+    if (
+      props.widgetAction === 'WIDGET_ADDED' || props.widgetAction === 'WIDGET_UPDATE' ||
+      props.widgetAction === 'WIDGET_RESIZED' || props.widgetAction === 'WIDGET_DELETED'
+    ) {
+      props.renderWidget(
+        <Widget
+          {...widgetInfo}
+          widgetHeight={widgetInfo.height as number}
+          clientLanguage={clientLanguage}
+          clientCurrency={clientCurrency}
+          clientDate={clientDate}
+          clientDay={clientDay}
+          clientTime={clientTime}
+          exercise={OBJECT.exercise}
+          food={OBJECT.food}
+          money={OBJECT.money}
+          sleep={OBJECT.sleep}
+        />
+      );
+    }
+    else if (props.widgetAction === 'WIDGET_CLICK') {
+      props.renderWidget(
+        <Widget
+          {...widgetInfo}
+          widgetHeight={widgetInfo.height as number}
+          activeView={props.clickAction as string}
+          clientLanguage={clientLanguage}
+          clientCurrency={clientCurrency}
+          clientDate={clientDate}
+          clientDay={clientDay}
+          clientTime={clientTime}
+          exercise={OBJECT.exercise}
+          food={OBJECT.food}
+          money={OBJECT.money}
+          sleep={OBJECT.sleep}
+        />
+      );
     }
   }
 
   // 일정 위젯인 경우 ------------------------------------------------------------------------------
   else if (widgetInfo.widgetName === "CalendarWidget") {
 
-    // fetch 데이터 (일정)
+    // fetch 데이터
     await (async () => {
       const params = {
         user_id: sessionId,
@@ -151,23 +165,48 @@ export async function widgetTaskHandler(
     })();
 
     // 위젯 액션에 따른 렌더링
-    switch (props.widgetAction) {
-      case 'WIDGET_ADDED':
-      case 'WIDGET_RESIZED':
-      case 'WIDGET_UPDATE':
-      case 'WIDGET_CLICK':
-      case 'WIDGET_DELETED':
-        props.renderWidget(
-          <Widget
-            {...widgetInfo}
-            clientLanguage={clientLanguage}
-            clientDate={clientDate}
-            clientDay={clientDay}
-            clientTime={clientTime}
-            calendar={OBJECT.calendar}
-          />
-        );
-      break;
+    if (
+      props.widgetAction === 'WIDGET_ADDED' || props.widgetAction === 'WIDGET_UPDATE' ||
+      props.widgetAction === 'WIDGET_RESIZED' || props.widgetAction === 'WIDGET_DELETED'
+    ) {
+      props.renderWidget(
+        <Widget
+          {...widgetInfo}
+          widgetHeight={widgetInfo.height as number}
+          widgetWidth={widgetInfo.width as number}
+          clientLanguage={clientLanguage}
+          clientDate={clientDate}
+          clientMonthStart={clientMonthStart}
+          clientMonthEnd={clientMonthEnd}
+          clientTime={clientTime}
+          calendar={OBJECT.calendar}
+        />
+      );
+    }
+    else if (props.widgetAction === 'WIDGET_CLICK') {
+      // 이전 달로 이동
+      if (props.clickAction === "PREV_MONTH") {
+        clientMonthStart = moment(clientMonthStart).subtract(1, 'month').startOf('month').format("YYYY-MM-DD");
+        clientMonthEnd = moment(clientMonthStart).endOf('month').format("YYYY-MM-DD");
+      }
+      // 다음 달로 이동
+      else if (props.clickAction === "NEXT_MONTH") {
+        clientMonthStart = moment(clientMonthStart).add(1, 'month').startOf('month').format("YYYY-MM-DD");
+        clientMonthEnd = moment(clientMonthStart).endOf('month').format("YYYY-MM-DD");
+      }
+      props.renderWidget(
+        <Widget
+          {...widgetInfo}
+          widgetHeight={widgetInfo.height as number}
+          widgetWidth={widgetInfo.width as number}
+          clientLanguage={clientLanguage}
+          clientDate={clientDate}
+          clientMonthStart={clientMonthStart}
+          clientMonthEnd={clientMonthEnd}
+          clientTime={clientTime}
+          calendar={OBJECT.calendar}
+        />
+      );
     }
   }
 

@@ -8,14 +8,19 @@ import {
 declare type CalendarWidgetProps = {
   clientLanguage: string;
   clientDate: string;
+  clientMonthStart: string;
+  clientMonthEnd: string;
   clientTime: string;
   clientDay: string;
 };
 // -------------------------------------------------------------------------------------------------
 declare type CalendarProps = {
+  widgetHeight: number;
+  widgetWidth: number;
   clientLanguage: string;
   clientDate: string;
-  clientDay: string;
+  clientMonthStart: string;
+  clientMonthEnd: string;
   calendar: [{
     calendar_dateStart: string;
     calendar_dateEnd: string;
@@ -31,34 +36,44 @@ declare type CalendarProps = {
 
 // -------------------------------------------------------------------------------------------------
 const CalendarSection = (
-  { clientLanguage, clientDate, clientDay, calendar }: CalendarProps
+  { widgetHeight, widgetWidth, clientLanguage, clientDate, clientMonthStart, clientMonthEnd, calendar }: CalendarProps
 ) => {
 
-  const date = new Date();
-  const month = date.getMonth();
-  const year = date.getFullYear();
+  let currentDate = new Date(clientMonthStart);
+  let currentMonth = currentDate.getMonth();
+  let currentYear = currentDate.getFullYear();
 
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const firstDay = new Date(year, month, 1).getDay();
-  const lastDay = new Date(year, month, daysInMonth).getDay();
-  const weeks = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  // 달력 배열 생성
+  const updateCalendar = (month: number, year: number) => {
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const firstDay = new Date(year, month, 1).getDay();
+    const calendarArray = [];
+    let week = [];
 
-  const calendarArray = [];
-  let week = [];
-  for (let i = 0; i < firstDay; i++) {
-    week.push('');
-  }
-  for (let i = 1; i <= daysInMonth; i++) {
-    week.push(i);
-    if (week.length === 7) {
-      calendarArray.push(week);
-      week = [];
+    // 첫 주 빈 칸 추가
+    for (let i = 0; i < firstDay; i++) {
+      week.push('');
     }
-  }
-  for (let i = lastDay; i < 6; i++) {
-    week.push('');
-  }
-  calendarArray.push(week);
+
+    // 날짜 추가
+    for (let i = 1; i <= daysInMonth; i++) {
+      week.push(i);
+      if (week.length === 7) {
+        calendarArray.push(week);
+        week = [];
+      }
+    }
+
+    // 마지막 주 빈 칸 처리
+    while (week.length < 7) {
+      week.push('');
+    }
+    calendarArray.push(week);
+
+    return calendarArray;
+  };
+
+  let calendarArray = updateCalendar(currentMonth, currentYear);
 
   return (
     <FlexWidget
@@ -70,7 +85,7 @@ const CalendarSection = (
         alignItems: 'center',
       }}
     >
-      {/** week days */}
+      {/* 요일 표시 */}
       <FlexWidget
         style={{
           width: 'match_parent',
@@ -80,62 +95,72 @@ const CalendarSection = (
           alignItems: 'center',
         }}
       >
-        {weeks.map((day, index) => (
+        {[
+          clientLanguage === 'ko' ? '일' : 'S',
+          clientLanguage === 'ko' ? '월' : 'M',
+          clientLanguage === 'ko' ? '화' : 'T',
+          clientLanguage === 'ko' ? '수' : 'W',
+          clientLanguage === 'ko' ? '목' : 'T',
+          clientLanguage === 'ko' ? '금' : 'F',
+          clientLanguage === 'ko' ? '토' : 'S'
+        ].map((day, index) => (
           <TextWidget
             key={index}
             style={{
-              width: 50,
-              height: 40,
-              textAlign: "center",
+              width: widgetWidth / 7,
+              height: 50,
+              textAlign: 'center',
               fontSize: 14,
               fontWeight: '600',
               color: '#000000',
-              borderRightColor: '#c0c0c0',
-              borderRightWidth: 1,
+              backgroundColor: '#f0f0f0',
               letterSpacing: 1,
             }}
-            text={clientLanguage === 'ko' ? (
-              day === 'Sun' ? '일'
-              : day === 'Mon' ? '월'
-              : day === 'Tue' ? '화'
-              : day === 'Wed' ? '수'
-              : day === 'Thu' ? '목'
-              : day === 'Fri' ? '금'
-              : '토'
-            ) : day}
+            text={day}
           />
         ))}
       </FlexWidget>
-      {/** calendar days */}
+
+      {/* 날짜 표시 */}
       <FlexWidget
         style={{
           width: 'match_parent',
           height: 'wrap_content',
-          flexDirection: 'row',
+          flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          paddingVertical: 10,
-          paddingHorizontal: 10,
         }}
       >
-        {calendarArray.map((week, index) => (
-          week.map((day, index) => (
-            <TextWidget
-              key={index}
-              style={{
-                width: 30,
-                height: 30,
-                textAlign: "center",
-                fontSize: 14,
-                fontWeight: '600',
-                color: day === '' ? '#ffffff' : '#000000',
-                backgroundColor: day === '' ? '#ffffff' : '#f0f0f0',
-                borderRadius: 15,
-                letterSpacing: 1,
-              }}
-              text={`${day}`}
-            />
-          ))
+        {calendarArray.map((week, weekIndex) => (
+          <FlexWidget
+            key={weekIndex}
+            style={{
+              width: 'match_parent',
+              height: 'wrap_content',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            {week.map((day, dayIndex) => (
+              <TextWidget
+                key={dayIndex}
+                style={{
+                  width: widgetWidth / 7,
+                  height: (widgetHeight - 100) / 6,
+                  textAlign: 'center',
+                  fontSize: 14,
+                  fontWeight: '600',
+                  color: '#000000',
+                  backgroundColor: '#ffffff',
+                  letterSpacing: 1,
+                  borderWidth: 1,
+                  borderColor: '#c0c0c0',
+                }}
+                text={day === '' ? '' : `${day}`}
+              />
+            ))}
+          </FlexWidget>
         ))}
       </FlexWidget>
     </FlexWidget>
@@ -147,9 +172,12 @@ export const CalendarWidget = (
   {
     clientLanguage,
     clientDate,
-    clientDay,
+    clientMonthStart,
+    clientMonthEnd,
     clientTime,
     calendar,
+    widgetHeight,
+    widgetWidth,
   }: CalendarWidgetProps & CalendarProps
 ) => {
 
@@ -190,16 +218,29 @@ export const CalendarWidget = (
             alignItems: 'center',
           }}
         >
+          <ImageWidget
+            image={require('../assets/images/arrowLeft.webp')}
+            imageWidth={20}
+            imageHeight={20}
+            clickAction={'PREV_MONTH'}
+          />
           <TextWidget
             style={{
               textAlign: "center",
               fontSize: 20,
               fontWeight: '700',
               color: '#000000',
-              marginRight: 0,
+              marginLeft: 15,
+              marginRight: 15,
               letterSpacing: 1,
             }}
             text={clientDate.slice(0, 7)}
+          />
+          <ImageWidget
+            image={require('../assets/images/arrowRight.webp')}
+            imageWidth={20}
+            imageHeight={20}
+            clickAction={'NEXT_MONTH'}
           />
         </FlexWidget>
         <FlexWidget
@@ -243,9 +284,12 @@ export const CalendarWidget = (
         }}
       >
         <CalendarSection
+          widgetHeight={widgetHeight}
+          widgetWidth={widgetWidth}
           clientLanguage={clientLanguage}
           clientDate={clientDate}
-          clientDay={clientDay}
+          clientMonthStart={clientMonthStart}
+          clientMonthEnd={clientMonthEnd}
           calendar={calendar}
         />
       </FlexWidget>
