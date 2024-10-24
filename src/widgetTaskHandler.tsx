@@ -41,7 +41,7 @@ export async function widgetTaskHandler(
 
   // 타임존, 언어, 통화 ----------------------------------------------------------------------------
   const clientTimeZone: string = JSON.parse(localeSetting).timeZone;
-  const clientLanguage: string = JSON.parse(localeSetting).locale;
+  const clientLanguage: string = JSON.parse(localeSetting).lang;
   const clientCurrency: string = JSON.parse(localeSetting).currency;
 
   // 현재 시간 및 날짜, 요일 -----------------------------------------------------------------------

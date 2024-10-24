@@ -57,7 +57,7 @@
     </receiver>
 
     <!-- calendar widget -->
-    <receiver
+    <!-- <receiver
       android:name=".widgets.CalendarWidget"
       android:exported="false"
       android:label="일정"
@@ -70,7 +70,7 @@
         android:name="android.appwidget.provider"
         android:resource="@xml/widget_calendar_provider"
       />
-    </receiver>
+    </receiver> -->
 
   </application>
 </manifest>

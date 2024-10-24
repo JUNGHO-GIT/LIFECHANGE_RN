@@ -84,7 +84,7 @@ const insertComma = (str: string) => {
 
 // -------------------------------------------------------------------------------------------------
 const SelectSection = (
-  {isActive, iconName}: ActiveProps
+  { isActive, iconName }: ActiveProps
 ) => {
   let imageLink;
   if (iconName === "exercise") {
@@ -1003,8 +1003,7 @@ const SleepSection = (
 
 // -------------------------------------------------------------------------------------------------
 export const DetailWidget = (
-  {
-    widgetHeight,
+  { widgetHeight,
     activeView,
     clientCurrency,
     clientLanguage,
