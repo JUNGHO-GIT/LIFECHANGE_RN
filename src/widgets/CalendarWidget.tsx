@@ -180,119 +180,123 @@ export const CalendarWidget = (
     widgetWidth,
   }: CalendarWidgetProps & CalendarProps
 ) => {
-
-  return (
-    <FlexWidget
-      style={{
-        height: 'match_parent',
-        width: 'match_parent',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#ffffff',
-        borderRadius: 16,
-        borderWidth: 1,
-        borderColor: '#000',
-      }}
-    >
-      {/** header section */}
+  try {
+    return (
       <FlexWidget
         style={{
-          width: 'match_parent',
-          height: 'wrap_content',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          borderBottomWidth: 1,
-          borderBottomColor: '#c0c0c0',
-          paddingVertical: 20,
-          paddingHorizontal: 30,
-        }}
-      >
-        <FlexWidget
-          style={{
-            width: 'wrap_content',
-            height: 'wrap_content',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <ImageWidget
-            image={require('../assets/images/arrowLeft.webp')}
-            imageWidth={20}
-            imageHeight={20}
-            clickAction={'PREV_MONTH'}
-          />
-          <TextWidget
-            style={{
-              textAlign: "center",
-              fontSize: 20,
-              fontWeight: '700',
-              color: '#000000',
-              marginLeft: 15,
-              marginRight: 15,
-              letterSpacing: 1,
-            }}
-            text={clientDate.slice(0, 7)}
-          />
-          <ImageWidget
-            image={require('../assets/images/arrowRight.webp')}
-            imageWidth={20}
-            imageHeight={20}
-            clickAction={'NEXT_MONTH'}
-          />
-        </FlexWidget>
-        <FlexWidget
-          style={{
-            width: 'wrap_content',
-            height: 'wrap_content',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <TextWidget
-            style={{
-              textAlign: "center",
-              fontSize: 10,
-              fontWeight: '500',
-              color: '#000000',
-              marginRight: 15,
-              letterSpacing: 1,
-            }}
-            text={clientTime}
-          />
-          <ImageWidget
-            image={require('../assets/images/refresh.webp')}
-            imageWidth={16}
-            imageHeight={16}
-            clickAction={'REFRESH'}
-          />
-        </FlexWidget>
-      </FlexWidget>
-      {/** content section */}
-      <FlexWidget
-        style={{
-          width: 'match_parent',
           height: 'match_parent',
+          width: 'match_parent',
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          paddingVertical: 0,
-          paddingHorizontal: 0,
+          backgroundColor: '#ffffff',
+          borderRadius: 16,
+          borderWidth: 1,
+          borderColor: '#000',
         }}
       >
-        <CalendarSection
-          widgetHeight={widgetHeight}
-          widgetWidth={widgetWidth}
-          clientLanguage={clientLanguage}
-          clientDate={clientDate}
-          clientMonthStart={clientMonthStart}
-          clientMonthEnd={clientMonthEnd}
-          calendar={calendar}
-        />
+        {/** header section */}
+        <FlexWidget
+          style={{
+            width: 'match_parent',
+            height: 'wrap_content',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            borderBottomWidth: 1,
+            borderBottomColor: '#c0c0c0',
+            paddingVertical: 20,
+            paddingHorizontal: 30,
+          }}
+        >
+          <FlexWidget
+            style={{
+              width: 'wrap_content',
+              height: 'wrap_content',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <ImageWidget
+              image={require('../assets/images/arrowLeft.webp')}
+              imageWidth={20}
+              imageHeight={20}
+              clickAction={'PREV_MONTH'}
+            />
+            <TextWidget
+              style={{
+                textAlign: "center",
+                fontSize: 20,
+                fontWeight: '700',
+                color: '#000000',
+                marginLeft: 15,
+                marginRight: 15,
+                letterSpacing: 1,
+              }}
+              text={clientDate.slice(0, 7)}
+            />
+            <ImageWidget
+              image={require('../assets/images/arrowRight.webp')}
+              imageWidth={20}
+              imageHeight={20}
+              clickAction={'NEXT_MONTH'}
+            />
+          </FlexWidget>
+          <FlexWidget
+            style={{
+              width: 'wrap_content',
+              height: 'wrap_content',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <TextWidget
+              style={{
+                textAlign: "center",
+                fontSize: 10,
+                fontWeight: '500',
+                color: '#000000',
+                marginRight: 15,
+                letterSpacing: 1,
+              }}
+              text={clientTime}
+            />
+            <ImageWidget
+              image={require('../assets/images/refresh.webp')}
+              imageWidth={16}
+              imageHeight={16}
+              clickAction={'REFRESH'}
+            />
+          </FlexWidget>
+        </FlexWidget>
+        {/** content section */}
+        <FlexWidget
+          style={{
+            width: 'match_parent',
+            height: 'match_parent',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingVertical: 0,
+            paddingHorizontal: 0,
+          }}
+        >
+          <CalendarSection
+            widgetHeight={widgetHeight}
+            widgetWidth={widgetWidth}
+            clientLanguage={clientLanguage}
+            clientDate={clientDate}
+            clientMonthStart={clientMonthStart}
+            clientMonthEnd={clientMonthEnd}
+            calendar={calendar}
+          />
+        </FlexWidget>
       </FlexWidget>
-    </FlexWidget>
-  );
+    );
+  }
+  catch (err) {
+    console.error("CalendarWidget error:", err);
+  }
 };

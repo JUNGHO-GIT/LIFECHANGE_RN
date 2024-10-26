@@ -32,20 +32,25 @@ export const App = () => {
   // -----------------------------------------------------------------------------------------------
   // 뒤로가기 버튼 이벤트
   useEffect(() => {
-    const onBackPress = () => {
-      if (webViewRef.current && navigationEnabled) {
-        webViewRef.current.goBack();
-        return true;
-      }
-      return false;
-    };
+    try {
+      const onBackPress = () => {
+        if (webViewRef.current && navigationEnabled) {
+          webViewRef.current.goBack();
+          return true;
+        }
+        return false;
+      };
 
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      onBackPress
-    );
+      const backHandler = BackHandler.addEventListener(
+        'hardwareBackPress',
+        onBackPress
+      );
 
-    return () => backHandler.remove();
+      return () => backHandler.remove();
+    }
+    catch (err: any) {
+      console.error("backHandler error:", err);
+    }
   }, [navigationEnabled]);
 
   // -----------------------------------------------------------------------------------------------
@@ -70,13 +75,18 @@ export const App = () => {
 
   // -----------------------------------------------------------------------------------------------
   const handlerBannerVisible = ({ url }: any) => {
-    const hideBannerUrls = [
-      "user/signup", "user/login", "user/resetPw", "accounts.google.com"
-    ];
-    const shouldHideBanner = hideBannerUrls.some((hideUrl) => (
-      url.includes(hideUrl)
-    ));
-    setBannerVisible(!shouldHideBanner);
+    try {
+      const hideBannerUrls = [
+        "user/signup", "user/login", "user/resetPw", "accounts.google.com"
+      ];
+      const shouldHideBanner = hideBannerUrls.some((hideUrl) => (
+        url.includes(hideUrl)
+      ));
+      setBannerVisible(!shouldHideBanner);
+    }
+    catch (err: any) {
+      console.error("bannerVisible event error:", err);
+    }
   };
 
   // -----------------------------------------------------------------------------------------------

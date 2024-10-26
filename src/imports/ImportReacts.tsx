@@ -18,7 +18,7 @@ import {
 } from "react-native-google-mobile-ads";
 
 import {
-  FlexWidget, TextWidget, ImageWidget,
+  FlexWidget, TextWidget, ImageWidget, ColorProp
 } from "react-native-android-widget";
 
 import type {
@@ -56,4 +56,8 @@ export {
   TextWidget,
   ImageWidget,
   WidgetTaskHandlerProps,
+};
+
+export type {
+  ColorProp,
 };
