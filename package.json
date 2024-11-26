@@ -9,8 +9,8 @@
     "make-apk": "cd android && gradlew assembleRelease --stacktrace",
     "make-bundle": "cd android && gradlew bundleRelease --stacktrace",
     "kill-java": "taskkill /f /im java.exe",
-    "npm-install": "npm install",
-    "push": "git add . && git commit -m 'update' && git push origin main"
+    "npm-reset": "powershell -Command \"Remove-Item -Recurse -Force package-lock.json, node_modules; npm install --legacy-peer-deps;\"",
+    "gcloud": "node gcloud.cjs"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.0.0",
