@@ -104,6 +104,7 @@ thumbs.db
 */vendor/cache/
 *metro.config.js
 *jest.config.js
+*app.json
 *Gemfile
 *Gemfile.lock
 *babel.config.js
@@ -112,5 +113,7 @@ thumbs.db
 *.watchmanconfig
 *.prettierrc
 *.prettierignore
+*.prettierrc.js
 *.eslintrc
 *.eslintignore
+*.eslintrc.js
