@@ -14,6 +14,9 @@ declare type DetailWidgetProps = {
   clientTime: string;
   clientDay: string;
 }
+
+
+
 // -------------------------------------------------------------------------------------------------
 declare type ActiveProps = {
   isActive: boolean;
