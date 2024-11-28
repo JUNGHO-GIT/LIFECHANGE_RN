@@ -19,9 +19,12 @@
     <domain includeSubdomains="true">127.0.0.1</domain>
   </domain-config>
   <domain-config cleartextTrafficPermitted="true">
-    <domain includeSubdomains="true">34.23.233.23</domain>
+    <domain includeSubdomains="true">104.196.212.101</domain>
   </domain-config>
   <domain-config cleartextTrafficPermitted="true">
     <domain includeSubdomains="true">junghomun.com</domain>
+  </domain-config>
+  <domain-config cleartextTrafficPermitted="true">
+    <domain includeSubdomains="true">www.junghomun.com</domain>
   </domain-config>
 </network-security-config>

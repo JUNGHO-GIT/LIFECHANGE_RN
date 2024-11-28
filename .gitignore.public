@@ -95,6 +95,8 @@ thumbs.db
 *.vsix
 
 # react native
+/executionHistory/
+*executionHistory.bin
 *build/
 *ios/
 *.bundle/

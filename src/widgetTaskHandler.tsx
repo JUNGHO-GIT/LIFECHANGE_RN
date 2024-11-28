@@ -6,7 +6,7 @@ import {
 
 import {
   axios, AsyncStorage, moment,
-} from "@imports/ImportUtils";
+} from "@imports/ImportLibs";
 
 import {
   DetailWidget, CalendarWidget,
@@ -152,7 +152,7 @@ export async function widgetTaskHandler(
     }
 
     // 일정 위젯인 경우 ----------------------------------------------------------------------------
-    else if (widgetInfo.widgetName === "CalendarWidget") {
+    /* else if (widgetInfo.widgetName === "CalendarWidget") {
 
       // fetch 데이터
       await (async () => {
@@ -220,7 +220,7 @@ export async function widgetTaskHandler(
           />
         );
       }
-    }
+    } */
 
     // 콘솔 로그 -----------------------------------------------------------------------------------
     console.log(`

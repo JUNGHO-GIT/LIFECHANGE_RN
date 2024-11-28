@@ -10,7 +10,7 @@ import {
 
 import {
   AsyncStorage,
-} from "@imports/ImportUtils";
+} from "@imports/ImportLibs";
 
 // -------------------------------------------------------------------------------------------------
 const styles = StyleSheet.create({
@@ -25,12 +25,11 @@ const styles = StyleSheet.create({
 export const App = () => {
 
   // -----------------------------------------------------------------------------------------------
-  const [bannerVisible, setBannerVisible] = useState(false);
-  const [navigationEnabled, _setNavigationEnabled] = useState(true);
+  const [bannerVisible, setBannerVisible] = useState<boolean>(false);
+  const [navigationEnabled, _setNavigationEnabled] = useState<boolean>(true);
   const webViewRef = useRef<any>(null);
 
-  // -----------------------------------------------------------------------------------------------
-  // 뒤로가기 버튼 이벤트
+  // 뒤로가기 버튼 이벤트 --------------------------------------------------------------------------
   useEffect(() => {
     try {
       const onBackPress = () => {
@@ -88,7 +87,6 @@ export const App = () => {
       console.error("bannerVisible event error:", err);
     }
   };
-
 
   // -----------------------------------------------------------------------------------------------
   return (

@@ -1,7 +1,7 @@
 // Webviews.tsx
 
 import {
-  forwardRef, StyleSheet, Dimensions, WebView,
+  forwardRef, StyleSheet, Dimensions, WebView, useEffect
 } from "@imports/ImportReacts";
 
 import {
@@ -109,10 +109,10 @@ export const Webviews = forwardRef<WebView, Props>(
         onMessage={onMessage}
         originWhitelist={['*']}
         userAgent={userAgent}
-        allowFileAccess
-        cacheEnabled
-        javaScriptEnabled
-        domStorageEnabled
+        allowFileAccess={true}
+        cacheEnabled={true}
+        javaScriptEnabled={true}
+        domStorageEnabled={true}
         injectedJavaScript={injectedJavaScript}
         allowsBackForwardNavigationGestures={true}
         onNavigationStateChange={(newState) => {
