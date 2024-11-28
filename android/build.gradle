@@ -1,0 +1,76 @@
+// build.gradle (project)
+
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.nio.charset.StandardCharsets
+import java.util.regex.Pattern
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
+buildscript {
+  ext {
+    buildToolsVersion="34.0.0"
+    minSdkVersion=23
+    compileSdkVersion=34
+    targetSdkVersion=34
+    ndkVersion="26.1.10909125"
+    kotlinVersion="1.9.22"
+    versionCode=1
+    versionName="1.0.1"
+
+    // version code and name
+    def changeLogFile = file("../changelog.md")
+    def charset = StandardCharsets.UTF_8
+
+    def content = new String(Files.readAllBytes(Paths.get(changeLogFile.path)), charset)
+
+    def versionCodePattern = Pattern.compile('## versionCode = (\\d+)')
+    def matcher = versionCodePattern.matcher(content)
+    def newContent = content
+    def maxVersionCode = 0
+
+    while (matcher.find()) {
+      def versionCode = matcher.group(1).toInteger()
+      if (versionCode > maxVersionCode) {
+        maxVersionCode = versionCode
+      }
+    }
+
+    rootProject.ext.versionCode = maxVersionCode + 1
+    if (rootProject.ext.versionCode >= 100) {
+      def firstStr = rootProject.ext.versionCode.toString().substring(0, 1)
+      def remainStr = rootProject.ext.versionCode.toString().substring(1)
+
+      rootProject.ext.versionName = "1." + firstStr + "." + remainStr
+    }
+    else {
+      rootProject.ext.versionName = "1.0." + rootProject.ext.versionCode
+    }
+
+    def now = LocalDateTime.now()
+    def formatter = DateTimeFormatter.ofPattern('yyyy-MM-dd (HH:mm:ss)')
+    def timestamp = now.format(formatter)
+
+    def newVersionSection = "\n\n## versionCode = " + rootProject.ext.versionCode + "\n\t- " + "versionName = " + rootProject.ext.versionName + "\n\t- " + timestamp
+
+    newContent = newContent + newVersionSection
+
+    Files.write(Paths.get(changeLogFile.path), newContent.getBytes(charset))
+
+    println "Version code has been incremented to " + rootProject.ext.versionCode + " and new version section added."
+  }
+
+  repositories {
+    google()
+    mavenCentral()
+  }
+
+  dependencies {
+    classpath("com.android.tools.build:gradle")
+    classpath("com.facebook.react:react-native-gradle-plugin")
+    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
+  }
+}
+
+apply plugin: "com.facebook.react.rootproject"
+
