@@ -1,6 +1,6 @@
 // DetailWidget.java
 
-package com.LIFECHANGE_RN.widgets;
+package com.LIFECHANGE.widgets;
 
 import com.reactnativeandroidwidget.RNWidgetProvider;
 
