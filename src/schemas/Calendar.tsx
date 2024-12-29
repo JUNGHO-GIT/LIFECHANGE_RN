@@ -1,7 +1,7 @@
 // Calendar.tsx
 
 // -------------------------------------------------------------------------------------------------
-export const Calendar:any = {
+export const Calendar = {
   calendar_dateStart: "0000-00-00",
   calendar_dateEnd: "0000-00-00",
   calendar_section: [{

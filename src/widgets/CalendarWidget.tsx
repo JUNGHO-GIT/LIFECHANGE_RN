@@ -1,7 +1,7 @@
 // Calendar.tsx
 
 import {
-  FlexWidget, TextWidget, ImageWidget,
+  FlexWidget, TextWidget, ImageWidget
 } from "@imports/ImportReacts";
 
 // -------------------------------------------------------------------------------------------------
@@ -13,6 +13,7 @@ declare type CalendarWidgetProps = {
   clientTime: string;
   clientDay: string;
 };
+
 // -------------------------------------------------------------------------------------------------
 declare type CalendarProps = {
   widgetHeight: number;

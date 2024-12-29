@@ -1,7 +1,7 @@
 // Webviews.tsx
 
 import {
-  forwardRef, StyleSheet, Dimensions, WebView, useEffect
+  forwardRef, StyleSheet, Dimensions, WebView
 } from "@imports/ImportReacts";
 
 import {
@@ -29,17 +29,16 @@ export const Webviews = forwardRef<WebView, Props>(
   ({ onMessage, bannerVisible, navigationEnabled }, ref) => {
 
     const userAgent = (
-      "Mozilla/5.0 (Linux; Android 8.0.0; SM-G935S Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Mobile Safari/537.36"
+      "Mozilla/5.0 (Linux; Android 8.0.0; SM-G935S Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36"
     );
 
-    const injectedJavaScript = /* javascript */`
+    const injectedJavaScript = (/* javascript */`
 
       // Session storage overrides
-      const ogSessionSetItem = window.sessionStorage.setItem;
-      const ogSessionRemoveItem = window.sessionStorage.removeItem;
-
-      const sessionTitle = window.sessionStorage.getItem('${TITLE}');
-      const parsedTitle = JSON.parse(sessionTitle);
+      let ogSessionSetItem = window.sessionStorage.setItem;
+      let ogSessionRemoveItem = window.sessionStorage.removeItem;
+      let sessionTitle = window.sessionStorage.getItem('${TITLE}');
+      let parsedTitle = JSON.parse(sessionTitle);
       let sessionId = parsedTitle?.setting?.id?.sessionId;
 
       window.sessionStorage.setItem = function (key, value) {
@@ -55,7 +54,6 @@ export const Webviews = forwardRef<WebView, Props>(
           }));
         }
       }
-
       window.sessionStorage.removeItem = function(key) {
         ogSessionRemoveItem.call(window.sessionStorage, key);
         if (key === '${TITLE}') {
@@ -68,11 +66,10 @@ export const Webviews = forwardRef<WebView, Props>(
       }
 
       // Local storage overrides
-      const ogLocalSetItem = window.localStorage.setItem;
-      const ogLocalRemoveItem = window.localStorage.removeItem;
-
-      const localTitle = window.localStorage.getItem('${TITLE}');
-      const parsedLocalTitle = JSON.parse(localTitle);
+      let ogLocalSetItem = window.localStorage.setItem;
+      let ogLocalRemoveItem = window.localStorage.removeItem;
+      let localTitle = window.localStorage.getItem('${TITLE}');
+      let parsedLocalTitle = JSON.parse(localTitle);
       let localeSetting = parsedLocalTitle?.setting?.locale;
 
       window.localStorage.setItem = function(key, value) {
@@ -88,7 +85,6 @@ export const Webviews = forwardRef<WebView, Props>(
           }));
         }
       }
-
       window.localStorage.removeItem = function(key) {
         ogLocalRemoveItem.call(window.localStorage, key);
         if (key === '${TITLE}') {
@@ -99,7 +95,7 @@ export const Webviews = forwardRef<WebView, Props>(
           }));
         }
       }
-    `;
+    `);
 
     return (
       <WebView

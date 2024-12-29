@@ -1,6 +1,6 @@
 // MainApplication.kt
 
-package com.LIFECHANGE
+package com.LIFECHANGE_RN
 
 import android.app.Application
 import com.facebook.react.PackageList

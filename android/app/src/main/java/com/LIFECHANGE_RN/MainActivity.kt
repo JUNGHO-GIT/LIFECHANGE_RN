@@ -1,6 +1,6 @@
 // MainActivity.kt
 
-package com.LIFECHANGE
+package com.LIFECHANGE_RN
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

@@ -48,7 +48,7 @@
     >
       <intent-filter>
         <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-        <action android:name="com.LIFECHANGE.WIDGET_CLICK" />
+        <action android:name="com.LIFECHANGE_RN.WIDGET_CLICK" />
       </intent-filter>
       <meta-data
         android:name="android.appwidget.provider"
@@ -64,7 +64,7 @@
     >
       <intent-filter>
         <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-        <action android:name="com.LIFECHANGE.WIDGET_CLICK" />
+        <action android:name="com.LIFECHANGE_RN.WIDGET_CLICK" />
       </intent-filter>
       <meta-data
         android:name="android.appwidget.provider"
