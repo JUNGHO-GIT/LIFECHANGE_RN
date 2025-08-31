@@ -944,8 +944,6 @@ export const DetailWidget = (
     sleep
   }: DetailWidgetProps & ExerciseProps & FoodProps & MoneyProps & SleepProps
 ) => {
-
-  try {
     return (
       <FlexWidget
         style={{
@@ -1121,8 +1119,4 @@ export const DetailWidget = (
         </FlexWidget>
       </FlexWidget>
     );
-  }
-  catch (err) {
-    console.log("DetailWidget error: ", err);
-  }
 };

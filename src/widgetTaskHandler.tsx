@@ -9,7 +9,7 @@ import {
 } from "@imports/ImportLibs";
 
 import {
-  DetailWidget, CalendarWidget,
+  DetailWidget,
 } from "@imports/ImportWidgets";
 
 import {
@@ -17,13 +17,12 @@ import {
 } from "@env";
 
 import {
-  OBJECT, Calendar, Exercise, Food, Money, Sleep,
+  OBJECT, Exercise, Food, Money, Sleep,
 } from "@imports/ImportSchemas";
 
 // -------------------------------------------------------------------------------------------------
 const nameToWidget = {
   DetailWidget: DetailWidget,
-  CalendarWidget: CalendarWidget,
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -150,77 +149,6 @@ export async function widgetTaskHandler(
         );
       }
     }
-
-    // 일정 위젯인 경우 ----------------------------------------------------------------------------
-    /* else if (widgetInfo.widgetName === "CalendarWidget") {
-
-      // fetch 데이터
-      await (async () => {
-        const params = {
-          user_id: sessionId,
-          PAGING: {
-            sort: "asc",
-            page: 1
-          },
-          DATE: {
-            dateType: "",
-            dateStart: clientMonthStart,
-            dateEnd: clientMonthEnd,
-          },
-        };
-        const [calendarResponse] = await Promise.all([
-          axios.get(`${SERVER_URL}/api/calendar/list`, {
-            params: params
-          })
-        ])
-        OBJECT.calendar = calendarResponse.data.result || Calendar;
-      })();
-
-      // 위젯 액션에 따른 렌더링
-      if (
-        props.widgetAction === 'WIDGET_ADDED' || props.widgetAction === 'WIDGET_UPDATE' ||
-        props.widgetAction === 'WIDGET_RESIZED' || props.widgetAction === 'WIDGET_DELETED'
-      ) {
-        props.renderWidget(
-          <Widget
-            {...widgetInfo}
-            widgetHeight={widgetInfo.height as number}
-            widgetWidth={widgetInfo.width as number}
-            clientLanguage={clientLanguage}
-            clientDate={clientDate}
-            clientMonthStart={clientMonthStart}
-            clientMonthEnd={clientMonthEnd}
-            clientTime={clientTime}
-            calendar={OBJECT.calendar}
-          />
-        );
-      }
-      else if (props.widgetAction === 'WIDGET_CLICK') {
-        // 이전 달로 이동
-        if (props.clickAction === "PREV_MONTH") {
-          clientMonthStart = moment(clientMonthStart).subtract(1, 'month').startOf('month').format("YYYY-MM-DD");
-          clientMonthEnd = moment(clientMonthStart).endOf('month').format("YYYY-MM-DD");
-        }
-        // 다음 달로 이동
-        else if (props.clickAction === "NEXT_MONTH") {
-          clientMonthStart = moment(clientMonthStart).add(1, 'month').startOf('month').format("YYYY-MM-DD");
-          clientMonthEnd = moment(clientMonthStart).endOf('month').format("YYYY-MM-DD");
-        }
-        props.renderWidget(
-          <Widget
-            {...widgetInfo}
-            widgetHeight={widgetInfo.height as number}
-            widgetWidth={widgetInfo.width as number}
-            clientLanguage={clientLanguage}
-            clientDate={clientDate}
-            clientMonthStart={clientMonthStart}
-            clientMonthEnd={clientMonthEnd}
-            clientTime={clientTime}
-            calendar={OBJECT.calendar}
-          />
-        );
-      }
-    } */
 
     // 콘솔 로그 -----------------------------------------------------------------------------------
     console.log(`

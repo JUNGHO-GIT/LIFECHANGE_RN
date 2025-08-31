@@ -6,8 +6,12 @@ import React, {
 } from "react";
 
 import {
-  SafeAreaView, StyleSheet, Dimensions, View, Text, TouchableOpacity, Modal, BackHandler,
+	StyleSheet, Dimensions, View, Text, TouchableOpacity, Modal, BackHandler, SafeAreaView,
 } from 'react-native';
+
+import {
+	SafeAreaProvider,
+} from 'react-native-safe-area-context';
 
 import {
   WebView,
@@ -56,6 +60,7 @@ export {
   TextWidget,
   ImageWidget,
   WidgetTaskHandlerProps,
+  SafeAreaProvider,
 };
 
 export type {

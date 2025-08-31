@@ -1,0 +1,98 @@
+{
+  "buildFiles": [
+    "C:\\JUNGHO\\2.IDE\\2.Vscode\\Workspace\\1.Project\\LIFECHANGE_RN\\node_modules\\@react-native-async-storage\\async-storage\\android\\build\\generated\\source\\codegen\\jni\\CMakeLists.txt",
+    "C:\\JUNGHO\\2.IDE\\2.Vscode\\Workspace\\1.Project\\LIFECHANGE_RN\\node_modules\\react-native-android-widget\\android\\build\\generated\\source\\codegen\\jni\\CMakeLists.txt",
+    "C:\\JUNGHO\\2.IDE\\2.Vscode\\Workspace\\1.Project\\LIFECHANGE_RN\\node_modules\\react-native-gesture-handler\\android\\build\\generated\\source\\codegen\\jni\\CMakeLists.txt",
+    "C:\\JUNGHO\\2.IDE\\2.Vscode\\Workspace\\1.Project\\LIFECHANGE_RN\\node_modules\\react-native-google-mobile-ads\\android\\build\\generated\\source\\codegen\\jni\\CMakeLists.txt",
+    "C:\\JUNGHO\\2.IDE\\2.Vscode\\Workspace\\1.Project\\LIFECHANGE_RN\\node_modules\\react-native-safe-area-context\\android\\src\\main\\jni\\CMakeLists.txt",
+    "C:\\JUNGHO\\2.IDE\\2.Vscode\\Workspace\\1.Project\\LIFECHANGE_RN\\node_modules\\react-native-screens\\android\\src\\main\\jni\\CMakeLists.txt",
+    "C:\\JUNGHO\\2.IDE\\2.Vscode\\Workspace\\1.Project\\LIFECHANGE_RN\\node_modules\\react-native-webview\\android\\build\\generated\\source\\codegen\\jni\\CMakeLists.txt",
+    "C:\\JUNGHO\\2.IDE\\2.Vscode\\Workspace\\1.Project\\LIFECHANGE_RN\\node_modules\\react-native\\ReactAndroid\\cmake-utils\\default-app-setup\\CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "C:\\JUNGHO\\2.IDE\\4.AndroidSDK\\cmake\\3.22.1\\bin\\ninja.exe",
+      "-C",
+      "C:\\JUNGHO\\2.IDE\\2.Vscode\\Workspace\\1.Project\\LIFECHANGE_RN\\android\\app\\.cxx\\RelWithDebInfo\\19a266n6\\x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "C:\\JUNGHO\\2.IDE\\4.AndroidSDK\\cmake\\3.22.1\\bin\\ninja.exe",
+    "-C",
+    "C:\\JUNGHO\\2.IDE\\2.Vscode\\Workspace\\1.Project\\LIFECHANGE_RN\\android\\app\\.cxx\\RelWithDebInfo\\19a266n6\\x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "appmodules::@6890427a1f51a3e7e1df": {
+      "toolchain": "toolchain",
+      "abi": "x86_64",
+      "artifactName": "appmodules",
+      "output": "C:\\JUNGHO\\2.IDE\\2.Vscode\\Workspace\\1.Project\\LIFECHANGE_RN\\android\\app\\build\\intermediates\\cxx\\RelWithDebInfo\\19a266n6\\obj\\x86_64\\libappmodules.so",
+      "runtimeFiles": [
+        "C:\\JUNGHO\\2.IDE\\2.Vscode\\Workspace\\1.Project\\LIFECHANGE_RN\\android\\app\\build\\intermediates\\cxx\\RelWithDebInfo\\19a266n6\\obj\\x86_64\\libreact_codegen_safeareacontext.so",
+        "C:\\JUNGHO\\2.IDE\\2.Vscode\\Workspace\\1.Project\\LIFECHANGE_RN\\android\\app\\build\\intermediates\\cxx\\RelWithDebInfo\\19a266n6\\obj\\x86_64\\libreact_codegen_rnscreens.so",
+        "C:\\Users\\jungh\\.gradle\\caches\\8.14.3\\transforms\\07a384d86d79b4d31de3e4b4b5fd3da2\\transformed\\jetified-fbjni-0.7.0\\prefab\\modules\\fbjni\\libs\\android.x86_64\\libfbjni.so",
+        "C:\\Users\\jungh\\.gradle\\caches\\8.14.3\\transforms\\8c58a88258beae66640dfcc46b95cc04\\transformed\\jetified-react-android-0.81.1-release\\prefab\\modules\\jsi\\libs\\android.x86_64\\libjsi.so",
+        "C:\\Users\\jungh\\.gradle\\caches\\8.14.3\\transforms\\8c58a88258beae66640dfcc46b95cc04\\transformed\\jetified-react-android-0.81.1-release\\prefab\\modules\\reactnative\\libs\\android.x86_64\\libreactnative.so"
+      ]
+    },
+    "react_codegen_AndroidWidget::@8ee9d6dd26ffa90c075b": {
+      "toolchain": "toolchain",
+      "abi": "x86_64",
+      "artifactName": "react_codegen_AndroidWidget"
+    },
+    "react_codegen_RNCWebViewSpec::@eb48929f9f7453740a6c": {
+      "toolchain": "toolchain",
+      "abi": "x86_64",
+      "artifactName": "react_codegen_RNCWebViewSpec"
+    },
+    "react_codegen_RNGoogleMobileAdsSpec::@c00c605517d10bc7886c": {
+      "toolchain": "toolchain",
+      "abi": "x86_64",
+      "artifactName": "react_codegen_RNGoogleMobileAdsSpec"
+    },
+    "react_codegen_rnasyncstorage::@1596841e19ec5b9eeffe": {
+      "toolchain": "toolchain",
+      "abi": "x86_64",
+      "artifactName": "react_codegen_rnasyncstorage"
+    },
+    "react_codegen_rngesturehandler_codegen::@39f233abcd2c728bc6ec": {
+      "toolchain": "toolchain",
+      "abi": "x86_64",
+      "artifactName": "react_codegen_rngesturehandler_codegen"
+    },
+    "react_codegen_rnscreens::@25bcbd507e98d3a854ad": {
+      "toolchain": "toolchain",
+      "abi": "x86_64",
+      "artifactName": "react_codegen_rnscreens",
+      "output": "C:\\JUNGHO\\2.IDE\\2.Vscode\\Workspace\\1.Project\\LIFECHANGE_RN\\android\\app\\build\\intermediates\\cxx\\RelWithDebInfo\\19a266n6\\obj\\x86_64\\libreact_codegen_rnscreens.so",
+      "runtimeFiles": [
+        "C:\\Users\\jungh\\.gradle\\caches\\8.14.3\\transforms\\8c58a88258beae66640dfcc46b95cc04\\transformed\\jetified-react-android-0.81.1-release\\prefab\\modules\\reactnative\\libs\\android.x86_64\\libreactnative.so",
+        "C:\\Users\\jungh\\.gradle\\caches\\8.14.3\\transforms\\8c58a88258beae66640dfcc46b95cc04\\transformed\\jetified-react-android-0.81.1-release\\prefab\\modules\\jsi\\libs\\android.x86_64\\libjsi.so",
+        "C:\\Users\\jungh\\.gradle\\caches\\8.14.3\\transforms\\07a384d86d79b4d31de3e4b4b5fd3da2\\transformed\\jetified-fbjni-0.7.0\\prefab\\modules\\fbjni\\libs\\android.x86_64\\libfbjni.so"
+      ]
+    },
+    "react_codegen_safeareacontext::@7984cd80db47aa7b952a": {
+      "toolchain": "toolchain",
+      "abi": "x86_64",
+      "artifactName": "react_codegen_safeareacontext",
+      "output": "C:\\JUNGHO\\2.IDE\\2.Vscode\\Workspace\\1.Project\\LIFECHANGE_RN\\android\\app\\build\\intermediates\\cxx\\RelWithDebInfo\\19a266n6\\obj\\x86_64\\libreact_codegen_safeareacontext.so",
+      "runtimeFiles": [
+        "C:\\Users\\jungh\\.gradle\\caches\\8.14.3\\transforms\\07a384d86d79b4d31de3e4b4b5fd3da2\\transformed\\jetified-fbjni-0.7.0\\prefab\\modules\\fbjni\\libs\\android.x86_64\\libfbjni.so",
+        "C:\\Users\\jungh\\.gradle\\caches\\8.14.3\\transforms\\8c58a88258beae66640dfcc46b95cc04\\transformed\\jetified-react-android-0.81.1-release\\prefab\\modules\\jsi\\libs\\android.x86_64\\libjsi.so",
+        "C:\\Users\\jungh\\.gradle\\caches\\8.14.3\\transforms\\8c58a88258beae66640dfcc46b95cc04\\transformed\\jetified-react-android-0.81.1-release\\prefab\\modules\\reactnative\\libs\\android.x86_64\\libreactnative.so"
+      ]
+    }
+  },
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "C:\\JUNGHO\\2.IDE\\4.AndroidSDK\\ndk\\27.1.12297006\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe",
+      "cppCompilerExecutable": "C:\\JUNGHO\\2.IDE\\4.AndroidSDK\\ndk\\27.1.12297006\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <!-- widget_detail_provider.xml -->
 
@@ -9,7 +9,6 @@
   android:minHeight="100dp"
   android:maxHeight="110dp"
   android:updatePeriodMillis="1800000"
-  android:initialLayout="@layout/rn_widget"
   android:previewImage="@drawable/detail_preview"
   android:resizeMode="horizontal|vertical"
   android:widgetCategory="home_screen"
