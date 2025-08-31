@@ -1,0 +1,110 @@
+// android/build.gradle (project)
+
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.nio.charset.StandardCharsets
+import java.util.regex.Pattern
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Properties
+
+// ----------------------------------------------------------------------------------------------------------
+// 1. buildscript
+// ----------------------------------------------------------------------------------------------------------
+buildscript {
+  	ext {
+		// Android SDK 및 NDK 버전
+        buildToolsVersion = "36.0.0"
+        compileSdkVersion = 36
+        targetSdkVersion = 35
+        minSdkVersion = 24
+        ndkVersion = "27.1.12297006"
+        kotlinVersion = "2.1.20"
+		agpVersion = "8.7.3"
+		versionCode = 1
+		versionName = "1.0.1"
+
+		// RN 버전 자동 탐지
+		def rnProps = new Properties()
+		file("../node_modules/react-native/ReactAndroid/gradle.properties").withInputStream {
+			rnProps.load(it)
+		}
+		reactNativeVersion = rnProps.getProperty("VERSION_NAME")
+
+		// changelog 기반 versionCode/Name 업데이트
+		def changeLogFile = file("../changelog.md")
+		def charset = StandardCharsets.UTF_8
+		def content = new String(Files.readAllBytes(Paths.get(changeLogFile.path)), charset)
+		def versionCodePattern = Pattern.compile('## versionCode = (\\d+)')
+		def matcher = versionCodePattern.matcher(content)
+		def newContent = content
+		def maxVersionCode = 0
+
+		// 가장 큰 버전 코드 탐색
+		while (matcher.find()) {
+			def v = matcher.group(1).toInteger()
+			if (v > maxVersionCode) {
+				maxVersionCode = v
+			}
+		}
+		rootProject.ext.versionCode = maxVersionCode + 1
+
+		// 1.x.x 형식으로 변경
+		if (rootProject.ext.versionCode >= 100) {
+			def firstStr = rootProject.ext.versionCode.toString().substring(0, 1)
+			def remainStr = rootProject.ext.versionCode.toString().substring(1)
+			rootProject.ext.versionName = "1." + firstStr + "." + remainStr
+		}
+		else {
+			rootProject.ext.versionName = "1.0." + rootProject.ext.versionCode
+		}
+
+		// changelog에 새 버전 섹션 추가
+		def now = LocalDateTime.now()
+		def formatter = DateTimeFormatter.ofPattern('yyyy-MM-dd (HH:mm:ss)')
+		def timestamp = now.format(formatter)
+		def newVersionSection = "\n## versionCode = " + rootProject.ext.versionCode + "\n\n- " + "versionName = " + rootProject.ext.versionName + "\n- " + timestamp + "\n"
+		newContent = newContent + newVersionSection
+
+		// 변경된 내용 저장
+		Files.write(Paths.get(changeLogFile.path), newContent.getBytes(charset))
+		println "Version code has been incremented to " + rootProject.ext.versionCode
+	}
+	repositories {
+		google()
+		mavenCentral()
+	}
+	dependencies {
+		classpath("com.android.tools.build:gradle:$agpVersion")
+		classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+		classpath("com.facebook.react:react-native-gradle-plugin")
+	}
+}
+
+// ----------------------------------------------------------------------------------------------------------
+// 3. subprojects
+// ----------------------------------------------------------------------------------------------------------
+subprojects { sp ->
+	afterEvaluate {
+		def androidExt = sp.extensions.findByName("android")
+		if (androidExt == null) {
+			return
+		}
+		try {
+			androidExt.compileSdk = rootProject.ext.compileSdkVersion
+		}
+		catch(Throwable ignore) {
+			androidExt.compileSdkVersion = rootProject.ext.compileSdkVersion
+		}
+		androidExt.defaultConfig {
+			minSdkVersion = rootProject.ext.minSdkVersion
+			targetSdkVersion = rootProject.ext.targetSdkVersion
+		}
+		try {
+			androidExt.ndkVersion = rootProject.ext.ndkVersion
+		}
+		catch(Throwable ignore) {
+			androidExt.ndkVersion = rootProject.ext.ndkVersion
+		}
+	}
+}

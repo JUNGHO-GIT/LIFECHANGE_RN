@@ -1,0 +1,124 @@
+#!/bin/sh
+# Optimized Gradle Wrapper Launcher (speed-tuned)
+
+# --- APP_HOME resolve ---
+app_path=$0
+while
+  APP_HOME=${app_path%"${app_path##*/}"}
+  [ -h "$app_path" ]
+do
+  ls=$(ls -ld "$app_path")
+  link=${ls#*' -> '}
+  case $link in
+    /*) app_path=$link ;;
+    *)  app_path=$APP_HOME$link ;;
+  esac
+done
+APP_BASE_NAME=${0##*/}
+APP_HOME=$(cd "${APP_HOME:-./}" >/dev/null && pwd -P) || exit
+CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
+
+# --- OS flags ---
+cygwin=false; msys=false; darwin=false; nonstop=false
+case "$(uname)" in
+  CYGWIN*) cygwin=true ;;
+  Darwin*) darwin=true ;;
+  MSYS*|MINGW*) msys=true ;;
+  NONSTOP*) nonstop=true ;;
+esac
+
+warn() { echo "$*" >&2; }
+die()  { echo >&2; echo "$*" >&2; echo >&2; exit 1; }
+
+# --- Pick Java: prefer GRADLE_JAVA_HOME, then JAVA_HOME, then PATH ---
+JAVACMD=
+if [ -n "$GRADLE_JAVA_HOME" ]; then
+  if [ -x "$GRADLE_JAVA_HOME/bin/java" ]; then
+    JAVACMD="$GRADLE_JAVA_HOME/bin/java"
+  fi
+fi
+if [ -z "$JAVACMD" ] && [ -n "$JAVA_HOME" ]; then
+  if [ -x "$JAVA_HOME/jre/sh/java" ]; then
+    JAVACMD="$JAVA_HOME/jre/sh/java"
+  else
+    JAVACMD="$JAVA_HOME/bin/java"
+  fi
+fi
+if [ -z "$JAVACMD" ]; then
+  JAVACMD=java
+fi
+if ! command -v "$JAVACMD" >/dev/null 2>&1; then
+  die "ERROR: No Java found. Set GRADLE_JAVA_HOME or JAVA_HOME correctly."
+fi
+
+# --- Bump file descriptors where possible ---
+if ! "$cygwin" && ! "$darwin" && ! "$nonstop"; then
+  MAX_FD=maximum
+  case $MAX_FD in
+    max*) MAX_FD=$(ulimit -H -n) || warn "Could not query max FD";;
+  esac
+  case $MAX_FD in
+    ''|soft) : ;;
+    *) ulimit -n "$MAX_FD" || warn "Could not raise FD limit to $MAX_FD" ;;
+  esac
+fi
+
+# --- Windows path fix for Cygwin/MSYS ---
+if "$cygwin" || "$msys"; then
+  APP_HOME=$(cygpath --path --mixed "$APP_HOME")
+  CLASSPATH=$(cygpath --path --mixed "$CLASSPATH")
+  JAVACMD=$(cygpath --unix "$JAVACMD")
+  # convert non-option args that look like paths
+  for arg; do
+    case $arg in
+      -*) : ;;
+      /?*)
+        t=${arg#/}; t=/${t%%/*}
+        [ -e "$t" ] && arg=$(cygpath --path --ignore --mixed "$arg")
+        ;;
+    esac
+    shift; set -- "$@" "$arg"
+  done
+fi
+
+# --- Defaults: bigger heap for launcher, UTF-8, dedup ---
+DEFAULT_JVM_OPTS='"-Xms512m" "-Xmx2048m" "-XX:MaxMetaspaceSize=512m" "-Dfile.encoding=UTF-8" "-XX:+UseStringDeduplication" "-XX:+HeapDumpOnOutOfMemoryError"'
+
+# --- Perf tuning (can disable with GRADLE_TUNING=off) ---
+if [ "${GRADLE_TUNING:-on}" != "off" ]; then
+  # cores -> workers = max(1, cores-1)
+  cores=1
+  if command -v getconf >/dev/null 2>&1; then
+    cores=$(getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1)
+  elif command -v sysctl >/dev/null 2>&1; then
+    cores=$(sysctl -n hw.ncpu 2>/dev/null || echo 1)
+  elif command -v nproc >/dev/null 2>&1; then
+    cores=$(nproc 2>/dev/null || echo 1)
+  fi
+  case "$cores" in ''|*[!0-9]*) cores=1;; esac
+  workers=$((cores>1 ? cores-1 : 1))
+
+  PERF_OPTS="-Dorg.gradle.parallel=true -Dorg.gradle.caching=true -Dorg.gradle.vfs.watch=true -Dorg.gradle.configuration-cache=true -Dorg.gradle.configuration-cache.problems=warn -Dorg.gradle.workers.max=$workers -Dkotlin.incremental=true"
+  # append without clobbering user-provided GRADLE_OPTS
+  GRADLE_OPTS="${GRADLE_OPTS:+$GRADLE_OPTS }$PERF_OPTS"
+fi
+
+# --- Launch args ---
+set -- \
+  "-Dorg.gradle.appname=$APP_BASE_NAME" \
+  -classpath "$CLASSPATH" \
+  org.gradle.wrapper.GradleWrapperMain \
+  "$@"
+
+# require xargs
+command -v xargs >/dev/null 2>&1 || die "xargs is not available"
+
+# quote/escape JVM opts safely
+eval "set -- $(
+  printf '%s\n' "$DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS" \
+  | xargs -n1 \
+  | sed ' s~[^-[:alnum:]+,./:=@_]~\\&~g; ' \
+  | tr '\n' ' '
+)" '"$@"'
+
+exec "$JAVACMD" "$@"
