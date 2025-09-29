@@ -17,7 +17,7 @@ import {
 } from "@env";
 
 import {
-  OBJECT, Exercise, Food, Money, Sleep,
+  OBJECT, ExerciseRecord, FoodRecord, MoneyRecord, SleepRecord,
 } from "@imports/ImportSchemas";
 
 // -------------------------------------------------------------------------------------------------
@@ -65,7 +65,6 @@ export async function widgetTaskHandler(
     // 위젯 클릭 섹션 ------------------------------------------------------------------------------
     const setActiveView = async (section: string) => {
       await AsyncStorage.setItem("activeView", section);
-
       return section;
     };
 
@@ -87,23 +86,23 @@ export async function widgetTaskHandler(
           },
         };
         const [exerciseResponse, foodResponse, moneyResponse, sleepResponse] = await Promise.all([
-          axios.get(`${SERVER_URL}/api/exercise/list`, {
+          axios.get(`${SERVER_URL}/api/exercise/record/list`, {
             params: params
           }),
-          axios.get(`${SERVER_URL}/api/food/list`, {
+          axios.get(`${SERVER_URL}/api/food/record/list`, {
             params: params
           }),
-          axios.get(`${SERVER_URL}/api/money/list`, {
+          axios.get(`${SERVER_URL}/api/money/record/list`, {
             params: params
           }),
-          axios.get(`${SERVER_URL}/api/sleep/list`, {
+          axios.get(`${SERVER_URL}/api/sleep/record/list`, {
             params: params
           }),
         ]);
-        OBJECT.exercise = exerciseResponse.data.result?.[0] || Exercise;
-        OBJECT.food = foodResponse.data.result?.[0] || Food;
-        OBJECT.money = moneyResponse.data.result?.[0] || Money;
-        OBJECT.sleep = sleepResponse.data.result?.[0]?.sleep_section?.[0] || Sleep;
+        OBJECT.exerciseRecord = exerciseResponse.data.result?.[0] || ExerciseRecord;
+        OBJECT.foodRecord = foodResponse.data.result?.[0] || FoodRecord;
+        OBJECT.moneyRecord = moneyResponse.data.result?.[0] || MoneyRecord;
+        OBJECT.sleepRecord = sleepResponse.data.result?.[0]?.sleep_section?.[0] || SleepRecord;
       })();
 
       // 위젯 액션에 따른 렌더링
@@ -122,10 +121,10 @@ export async function widgetTaskHandler(
             clientDate={clientDate}
             clientDay={clientDay}
             clientTime={clientTime}
-            exercise={OBJECT.exercise}
-            food={OBJECT.food}
-            money={OBJECT.money}
-            sleep={OBJECT.sleep}
+            exercise={OBJECT.exerciseRecord}
+            food={OBJECT.foodRecord}
+            money={OBJECT.moneyRecord}
+            sleep={OBJECT.sleepRecord}
           />
         );
       }
@@ -141,10 +140,10 @@ export async function widgetTaskHandler(
             clientDate={clientDate}
             clientDay={clientDay}
             clientTime={clientTime}
-            exercise={OBJECT.exercise}
-            food={OBJECT.food}
-            money={OBJECT.money}
-            sleep={OBJECT.sleep}
+            exercise={OBJECT.exerciseRecord}
+            food={OBJECT.foodRecord}
+            money={OBJECT.moneyRecord}
+            sleep={OBJECT.sleepRecord}
           />
         );
       }

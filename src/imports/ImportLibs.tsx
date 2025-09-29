@@ -1,12 +1,6 @@
 // ImportLibs.tsx
 
-import axios from "axios";
-import moment from "moment-timezone";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 // -------------------------------------------------------------------------------------------------
-export {
-  axios,
-  moment,
-  AsyncStorage,
-};
+export { default as axios } from "axios";
+export { default as moment } from "moment-timezone";
+export { default as AsyncStorage } from '@react-native-async-storage/async-storage';

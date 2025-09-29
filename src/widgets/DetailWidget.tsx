@@ -5,7 +5,7 @@ import {
 } from "@imports/ImportReacts";
 
 // -------------------------------------------------------------------------------------------------
-declare type DetailWidgetProps = {
+declare type DetailWidgetRecordProps = {
   activeView: string;
   clientLanguage: string;
   clientCurrency: string;
@@ -15,50 +15,50 @@ declare type DetailWidgetProps = {
   clientDay: string;
 }
 // -------------------------------------------------------------------------------------------------
-declare type ActiveProps = {
+declare type ActiveRecordProps = {
   isActive: boolean;
   iconName: string;
 }
 // -------------------------------------------------------------------------------------------------
-declare type ExerciseProps = {
+declare type ExerciseRecordProps = {
   widgetHeight: number;
   clientLanguage: string;
   clientUnit: string;
   exercise: {
-    exercise_total_volume: any;
-    exercise_total_cardio: any;
-    exercise_total_scale: any;
+    exercise_record_total_volume: any;
+    exercise_record_total_cardio: any;
+    exercise_record_total_scale: any;
   };
 }
 // -------------------------------------------------------------------------------------------------
-declare type FoodProps = {
+declare type FoodRecordProps = {
   widgetHeight: number;
   clientLanguage: string;
   food: {
-    food_total_kcal: any;
-    food_total_carb:  any;
-    food_total_protein: any;
-    food_total_fat: any;
+    food_record_total_kcal: any;
+    food_record_total_carb:  any;
+    food_record_total_protein: any;
+    food_record_total_fat: any;
   };
 }
 // -------------------------------------------------------------------------------------------------
-declare type MoneyProps = {
+declare type MoneyRecordProps = {
   widgetHeight: number;
   clientLanguage: string;
   clientCurrency: string;
   money: {
-    money_total_income: any;
-    money_total_expense: any;
+    money_record_total_income: any;
+    money_record_total_expense: any;
   };
 }
 // -------------------------------------------------------------------------------------------------
-declare type SleepProps = {
+declare type SleepRecordProps = {
   widgetHeight: number;
   clientLanguage: string;
   sleep: {
-    sleep_bedTime: any;
-    sleep_wakeTime: any;
-    sleep_sleepTime: any;
+    sleep_record_bedTime: any;
+    sleep_record_wakeTime: any;
+    sleep_record_sleepTime: any;
   };
 }
 
@@ -86,7 +86,7 @@ const insertComma = (str: string) => {
 
 // -------------------------------------------------------------------------------------------------
 const SelectSection = (
-  { isActive, iconName }: ActiveProps
+  { isActive, iconName }: ActiveRecordProps
 ) => {
   let imageLink;
   if (iconName === "exercise") {
@@ -137,7 +137,7 @@ const SelectSection = (
 
 // -------------------------------------------------------------------------------------------------
 const ExerciseSection  = (
-  { widgetHeight, clientLanguage, clientUnit, exercise }: ExerciseProps
+  { widgetHeight, clientLanguage, clientUnit, exercise }: ExerciseRecordProps
 ) => {
 
   // 0. height
@@ -149,27 +149,27 @@ const ExerciseSection  = (
   }
 
   // 1. volume
-  const exercise_total_volume = {
+  const exercise_record_total_volume = {
     text: clientLanguage === "ko" ? "볼륨" : "Volume",
-    value: ["x"].includes(exercise.exercise_total_volume) ? "x" : exercise.exercise_total_volume,
-    color: ["x", "0"].includes(exercise.exercise_total_volume) ? "#9CA3AF" : "#000000",
-    end: ["x"].includes(exercise.exercise_total_volume) ? "" : "vol",
+    value: ["x"].includes(exercise.exercise_record_total_volume) ? "x" : exercise.exercise_record_total_volume,
+    color: ["x", "0"].includes(exercise.exercise_record_total_volume) ? "#9CA3AF" : "#000000",
+    end: ["x"].includes(exercise.exercise_record_total_volume) ? "" : "vol",
   };
 
   // 2. cardio
-  const exercise_total_cardio = {
+  const exercise_record_total_cardio = {
     text: clientLanguage === "ko" ? "유산소" : "Cardio",
-    value: ["x"].includes(exercise.exercise_total_cardio) ? "x" : exercise.exercise_total_cardio,
-    color: ["x", "00:00"].includes(exercise.exercise_total_cardio) ? "#9CA3AF" : "#000000",
-    end: ["x"].includes(exercise.exercise_total_cardio) ? "" : "h:m",
+    value: ["x"].includes(exercise.exercise_record_total_cardio) ? "x" : exercise.exercise_record_total_cardio,
+    color: ["x", "00:00"].includes(exercise.exercise_record_total_cardio) ? "#9CA3AF" : "#000000",
+    end: ["x"].includes(exercise.exercise_record_total_cardio) ? "" : "h:m",
   };
 
   // 3. scale
-  const exercise_total_scale = {
+  const exercise_record_total_scale = {
     text: clientLanguage === "ko" ? "체중" : "BodyWeight",
-    value: ["x"].includes(exercise.exercise_total_scale) ? "x" : exercise.exercise_total_scale,
-    color: ["x", "0"].includes(exercise.exercise_total_scale) ? "#9CA3AF" : "#000000",
-    end: ["x"].includes(exercise.exercise_total_scale) ? "" : clientUnit,
+    value: ["x"].includes(exercise.exercise_record_total_scale) ? "x" : exercise.exercise_record_total_scale,
+    color: ["x", "0"].includes(exercise.exercise_record_total_scale) ? "#9CA3AF" : "#000000",
+    end: ["x"].includes(exercise.exercise_record_total_scale) ? "" : clientUnit,
   };
 
   return (
@@ -203,12 +203,12 @@ const ExerciseSection  = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: fontSize(exercise_total_volume.text),
+            fontSize: fontSize(exercise_record_total_volume.text),
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
           }}
-          text={`${exercise_total_volume.text} : `}
+          text={`${exercise_record_total_volume.text} : `}
         />
         <TextWidget
           style={{
@@ -216,9 +216,9 @@ const ExerciseSection  = (
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
-            color: exercise_total_volume.color as ColorProp,
+            color: exercise_record_total_volume.color as ColorProp,
           }}
-          text={`${insertComma(exercise_total_volume.value)}`}
+          text={`${insertComma(exercise_record_total_volume.value)}`}
         />
         <TextWidget
           style={{
@@ -228,7 +228,7 @@ const ExerciseSection  = (
             marginRight: 0,
             color: "#434343"
           }}
-          text={`${exercise_total_volume.end}`}
+          text={`${exercise_record_total_volume.end}`}
         />
       </FlexWidget>
       {/* exercise 2 */}
@@ -252,12 +252,12 @@ const ExerciseSection  = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: fontSize(exercise_total_cardio.text),
+            fontSize: fontSize(exercise_record_total_cardio.text),
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
           }}
-          text={`${exercise_total_cardio.text} : `}
+          text={`${exercise_record_total_cardio.text} : `}
         />
         <TextWidget
           style={{
@@ -265,9 +265,9 @@ const ExerciseSection  = (
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
-            color: exercise_total_cardio.color as ColorProp,
+            color: exercise_record_total_cardio.color as ColorProp,
           }}
-          text={`${exercise_total_cardio.value}`}
+          text={`${exercise_record_total_cardio.value}`}
         />
         <TextWidget
           style={{
@@ -277,7 +277,7 @@ const ExerciseSection  = (
             marginRight: 0,
             color: "#434343"
           }}
-          text={`${exercise_total_cardio.end}`}
+          text={`${exercise_record_total_cardio.end}`}
         />
       </FlexWidget>
       {/* exercise 3 */}
@@ -301,12 +301,12 @@ const ExerciseSection  = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: fontSize(exercise_total_scale.text),
+            fontSize: fontSize(exercise_record_total_scale.text),
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
           }}
-          text={`${exercise_total_scale.text} : `}
+          text={`${exercise_record_total_scale.text} : `}
         />
         <TextWidget
           style={{
@@ -314,9 +314,9 @@ const ExerciseSection  = (
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
-            color: exercise_total_scale.color as ColorProp,
+            color: exercise_record_total_scale.color as ColorProp,
           }}
-          text={`${insertComma(exercise_total_scale.value)}`}
+          text={`${insertComma(exercise_record_total_scale.value)}`}
         />
         <TextWidget
           style={{
@@ -326,7 +326,7 @@ const ExerciseSection  = (
             marginRight: 0,
             color: "#434343"
           }}
-          text={`${exercise_total_scale.end}`}
+          text={`${exercise_record_total_scale.end}`}
         />
       </FlexWidget>
     </FlexWidget>
@@ -335,7 +335,7 @@ const ExerciseSection  = (
 
 // -------------------------------------------------------------------------------------------------
 const FoodSection = (
-  { widgetHeight, clientLanguage, food }: FoodProps
+  { widgetHeight, clientLanguage, food }: FoodRecordProps
 ) => {
 
   // 0. height
@@ -347,35 +347,35 @@ const FoodSection = (
   }
 
   // 1. kcal
-  const food_total_kcal = {
+  const food_record_total_kcal = {
     text: clientLanguage === "ko" ? "칼로리" : "Kcal",
-    value: ["x"].includes(food.food_total_kcal) ? "x" : food.food_total_kcal,
-    color: ["x", "0"].includes(food.food_total_kcal) ? "#9CA3AF" : "#000000",
-    end: ["x"].includes(food.food_total_kcal) ? "" : "kcal",
+    value: ["x"].includes(food.food_record_total_kcal) ? "x" : food.food_record_total_kcal,
+    color: ["x", "0"].includes(food.food_record_total_kcal) ? "#9CA3AF" : "#000000",
+    end: ["x"].includes(food.food_record_total_kcal) ? "" : "kcal",
   };
 
   // 2. carb
-  const food_total_carb = {
+  const food_record_total_carb = {
     text: clientLanguage === "ko" ? "탄수화물" : "Carb",
-    value: ["x"].includes(food.food_total_carb) ? "x" : food.food_total_carb,
-    color: ["x", "0"].includes(food.food_total_carb) ? "#9CA3AF" : "#000000",
-    end: ["x"].includes(food.food_total_carb) ? "" : "g",
+    value: ["x"].includes(food.food_record_total_carb) ? "x" : food.food_record_total_carb,
+    color: ["x", "0"].includes(food.food_record_total_carb) ? "#9CA3AF" : "#000000",
+    end: ["x"].includes(food.food_record_total_carb) ? "" : "g",
   };
 
   // 3. protein
-  const food_total_protein = {
+  const food_record_total_protein = {
     text: clientLanguage === "ko" ? "단백질" : "Protein",
-    value: ["x"].includes(food.food_total_protein) ? "x" : food.food_total_protein,
-    color: ["x", "0"].includes(food.food_total_protein) ? "#9CA3AF" : "#000000",
-    end: ["x"].includes(food.food_total_protein) ? "" : "g",
+    value: ["x"].includes(food.food_record_total_protein) ? "x" : food.food_record_total_protein,
+    color: ["x", "0"].includes(food.food_record_total_protein) ? "#9CA3AF" : "#000000",
+    end: ["x"].includes(food.food_record_total_protein) ? "" : "g",
   };
 
   // 4. fat
-  const food_total_fat = {
+  const food_record_total_fat = {
     text: clientLanguage === "ko" ? "지방" : "Fat",
-    value: ["x"].includes(food.food_total_fat) ? "x" : food.food_total_fat,
-    color: ["x", "0"].includes(food.food_total_fat) ? "#9CA3AF" : "#000000",
-    end: ["x"].includes(food.food_total_fat) ? "" : "g",
+    value: ["x"].includes(food.food_record_total_fat) ? "x" : food.food_record_total_fat,
+    color: ["x", "0"].includes(food.food_record_total_fat) ? "#9CA3AF" : "#000000",
+    end: ["x"].includes(food.food_record_total_fat) ? "" : "g",
   };
 
   return (
@@ -409,12 +409,12 @@ const FoodSection = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: fontSize(food_total_kcal.text),
+            fontSize: fontSize(food_record_total_kcal.text),
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
           }}
-          text={`${food_total_kcal.text} : `}
+          text={`${food_record_total_kcal.text} : `}
         />
         <TextWidget
           style={{
@@ -422,9 +422,9 @@ const FoodSection = (
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
-            color: food_total_kcal.color as ColorProp,
+            color: food_record_total_kcal.color as ColorProp,
           }}
-          text={`${insertComma(food_total_kcal.value)}`}
+          text={`${insertComma(food_record_total_kcal.value)}`}
         />
         <TextWidget
           style={{
@@ -434,7 +434,7 @@ const FoodSection = (
             marginRight: 0,
             color: "#434343"
           }}
-          text={`${food_total_kcal.end}`}
+          text={`${food_record_total_kcal.end}`}
         />
       </FlexWidget>
       {/* food 2 */}
@@ -458,12 +458,12 @@ const FoodSection = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: fontSize(food_total_carb.text),
+            fontSize: fontSize(food_record_total_carb.text),
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
           }}
-          text={`${food_total_carb.text} : `}
+          text={`${food_record_total_carb.text} : `}
         />
         <TextWidget
           style={{
@@ -471,9 +471,9 @@ const FoodSection = (
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
-            color: food_total_carb.color as ColorProp,
+            color: food_record_total_carb.color as ColorProp,
           }}
-          text={`${insertComma(food_total_carb.value)}`}
+          text={`${insertComma(food_record_total_carb.value)}`}
         />
         <TextWidget
           style={{
@@ -483,7 +483,7 @@ const FoodSection = (
             marginRight: 0,
             color: "#434343"
           }}
-          text={`${food_total_carb.end}`}
+          text={`${food_record_total_carb.end}`}
         />
       </FlexWidget>
       {/* food 3 */}
@@ -507,12 +507,12 @@ const FoodSection = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: fontSize(food_total_protein.text),
+            fontSize: fontSize(food_record_total_protein.text),
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
           }}
-          text={`${food_total_protein.text} : `}
+          text={`${food_record_total_protein.text} : `}
         />
         <TextWidget
           style={{
@@ -520,9 +520,9 @@ const FoodSection = (
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
-            color: food_total_protein.color as ColorProp,
+            color: food_record_total_protein.color as ColorProp,
           }}
-          text={`${insertComma(food_total_protein.value)}`}
+          text={`${insertComma(food_record_total_protein.value)}`}
         />
         <TextWidget
           style={{
@@ -532,7 +532,7 @@ const FoodSection = (
             marginRight: 0,
             color: "#434343"
           }}
-          text={`${food_total_protein.end}`}
+          text={`${food_record_total_protein.end}`}
         />
       </FlexWidget>
       {/* food 4 */}
@@ -556,12 +556,12 @@ const FoodSection = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: fontSize(food_total_fat.text),
+            fontSize: fontSize(food_record_total_fat.text),
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
           }}
-          text={`${food_total_fat.text} : `}
+          text={`${food_record_total_fat.text} : `}
         />
         <TextWidget
           style={{
@@ -569,9 +569,9 @@ const FoodSection = (
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
-            color: food_total_fat.color as ColorProp,
+            color: food_record_total_fat.color as ColorProp,
           }}
-          text={`${insertComma(food_total_fat.value)}`}
+          text={`${insertComma(food_record_total_fat.value)}`}
         />
         <TextWidget
           style={{
@@ -581,7 +581,7 @@ const FoodSection = (
             marginRight: 0,
             color: "#434343"
           }}
-          text={`${food_total_fat.end}`}
+          text={`${food_record_total_fat.end}`}
         />
       </FlexWidget>
     </FlexWidget>
@@ -590,7 +590,7 @@ const FoodSection = (
 
 // -------------------------------------------------------------------------------------------------
 const MoneySection = (
-  { widgetHeight, clientLanguage, clientCurrency, money}: MoneyProps
+  { widgetHeight, clientLanguage, clientCurrency, money}: MoneyRecordProps
 ) => {
 
   // 0. height
@@ -602,19 +602,19 @@ const MoneySection = (
   }
 
   // 1. income
-  const money_total_income = {
+  const money_record_total_income = {
     text: clientLanguage === "ko" ? "수입" : "Income",
-    value: ["x"].includes(money.money_total_income) ? "x" : money.money_total_income,
-    color: ["x", "0"].includes(money.money_total_income) ? "#9CA3AF" : "#000000",
-    end: ["x"].includes(money.money_total_income) ? "" : clientCurrency,
+    value: ["x"].includes(money.money_record_total_income) ? "x" : money.money_record_total_income,
+    color: ["x", "0"].includes(money.money_record_total_income) ? "#9CA3AF" : "#000000",
+    end: ["x"].includes(money.money_record_total_income) ? "" : clientCurrency,
   };
 
   // 2. expense
-  const money_total_expense = {
+  const money_record_total_expense = {
     text: clientLanguage === "ko" ? "지출" : "Expense",
-    value: ["x"].includes(money.money_total_expense) ? "x" : money.money_total_expense,
-    color: ["x", "0"].includes(money.money_total_expense) ? "#9CA3AF" : "#000000",
-    end: ["x"].includes(money.money_total_expense) ? "" : clientCurrency,
+    value: ["x"].includes(money.money_record_total_expense) ? "x" : money.money_record_total_expense,
+    color: ["x", "0"].includes(money.money_record_total_expense) ? "#9CA3AF" : "#000000",
+    end: ["x"].includes(money.money_record_total_expense) ? "" : clientCurrency,
   };
 
   return (
@@ -648,12 +648,12 @@ const MoneySection = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: fontSize(money_total_income.text),
+            fontSize: fontSize(money_record_total_income.text),
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
           }}
-          text={`${money_total_income.text} : `}
+          text={`${money_record_total_income.text} : `}
         />
         <TextWidget
           style={{
@@ -661,9 +661,9 @@ const MoneySection = (
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
-            color: money_total_income.color as ColorProp,
+            color: money_record_total_income.color as ColorProp,
           }}
-          text={`${insertComma(money_total_income.value)}`}
+          text={`${insertComma(money_record_total_income.value)}`}
         />
         <TextWidget
           style={{
@@ -673,7 +673,7 @@ const MoneySection = (
             marginRight: 0,
             color: "#434343"
           }}
-          text={`${money_total_income.end}`}
+          text={`${money_record_total_income.end}`}
         />
       </FlexWidget>
       {/* money 2 */}
@@ -697,12 +697,12 @@ const MoneySection = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: fontSize(money_total_expense.text),
+            fontSize: fontSize(money_record_total_expense.text),
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
           }}
-          text={`${money_total_expense.text} : `}
+          text={`${money_record_total_expense.text} : `}
         />
         <TextWidget
           style={{
@@ -710,9 +710,9 @@ const MoneySection = (
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
-            color: money_total_expense.color as ColorProp,
+            color: money_record_total_expense.color as ColorProp,
           }}
-          text={`${insertComma(money_total_expense.value)}`}
+          text={`${insertComma(money_record_total_expense.value)}`}
         />
         <TextWidget
           style={{
@@ -722,7 +722,7 @@ const MoneySection = (
             marginRight: 0,
             color: "#434343"
           }}
-          text={`${money_total_expense.end}`}
+          text={`${money_record_total_expense.end}`}
         />
       </FlexWidget>
     </FlexWidget>
@@ -731,7 +731,7 @@ const MoneySection = (
 
 // -------------------------------------------------------------------------------------------------
 const SleepSection = (
-  { widgetHeight, clientLanguage, sleep }: SleepProps
+  { widgetHeight, clientLanguage, sleep }: SleepRecordProps
 ) => {
 
   // 0. height
@@ -743,27 +743,27 @@ const SleepSection = (
   }
 
   // 1. bedTime
-  const sleep_bedTime = {
+  const sleep_record_bedTime = {
     text: clientLanguage === "ko" ? "취침" : "Bed",
-    value: ["x"].includes(sleep.sleep_bedTime) ? "x" : sleep.sleep_bedTime,
-    color: ["x", "00:00"].includes(sleep.sleep_bedTime) ? "#9CA3AF" : "#000000",
-    end: ["x"].includes(sleep.sleep_bedTime) ? "" : "h:m",
+    value: ["x"].includes(sleep.sleep_record_bedTime) ? "x" : sleep.sleep_record_bedTime,
+    color: ["x", "00:00"].includes(sleep.sleep_record_bedTime) ? "#9CA3AF" : "#000000",
+    end: ["x"].includes(sleep.sleep_record_bedTime) ? "" : "h:m",
   };
 
   // 2. wakeTime
-  const sleep_wakeTime = {
+  const sleep_record_wakeTime = {
     text: clientLanguage === "ko" ? "기상" : "Wake",
-    value: ["x"].includes(sleep.sleep_wakeTime) ? "x" : sleep.sleep_wakeTime,
-    color: ["x", "00:00"].includes(sleep.sleep_wakeTime) ? "#9CA3AF" : "#000000",
-    end: ["x"].includes(sleep.sleep_wakeTime) ? "" : "h:m",
+    value: ["x"].includes(sleep.sleep_record_wakeTime) ? "x" : sleep.sleep_record_wakeTime,
+    color: ["x", "00:00"].includes(sleep.sleep_record_wakeTime) ? "#9CA3AF" : "#000000",
+    end: ["x"].includes(sleep.sleep_record_wakeTime) ? "" : "h:m",
   };
 
   // 3. sleepTime
-  const sleep_sleepTime = {
+  const sleep_record_sleepTime = {
     text: clientLanguage === "ko" ? "수면" : "Sleep",
-    value: ["x"].includes(sleep.sleep_sleepTime) ? "x" : sleep.sleep_sleepTime,
-    color: ["x", "00:00"].includes(sleep.sleep_sleepTime) ? "#9CA3AF" : "#000000",
-    end: ["x"].includes(sleep.sleep_sleepTime) ? "" : "h:m",
+    value: ["x"].includes(sleep.sleep_record_sleepTime) ? "x" : sleep.sleep_record_sleepTime,
+    color: ["x", "00:00"].includes(sleep.sleep_record_sleepTime) ? "#9CA3AF" : "#000000",
+    end: ["x"].includes(sleep.sleep_record_sleepTime) ? "" : "h:m",
   };
 
   return (
@@ -797,12 +797,12 @@ const SleepSection = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: fontSize(sleep_bedTime.text),
+            fontSize: fontSize(sleep_record_bedTime.text),
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
           }}
-          text={`${sleep_bedTime.text} : `}
+          text={`${sleep_record_bedTime.text} : `}
         />
         <TextWidget
           style={{
@@ -810,9 +810,9 @@ const SleepSection = (
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
-            color: sleep_bedTime.color as ColorProp,
+            color: sleep_record_bedTime.color as ColorProp,
           }}
-          text={`${sleep_bedTime.value}`}
+          text={`${sleep_record_bedTime.value}`}
         />
         <TextWidget
           style={{
@@ -822,7 +822,7 @@ const SleepSection = (
             marginRight: 0,
             color: "#434343"
           }}
-          text={`${sleep_bedTime.end}`}
+          text={`${sleep_record_bedTime.end}`}
         />
       </FlexWidget>
       {/* sleep 2 */}
@@ -846,12 +846,12 @@ const SleepSection = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: fontSize(sleep_wakeTime.text),
+            fontSize: fontSize(sleep_record_wakeTime.text),
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
           }}
-          text={`${sleep_wakeTime.text} : `}
+          text={`${sleep_record_wakeTime.text} : `}
         />
         <TextWidget
           style={{
@@ -859,9 +859,9 @@ const SleepSection = (
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
-            color: sleep_wakeTime.color as ColorProp,
+            color: sleep_record_wakeTime.color as ColorProp,
           }}
-          text={`${sleep_wakeTime.value}`}
+          text={`${sleep_record_wakeTime.value}`}
         />
         <TextWidget
           style={{
@@ -871,7 +871,7 @@ const SleepSection = (
             marginRight: 0,
             color: "#434343"
           }}
-          text={`${sleep_wakeTime.end}`}
+          text={`${sleep_record_wakeTime.end}`}
         />
       </FlexWidget>
       {/* sleep 3 */}
@@ -895,12 +895,12 @@ const SleepSection = (
         <TextWidget
           style={{
             textAlign: "center",
-            fontSize: fontSize(sleep_sleepTime.text),
+            fontSize: fontSize(sleep_record_sleepTime.text),
             fontWeight: '500',
             marginRight: 10,
             color: "#000000"
           }}
-          text={`${sleep_sleepTime.text} : `}
+          text={`${sleep_record_sleepTime.text} : `}
         />
         <TextWidget
           style={{
@@ -908,9 +908,9 @@ const SleepSection = (
             fontSize: 16,
             fontWeight: '500',
             marginRight: 10,
-            color: sleep_sleepTime.color as ColorProp,
+            color: sleep_record_sleepTime.color as ColorProp,
           }}
-          text={`${sleep_sleepTime.value}`}
+          text={`${sleep_record_sleepTime.value}`}
         />
         <TextWidget
           style={{
@@ -920,7 +920,7 @@ const SleepSection = (
             marginRight: 0,
             color: "#434343"
           }}
-          text={`${sleep_sleepTime.end}`}
+          text={`${sleep_record_sleepTime.end}`}
         />
       </FlexWidget>
     </FlexWidget>
@@ -942,7 +942,7 @@ export const DetailWidget = (
     food,
     money,
     sleep
-  }: DetailWidgetProps & ExerciseProps & FoodProps & MoneyProps & SleepProps
+  }: DetailWidgetRecordProps & ExerciseRecordProps & FoodRecordProps & MoneyRecordProps & SleepRecordProps
 ) => {
     return (
       <FlexWidget

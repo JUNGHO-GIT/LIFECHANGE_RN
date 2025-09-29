@@ -1,37 +1,8 @@
 // ImportReacts.tsx
 
-import React, {
-  useState, useEffect, useLayoutEffect, useCallback, useMemo, useRef, createRef, forwardRef,
-  createContext, useContext, Suspense, lazy,
-} from "react";
-
-import {
-	StyleSheet, Dimensions, View, Text, TouchableOpacity, Modal, BackHandler, SafeAreaView,
-} from 'react-native';
-
-import {
-	SafeAreaProvider,
-} from 'react-native-safe-area-context';
-
-import {
-  WebView,
-} from 'react-native-webview';
-
-import {
-  BannerAd, BannerAdSize, TestIds,
-} from "react-native-google-mobile-ads";
-
-import {
-  FlexWidget, TextWidget, ImageWidget, ColorProp
-} from "react-native-android-widget";
-
-import type {
-  WidgetTaskHandlerProps,
-} from "react-native-android-widget";
-
 // -------------------------------------------------------------------------------------------------
 export {
-  React,
+  default as React,
   useState,
   useEffect,
   useLayoutEffect,
@@ -44,7 +15,9 @@ export {
   useContext,
   Suspense,
   lazy,
-  SafeAreaView,
+} from "react";
+
+export {
   StyleSheet,
   Dimensions,
   View,
@@ -52,17 +25,30 @@ export {
   TouchableOpacity,
   Modal,
   BackHandler,
+  SafeAreaView,
+} from 'react-native';
+
+export {
+  SafeAreaProvider,
+} from 'react-native-safe-area-context';
+
+export {
   WebView,
+} from 'react-native-webview';
+
+export {
   BannerAd,
   BannerAdSize,
   TestIds,
+} from "react-native-google-mobile-ads";
+
+export {
   FlexWidget,
   TextWidget,
   ImageWidget,
-  WidgetTaskHandlerProps,
-  SafeAreaProvider,
-};
+} from "react-native-android-widget";
 
 export type {
   ColorProp,
-};
+  WidgetTaskHandlerProps,
+} from "react-native-android-widget";
