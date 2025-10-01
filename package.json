@@ -9,9 +9,9 @@
     "build": "cd android && gradlew clean && gradlew assembleRelease --stacktrace",
     "make-apk": "cd android && gradlew assembleRelease --stacktrace",
     "make-bundle": "cd android && gradlew bundleRelease --stacktrace",
-    "git-fetch": "git fetch --all && git reset --hard private/master && git pull",
-    "android-reset": "pwsh -NoProfile -Command \"try { Stop-Process -Name java,node,adb -Force -ErrorAction SilentlyContinue } catch {}; Start-Sleep -Milliseconds 500; if (Test-Path 'node_modules') { Remove-Item -Recurse -Force 'node_modules' }; if (Test-Path 'package-lock.json') { Remove-Item -Force 'package-lock.json' }; if (Test-Path 'android\\\\.gradle') { Remove-Item -Recurse -Force 'android\\\\.gradle' }; if (Test-Path 'android\\\\build') { Remove-Item -Recurse -Force 'android\\\\build' }; if (Test-Path 'android\\\\app\\\\build') { Remove-Item -Recurse -Force 'android\\\\app\\\\build' }; if (Test-Path 'android\\\\.idea') { Remove-Item -Recurse -Force 'android\\\\.idea' }; if (Test-Path 'android\\\\.project') { Remove-Item -Force 'android\\\\.project' }; if (Test-Path 'android\\\\.classpath') { Remove-Item -Force 'android\\\\.classpath' }; if (Test-Path 'android\\\\.settings') { Remove-Item -Recurse -Force 'android\\\\.settings' }; if (Test-Path '$env:USERPROFILE\\\\.gradle') { Remove-Item -Recurse -Force '$env:USERPROFILE\\\\.gradle' }; npm install; Write-Host '리셋 완료'\"",
-    "gcloud-deploy": "node .node/gcloud.cjs --full-deploy"
+		"reset": "node .node/reset.cjs --npm",
+		"autofix": "node .node/autofix.cjs",
+		"gcloud": "node .node/gcloud.cjs"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",
@@ -22,7 +22,7 @@
     "react-native-android-widget": "0.17.1",
     "react-native-dotenv": "3.4.11",
     "react-native-gesture-handler": "2.28.0",
-    "react-native-google-mobile-ads": "15.7.0",
+    "react-native-google-mobile-ads": "15.8.0",
     "react-native-safe-area-context": "5.6.1",
     "react-native-screens": "4.16.0",
     "react-native-webview": "13.16.0"
@@ -39,7 +39,7 @@
     "@react-native/gradle-plugin": "0.81.1",
     "@react-native/metro-config": "0.81.1",
     "@react-native/typescript-config": "0.81.1",
-    "@types/react": "19.1.15",
+    "@types/react": "19.1.16",
     "@types/react-test-renderer": "19.1.0",
     "babel-jest": "30.2.0",
     "babel-plugin-module-resolver": "5.0.2",
@@ -47,6 +47,6 @@
     "jest": "30.2.0",
     "prettier": "3.6.2",
     "react-test-renderer": "19.1.1",
-    "typescript": "5.9.2"
+    "typescript": "5.9.3"
   }
 }
