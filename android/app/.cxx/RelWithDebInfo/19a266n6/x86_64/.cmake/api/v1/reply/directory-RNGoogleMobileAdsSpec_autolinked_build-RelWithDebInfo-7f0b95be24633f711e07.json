@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "RNGoogleMobileAdsSpec_autolinked_build",
+		"source" : "C:/JUNGHO/2.IDE/2.Vscode/Workspace/1.Project/LIFECHANGE_RN/node_modules/react-native-google-mobile-ads/android/build/generated/source/codegen/jni"
+	}
+}
