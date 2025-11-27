@@ -1,0 +1,145 @@
+// android/build.gradle (project)
+
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.nio.charset.StandardCharsets
+import java.util.regex.Pattern
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Properties
+
+// ----------------------------------------------------------------------------------------------------------
+// 1. buildscript
+// ----------------------------------------------------------------------------------------------------------
+buildscript {
+	repositories {
+		google()
+		mavenCentral()
+	}
+	dependencies {
+		classpath("com.android.tools.build:gradle:8.7.3")
+		classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.20")
+	}
+  	ext {
+		// Android SDK 및 NDK 버전 ---------------------------------------------------
+		buildToolsVersion = "35.0.0"
+		compileSdkVersion = 35
+		targetSdkVersion = 35
+		minSdkVersion = 27
+		ndkVersion = '27.0.12077973'
+		versionCode = 1
+		versionName = "1.0.1"
+
+		// RN 버전 자동 탐지 ---------------------------------------------------------
+		def rnProps = new Properties()
+		file("../node_modules/react-native/ReactAndroid/gradle.properties").withInputStream {
+			rnProps.load(it)
+		}
+		reactNativeVersion = rnProps.getProperty("VERSION_NAME")
+
+		// changelog 기반 versionCode/Name 업데이트 ---------------------------------
+		def changeLogFile = file("../changelog.md")
+		def charset = StandardCharsets.UTF_8
+		def content = new String(Files.readAllBytes(Paths.get(changeLogFile.path)), charset)
+		def versionCodePattern = Pattern.compile('## versionCode = (\\d+)')
+		def matcher = versionCodePattern.matcher(content)
+		def newContent = content
+		def maxVersionCode = 0
+		while (matcher.find()) {
+			def v = matcher.group(1).toInteger()
+			if (v > maxVersionCode) { maxVersionCode = v }
+		}
+		rootProject.ext.versionCode = maxVersionCode + 1
+		if (rootProject.ext.versionCode >= 100) {
+			def firstStr = rootProject.ext.versionCode.toString().substring(0, 1)
+			def remainStr = rootProject.ext.versionCode.toString().substring(1)
+			rootProject.ext.versionName = "1." + firstStr + "." + remainStr
+		}
+		else {
+			rootProject.ext.versionName = "1.0." + rootProject.ext.versionCode
+		}
+
+		// changelog에 새 버전 섹션 추가 -----------------------------------------------
+		def now = LocalDateTime.now()
+		def formatter = DateTimeFormatter.ofPattern('yyyy-MM-dd (HH:mm:ss)')
+		def timestamp = now.format(formatter)
+		def newVersionSection = "\n## versionCode = " + rootProject.ext.versionCode + "\n\n- " + "versionName = " + rootProject.ext.versionName + "\n- " + timestamp + "\n"
+		newContent = newContent + newVersionSection
+		Files.write(Paths.get(changeLogFile.path), newContent.getBytes(charset))
+		println "Version code has been incremented to " + rootProject.ext.versionCode + " and new version section added."
+	}
+}
+
+// ----------------------------------------------------------------------------------------------------------
+// 3. allprojects
+// ----------------------------------------------------------------------------------------------------------
+allprojects {
+	configurations.all {
+		// react-native -> react-android 치환 + Kotlin 강제 정렬
+		resolutionStrategy.dependencySubstitution {
+			substitute(module("com.facebook.react:react-native"))
+			.using(module("com.facebook.react:react-android:${rootProject.ext.reactNativeVersion}"))
+		}
+		// Kotlin BOM 강제(라이브러리와 불일치 방지)
+		resolutionStrategy.force(
+			"org.jetbrains.kotlin:kotlin-stdlib:2.1.20",
+			"org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.1.20",
+			"org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.1.20",
+			"org.jetbrains.kotlin:kotlin-stdlib-common:2.1.20",
+			"org.jetbrains.kotlin:kotlin-reflect:2.1.20"
+		)
+	}
+}
+
+// ----------------------------------------------------------------------------------------------------------
+// 4. subprojects
+// ----------------------------------------------------------------------------------------------------------
+subprojects { p ->
+	// 저장소 보강
+	repositories {
+		google()
+		mavenCentral()
+		maven { url("$rootDir/../node_modules/react-native/android") }
+		maven { url("$rootDir/../node_modules/jsc-android/dist") }
+	}
+
+	p.plugins.withId("com.android.library") {
+		// Android 라이브러리 공통 옵션 + RN 코어 타입 제공
+		p.android {
+			buildFeatures { buildConfig = true }
+			compileOptions {
+			sourceCompatibility JavaVersion.VERSION_1_8
+			targetCompatibility JavaVersion.VERSION_1_8
+			}
+		}
+		// RN 타입 참조용
+		p.dependencies.add("compileOnly", "com.facebook.react:react-android:${rootProject.ext.reactNativeVersion}")
+	}
+
+	// Kotlin JVM 타깃 1.8로 통일
+	p.plugins.withId("org.jetbrains.kotlin.android") {
+		p.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+			kotlinOptions.jvmTarget = "1.8"
+		}
+	}
+
+	// 혹시 모듈이 자체적으로 덮어쓰는 경우, 태스크 레벨 재강제
+	p.tasks.matching { it.name.startsWith("compile") && it instanceof JavaCompile }.configureEach { JavaCompile jc ->
+		jc.sourceCompatibility = JavaVersion.VERSION_1_8.toString()
+		jc.targetCompatibility = JavaVersion.VERSION_1_8.toString()
+	}
+
+	// AndroidX 리소스/타입 부족 보강(필요 모듈 한정)
+	if (["react-native-gesture-handler", "react-native-screens", "react-native-webview"].contains(p.name)) {
+		p.dependencies.add("implementation", "androidx.appcompat:appcompat:1.7.0")
+		p.dependencies.add("implementation", "androidx.core:core-ktx:1.13.1")
+		p.dependencies.add("implementation", "com.google.android.material:material:1.12.0")
+	}
+
+	// 특정 모듈 네임스페이스 보정
+	if (p.name == "react-native-google-mobile-ads") {
+		p.plugins.withId("com.android.library") {
+			p.android { namespace "io.invertase.googlemobileads" }
+		}
+	}
+}
