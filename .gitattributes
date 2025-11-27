@@ -54,6 +54,10 @@
 **/.grunt/** linguist-detectable=false
 **/.gulp/** linguist-detectable=false
 **/.parcel-cache/** linguist-detectable=false
+**/.history/** linguist-detectable=false
+**/.bookmark/** linguist-detectable=false
+**/.backup/** linguist-detectable=false
+**/.etc/** linguist-detectable=false
 
 # ==================================================================================================
 # Files ============================================================================================
@@ -184,11 +188,5 @@
 **/.gitignore.public.* linguist-detectable=false
 **/.gitignore.private linguist-detectable=false
 **/.gitignore.private.* linguist-detectable=false
-**/*.backup linguist-detectable=false
-**/*.backup.* linguist-detectable=false
 **/*.vsix linguist-detectable=false
 **/*.vsix.* linguist-detectable=false
-**/*.history linguist-detectable=false
-**/*.history.* linguist-detectable=false
-**/*.bookmark linguist-detectable=false
-**/*.bookmark.* linguist-detectable=false
