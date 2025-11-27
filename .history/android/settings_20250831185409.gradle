@@ -1,0 +1,42 @@
+// settings.gradle
+
+// ----------------------------------------------------------------------------------------------------------
+// 1. pluginManagement
+// ----------------------------------------------------------------------------------------------------------
+pluginManagement {
+	repositories {
+		google()
+		mavenCentral()
+		gradlePluginPortal()
+		maven { url("$rootDir/../node_modules/react-native/android") }
+		maven { url("$rootDir/../node_modules/jsc-android/dist") }
+	}
+	// RN Gradle 플러그인 경로
+	includeBuild("../node_modules/@react-native/gradle-plugin")
+}
+
+// React Settings 플러그인 적용 + 오토링킹 생성 설정
+plugins {
+	id("com.facebook.react.settings")
+}
+extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
+	ex.autolinkLibrariesFromCommand()
+}
+
+// ----------------------------------------------------------------------------------------------------------
+// 2. dependencyResolutionManagement
+// ----------------------------------------------------------------------------------------------------------
+dependencyResolutionManagement {
+	repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+	repositories {
+		google()
+		mavenCentral()
+	}
+}
+
+// ----------------------------------------------------------------------------------------------------------
+// 3. include modules
+// ----------------------------------------------------------------------------------------------------------
+rootProject.name = "LIFECHANGE"
+include(":app")
+includeBuild("../node_modules/@react-native/gradle-plugin")
