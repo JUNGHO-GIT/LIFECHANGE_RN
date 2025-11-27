@@ -2,15 +2,15 @@
 
 import {
   WidgetTaskHandlerProps,
-} from "@imports/ImportReacts";
+} from "@exports/ExportReacts";
 
 import {
   axios, AsyncStorage, moment,
-} from "@imports/ImportLibs";
+} from "@exports/ExportLibs";
 
 import {
   DetailWidget,
-} from "@imports/ImportWidgets";
+} from "@exports/ExportWidgets";
 
 import {
   SERVER_URL,
@@ -18,7 +18,7 @@ import {
 
 import {
   OBJECT, ExerciseRecord, FoodRecord, MoneyRecord, SleepRecord,
-} from "@imports/ImportSchemas";
+} from "@exports/ExportSchemas";
 
 // -------------------------------------------------------------------------------------------------
 const nameToWidget = {

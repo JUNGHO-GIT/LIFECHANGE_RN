@@ -1,14 +1,110 @@
-0. The Maximum Java version is Java 11
-1. The most important thing to keep in mind is to reduce unnecessary memory waste and leaks, and maximize performance and efficiency
-2. But Do not shorten variable or parameter names to extremes. For example, do not use result => r And Never break a line before a semicolon
-2. Change the code to arrow function format, and if it is a function, add the fn prefix in the format 'fnFoo'
-3. Never change comments in the code I send, even if they are simple `----` lines
-4. Use `JUST ONE SPACE` around assignment operators (ex. '=' or ':') and avoid more than one spacing for alignment
-5. Always use line breaks and indentation in parentheses, square brackets
-6. When rewriting, avoid using 'if' statements whenever possible and use symbols like the ternary operator or '&&' instead
-7. When modifying existing code, revise all 'if' statements to use the ternary operator or symbols like '&&' for brevity
-8. Nevertheless, only in the absolutely unavoidable case where you must use an 'if' conditional statement, follow these guidelines:
-9-1. All if statements must use braces {..} and proper line breaks/indentation, especially when they contain return statements
-9-2. Never write `if` statements on a single line.
-9-3. Use `}\n\telse {` or `}\n\telse if {` or `}\n\tcatch {` instead of `}else{` or `}else if {` or `}catch{`
-9-4. Convert all single-line if statements like `if (condition) return value;` to:`if (condition) {\n\treturn value;\n}`
+# 1. CORE PRINCIPLES
+
+# 1-1. Response Principles
+- Detailed, objective, professional responses
+- Capture core intent, not literal interpretation
+- Never fabricate; acknowledge errors immediately
+- When in 'Agent' mode, jsconfig or tsconfig errors are ignored.
+
+# 1-2. Coding Philosophy
+- PerformanceFirst: minimize memory waste/leaks
+- Readability: clear variable names (no extreme abbreviations)
+- Maintainability: flat structure, avoid deep nesting
+- FunctionOrganization: group by logical flow, not micro-tasks
+- StyleGuide: no spaghetti (max 4-level indentation)
+
+# 1-3. MANDATORY Code Modification Protocol
+**NOTE: Ternary and IIFE preferences apply primarily to JavaScript/TypeScript. For other languages (Java, Python, etc.), follow language-specific idiomatic conventions.**
+
+- ALWAYS PREFER `ternary` or `IIFE` over if-else (JS/TS)
+- ALWAYS send `code format` for copy-paste
+- ALWAYS return `MODIFIED code` ONLY
+- ALWAYS exactly ONE SPACE around "=" or ":"
+- EXCEPTION NO SPACE in parameter default values (e.g., `function f(a=1)`, `(a=1) => {}`)
+- NEVER modify comments (preserve `// -----------`)
+- NEVER break line before semicolon
+- NEVER mid-function return; assign variable, return at end only
+
+# 1-4. Java (max v1.8)
+- Define inner classes within larger class; group related methods in inner classes
+
+# 1-5. JavaScript (ES6+)
+- Prefer ternary/&& over if statements
+- Prefer arrow functions
+- Template literals: `foo` (backticks)
+- Object keys: always double quotes ("key": value)
+
+# 2. FORMATTING EXAMPLES
+
+# 2-1. TERNARY CHAINS
+- Wrap each condition/result in parentheses on separate lines
+**INCORRECT:**
+```javascript
+(!s || s === "p1") ? f() : (s === "p2") ? f(s, "yy") : f(s);
+```
+**CORRECT:**
+```javascript
+!s || s === `p1` ? (
+  f()
+) : s === `p2` ? (
+  f(s, "yy")
+) : (
+  f(s)
+)
+```
+
+# 2-2. IIFE
+- Prefer IIFE over if-else when ternary insufficient
+- AVOID excessive IIFE, extract variables BEFORE final ternary
+- Use `(() => { })()` only when: isolated scope required, block scoping needed, or mid-execution return
+**INCORRECT:**
+```javascript
+(!r.e) ? (() => {
+  const sts = typeof r.s === `number` ? r.s === 0 : true;
+  return sts;
+})() : (
+  false
+)
+return ext ? (() => {
+  const d = tp ? path.join(cwd, tp) : cwd;
+  return fs.existsSync(d) ? true : false;
+})() : false;
+```
+**CORRECT:**
+```javascript
+!r.e ? (
+  typeof r.s === `number` ? r.s === 0 : true
+) : (
+  false
+)
+const d = tp ? path.join(cwd, tp) : cwd;
+const v = fs.existsSync(d);
+const rs = ext && v ? true : false;
+return rs;
+```
+
+# 2-3. IF/ELSE & TRY/CATCH
+- ALWAYS PREFER ternary/IIFE over if-else (JS/TS)
+- ALL if/else/try/catch MUST use braces with line breaks
+- Closing brace and else/catch on SEPARATE lines: `}\nelse {`
+**INCORRECT:**
+```javascript
+if (p1) return rs;
+if (p2) {
+} else { f(e); }
+```
+**CORRECT:**
+```javascript
+if (p1) {
+  return rs;
+}
+else {
+  f(e);
+}
+try {
+  f1();
+}
+catch (Exception e) {
+  f2();
+}
+```

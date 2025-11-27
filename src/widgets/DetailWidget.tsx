@@ -2,7 +2,7 @@
 
 import {
   FlexWidget, TextWidget, ImageWidget, ColorProp
-} from "@imports/ImportReacts";
+} from "@exports/ExportReacts";
 
 // -------------------------------------------------------------------------------------------------
 declare type DetailWidgetRecordProps = {

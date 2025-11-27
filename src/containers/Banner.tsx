@@ -2,7 +2,7 @@
 
 import {
   BannerAd, BannerAdSize, StyleSheet, View,
-} from "@imports/ImportReacts";
+} from "@exports/ExportReacts";
 
 import {
   ADMOB_BANNER_ID,

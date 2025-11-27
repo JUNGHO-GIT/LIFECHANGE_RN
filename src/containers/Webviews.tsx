@@ -2,7 +2,7 @@
 
 import {
   forwardRef, StyleSheet, Dimensions, WebView
-} from "@imports/ImportReacts";
+} from "@exports/ExportReacts";
 
 import {
   TITLE, SERVER_URL,

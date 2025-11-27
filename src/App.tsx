@@ -2,15 +2,15 @@
 
 import {
   useEffect, useRef, useState, BackHandler, StyleSheet, SafeAreaProvider
-} from "@imports/ImportReacts";
+} from "@exports/ExportReacts";
 
 import {
   Banner, Webviews,
-} from "@imports/ImportContainers";
+} from "@exports/ExportContainers";
 
 import {
   AsyncStorage,
-} from "@imports/ImportLibs";
+} from "@exports/ExportLibs";
 
 // -------------------------------------------------------------------------------------------------
 const styles = StyleSheet.create({

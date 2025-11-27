@@ -3104,3 +3104,622 @@
 
 - versionName = 1.1.333
 - 2025-10-01 (22:48:50)
+
+## versionCode = 1334
+
+- versionName = 1.1.334
+- 2025-10-13 (00:03:17)
+
+## versionCode = 1335
+
+- versionName = 1.1.335
+- 2025-11-02 (19:28:11)
+
+## versionCode = 1336
+
+- versionName = 1.1.336
+- 2025-11-02 (19:28:38)
+
+## versionCode = 1337
+
+- versionName = 1.1.337
+- 2025-11-02 (20:09:10)
+
+## versionCode = 1338
+
+- versionName = 1.1.338
+- 2025-11-02 (20:09:25)
+
+## versionCode = 1339
+
+- versionName = 1.1.339
+- 2025-11-02 (20:09:38)
+
+## versionCode = 1340
+
+- versionName = 1.1.340
+- 2025-11-02 (20:09:48)
+
+## versionCode = 1341
+
+- versionName = 1.1.341
+- 2025-11-02 (20:10:02)
+
+## versionCode = 1342
+
+- versionName = 1.1.342
+- 2025-11-02 (20:10:12)
+
+## versionCode = 1343
+
+- versionName = 1.1.343
+- 2025-11-02 (20:11:29)
+
+## versionCode = 1344
+
+- versionName = 1.1.344
+- 2025-11-06 (21:03:36)
+
+## versionCode = 1345
+
+- versionName = 1.1.345
+- 2025-11-06 (21:03:57)
+
+## versionCode = 1346
+
+- versionName = 1.1.346
+- 2025-11-06 (21:04:02)
+
+## versionCode = 1347
+
+- versionName = 1.1.347
+- 2025-11-06 (21:54:26)
+
+## versionCode = 1348
+
+- versionName = 1.1.348
+- 2025-11-06 (21:54:47)
+
+## versionCode = 1349
+
+- versionName = 1.1.349
+- 2025-11-06 (21:54:58)
+
+## versionCode = 1350
+
+- versionName = 1.1.350
+- 2025-11-06 (21:56:10)
+
+## versionCode = 1351
+
+- versionName = 1.1.351
+- 2025-11-06 (21:57:14)
+
+## versionCode = 1352
+
+- versionName = 1.1.352
+- 2025-11-06 (22:01:33)
+
+## versionCode = 1353
+
+- versionName = 1.1.353
+- 2025-11-06 (22:02:50)
+
+## versionCode = 1354
+
+- versionName = 1.1.354
+- 2025-11-06 (22:06:33)
+
+## versionCode = 1355
+
+- versionName = 1.1.355
+- 2025-11-06 (22:07:04)
+
+## versionCode = 1356
+
+- versionName = 1.1.356
+- 2025-11-06 (22:08:05)
+
+## versionCode = 1357
+
+- versionName = 1.1.357
+- 2025-11-07 (23:13:31)
+
+## versionCode = 1358
+
+- versionName = 1.1.358
+- 2025-11-07 (23:13:35)
+
+## versionCode = 1359
+
+- versionName = 1.1.359
+- 2025-11-07 (23:13:44)
+
+## versionCode = 1360
+
+- versionName = 1.1.360
+- 2025-11-07 (23:42:43)
+
+## versionCode = 1361
+
+- versionName = 1.1.361
+- 2025-11-07 (23:43:05)
+
+## versionCode = 1362
+
+- versionName = 1.1.362
+- 2025-11-07 (23:55:34)
+
+## versionCode = 1363
+
+- versionName = 1.1.363
+- 2025-11-07 (23:55:39)
+
+## versionCode = 1364
+
+- versionName = 1.1.364
+- 2025-11-07 (23:55:43)
+
+## versionCode = 1365
+
+- versionName = 1.1.365
+- 2025-11-07 (23:55:47)
+
+## versionCode = 1366
+
+- versionName = 1.1.366
+- 2025-11-08 (00:00:33)
+
+## versionCode = 1367
+
+- versionName = 1.1.367
+- 2025-11-08 (00:00:41)
+
+## versionCode = 1368
+
+- versionName = 1.1.368
+- 2025-11-08 (00:00:52)
+
+## versionCode = 1369
+
+- versionName = 1.1.369
+- 2025-11-08 (00:01:14)
+
+## versionCode = 1370
+
+- versionName = 1.1.370
+- 2025-11-08 (15:28:09)
+
+## versionCode = 1371
+
+- versionName = 1.1.371
+- 2025-11-08 (15:28:29)
+
+## versionCode = 1372
+
+- versionName = 1.1.372
+- 2025-11-08 (15:28:30)
+
+## versionCode = 1373
+
+- versionName = 1.1.373
+- 2025-11-08 (15:28:35)
+
+## versionCode = 1374
+
+- versionName = 1.1.374
+- 2025-11-09 (23:22:26)
+
+## versionCode = 1375
+
+- versionName = 1.1.375
+- 2025-11-09 (23:24:03)
+
+## versionCode = 1376
+
+- versionName = 1.1.376
+- 2025-11-09 (23:24:04)
+
+## versionCode = 1377
+
+- versionName = 1.1.377
+- 2025-11-09 (23:24:11)
+
+## versionCode = 1378
+
+- versionName = 1.1.378
+- 2025-11-09 (23:25:46)
+
+## versionCode = 1379
+
+- versionName = 1.1.379
+- 2025-11-09 (23:25:50)
+
+## versionCode = 1380
+
+- versionName = 1.1.380
+- 2025-11-09 (23:25:58)
+
+## versionCode = 1381
+
+- versionName = 1.1.381
+- 2025-11-09 (23:26:16)
+
+## versionCode = 1382
+
+- versionName = 1.1.382
+- 2025-11-10 (00:09:05)
+
+## versionCode = 1383
+
+- versionName = 1.1.383
+- 2025-11-10 (00:09:10)
+
+## versionCode = 1384
+
+- versionName = 1.1.384
+- 2025-11-10 (00:09:17)
+
+## versionCode = 1385
+
+- versionName = 1.1.385
+- 2025-11-10 (00:09:41)
+
+## versionCode = 1386
+
+- versionName = 1.1.386
+- 2025-11-10 (01:37:40)
+
+## versionCode = 1387
+
+- versionName = 1.1.387
+- 2025-11-10 (01:37:45)
+
+## versionCode = 1388
+
+- versionName = 1.1.388
+- 2025-11-10 (01:37:50)
+
+## versionCode = 1389
+
+- versionName = 1.1.389
+- 2025-11-10 (01:40:53)
+
+## versionCode = 1390
+
+- versionName = 1.1.390
+- 2025-11-10 (01:40:57)
+
+## versionCode = 1391
+
+- versionName = 1.1.391
+- 2025-11-10 (01:41:04)
+
+## versionCode = 1392
+
+- versionName = 1.1.392
+- 2025-11-10 (01:41:26)
+
+## versionCode = 1393
+
+- versionName = 1.1.393
+- 2025-11-10 (01:50:35)
+
+## versionCode = 1394
+
+- versionName = 1.1.394
+- 2025-11-10 (01:50:40)
+
+## versionCode = 1395
+
+- versionName = 1.1.395
+- 2025-11-10 (01:50:46)
+
+## versionCode = 1396
+
+- versionName = 1.1.396
+- 2025-11-10 (02:05:07)
+
+## versionCode = 1397
+
+- versionName = 1.1.397
+- 2025-11-10 (02:05:10)
+
+## versionCode = 1398
+
+- versionName = 1.1.398
+- 2025-11-10 (02:05:16)
+
+## versionCode = 1399
+
+- versionName = 1.1.399
+- 2025-11-10 (02:05:40)
+
+## versionCode = 1400
+
+- versionName = 1.1.400
+- 2025-11-10 (03:08:28)
+
+## versionCode = 1401
+
+- versionName = 1.1.401
+- 2025-11-10 (03:08:35)
+
+## versionCode = 1402
+
+- versionName = 1.1.402
+- 2025-11-10 (03:08:39)
+
+## versionCode = 1403
+
+- versionName = 1.1.403
+- 2025-11-12 (19:59:01)
+
+## versionCode = 1404
+
+- versionName = 1.1.404
+- 2025-11-12 (19:59:05)
+
+## versionCode = 1405
+
+- versionName = 1.1.405
+- 2025-11-12 (19:59:14)
+
+## versionCode = 1406
+
+- versionName = 1.1.406
+- 2025-11-12 (19:59:18)
+
+## versionCode = 1407
+
+- versionName = 1.1.407
+- 2025-11-12 (20:04:27)
+
+## versionCode = 1408
+
+- versionName = 1.1.408
+- 2025-11-12 (20:04:32)
+
+## versionCode = 1409
+
+- versionName = 1.1.409
+- 2025-11-12 (20:04:43)
+
+## versionCode = 1410
+
+- versionName = 1.1.410
+- 2025-11-12 (20:28:04)
+
+## versionCode = 1411
+
+- versionName = 1.1.411
+- 2025-11-12 (20:28:24)
+
+## versionCode = 1412
+
+- versionName = 1.1.412
+- 2025-11-12 (20:36:21)
+
+## versionCode = 1413
+
+- versionName = 1.1.413
+- 2025-11-12 (20:36:57)
+
+## versionCode = 1414
+
+- versionName = 1.1.414
+- 2025-11-12 (20:37:00)
+
+## versionCode = 1415
+
+- versionName = 1.1.415
+- 2025-11-12 (20:37:03)
+
+## versionCode = 1416
+
+- versionName = 1.1.416
+- 2025-11-12 (20:37:07)
+
+## versionCode = 1417
+
+- versionName = 1.1.417
+- 2025-11-12 (20:37:11)
+
+## versionCode = 1418
+
+- versionName = 1.1.418
+- 2025-11-12 (20:37:15)
+
+## versionCode = 1419
+
+- versionName = 1.1.419
+- 2025-11-12 (20:37:18)
+
+## versionCode = 1420
+
+- versionName = 1.1.420
+- 2025-11-12 (20:37:22)
+
+## versionCode = 1421
+
+- versionName = 1.1.421
+- 2025-11-12 (20:37:25)
+
+## versionCode = 1422
+
+- versionName = 1.1.422
+- 2025-11-12 (20:37:28)
+
+## versionCode = 1423
+
+- versionName = 1.1.423
+- 2025-11-12 (20:37:31)
+
+## versionCode = 1424
+
+- versionName = 1.1.424
+- 2025-11-12 (22:48:27)
+
+## versionCode = 1425
+
+- versionName = 1.1.425
+- 2025-11-12 (22:48:30)
+
+## versionCode = 1426
+
+- versionName = 1.1.426
+- 2025-11-12 (22:49:05)
+
+## versionCode = 1427
+
+- versionName = 1.1.427
+- 2025-11-12 (22:49:09)
+
+## versionCode = 1428
+
+- versionName = 1.1.428
+- 2025-11-12 (22:49:18)
+
+## versionCode = 1429
+
+- versionName = 1.1.429
+- 2025-11-12 (22:53:29)
+
+## versionCode = 1430
+
+- versionName = 1.1.430
+- 2025-11-12 (22:54:33)
+
+## versionCode = 1431
+
+- versionName = 1.1.431
+- 2025-11-12 (22:54:52)
+
+## versionCode = 1432
+
+- versionName = 1.1.432
+- 2025-11-12 (22:55:08)
+
+## versionCode = 1433
+
+- versionName = 1.1.433
+- 2025-11-12 (22:55:18)
+
+## versionCode = 1434
+
+- versionName = 1.1.434
+- 2025-11-12 (22:55:26)
+
+## versionCode = 1435
+
+- versionName = 1.1.435
+- 2025-11-12 (22:55:32)
+
+## versionCode = 1436
+
+- versionName = 1.1.436
+- 2025-11-12 (22:55:38)
+
+## versionCode = 1437
+
+- versionName = 1.1.437
+- 2025-11-12 (22:55:42)
+
+## versionCode = 1438
+
+- versionName = 1.1.438
+- 2025-11-12 (22:55:46)
+
+## versionCode = 1439
+
+- versionName = 1.1.439
+- 2025-11-12 (22:55:50)
+
+## versionCode = 1440
+
+- versionName = 1.1.440
+- 2025-11-12 (22:55:54)
+
+## versionCode = 1441
+
+- versionName = 1.1.441
+- 2025-11-12 (23:00:42)
+
+## versionCode = 1442
+
+- versionName = 1.1.442
+- 2025-11-12 (23:03:19)
+
+## versionCode = 1443
+
+- versionName = 1.1.443
+- 2025-11-12 (23:43:21)
+
+## versionCode = 1444
+
+- versionName = 1.1.444
+- 2025-11-12 (23:43:45)
+
+## versionCode = 1445
+
+- versionName = 1.1.445
+- 2025-11-12 (23:44:00)
+
+## versionCode = 1446
+
+- versionName = 1.1.446
+- 2025-11-12 (23:44:18)
+
+## versionCode = 1447
+
+- versionName = 1.1.447
+- 2025-11-12 (23:44:35)
+
+## versionCode = 1448
+
+- versionName = 1.1.448
+- 2025-11-17 (22:32:50)
+
+## versionCode = 1449
+
+- versionName = 1.1.449
+- 2025-11-17 (22:33:10)
+
+## versionCode = 1450
+
+- versionName = 1.1.450
+- 2025-11-20 (00:42:41)
+
+## versionCode = 1451
+
+- versionName = 1.1.451
+- 2025-11-20 (00:54:16)
+
+## versionCode = 1452
+
+- versionName = 1.1.452
+- 2025-11-22 (21:23:27)
+
+## versionCode = 1453
+
+- versionName = 1.1.453
+- 2025-11-22 (23:22:02)
+
+## versionCode = 1454
+
+- versionName = 1.1.454
+- 2025-11-27 (20:51:56)
+
+## versionCode = 1455
+
+- versionName = 1.1.455
+- 2025-11-27 (21:31:51)
+
+## versionCode = 1456
+
+- versionName = 1.1.456
+- 2025-11-27 (22:01:05)
+
+## \[ 1.2.0 \]
+
+- 2025-11-27 (22:02:33)

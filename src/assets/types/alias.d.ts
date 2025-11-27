@@ -36,7 +36,7 @@ declare module "@hooks/*" {
   const value: any;
   export default value;
 }
-declare module "@imports/*" {
+declare module "@exports/*" {
   const value: any;
   export default value;
 }
