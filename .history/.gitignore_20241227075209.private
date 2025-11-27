@@ -5,8 +5,8 @@
 # 1. build directories
 **/build/
 **/.build/
-**/bundle/
-**/.bundle/
+# **/bundle/
+# **/.bundle/
 **/vendor/
 **/.vendor/
 **/debug/
@@ -47,10 +47,6 @@
 **/.grunt/
 **/.gulp/
 **/.parcel-cache/
-# **/.backup/
-# **/.history/
-# **/.bookmark/
-# **/.etc/
 
 # ==================================================================================================
 # ==== Files =======================================================================================
@@ -61,7 +57,7 @@
 **/*.swo
 **/*.DS_Store
 **/*Thumbs.db
-**/*Gemfile
+# **/*Gemfile
 
 # 2. log files
 **/*.log
@@ -118,16 +114,12 @@
 # **/tsconfig.paths.json.*
 # **/tsconfig.default.json
 # **/tsconfig.default.json.*
-# **/tsconfig.regular.json
-# **/tsconfig.regular.json.*
 # **/jsconfig.json
 # **/jsconfig.json.*
 # **/jsconfig.paths.json
 # **/jsconfig.paths.json.*
 # **/jsconfig.default.json
 # **/jsconfig.default.json.*
-# **/jsconfig.regular.json
-# **/jsconfig.regular.json.*
 # **/metro.config.js
 # **/metro.config.*
 # **/jest.config.js
@@ -148,11 +140,6 @@
 # **/.eslintignore.*
 # **/.eslintrc.js
 # **/.eslintrc.js.*
-# **/.stylelintrc
-# **/.stylelintrc.*
-# **/.stylelintignore
-# **/.swcrc
-# **/.swcrc.*
 
 # 8. etc files
 # **/push.cjs
@@ -179,5 +166,5 @@
 # **/.gitignore.public.*
 # **/.gitignore.private
 # **/.gitignore.private.*
-**/*.vsix
-**/*.vsix.*
+# **/.vsix
+# **/.vsix.*
