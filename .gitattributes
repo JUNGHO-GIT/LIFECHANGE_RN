@@ -59,6 +59,7 @@ auth/** linguist-detectable=false
 .backup/** linguist-detectable=false
 .etc/** linguist-detectable=false
 .node/** linguist-detectable=false
+.cxx/** linguist-detectable=false
 
 # ==================================================================================================
 # Files ============================================================================================
