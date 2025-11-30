@@ -1,0 +1,43 @@
+// settings.gradle
+
+// ----------------------------------------------------------------------------------------------------------
+// 1. pluginManagement
+// ----------------------------------------------------------------------------------------------------------
+pluginManagement {
+    includeBuild("../node_modules/@react-native/gradle-plugin")
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+// ----------------------------------------------------------------------------------------------------------
+// 2. plugins
+// ----------------------------------------------------------------------------------------------------------
+plugins {
+	id("com.facebook.react.settings")
+}
+extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
+	ex.autolinkLibrariesFromCommand()
+}
+
+// ----------------------------------------------------------------------------------------------------------
+// 3. dependencyResolutionManagement
+// ----------------------------------------------------------------------------------------------------------
+dependencyResolutionManagement {
+  repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+  repositories {
+    google()
+    mavenCentral()
+    maven { url("$rootDir/../node_modules/react-native/android") }
+    maven { url("$rootDir/../node_modules/jsc-android/dist") }
+  }
+}
+
+// ----------------------------------------------------------------------------------------------------------
+// 4. include modules
+// ----------------------------------------------------------------------------------------------------------
+rootProject.name = "LIFECHANGE"
+include(":app")
+includeBuild("../node_modules/@react-native/gradle-plugin")
