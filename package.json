@@ -5,17 +5,12 @@
     "node": ">=20"
   },
   "scripts": {
-    "start": "npx react-native run-android",
-    "build": "cd android && gradlew clean && gradlew assembleRelease --stacktrace",
-    "make-apk": "cd android && gradlew assembleRelease --stacktrace",
-    "make-bundle": "cd android && gradlew bundleRelease --stacktrace",
-    "watch": "bun .node/swc.cjs --bun --watch",
-    "reset": "bun .node/reset.cjs --bun --reset",
-    "fix": "bun .node/fix.cjs --bun --fix",
-    "compile-client": "bun .node/swc.cjs --bun --compile --client",
-    "compile-server": "bun .node/swc.cjs --bun --compile --server",
+    "start": "bun .node/swc.cjs --bun --start --server",
+    "build": "bun .node/swc.cjs --bun --build --server",
     "git-fetch": "bun .node/git.cjs --bun --fetch",
-    "git-push": "bun .node/git.cjs --bun --push"
+    "git-push": "bun .node/git.cjs --bun --push",
+    "fix": "bun .node/fix.cjs --bun --fix",
+    "reset": "bun .node/reset.cjs --bun --reset"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",
@@ -43,13 +38,13 @@
     "@react-native/gradle-plugin": "0.82.1",
     "@react-native/metro-config": "0.82.1",
     "@react-native/typescript-config": "0.82.1",
-    "@types/react": "19.2.5",
+    "@types/react": "19.2.7",
     "@types/react-test-renderer": "19.1.0",
     "babel-jest": "30.2.0",
     "babel-plugin-module-resolver": "5.0.2",
     "eslint": "9.39.1",
     "jest": "30.2.0",
-    "prettier": "3.6.2",
+    "prettier": "3.7.1",
     "react-test-renderer": "19.2.0",
     "typescript": "5.9.3"
   }

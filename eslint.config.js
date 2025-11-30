@@ -458,10 +458,10 @@ const BASE_RULES = {
 		}
 	],
 
-	// 줄바꿈 스타일 (CRLF)
+	// 줄바꿈 스타일 (lf)
 	"linebreak-style": [
 		"error",
-		"windows"
+		"unix"
 	],
 
 	// 주석 주변 빈 줄

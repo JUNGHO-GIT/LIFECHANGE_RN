@@ -1,36 +1,36 @@
 // App.tsx
 
 import {
-  useEffect, useRef, useState, BackHandler, StyleSheet, SafeAreaProvider
+	useEffect, useRef, useState, BackHandler, StyleSheet, SafeAreaProvider,
 } from "@exports/ExportReacts";
 
 import {
-  Banner, Webviews,
+	Banner, Webviews,
 } from "@exports/ExportContainers";
 
 import {
-  AsyncStorage,
+	AsyncStorage,
 } from "@exports/ExportLibs";
 
 // -------------------------------------------------------------------------------------------------
 const styles = StyleSheet.create({
-  container: {
-	flex: 1,
-	alignItems: 'center',
-	justifyContent: 'center',
-  },
+	container: {
+		flex: 1,
+		alignItems: `center`,
+		justifyContent: `center`,
+	},
 });
 
 // -------------------------------------------------------------------------------------------------
 export const App = () => {
 
-  // -----------------------------------------------------------------------------------------------
-  const [bannerVisible, setBannerVisible] = useState<boolean>(false);
-  const [navigationEnabled, _setNavigationEnabled] = useState<boolean>(true);
-  const webViewRef = useRef<any>(null);
+	// -----------------------------------------------------------------------------------------------
+	const [bannerVisible, setBannerVisible] = useState<boolean>(false);
+	const [navigationEnabled, _setNavigationEnabled] = useState<boolean>(true);
+	const webViewRef = useRef<any>(null);
 
-  // 뒤로가기 버튼 이벤트 --------------------------------------------------------------------------
-  useEffect(() => {
+	// 뒤로가기 버튼 이벤트 --------------------------------------------------------------------------
+	useEffect(() => {
 		try {
 			const onBackPress = () => {
 				if (webViewRef.current && navigationEnabled) {
@@ -41,42 +41,42 @@ export const App = () => {
 			};
 
 			const backHandler = BackHandler.addEventListener(
-				'hardwareBackPress',
+				`hardwareBackPress`,
 				onBackPress
 			);
 
 			return () => backHandler.remove();
 		}
 		catch (err: any) {
-			console.error("backHandler error:", err);
+			console.error(`backHandler error:`, err);
 		}
-  }, [navigationEnabled]);
+	}, [navigationEnabled]);
 
-  // -----------------------------------------------------------------------------------------------
-  const handlerOnMessage = (event: any) => {
+	// -----------------------------------------------------------------------------------------------
+	const handlerOnMessage = (event: any) => {
 		try {
 			const parsedData = JSON.parse(event.nativeEvent.data);
 
 			// 세션아이디는 단일 string
-			if (parsedData.type === 'sessionId') {
-				AsyncStorage.setItem("sessionId", parsedData.sessionId);
+			if (parsedData.type === `sessionId`) {
+				AsyncStorage.setItem(`sessionId`, parsedData.sessionId);
 			}
 
 			// 로케일은 객체
-			else if (parsedData.type === 'localeSetting') {
-				AsyncStorage.setItem("localeSetting", JSON.stringify(parsedData.localeSetting));
+			else if (parsedData.type === `localeSetting`) {
+				AsyncStorage.setItem(`localeSetting`, JSON.stringify(parsedData.localeSetting));
 			}
 		}
 		catch (err: any) {
-			console.error("onMessage event error:", err);
+			console.error(`onMessage event error:`, err);
 		}
-  };
+	};
 
-  // -----------------------------------------------------------------------------------------------
-  const handlerBannerVisible = ({ url }: any) => {
+	// -----------------------------------------------------------------------------------------------
+	const handlerBannerVisible = ({url}: any) => {
 		try {
 			const hideBannerUrls = [
-				"user/signup", "user/login", "user/resetPw", "accounts.google.com"
+				`user/signup`, `user/login`, `user/resetPw`, `accounts.google.com`,
 			];
 			const shouldHideBanner = hideBannerUrls.some((hideUrl) => (
 				url.includes(hideUrl)
@@ -84,20 +84,123 @@ export const App = () => {
 			setBannerVisible(!shouldHideBanner);
 		}
 		catch (err: any) {
-			console.error("bannerVisible event error:", err);
+			console.error(`bannerVisible event error:`, err);
 		}
-  };
+	};
 
-  // -----------------------------------------------------------------------------------------------
-  return (
-	<SafeAreaProvider style={styles.container}>
-	  <Webviews
-		onMessage={handlerOnMessage}
-		bannerVisible={handlerBannerVisible}
-		navigationEnabled={navigationEnabled}
-		ref={webViewRef}
-	  />
-	  {bannerVisible && <Banner />}
-	</SafeAreaProvider>
-  );
+	// -----------------------------------------------------------------------------------------------
+	return (
+		<SafeAreaProvider style={styles.container}>
+			<Webviews
+				onMessage={handlerOnMessage}
+				bannerVisible={handlerBannerVisible}
+				navigationEnabled={navigationEnabled}
+				ref={webViewRef}
+			/>
+			{bannerVisible && <Banner />}
+		</SafeAreaProvider>
+	);
+};
+// App.tsx
+
+import {
+	useEffect, useRef, useState, BackHandler, StyleSheet, SafeAreaProvider,
+} from "@exports/ExportReacts";
+
+import {
+	Banner, Webviews,
+} from "@exports/ExportContainers";
+
+import {
+	AsyncStorage,
+} from "@exports/ExportLibs";
+
+// -------------------------------------------------------------------------------------------------
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		alignItems: `center`,
+		justifyContent: `center`,
+	},
+});
+
+// -------------------------------------------------------------------------------------------------
+export const App = () => {
+
+	// -----------------------------------------------------------------------------------------------
+	const [bannerVisible, setBannerVisible] = useState<boolean>(false);
+	const [navigationEnabled, _setNavigationEnabled] = useState<boolean>(true);
+	const webViewRef = useRef<any>(null);
+
+	// 뒤로가기 버튼 이벤트 --------------------------------------------------------------------------
+	useEffect(() => {
+		try {
+			const onBackPress = () => {
+				if (webViewRef.current && navigationEnabled) {
+					webViewRef.current.goBack();
+					return true;
+				}
+				return false;
+			};
+
+			const backHandler = BackHandler.addEventListener(
+				`hardwareBackPress`,
+				onBackPress
+			);
+
+			return () => backHandler.remove();
+		}
+		catch (err: any) {
+			console.error(`backHandler error:`, err);
+		}
+	}, [navigationEnabled]);
+
+	// -----------------------------------------------------------------------------------------------
+	const handlerOnMessage = (event: any) => {
+		try {
+			const parsedData = JSON.parse(event.nativeEvent.data);
+
+			// 세션아이디는 단일 string
+			if (parsedData.type === `sessionId`) {
+				AsyncStorage.setItem(`sessionId`, parsedData.sessionId);
+			}
+
+			// 로케일은 객체
+			else if (parsedData.type === `localeSetting`) {
+				AsyncStorage.setItem(`localeSetting`, JSON.stringify(parsedData.localeSetting));
+			}
+		}
+		catch (err: any) {
+			console.error(`onMessage event error:`, err);
+		}
+	};
+
+	// -----------------------------------------------------------------------------------------------
+	const handlerBannerVisible = ({url}: any) => {
+		try {
+			const hideBannerUrls = [
+				`user/signup`, `user/login`, `user/resetPw`, `accounts.google.com`,
+			];
+			const shouldHideBanner = hideBannerUrls.some((hideUrl) => (
+				url.includes(hideUrl)
+			));
+			setBannerVisible(!shouldHideBanner);
+		}
+		catch (err: any) {
+			console.error(`bannerVisible event error:`, err);
+		}
+	};
+
+	// -----------------------------------------------------------------------------------------------
+	return (
+		<SafeAreaProvider style={styles.container}>
+			<Webviews
+				onMessage={handlerOnMessage}
+				bannerVisible={handlerBannerVisible}
+				navigationEnabled={navigationEnabled}
+				ref={webViewRef}
+			/>
+			{bannerVisible && <Banner />}
+		</SafeAreaProvider>
+	);
 };

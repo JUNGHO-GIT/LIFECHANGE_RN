@@ -3782,3 +3782,152 @@
 ## \[ 1.2.0 \]
 
 - 2025-11-27 (23:17:43)
+
+## versionCode = 1460
+
+- versionName = 1.1.460
+- 2025-11-27 (23:18:06)
+
+## versionCode = 1461
+
+- versionName = 1.1.461
+- 2025-11-28 (21:36:23)
+
+## versionCode = 1462
+
+- versionName = 1.1.462
+- 2025-11-28 (21:39:17)
+
+## versionCode = 1463
+
+- versionName = 1.1.463
+- 2025-11-28 (21:45:40)
+
+## versionCode = 1464
+
+- versionName = 1.1.464
+- 2025-11-28 (21:45:41)
+
+## versionCode = 1465
+
+- versionName = 1.1.465
+- 2025-11-28 (21:46:20)
+
+## versionCode = 1466
+
+- versionName = 1.1.466
+- 2025-11-28 (21:46:27)
+
+## versionCode = 1467
+
+- versionName = 1.1.467
+- 2025-11-28 (21:46:38)
+
+## versionCode = 1468
+
+- versionName = 1.1.468
+- 2025-11-28 (21:46:45)
+
+## versionCode = 1469
+
+- versionName = 1.1.469
+- 2025-11-28 (21:46:51)
+
+## versionCode = 1470
+
+- versionName = 1.1.470
+- 2025-11-28 (21:47:19)
+
+## versionCode = 1471
+
+- versionName = 1.1.471
+- 2025-11-29 (14:41:57)
+
+## versionCode = 1472
+
+- versionName = 1.1.472
+- 2025-11-29 (14:42:10)
+
+## versionCode = 1473
+
+- versionName = 1.1.473
+- 2025-11-29 (14:42:37)
+
+## versionCode = 1474
+
+- versionName = 1.1.474
+- 2025-11-29 (16:04:30)
+
+## versionCode = 1475
+
+- versionName = 1.1.475
+- 2025-11-29 (16:04:32)
+
+## versionCode = 1476
+
+- versionName = 1.1.476
+- 2025-11-29 (16:04:46)
+
+## versionCode = 1477
+
+- versionName = 1.1.477
+- 2025-11-30 (02:21:02)
+
+## versionCode = 1478
+
+- versionName = 1.1.478
+- 2025-11-30 (02:21:08)
+
+## versionCode = 1479
+
+- versionName = 1.1.479
+- 2025-11-30 (02:21:26)
+
+## versionCode = 1480
+
+- versionName = 1.1.480
+- 2025-11-30 (02:21:35)
+
+## versionCode = 1481
+
+- versionName = 1.1.481
+- 2025-11-30 (13:32:27)
+
+## versionCode = 1482
+
+- versionName = 1.1.482
+- 2025-11-30 (13:32:36)
+
+## versionCode = 1483
+
+- versionName = 1.1.483
+- 2025-11-30 (13:32:37)
+
+## versionCode = 1484
+
+- versionName = 1.1.484
+- 2025-11-30 (13:33:07)
+
+## versionCode = 1485
+
+- versionName = 1.1.485
+- 2025-11-30 (13:34:53)
+
+## versionCode = 1486
+
+- versionName = 1.1.486
+- 2025-11-30 (13:35:01)
+
+## versionCode = 1487
+
+- versionName = 1.1.487
+- 2025-11-30 (13:35:07)
+
+## versionCode = 1488
+
+- versionName = 1.1.488
+- 2025-11-30 (13:35:13)
+
+## \[ 1.2.0 \]
+
+- 2025-11-30 (13:40:38)
