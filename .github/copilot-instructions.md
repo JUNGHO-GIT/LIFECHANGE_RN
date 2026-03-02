@@ -1,119 +1,188 @@
-# 1. CORE PRINCIPLES
+# LIFECHANGE_RN — Coding Rules & Agent Directive
 
-# 1-1. Response Principles
-- Detailed, objective, professional responses
-- Capture core intent, not literal interpretation
-- Never fabricate; acknowledge errors immediately
-- When in 'Agent' mode, jsconfig or tsconfig errors are ignored.
+> Single source of truth for coding standards and agent behavior.
+> Follow these rules first. Only search the codebase when information here is incomplete.
 
-# 1-2. Coding Philosophy
-- PerformanceFirst: minimize memory waste/leaks
-- Readability: clear variable names (no extreme abbreviations)
-- Maintainability: flat structure, avoid deep nesting
-- FunctionOrganization: group by logical flow, not micro-tasks
-- StyleGuide: no spaghetti (max 4-level indentation)
+---
 
-# 1-3. MANDATORY Code Modification Protocol
-- ** Ternary and IIFE preferences apply primarily to Js/Ts. For other languages follow specific idiomatic conventions**
-- ALWAYS PREFER `ternary` or `IIFE` over if-else (JS/TS)
-- ALWAYS send `code format` for copy-paste
-- ALWAYS return `MODIFIED code` ONLY
-- ALWAYS exactly ONE SPACE around "=" or ":"
-- EXCEPTION NO SPACE in parameter default values (e.g., `function f(a=1)`, `(a=1) => {}`)
-- ALWAYS Instead of using `=======` style comments, use `-----------` style
-- NEVER break line before semicolon
-- NEVER mid-function return; assign variable, return at end only
+## 1. 핵심 원칙
 
-# 1-4. LANGUAGE-SPECIFIC GUIDELINES
-- ** Java: **
-  - Max 1.8 version
-- ** JavaScript/TypeScript: **
-  - Prefer ternary/&& over if statements
-  - Prefer arrow functions
-  - Template literals: `foo` (backticks)
-  - Object keys: always double quotes ("key": value)
+- **Readability > Performance > Cleverness** — 명확한 변수명, 극단적 축약 금지
+- **SRP (Single Responsibility Principle)** — 함수·컴포넌트는 하나의 역할
+- **Fail-fast** — 유효하지 않은 입력은 즉시 에러, 빈 catch 금지
+- **Flat structure** — 최대 4단계 들여쓰기, 깊은 중첩 금지
 
-# 2. FORMATTING EXAMPLES
+---
 
-# 2-0. COMMENTS
-**CORRECT:**
-```js
-// 1. f -----
-const f = () => {}
-```
-**INCORRECT:**
-```js
-// ==== f ====
-const f = () => {}
+## 2. 포매팅
+
+- **Tab** 들여쓰기 (space 아님)
+- **세미콜론** 필수
+- 모든 `if/else/try/catch` 블록에 **중괄호 + 줄바꿈** 필수
+- `else` / `catch` / `finally` 는 닫는 중괄호와 **별도 줄**에 작성
+
+```ts
+if (condition) {
+  doA();
+}
+else {
+  doB();
+}
+try {
+  riskyOp();
+}
+catch (err) {
+  handleError(err);
+}
+finally {
+  cleanup();
+}
 ```
 
-# 2-1. TERNARY CHAINS
-- Wrap each condition/result in parentheses on separate lines
-**INCORRECT:**
-```js
-(!s || s === "p1") ? f() : (s === "p2") ? f(s, "yy") : f(s);
+- 주석 구분선은 `-----` 사용 (`======` 금지)
+
+```ts
+// 1. Section -----
+const f = () => {};
 ```
-**CORRECT:**
-```js
-!s || s === `p1` ? (
+
+---
+
+## 3. 네이밍 컨벤션
+
+| 대상 | 규칙 | 예시 |
+|------|------|------|
+| 파일 (컴포넌트) | `PascalCase.tsx` | `CalendarWidget.tsx` |
+| 파일 (config/script) | `camelCase.js` · `kebab-case.mjs` | `metro.config.js`, `swc.mjs` |
+| 배럴 re-export | `Import{Name}.tsx` | `ImportSchemas.tsx` |
+| React 컴포넌트 | `PascalCase` | `const Banner = () => {}` |
+| 함수 / 변수 | `camelCase` | `const fetchData = () => {}` |
+| 상수 | `UPPER_SNAKE_CASE` | `const SERVER_URL = "..."` |
+| TS 타입/인터페이스 | `PascalCase` | `type ExerciseRecord = {...}` |
+| 타입 선언 파일 | `camelCase.d.ts` | `global.d.ts` |
+| 테스트 파일 | `*.spec.ts` · `*.spec.tsx` | `App.spec.tsx` |
+
+---
+
+## 4. Java 규칙
+
+- **Java 1.8** (Android Gradle 호환)
+- `Optional` 적극 사용, `null` 반환 지양
+- 필드에 `final` 우선 적용
+- Stream API 활용 가능
+- `catch (Exception e)` 금지 → 구체적 예외 타입 catch
+
+---
+
+## 5. TypeScript 규칙
+
+- **Ternary / IIFE > if-else** (값 반환 로직 시 필수)
+- **Single Exit Point** — 함수 중간 `return` 금지, 변수에 할당 후 끝에서 `return`
+- **`any` 사용 금지** — `@ts-ignore`도 금지, 타입 에러는 직접 수정
+- **Object 키**는 항상 double quote: `{ "key": value }`
+- **Arrow function** 우선: `const f = () => {}` (function 선언 지양)
+- **Template literal** 사용: `` `Hello ${name}` ``
+- **`var` 금지** — `const` 우선, 필요 시 `let`
+- 공백: `=` `:` 주위 1칸, 단 파라미터 기본값은 예외 `(a=1) => {}`
+- 배열 대괄호 안 공백: `[ 1, 2, 3 ]`
+
+```ts
+// ✅ ternary chain
+!s || s === "p1" ? (
   f()
-) : s === `p2` ? (
+) : s === "p2" ? (
   f(s, "yy")
 ) : (
   f(s)
-)
+);
+
+// ✅ single exit point
+const processData = (items: Item[]) => {
+  const result = !items.length ? [] : items.map(transform);
+  return result;
+};
+
+// ❌ mid-function return
+const processData = (items: Item[]) => {
+  if (!items.length) return [];
+  return items.map(transform);
+};
 ```
 
-# 2-2. IIFE
-- Prefer IIFE over if-else when ternary insufficient
-- AVOID excessive IIFE, extract variables BEFORE final ternary
-- Use `(() => { })()` only when: isolated scope, block scoping, or mid-execution return
-**INCORRECT:**
-```js
-!r.e ? (() => {
-  const ss = typeof r.s === `number` ? r.s === 0 : true;
-  return ss;
-})() : false
-return ee ? (() => {
-  const d = tp ? path.join(cwd, tp) : cwd;
-  return fs.existsSync(d);
-})() : false;
-```
-**CORRECT:**
-```js
-!r.e ? (
-  typeof r.s === `number` ? r.s === 0 : true
-) : false
-const d = tp ? path.join(cwd, tp) : cwd;
-const rs = ee && fs.existsSync(d);
-return rs;
+---
+
+## 6. SQL / MyBatis 규칙
+
+- **`#{}` 강제** (PreparedStatement 바인딩) — `${}` 사용 금지 (SQL Injection 위험)
+- SQL 키워드는 **대문자**: `SELECT`, `FROM`, `WHERE`, `INSERT`, `UPDATE`
+
+---
+
+## 7. 테스트 규칙
+
+- **Given-When-Then** 구조
+- 한글 메서드명 허용: `"운동 기록을 조회한다"`
+- Jest 30 (preset: `react-native`)
+- 현재 테스트 파일 없음 — 새 기능 작성 시 테스트 추가 권장
+
+```shell
+npx jest --passWithNoTests          # 전체 실행
+npx jest --testPathPattern="App"    # 단일 파일
 ```
 
-# 2-3. IF/ELSE & TRY/CATCH
-- ALWAYS PREFER ternary/IIFE over if-else (JS/TS)
-- ALL if/else/try/catch MUST use braces with line breaks
-- Closing brace and else/catch on SEPARATE lines: `}\nelse {`
-**INCORRECT:**
-```js
-if (p2) {
-} else { f(e); }
-if (p2) return rs; else f(e);
-```
-**CORRECT:**
-```js
-if (p1) {
-  return rs;
-}
-else {
-  f(e);
-}
+---
+
+## 8. 에러 핸들링
+
+- **빈 catch 블록 절대 금지** — 최소한 로깅 또는 re-throw
+- **Fail-fast** — 유효성 검증 실패 시 즉시 에러
+- **Contextual message** — 에러 메시지에 변수·상태 포함
+
+```ts
 try {
-  f1();
+  await fetchData(id);
 }
-catch (Exception e) {
-  f2();
+catch (err) {
+  throw new Error(`fetchData failed for id=${id}: ${err}`);
 }
-finally {
-  f3();
-}
+```
+
+---
+
+## 9. Commit 메시지
+
+```
+<type>: <short description>
+
+# type: feat | fix | chore | refactor | docs | style | test
+# 예시:
+feat: add sleep record schema
+fix: resolve calendar date offset
+chore: update dependencies
+```
+
+---
+
+## 10. 에이전트 행동 규칙
+
+1. **Surgical edit** — 최소한의 변경만 수행, 관련 없는 코드 수정 금지
+2. **ESLint `--fix` 자동 실행 금지** — 승인 없이 자동 포맷 금지
+3. **빌드(`npm run build`) 자동 실행 금지** — Bun 필요, 환경 의존적
+4. **path alias 유지** — `@exports/*`, `@schemas/*` 등을 상대 경로로 바꾸지 말 것
+5. **`changelog.md` 수정 금지** — Gradle 빌드 시 자동 생성
+6. **테스트가 없다고 가정하지 말 것** — Jest 설정은 존재, 파일만 없음
+7. 명령 실패 시 임의 대안 실행 금지 — **에러 메시지를 그대로 보고**
+8. Import 순서: React/RN core → 서드파티 → path alias → 상대 경로
+
+---
+
+## 11. Changes 섹션 필수
+
+작업 완료 후 PR 본문에 **파일별 한 줄 요약**을 포함하라:
+
+```markdown
+## Changes
+
+### `src/schemas/Sleep.tsx` — 수면 기록 타입 필드 추가
+### `src/containers/Banner.tsx` — 배너 높이 반응형 수정
 ```
