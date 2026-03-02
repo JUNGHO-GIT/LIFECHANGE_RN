@@ -106,7 +106,8 @@ npx tsc --noEmit                  # 타입 에러만 확인, 파일 미생성
 npm run build                     # bun .node/mjs/swc.mjs --bun --build --server
 ```
 
-> ⚠️ 현재 `tsc-alias`가 `compilerOptions.outDir` 미설정으로 실패함
+> ⚠️ 현재 `tsc-alias`가 `compilerOptions.outDir` 미설정으로 실패함.
+> 해결: `tsconfig.json`에 `"outDir": "out"` 추가 또는 `tsc-alias` 단계 스킵
 
 ### Android APK
 
