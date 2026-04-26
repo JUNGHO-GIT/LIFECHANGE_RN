@@ -1,4 +1,4 @@
-package com.lifechangeapp
+package com.LIFECHANGE
 
 import android.app.Application
 import com.facebook.react.PackageList

@@ -1,4 +1,4 @@
-package com.lifechangeapp
+package com.LIFECHANGE
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

@@ -23,14 +23,14 @@ react {
 android {
 
 	// 기본 설정 1
-	namespace "com.lifechangeapp"
+	namespace "com.LIFECHANGE"
 	ndkVersion rootProject.ext.ndkVersion
 	buildToolsVersion rootProject.ext.buildToolsVersion
 	compileSdk rootProject.ext.compileSdkVersion
 
 	// 기본 설정 2
 	defaultConfig {
-		applicationId "com.lifechangeapp"
+		applicationId "com.LIFECHANGE"
 		minSdkVersion rootProject.ext.minSdkVersion
 		targetSdkVersion rootProject.ext.targetSdkVersion
 		versionCode rootProject.ext.versionCode
