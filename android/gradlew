@@ -1,7 +1,7 @@
 #!/bin/sh
 # Optimized Gradle Wrapper Launcher (speed-tuned)
 
-# --- APP_HOME resolve ---
+# ――― APP_HOME resolve ―――
 app_path=$0
 while
   APP_HOME=${app_path%"${app_path##*/}"}
@@ -18,7 +18,7 @@ APP_BASE_NAME=${0##*/}
 APP_HOME=$(cd "${APP_HOME:-./}" >/dev/null && pwd -P) || exit
 CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
 
-# --- OS flags ---
+# ――― OS flags ―――
 cygwin=false; msys=false; darwin=false; nonstop=false
 case "$(uname)" in
   CYGWIN*) cygwin=true ;;
@@ -30,7 +30,7 @@ esac
 warn() { echo "$*" >&2; }
 die()  { echo >&2; echo "$*" >&2; echo >&2; exit 1; }
 
-# --- Pick Java: prefer GRADLE_JAVA_HOME, then JAVA_HOME, then PATH ---
+# ――― Pick Java: prefer GRADLE_JAVA_HOME, then JAVA_HOME, then PATH ―――
 JAVACMD=
 if [ -n "$GRADLE_JAVA_HOME" ]; then
   if [ -x "$GRADLE_JAVA_HOME/bin/java" ]; then
@@ -51,7 +51,7 @@ if ! command -v "$JAVACMD" >/dev/null 2>&1; then
   die "ERROR: No Java found. Set GRADLE_JAVA_HOME or JAVA_HOME correctly."
 fi
 
-# --- Bump file descriptors where possible ---
+# ――― Bump file descriptors where possible ―――
 if ! "$cygwin" && ! "$darwin" && ! "$nonstop"; then
   MAX_FD=maximum
   case $MAX_FD in
@@ -63,7 +63,7 @@ if ! "$cygwin" && ! "$darwin" && ! "$nonstop"; then
   esac
 fi
 
-# --- Windows path fix for Cygwin/MSYS ---
+# ――― Windows path fix for Cygwin/MSYS ―――
 if "$cygwin" || "$msys"; then
   APP_HOME=$(cygpath --path --mixed "$APP_HOME")
   CLASSPATH=$(cygpath --path --mixed "$CLASSPATH")
@@ -81,10 +81,10 @@ if "$cygwin" || "$msys"; then
   done
 fi
 
-# --- Defaults: bigger heap for launcher, UTF-8, dedup ---
+# ――― Defaults: bigger heap for launcher, UTF-8, dedup ―――
 DEFAULT_JVM_OPTS='"-Xms512m" "-Xmx2048m" "-XX:MaxMetaspaceSize=512m" "-Dfile.encoding=UTF-8" "-XX:+UseStringDeduplication" "-XX:+HeapDumpOnOutOfMemoryError"'
 
-# --- Perf tuning (can disable with GRADLE_TUNING=off) ---
+# ――― Perf tuning (can disable with GRADLE_TUNING=off) ―――
 if [ "${GRADLE_TUNING:-on}" != "off" ]; then
   # cores -> workers = max(1, cores-1)
   cores=1
@@ -103,7 +103,7 @@ if [ "${GRADLE_TUNING:-on}" != "off" ]; then
   GRADLE_OPTS="${GRADLE_OPTS:+$GRADLE_OPTS }$PERF_OPTS"
 fi
 
-# --- Launch args ---
+# ――― Launch args ―――
 set -- \
   "-Dorg.gradle.appname=$APP_BASE_NAME" \
   -classpath "$CLASSPATH" \

@@ -1,70 +1,67 @@
 // Detail.tsx
 
-import type { ColorProp,
-} from "@exports/ExportReacts";
-import {
-	FlexWidget, TextWidget, ImageWidget,
-} from "@exports/ExportReacts";
+import type { ColorProp } from "@exports/ExportReacts";
+import { FlexWidget, ImageWidget, TextWidget } from "@exports/ExportReacts";
 
-// -------------------------------------------------------------------------------------------------
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 declare interface DetailWidgetRecordProps {
-  activeView: string;
-  clientLanguage: string;
-  clientCurrency: string;
-  clientUnit: string;
-  clientDate: string;
-  clientTime: string;
-  clientDay: string;
+	activeView: string;
+	clientLanguage: string;
+	clientCurrency: string;
+	clientUnit: string;
+	clientDate: string;
+	clientTime: string;
+	clientDay: string;
 }
-// -------------------------------------------------------------------------------------------------
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 declare interface ActiveRecordProps {
-  isActive: boolean;
-  iconName: string;
+	isActive: boolean;
+	iconName: string;
 }
-// -------------------------------------------------------------------------------------------------
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 declare interface ExerciseRecordProps {
-  widgetHeight: number;
-  clientLanguage: string;
-  clientUnit: string;
-  exercise: {
-    exercise_record_total_volume: any;
-    exercise_record_total_cardio: any;
-    exercise_record_total_scale: any;
-  };
+	widgetHeight: number;
+	clientLanguage: string;
+	clientUnit: string;
+	exercise: {
+		exercise_record_total_volume: any;
+		exercise_record_total_cardio: any;
+		exercise_record_total_scale: any;
+	};
 }
-// -------------------------------------------------------------------------------------------------
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 declare interface FoodRecordProps {
-  widgetHeight: number;
-  clientLanguage: string;
-  food: {
-    food_record_total_kcal: any;
-    food_record_total_carb: any;
-    food_record_total_protein: any;
-    food_record_total_fat: any;
-  };
+	widgetHeight: number;
+	clientLanguage: string;
+	food: {
+		food_record_total_kcal: any;
+		food_record_total_carb: any;
+		food_record_total_protein: any;
+		food_record_total_fat: any;
+	};
 }
-// -------------------------------------------------------------------------------------------------
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 declare interface MoneyRecordProps {
-  widgetHeight: number;
-  clientLanguage: string;
-  clientCurrency: string;
-  money: {
-    money_record_total_income: any;
-    money_record_total_expense: any;
-  };
+	widgetHeight: number;
+	clientLanguage: string;
+	clientCurrency: string;
+	money: {
+		money_record_total_income: any;
+		money_record_total_expense: any;
+	};
 }
-// -------------------------------------------------------------------------------------------------
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 declare interface SleepRecordProps {
-  widgetHeight: number;
-  clientLanguage: string;
-  sleep: {
-    sleep_record_bedTime: any;
-    sleep_record_wakeTime: any;
-    sleep_record_sleepTime: any;
-  };
+	widgetHeight: number;
+	clientLanguage: string;
+	sleep: {
+		sleep_record_bedTime: any;
+		sleep_record_wakeTime: any;
+		sleep_record_sleepTime: any;
+	};
 }
 
-// -------------------------------------------------------------------------------------------------
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 const insertComma = (str: string) => {
 	// 'x'인 경우 그대로 반환
 	if (str === `x`) {
@@ -72,7 +69,7 @@ const insertComma = (str: string) => {
 	}
 
 	// 숫자로 변환 가능한지 체크
-	let num = parseFloat(str);
+	let num = Number.parseFloat(str);
 
 	// 변환이 실패하면 그대로 반환
 	if (isNaN(num)) {
@@ -86,21 +83,16 @@ const insertComma = (str: string) => {
 	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, `,`);
 };
 
-// -------------------------------------------------------------------------------------------------
-const SelectSection = (
-	{ isActive, iconName }: ActiveRecordProps
-) => {
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+const SelectSection = ({ isActive, iconName }: ActiveRecordProps) => {
 	let imageLink;
 	if (iconName === `exercise`) {
 		imageLink = require(`../assets/images/exercise1.webp`);
-	}
-	else if (iconName === `food`) {
+	} else if (iconName === `food`) {
 		imageLink = require(`../assets/images/food1.webp`);
-	}
-	else if (iconName === `money`) {
+	} else if (iconName === `money`) {
 		imageLink = require(`../assets/images/money1.webp`);
-	}
-	else if (iconName === `sleep`) {
+	} else if (iconName === `sleep`) {
 		imageLink = require(`../assets/images/sleep1.webp`);
 	}
 	return (
@@ -127,21 +119,19 @@ const SelectSection = (
 					backgroundColor: isActive ? `#b3e5fc` : `#ffffff`,
 				}}
 			>
-				<ImageWidget
-					image={imageLink}
-					imageHeight={25}
-					imageWidth={25}
-				/>
+				<ImageWidget image={imageLink} imageHeight={25} imageWidth={25} />
 			</FlexWidget>
 		</FlexWidget>
 	);
 };
 
-// -------------------------------------------------------------------------------------------------
-const ExerciseSection = (
-	{ widgetHeight, clientLanguage, clientUnit, exercise }: ExerciseRecordProps
-) => {
-
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+const ExerciseSection = ({
+	widgetHeight,
+	clientLanguage,
+	clientUnit,
+	exercise,
+}: ExerciseRecordProps) => {
 	// 0. height
 	const height = (widgetHeight - 100) / 3 > 60 ? 60 : (widgetHeight - 100) / 3;
 
@@ -153,25 +143,37 @@ const ExerciseSection = (
 	// 1. volume
 	const exercise_record_total_volume = {
 		text: clientLanguage === `ko` ? `볼륨` : `Volume`,
-		value: [ `x` ].includes(exercise.exercise_record_total_volume) ? `x` : exercise.exercise_record_total_volume,
-		color: [ `x`, `0` ].includes(exercise.exercise_record_total_volume) ? `#9CA3AF` : `#000000`,
-		end: [ `x` ].includes(exercise.exercise_record_total_volume) ? `` : `vol`,
+		value: [`x`].includes(exercise.exercise_record_total_volume)
+			? `x`
+			: exercise.exercise_record_total_volume,
+		color: [`x`, `0`].includes(exercise.exercise_record_total_volume)
+			? `#9CA3AF`
+			: `#000000`,
+		end: [`x`].includes(exercise.exercise_record_total_volume) ? `` : `vol`,
 	};
 
 	// 2. cardio
 	const exercise_record_total_cardio = {
 		text: clientLanguage === `ko` ? `유산소` : `Cardio`,
-		value: [ `x` ].includes(exercise.exercise_record_total_cardio) ? `x` : exercise.exercise_record_total_cardio,
-		color: [ `x`, `00:00` ].includes(exercise.exercise_record_total_cardio) ? `#9CA3AF` : `#000000`,
-		end: [ `x` ].includes(exercise.exercise_record_total_cardio) ? `` : `h:m`,
+		value: [`x`].includes(exercise.exercise_record_total_cardio)
+			? `x`
+			: exercise.exercise_record_total_cardio,
+		color: [`x`, `00:00`].includes(exercise.exercise_record_total_cardio)
+			? `#9CA3AF`
+			: `#000000`,
+		end: [`x`].includes(exercise.exercise_record_total_cardio) ? `` : `h:m`,
 	};
 
 	// 3. scale
 	const exercise_record_total_scale = {
 		text: clientLanguage === `ko` ? `체중` : `BodyWeight`,
-		value: [ `x` ].includes(exercise.exercise_record_total_scale) ? `x` : exercise.exercise_record_total_scale,
-		color: [ `x`, `0` ].includes(exercise.exercise_record_total_scale) ? `#9CA3AF` : `#000000`,
-		end: [ `x` ].includes(exercise.exercise_record_total_scale) ? `` : clientUnit,
+		value: [`x`].includes(exercise.exercise_record_total_scale)
+			? `x`
+			: exercise.exercise_record_total_scale,
+		color: [`x`, `0`].includes(exercise.exercise_record_total_scale)
+			? `#9CA3AF`
+			: `#000000`,
+		end: [`x`].includes(exercise.exercise_record_total_scale) ? `` : clientUnit,
 	};
 
 	return (
@@ -335,11 +337,12 @@ const ExerciseSection = (
 	);
 };
 
-// -------------------------------------------------------------------------------------------------
-const FoodSection = (
-	{ widgetHeight, clientLanguage, food }: FoodRecordProps
-) => {
-
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+const FoodSection = ({
+	widgetHeight,
+	clientLanguage,
+	food,
+}: FoodRecordProps) => {
 	// 0. height
 	const height = (widgetHeight - 100) / 4 > 60 ? 60 : (widgetHeight - 100) / 4;
 
@@ -351,33 +354,49 @@ const FoodSection = (
 	// 1. kcal
 	const food_record_total_kcal = {
 		text: clientLanguage === `ko` ? `칼로리` : `Kcal`,
-		value: [ `x` ].includes(food.food_record_total_kcal) ? `x` : food.food_record_total_kcal,
-		color: [ `x`, `0` ].includes(food.food_record_total_kcal) ? `#9CA3AF` : `#000000`,
-		end: [ `x` ].includes(food.food_record_total_kcal) ? `` : `kcal`,
+		value: [`x`].includes(food.food_record_total_kcal)
+			? `x`
+			: food.food_record_total_kcal,
+		color: [`x`, `0`].includes(food.food_record_total_kcal)
+			? `#9CA3AF`
+			: `#000000`,
+		end: [`x`].includes(food.food_record_total_kcal) ? `` : `kcal`,
 	};
 
 	// 2. carb
 	const food_record_total_carb = {
 		text: clientLanguage === `ko` ? `탄수화물` : `Carb`,
-		value: [ `x` ].includes(food.food_record_total_carb) ? `x` : food.food_record_total_carb,
-		color: [ `x`, `0` ].includes(food.food_record_total_carb) ? `#9CA3AF` : `#000000`,
-		end: [ `x` ].includes(food.food_record_total_carb) ? `` : `g`,
+		value: [`x`].includes(food.food_record_total_carb)
+			? `x`
+			: food.food_record_total_carb,
+		color: [`x`, `0`].includes(food.food_record_total_carb)
+			? `#9CA3AF`
+			: `#000000`,
+		end: [`x`].includes(food.food_record_total_carb) ? `` : `g`,
 	};
 
 	// 3. protein
 	const food_record_total_protein = {
 		text: clientLanguage === `ko` ? `단백질` : `Protein`,
-		value: [ `x` ].includes(food.food_record_total_protein) ? `x` : food.food_record_total_protein,
-		color: [ `x`, `0` ].includes(food.food_record_total_protein) ? `#9CA3AF` : `#000000`,
-		end: [ `x` ].includes(food.food_record_total_protein) ? `` : `g`,
+		value: [`x`].includes(food.food_record_total_protein)
+			? `x`
+			: food.food_record_total_protein,
+		color: [`x`, `0`].includes(food.food_record_total_protein)
+			? `#9CA3AF`
+			: `#000000`,
+		end: [`x`].includes(food.food_record_total_protein) ? `` : `g`,
 	};
 
 	// 4. fat
 	const food_record_total_fat = {
 		text: clientLanguage === `ko` ? `지방` : `Fat`,
-		value: [ `x` ].includes(food.food_record_total_fat) ? `x` : food.food_record_total_fat,
-		color: [ `x`, `0` ].includes(food.food_record_total_fat) ? `#9CA3AF` : `#000000`,
-		end: [ `x` ].includes(food.food_record_total_fat) ? `` : `g`,
+		value: [`x`].includes(food.food_record_total_fat)
+			? `x`
+			: food.food_record_total_fat,
+		color: [`x`, `0`].includes(food.food_record_total_fat)
+			? `#9CA3AF`
+			: `#000000`,
+		end: [`x`].includes(food.food_record_total_fat) ? `` : `g`,
 	};
 
 	return (
@@ -590,11 +609,13 @@ const FoodSection = (
 	);
 };
 
-// -------------------------------------------------------------------------------------------------
-const MoneySection = (
-	{ widgetHeight, clientLanguage, clientCurrency, money}: MoneyRecordProps
-) => {
-
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+const MoneySection = ({
+	widgetHeight,
+	clientLanguage,
+	clientCurrency,
+	money,
+}: MoneyRecordProps) => {
 	// 0. height
 	const height = (widgetHeight - 100) / 2 > 60 ? 60 : (widgetHeight - 100) / 2;
 
@@ -606,17 +627,25 @@ const MoneySection = (
 	// 1. income
 	const money_record_total_income = {
 		text: clientLanguage === `ko` ? `수입` : `Income`,
-		value: [ `x` ].includes(money.money_record_total_income) ? `x` : money.money_record_total_income,
-		color: [ `x`, `0` ].includes(money.money_record_total_income) ? `#9CA3AF` : `#000000`,
-		end: [ `x` ].includes(money.money_record_total_income) ? `` : clientCurrency,
+		value: [`x`].includes(money.money_record_total_income)
+			? `x`
+			: money.money_record_total_income,
+		color: [`x`, `0`].includes(money.money_record_total_income)
+			? `#9CA3AF`
+			: `#000000`,
+		end: [`x`].includes(money.money_record_total_income) ? `` : clientCurrency,
 	};
 
 	// 2. expense
 	const money_record_total_expense = {
 		text: clientLanguage === `ko` ? `지출` : `Expense`,
-		value: [ `x` ].includes(money.money_record_total_expense) ? `x` : money.money_record_total_expense,
-		color: [ `x`, `0` ].includes(money.money_record_total_expense) ? `#9CA3AF` : `#000000`,
-		end: [ `x` ].includes(money.money_record_total_expense) ? `` : clientCurrency,
+		value: [`x`].includes(money.money_record_total_expense)
+			? `x`
+			: money.money_record_total_expense,
+		color: [`x`, `0`].includes(money.money_record_total_expense)
+			? `#9CA3AF`
+			: `#000000`,
+		end: [`x`].includes(money.money_record_total_expense) ? `` : clientCurrency,
 	};
 
 	return (
@@ -731,11 +760,12 @@ const MoneySection = (
 	);
 };
 
-// -------------------------------------------------------------------------------------------------
-const SleepSection = (
-	{ widgetHeight, clientLanguage, sleep }: SleepRecordProps
-) => {
-
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+const SleepSection = ({
+	widgetHeight,
+	clientLanguage,
+	sleep,
+}: SleepRecordProps) => {
 	// 0. height
 	const height = (widgetHeight - 100) / 3 > 60 ? 60 : (widgetHeight - 100) / 3;
 
@@ -747,25 +777,37 @@ const SleepSection = (
 	// 1. bedTime
 	const sleep_record_bedTime = {
 		text: clientLanguage === `ko` ? `취침` : `Bed`,
-		value: [ `x` ].includes(sleep.sleep_record_bedTime) ? `x` : sleep.sleep_record_bedTime,
-		color: [ `x`, `00:00` ].includes(sleep.sleep_record_bedTime) ? `#9CA3AF` : `#000000`,
-		end: [ `x` ].includes(sleep.sleep_record_bedTime) ? `` : `h:m`,
+		value: [`x`].includes(sleep.sleep_record_bedTime)
+			? `x`
+			: sleep.sleep_record_bedTime,
+		color: [`x`, `00:00`].includes(sleep.sleep_record_bedTime)
+			? `#9CA3AF`
+			: `#000000`,
+		end: [`x`].includes(sleep.sleep_record_bedTime) ? `` : `h:m`,
 	};
 
 	// 2. wakeTime
 	const sleep_record_wakeTime = {
 		text: clientLanguage === `ko` ? `기상` : `Wake`,
-		value: [ `x` ].includes(sleep.sleep_record_wakeTime) ? `x` : sleep.sleep_record_wakeTime,
-		color: [ `x`, `00:00` ].includes(sleep.sleep_record_wakeTime) ? `#9CA3AF` : `#000000`,
-		end: [ `x` ].includes(sleep.sleep_record_wakeTime) ? `` : `h:m`,
+		value: [`x`].includes(sleep.sleep_record_wakeTime)
+			? `x`
+			: sleep.sleep_record_wakeTime,
+		color: [`x`, `00:00`].includes(sleep.sleep_record_wakeTime)
+			? `#9CA3AF`
+			: `#000000`,
+		end: [`x`].includes(sleep.sleep_record_wakeTime) ? `` : `h:m`,
 	};
 
 	// 3. sleepTime
 	const sleep_record_sleepTime = {
 		text: clientLanguage === `ko` ? `수면` : `Sleep`,
-		value: [ `x` ].includes(sleep.sleep_record_sleepTime) ? `x` : sleep.sleep_record_sleepTime,
-		color: [ `x`, `00:00` ].includes(sleep.sleep_record_sleepTime) ? `#9CA3AF` : `#000000`,
-		end: [ `x` ].includes(sleep.sleep_record_sleepTime) ? `` : `h:m`,
+		value: [`x`].includes(sleep.sleep_record_sleepTime)
+			? `x`
+			: sleep.sleep_record_sleepTime,
+		color: [`x`, `00:00`].includes(sleep.sleep_record_sleepTime)
+			? `#9CA3AF`
+			: `#000000`,
+		end: [`x`].includes(sleep.sleep_record_sleepTime) ? `` : `h:m`,
 	};
 
 	return (
@@ -929,23 +971,25 @@ const SleepSection = (
 	);
 };
 
-// -------------------------------------------------------------------------------------------------
-export const DetailWidget = (
-	{
-		widgetHeight,
-		activeView,
-		clientLanguage,
-		clientCurrency,
-		clientUnit,
-		clientDate,
-		clientDay,
-		clientTime,
-		exercise,
-		food,
-		money,
-		sleep,
-	}: DetailWidgetRecordProps & ExerciseRecordProps & FoodRecordProps & MoneyRecordProps & SleepRecordProps
-) => {
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+export const DetailWidget = ({
+	widgetHeight,
+	activeView,
+	clientLanguage,
+	clientCurrency,
+	clientUnit,
+	clientDate,
+	clientDay,
+	clientTime,
+	exercise,
+	food,
+	money,
+	sleep,
+}: DetailWidgetRecordProps &
+	ExerciseRecordProps &
+	FoodRecordProps &
+	MoneyRecordProps &
+	SleepRecordProps) => {
 	return (
 		<FlexWidget
 			style={{
@@ -1066,10 +1110,15 @@ export const DetailWidget = (
 						imageWidth={16}
 						imageHeight={16}
 						clickAction={
-							activeView === `exercise` ? `exercise` :
-								activeView === `food` ? `food` :
-									activeView === `money` ? `money` :
-										activeView === `sleep` ? `sleep` : ``
+							activeView === `exercise`
+								? `exercise`
+								: activeView === `food`
+									? `food`
+									: activeView === `money`
+										? `money`
+										: activeView === `sleep`
+											? `sleep`
+											: ``
 						}
 					/>
 				</FlexWidget>

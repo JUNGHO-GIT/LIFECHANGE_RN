@@ -1,4 +1,4 @@
-package com.LIFECHANGE.widgets;
+package com.lifechangeapp.widgets;
 
 import com.reactnativeandroidwidget.RNWidgetProvider;
 

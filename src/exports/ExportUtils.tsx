@@ -1,7 +1,8 @@
-// Money.tsx
+// ExportLibs.tsx
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
+import moment from "moment-timezone";
 
 // ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
-export const Money = {
-	money_total_income: "x",
-	money_total_expense: "x",
-};
+export { AsyncStorage, axios, moment };

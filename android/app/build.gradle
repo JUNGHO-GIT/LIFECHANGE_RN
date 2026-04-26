@@ -1,8 +1,8 @@
 // android/app/build.gradle (module:app)
 
-// ----------------------------------------------------------------------------------------------------------
+// ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 // 1. plugins
-// ----------------------------------------------------------------------------------------------------------
+// ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 plugins {
 	id("com.android.application")
 	id("org.jetbrains.kotlin.android")
@@ -17,20 +17,20 @@ react {
 	autolinkLibrariesWithApp()
 }
 
-// ----------------------------------------------------------------------------------------------------------
+// ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 // 3. android
-// ----------------------------------------------------------------------------------------------------------
+// ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 android {
 
 	// 기본 설정 1
-	namespace "com.LIFECHANGE"
+	namespace "com.lifechangeapp"
 	ndkVersion rootProject.ext.ndkVersion
 	buildToolsVersion rootProject.ext.buildToolsVersion
 	compileSdk rootProject.ext.compileSdkVersion
 
 	// 기본 설정 2
 	defaultConfig {
-		applicationId "com.LIFECHANGE"
+		applicationId "com.lifechangeapp"
 		minSdkVersion rootProject.ext.minSdkVersion
 		targetSdkVersion rootProject.ext.targetSdkVersion
 		versionCode rootProject.ext.versionCode
@@ -107,15 +107,15 @@ android {
 	// apk 이름 변경
 	applicationVariants.all { variant ->
 		variant.outputs.all { output ->
-			def newApkName = "LIFECHANGE_${variant.versionName}.apk"
+			def newApkName = "lifechange_${variant.versionName}.apk"
 			output.outputFileName = newApkName
 		}
 	}
 }
 
-// ----------------------------------------------------------------------------------------------------------
+// ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 // 4. dependencies
-// ----------------------------------------------------------------------------------------------------------
+// ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 dependencies {
 	// Hermes 강제 포함(에뮬 x86_64용 .so 보장)
 	if (_hermesEnabled) {

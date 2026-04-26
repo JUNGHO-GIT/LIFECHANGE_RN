@@ -1,18 +1,17 @@
 // App.tsx
 
+import { Banner, Webviews } from "@exports/ExportContainers";
+import { AsyncStorage } from "@exports/ExportLibs";
 import {
-	useEffect, useRef, useState, BackHandler, StyleSheet, SafeAreaProvider,
+	BackHandler,
+	SafeAreaProvider,
+	StyleSheet,
+	useEffect,
+	useRef,
+	useState,
 } from "@exports/ExportReacts";
 
-import {
-	Banner, Webviews,
-} from "@exports/ExportContainers";
-
-import {
-	AsyncStorage,
-} from "@exports/ExportLibs";
-
-// -------------------------------------------------------------------------------------------------
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
@@ -21,15 +20,14 @@ const styles = StyleSheet.create({
 	},
 });
 
-// -------------------------------------------------------------------------------------------------
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 export const App = () => {
-
-	// -----------------------------------------------------------------------------------------------
+	// ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――--
 	const [bannerVisible, setBannerVisible] = useState<boolean>(false);
 	const [navigationEnabled, _setNavigationEnabled] = useState<boolean>(true);
 	const webViewRef = useRef<any>(null);
 
-	// 뒤로가기 버튼 이벤트 --------------------------------------------------------------------------
+	// 뒤로가기 버튼 이벤트 ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――--
 	useEffect(() => {
 		try {
 			const onBackPress = () => {
@@ -42,17 +40,16 @@ export const App = () => {
 
 			const backHandler = BackHandler.addEventListener(
 				`hardwareBackPress`,
-				onBackPress
+				onBackPress,
 			);
 
 			return () => backHandler.remove();
-		}
-		catch (err: any) {
+		} catch (err: any) {
 			console.error(`backHandler error:`, err);
 		}
 	}, [navigationEnabled]);
 
-	// -----------------------------------------------------------------------------------------------
+	// ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――--
 	const handlerOnMessage = (event: any) => {
 		try {
 			const parsedData = JSON.parse(event.nativeEvent.data);
@@ -64,134 +61,35 @@ export const App = () => {
 
 			// 로케일은 객체
 			else if (parsedData.type === `localeSetting`) {
-				AsyncStorage.setItem(`localeSetting`, JSON.stringify(parsedData.localeSetting));
+				AsyncStorage.setItem(
+					`localeSetting`,
+					JSON.stringify(parsedData.localeSetting),
+				);
 			}
-		}
-		catch (err: any) {
+		} catch (err: any) {
 			console.error(`onMessage event error:`, err);
 		}
 	};
 
-	// -----------------------------------------------------------------------------------------------
-	const handlerBannerVisible = ({url}: any) => {
+	// ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――--
+	const handlerBannerVisible = ({ url }: any) => {
 		try {
 			const hideBannerUrls = [
-				`user/signup`, `user/login`, `user/resetPw`, `accounts.google.com`,
+				`user/signup`,
+				`user/login`,
+				`user/resetPw`,
+				`accounts.google.com`,
 			];
-			const shouldHideBanner = hideBannerUrls.some((hideUrl) => (
-				url.includes(hideUrl)
-			));
-			setBannerVisible(!shouldHideBanner);
-		}
-		catch (err: any) {
-			console.error(`bannerVisible event error:`, err);
-		}
-	};
-
-	// -----------------------------------------------------------------------------------------------
-	return (
-		<SafeAreaProvider style={styles.container}>
-			<Webviews
-				onMessage={handlerOnMessage}
-				bannerVisible={handlerBannerVisible}
-				navigationEnabled={navigationEnabled}
-				ref={webViewRef}
-			/>
-			{bannerVisible && <Banner />}
-		</SafeAreaProvider>
-	);
-};
-// App.tsx
-
-import {
-	useEffect, useRef, useState, BackHandler, StyleSheet, SafeAreaProvider,
-} from "@exports/ExportReacts";
-
-import {
-	Banner, Webviews,
-} from "@exports/ExportContainers";
-
-import {
-	AsyncStorage,
-} from "@exports/ExportLibs";
-
-// -------------------------------------------------------------------------------------------------
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		alignItems: `center`,
-		justifyContent: `center`,
-	},
-});
-
-// -------------------------------------------------------------------------------------------------
-export const App = () => {
-
-	// -----------------------------------------------------------------------------------------------
-	const [bannerVisible, setBannerVisible] = useState<boolean>(false);
-	const [navigationEnabled, _setNavigationEnabled] = useState<boolean>(true);
-	const webViewRef = useRef<any>(null);
-
-	// 뒤로가기 버튼 이벤트 --------------------------------------------------------------------------
-	useEffect(() => {
-		try {
-			const onBackPress = () => {
-				if (webViewRef.current && navigationEnabled) {
-					webViewRef.current.goBack();
-					return true;
-				}
-				return false;
-			};
-
-			const backHandler = BackHandler.addEventListener(
-				`hardwareBackPress`,
-				onBackPress
+			const shouldHideBanner = hideBannerUrls.some((hideUrl) =>
+				url.includes(hideUrl),
 			);
-
-			return () => backHandler.remove();
-		}
-		catch (err: any) {
-			console.error(`backHandler error:`, err);
-		}
-	}, [navigationEnabled]);
-
-	// -----------------------------------------------------------------------------------------------
-	const handlerOnMessage = (event: any) => {
-		try {
-			const parsedData = JSON.parse(event.nativeEvent.data);
-
-			// 세션아이디는 단일 string
-			if (parsedData.type === `sessionId`) {
-				AsyncStorage.setItem(`sessionId`, parsedData.sessionId);
-			}
-
-			// 로케일은 객체
-			else if (parsedData.type === `localeSetting`) {
-				AsyncStorage.setItem(`localeSetting`, JSON.stringify(parsedData.localeSetting));
-			}
-		}
-		catch (err: any) {
-			console.error(`onMessage event error:`, err);
-		}
-	};
-
-	// -----------------------------------------------------------------------------------------------
-	const handlerBannerVisible = ({url}: any) => {
-		try {
-			const hideBannerUrls = [
-				`user/signup`, `user/login`, `user/resetPw`, `accounts.google.com`,
-			];
-			const shouldHideBanner = hideBannerUrls.some((hideUrl) => (
-				url.includes(hideUrl)
-			));
 			setBannerVisible(!shouldHideBanner);
-		}
-		catch (err: any) {
+		} catch (err: any) {
 			console.error(`bannerVisible event error:`, err);
 		}
 	};
 
-	// -----------------------------------------------------------------------------------------------
+	// ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――--
 	return (
 		<SafeAreaProvider style={styles.container}>
 			<Webviews

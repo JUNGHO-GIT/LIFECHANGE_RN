@@ -1,76 +1,83 @@
 // widgetTaskHandler.tsx
 
-import type {
-	WidgetTaskHandlerProps,
-} from "@exports/ExportReacts";
+import { SERVER_URL } from "@env";
 
+import { AsyncStorage, axios, moment } from "@exports/ExportLibs";
+import type { WidgetTaskHandlerProps } from "@exports/ExportReacts";
 import {
-	axios, AsyncStorage, moment,
-} from "@exports/ExportLibs";
-
-import {
-	DetailWidget,
-} from "@exports/ExportWidgets";
-
-import {
-	SERVER_URL,
-} from "@env";
-
-import {
-	OBJECT, ExerciseRecord, FoodRecord, MoneyRecord, SleepRecord,
+	ExerciseRecord,
+	FoodRecord,
+	MoneyRecord,
+	OBJECT,
+	SleepRecord,
 } from "@exports/ExportSchemas";
+import { DetailWidget } from "@exports/ExportWidgets";
 
-// -------------------------------------------------------------------------------------------------
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 const nameToWidget = {
 	DetailWidget: DetailWidget,
 };
 
-// -------------------------------------------------------------------------------------------------
-export async function widgetTaskHandler(
-	props: WidgetTaskHandlerProps
-) {
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+export async function widgetTaskHandler(props: WidgetTaskHandlerProps) {
 	try {
-		// 위젯 정보 -----------------------------------------------------------------------------------
+		// 위젯 정보 ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――--
 		const widgetInfo = props.widgetInfo;
-		const Widget = nameToWidget[widgetInfo.widgetName as keyof typeof nameToWidget] as any;
-		const existedActiveView = await AsyncStorage.getItem(`activeView`) || `exercise`;
+		const Widget = nameToWidget[
+			widgetInfo.widgetName as keyof typeof nameToWidget
+		] as any;
+		const existedActiveView =
+			(await AsyncStorage.getItem(`activeView`)) || `exercise`;
 
-		// 세션 아이디 및 로케일 -----------------------------------------------------------------------
-		const sessionId: string = await AsyncStorage.getItem(`sessionId`) || ``;
-		const localeSetting: string = await AsyncStorage.getItem(`localeSetting`) || ``;
+		// 세션 아이디 및 로케일 ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――--
+		const sessionId: string = (await AsyncStorage.getItem(`sessionId`)) || ``;
+		const localeSetting: string =
+			(await AsyncStorage.getItem(`localeSetting`)) || ``;
 
-		// 타임존, 언어, 통화 --------------------------------------------------------------------------
+		// 타임존, 언어, 통화 ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――--
 		const clientTimeZone: string = JSON.parse(localeSetting).timeZone;
 		const clientLanguage: string = JSON.parse(localeSetting).lang;
 		const clientCurrency: string = JSON.parse(localeSetting).currency;
 		const clientUnit: string = JSON.parse(localeSetting).unit;
 
-		// 현재 시간 및 날짜, 요일 ---------------------------------------------------------------------
+		// 현재 시간 및 날짜, 요일 ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 		const clientDate = moment().tz(clientTimeZone).format(`YYYY-MM-DD`);
-		const clientMonthStart = moment().tz(clientTimeZone).startOf(`month`).format(`YYYY-MM-DD`);
-		const clientMonthEnd = moment().tz(clientTimeZone).endOf(`month`).format(`YYYY-MM-DD`);
+		const clientMonthStart = moment()
+			.tz(clientTimeZone)
+			.startOf(`month`)
+			.format(`YYYY-MM-DD`);
+		const clientMonthEnd = moment()
+			.tz(clientTimeZone)
+			.endOf(`month`)
+			.format(`YYYY-MM-DD`);
 
 		const clientTime = moment().tz(clientTimeZone).format(`HH:mm:ss`);
 		const clientFormat = moment().tz(clientTimeZone).format(`ddd`);
-		const clientDay = clientTimeZone === `Asia/Seoul` ? (
-			clientFormat === `Mon` ? `월`
-				: clientFormat === `Tue` ? `화`
-					: clientFormat === `Wed` ? `수`
-						: clientFormat === `Thu` ? `목`
-							: clientFormat === `Fri` ? `금`
-								: clientFormat === `Sat` ? `토`
-									: `일`
-		) : clientFormat;
+		const clientDay =
+			clientTimeZone === `Asia/Seoul`
+				? clientFormat === `Mon`
+				? `월`
+				: clientFormat === `Tue`
+				? `화`
+				: clientFormat === `Wed`
+				? `수`
+				: clientFormat === `Thu`
+				? `목`
+				: clientFormat === `Fri`
+				? `금`
+				: clientFormat === `Sat`
+				? `토`
+				: `일`
+				: clientFormat;
 
-		// 위젯 클릭 섹션 ------------------------------------------------------------------------------
+		// 위젯 클릭 섹션 ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 		const setActiveView = async (section: string) => {
 			await AsyncStorage.setItem(`activeView`, section);
 			return section;
 		};
 
-		// 상세 위젯인 경우 ----------------------------------------------------------------------------
+		// 상세 위젯인 경우 ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 		if (widgetInfo.widgetName === `DetailWidget`) {
-
 			// fetch 데이터
 			await (async () => {
 				const params = {
@@ -85,36 +92,45 @@ export async function widgetTaskHandler(
 						dateEnd: clientDate,
 					},
 				};
-				const [ exerciseResponse, foodResponse, moneyResponse, sleepResponse ] = await Promise.all([
-					axios.get(`${SERVER_URL}/api/exercise/record/list`, {
-						params: params,
-					}),
-					axios.get(`${SERVER_URL}/api/food/record/list`, {
-						params: params,
-					}),
-					axios.get(`${SERVER_URL}/api/money/record/list`, {
-						params: params,
-					}),
-					axios.get(`${SERVER_URL}/api/sleep/record/list`, {
-						params: params,
-					}),
-				]);
-				OBJECT.exerciseRecord = exerciseResponse.data.result?.[0] || ExerciseRecord;
+				const [exerciseResponse, foodResponse, moneyResponse, sleepResponse] =
+					await Promise.all([
+						axios.get(`${SERVER_URL}/api/exercise/record/list`, {
+							params: params,
+						}),
+						axios.get(`${SERVER_URL}/api/food/record/list`, {
+							params: params,
+						}),
+						axios.get(`${SERVER_URL}/api/money/record/list`, {
+							params: params,
+						}),
+						axios.get(`${SERVER_URL}/api/sleep/record/list`, {
+							params: params,
+						}),
+					]);
+				OBJECT.exerciseRecord =
+					exerciseResponse.data.result?.[0] || ExerciseRecord;
 				OBJECT.foodRecord = foodResponse.data.result?.[0] || FoodRecord;
 				OBJECT.moneyRecord = moneyResponse.data.result?.[0] || MoneyRecord;
-				OBJECT.sleepRecord = sleepResponse.data.result?.[0]?.sleep_section?.[0] || SleepRecord;
+				OBJECT.sleepRecord =
+					sleepResponse.data.result?.[0]?.sleep_section?.[0] || SleepRecord;
 			})();
 
 			// 위젯 액션에 따른 렌더링
 			if (
-				props.widgetAction === `WIDGET_ADDED` || props.widgetAction === `WIDGET_UPDATE` ||
-				props.widgetAction === `WIDGET_RESIZED` || props.widgetAction === `WIDGET_DELETED`
+				props.widgetAction === `WIDGET_ADDED` ||
+				props.widgetAction === `WIDGET_UPDATE` ||
+				props.widgetAction === `WIDGET_RESIZED` ||
+				props.widgetAction === `WIDGET_DELETED`
 			) {
 				props.renderWidget(
 					<Widget
 						{...widgetInfo}
 						widgetHeight={widgetInfo.height as number}
-						activeView={await setActiveView(props.clickAction as string || existedActiveView)}
+						activeView={
+							await setActiveView(
+								(props.clickAction as string) || existedActiveView,
+							)
+						}
 						clientLanguage={clientLanguage}
 						clientCurrency={clientCurrency}
 						clientUnit={clientUnit}
@@ -125,15 +141,18 @@ export async function widgetTaskHandler(
 						food={OBJECT.foodRecord}
 						money={OBJECT.moneyRecord}
 						sleep={OBJECT.sleepRecord}
-					/>
+					/>,
 				);
-			}
-			else if (props.widgetAction === `WIDGET_CLICK`) {
+			} else if (props.widgetAction === `WIDGET_CLICK`) {
 				props.renderWidget(
 					<Widget
 						{...widgetInfo}
 						widgetHeight={widgetInfo.height as number}
-						activeView={await setActiveView(props.clickAction as string || existedActiveView)}
+						activeView={
+							await setActiveView(
+								(props.clickAction as string) || existedActiveView,
+							)
+						}
 						clientLanguage={clientLanguage}
 						clientCurrency={clientCurrency}
 						clientUnit={clientUnit}
@@ -144,12 +163,12 @@ export async function widgetTaskHandler(
 						food={OBJECT.foodRecord}
 						money={OBJECT.moneyRecord}
 						sleep={OBJECT.sleepRecord}
-					/>
+					/>,
 				);
 			}
 		}
 
-		// 콘솔 로그 -----------------------------------------------------------------------------------
+		// 콘솔 로그 ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――--
 		console.log(`
       sessionId: ${sessionId},
       clientTimeZone: ${clientTimeZone},
@@ -162,8 +181,7 @@ export async function widgetTaskHandler(
       clientTime: ${clientTime},
       ${props.widgetAction}: ${JSON.stringify(widgetInfo)}
     `);
-	}
-	catch (err: any) {
+	} catch (err: any) {
 		console.error(`widgetTaskHandler error:`, err);
 	}
 }

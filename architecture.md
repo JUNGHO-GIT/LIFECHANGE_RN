@@ -1,9 +1,9 @@
-# LIFECHANGE_RN Architecture
+# lifechange-rn Architecture
 
 ## Structure Map
 
 ```text
-LIFECHANGE_RN
+lifechange-rn
 |-- index.js         -> React Native entry
 |-- src/
 |   |-- containers/  -> screen-level composition

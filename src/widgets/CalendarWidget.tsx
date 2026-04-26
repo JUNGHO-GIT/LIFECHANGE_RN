@@ -1,45 +1,52 @@
 // Calendar.tsx
 
-import {
-	FlexWidget, TextWidget, ImageWidget,
-} from "@exports/ExportReacts";
+import { FlexWidget, ImageWidget, TextWidget } from "@exports/ExportReacts";
 
-// -------------------------------------------------------------------------------------------------
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 declare interface CalendarWidgetProps {
-  clientLanguage: string;
-  clientDate: string;
-  clientMonthStart: string;
-  clientMonthEnd: string;
-  clientTime: string;
-  clientDay: string;
+	clientLanguage: string;
+	clientDate: string;
+	clientMonthStart: string;
+	clientMonthEnd: string;
+	clientTime: string;
+	clientDay: string;
 }
 
-// -------------------------------------------------------------------------------------------------
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 declare interface CalendarProps {
-  widgetHeight: number;
-  widgetWidth: number;
-  clientLanguage: string;
-  clientDate: string;
-  clientMonthStart: string;
-  clientMonthEnd: string;
-  calendar: [{
-    calendar_dateStart: string;
-    calendar_dateEnd: string;
-    calendar_section: [{
-      calendar_part_idx: number;
-      calendar_part_val: string;
-      calendar_color: string;
-      calendar_title: string;
-      calendar_content: string;
-    }];
-  }];
+	widgetHeight: number;
+	widgetWidth: number;
+	clientLanguage: string;
+	clientDate: string;
+	clientMonthStart: string;
+	clientMonthEnd: string;
+	calendar: [
+		{
+			calendar_dateStart: string;
+			calendar_dateEnd: string;
+			calendar_section: [
+				{
+					calendar_part_idx: number;
+					calendar_part_val: string;
+					calendar_color: string;
+					calendar_title: string;
+					calendar_content: string;
+				},
+			];
+		},
+	];
 }
 
-// -------------------------------------------------------------------------------------------------
-const CalendarSection = (
-	{ widgetHeight, widgetWidth, clientLanguage, clientDate, clientMonthStart, clientMonthEnd, calendar }: CalendarProps
-) => {
-
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+const CalendarSection = ({
+	widgetHeight,
+	widgetWidth,
+	clientLanguage,
+	clientDate,
+	clientMonthStart,
+	clientMonthEnd,
+	calendar,
+}: CalendarProps) => {
 	const currentDate = new Date(clientMonthStart);
 	const currentMonth = currentDate.getMonth();
 	const currentYear = currentDate.getFullYear();
@@ -168,19 +175,17 @@ const CalendarSection = (
 	);
 };
 
-// -------------------------------------------------------------------------------------------------
-export const CalendarWidget = (
-	{
-		clientLanguage,
-		clientDate,
-		clientMonthStart,
-		clientMonthEnd,
-		clientTime,
-		calendar,
-		widgetHeight,
-		widgetWidth,
-	}: CalendarWidgetProps & CalendarProps
-) => {
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+export const CalendarWidget = ({
+	clientLanguage,
+	clientDate,
+	clientMonthStart,
+	clientMonthEnd,
+	clientTime,
+	calendar,
+	widgetHeight,
+	widgetWidth,
+}: CalendarWidgetProps & CalendarProps) => {
 	try {
 		return (
 			<FlexWidget
@@ -296,8 +301,7 @@ export const CalendarWidget = (
 				</FlexWidget>
 			</FlexWidget>
 		);
-	}
-	catch (err) {
+	} catch (err) {
 		console.error(`CalendarWidget error:`, err);
 	}
 };

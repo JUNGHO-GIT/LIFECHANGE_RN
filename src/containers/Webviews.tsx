@@ -1,38 +1,36 @@
 // Webviews.tsx
 
+import { SERVER_URL, TITLE } from "@env";
 import {
-  forwardRef, StyleSheet, Dimensions, WebView
+	Dimensions,
+	forwardRef,
+	StyleSheet,
+	WebView,
 } from "@exports/ExportReacts";
 
-import {
-  TITLE, SERVER_URL,
-} from "@env";
-
-// -------------------------------------------------------------------------------------------------
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 declare type Props = {
-  onMessage: (event: any) => void;
-  bannerVisible: (newState: any) => void;
-  navigationEnabled: boolean;
+	onMessage: (event: any) => void;
+	bannerVisible: (newState: any) => void;
+	navigationEnabled: boolean;
 };
 
-// -------------------------------------------------------------------------------------------------
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 const styles = StyleSheet.create({
-  webviewContainer: {
-    flex: 1,
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height - 60,
-  },
+	webviewContainer: {
+		flex: 1,
+		width: Dimensions.get("window").width,
+		height: Dimensions.get("window").height - 60,
+	},
 });
 
-// -------------------------------------------------------------------------------------------------
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 export const Webviews = forwardRef<WebView, Props>(
-  ({ onMessage, bannerVisible, navigationEnabled }, ref) => {
+	({ onMessage, bannerVisible, navigationEnabled }, ref) => {
+		const userAgent =
+			"Mozilla/5.0 (Linux; Android 8.0.0; SM-G935S Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36";
 
-    const userAgent = (
-      "Mozilla/5.0 (Linux; Android 8.0.0; SM-G935S Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36"
-    );
-
-    const injectedJavaScript = (/* javascript */`
+		const injectedJavaScript = /* javascript */ `
 
       // Session storage overrides
       let ogSessionSetItem = window.sessionStorage.setItem;
@@ -95,35 +93,35 @@ export const Webviews = forwardRef<WebView, Props>(
           }));
         }
       }
-    `);
+    `;
 
-    return (
-      <WebView
-        ref={ref}
-        style={styles.webviewContainer}
-        source={{ uri: SERVER_URL }}
-        onMessage={onMessage}
-        originWhitelist={['*']}
-        userAgent={userAgent}
-        allowFileAccess={true}
-        cacheEnabled={true}
-        javaScriptEnabled={true}
-        domStorageEnabled={true}
-        injectedJavaScript={injectedJavaScript}
-        allowsBackForwardNavigationGestures={true}
-        onNavigationStateChange={(newState) => {
-          if (navigationEnabled) {
-            bannerVisible(newState);
-          }
-        }}
-        onShouldStartLoadWithRequest={(request) => {
-          if (navigationEnabled) {
-            bannerVisible(request);
-            return true;
-          }
-          return false;
-        }}
-      />
-    );
-  }
+		return (
+			<WebView
+				ref={ref}
+				style={styles.webviewContainer}
+				source={{ uri: SERVER_URL }}
+				onMessage={onMessage}
+				originWhitelist={["*"]}
+				userAgent={userAgent}
+				allowFileAccess={true}
+				cacheEnabled={true}
+				javaScriptEnabled={true}
+				domStorageEnabled={true}
+				injectedJavaScript={injectedJavaScript}
+				allowsBackForwardNavigationGestures={true}
+				onNavigationStateChange={(newState) => {
+					if (navigationEnabled) {
+						bannerVisible(newState);
+					}
+				}}
+				onShouldStartLoadWithRequest={(request) => {
+					if (navigationEnabled) {
+						bannerVisible(request);
+						return true;
+					}
+					return false;
+				}}
+			/>
+		);
+	},
 );

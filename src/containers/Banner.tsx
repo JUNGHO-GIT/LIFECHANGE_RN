@@ -1,37 +1,36 @@
 // Banner.tsx
 
+import { ADMOB_BANNER_ID } from "@env";
 import {
-  BannerAd, BannerAdSize, StyleSheet, View,
+	BannerAd,
+	BannerAdSize,
+	StyleSheet,
+	View,
 } from "@exports/ExportReacts";
 
-import {
-  ADMOB_BANNER_ID,
-} from "@env";
-
-// -------------------------------------------------------------------------------------------------
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 const styles = StyleSheet.create({
-  bannerContainer: {
-    padding: 0,
-    margin: 0,
-    backgroundColor: '#ffffff',
-    objectFit: 'contain',
-    borderTopWidth: 1,
-    borderTopColor: '#c4c2c2',
-  },
+	bannerContainer: {
+		padding: 0,
+		margin: 0,
+		backgroundColor: "#ffffff",
+		objectFit: "contain",
+		borderTopWidth: 1,
+		borderTopColor: "#c4c2c2",
+	},
 });
 
-// -------------------------------------------------------------------------------------------------
+// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
 export const Banner = () => {
+	const realId = ADMOB_BANNER_ID;
 
-  const realId = ADMOB_BANNER_ID;
-
-  return (
-    <View style={styles.bannerContainer}>
-      <BannerAd
-        key={`banner-${realId}`}
-        unitId={`${realId}`}
-        size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
-      />
-    </View>
-  );
-}
+	return (
+		<View style={styles.bannerContainer}>
+			<BannerAd
+				key={`banner-${realId}`}
+				unitId={`${realId}`}
+				size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+			/>
+		</View>
+	);
+};

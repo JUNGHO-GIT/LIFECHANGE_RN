@@ -3,6 +3,6 @@
 <!-- strings.xml -->
 
 <resources>
-  <string name="app_name">LIFECHANGE</string>
+  <string name="app_name">lifechange</string>
   <string name="refresh">Refresh</string>
 </resources>

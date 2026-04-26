@@ -25,7 +25,7 @@ module.exports = {
 				'@schemas': './src/schemas',
 				'@containers': './src/containers',
 				'@widgets': './src/widgets',
-				'@exports': './src/imports'
+				'@exports': './src/exports'
 			}
 		}],
 		['module:react-native-dotenv', {

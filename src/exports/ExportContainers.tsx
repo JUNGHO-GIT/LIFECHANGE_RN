@@ -1,7 +1,5 @@
-// Money.tsx
+// ExportContainers.tsx
 
 // ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
-export const Money = {
-	money_total_income: "x",
-	money_total_expense: "x",
-};
+export { Banner } from "@containers/Banner";
+export { Webviews } from "@containers/Webviews";
