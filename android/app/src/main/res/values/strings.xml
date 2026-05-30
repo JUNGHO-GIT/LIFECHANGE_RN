@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- strings.xml -->
+
+<resources>
+  <string name="app_name">lifechange</string>
+  <string name="refresh">Refresh</string>
+</resources>
