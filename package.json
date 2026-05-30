@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "3.0.2",
-    "axios": "1.15.2",
+    "axios": "1.16.0",
     "moment-timezone": "0.6.2",
     "react": "19.2.5",
     "react-native": "0.85.2",
