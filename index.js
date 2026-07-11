@@ -2,12 +2,12 @@
 
 import 'react-native-gesture-handler';
 import { App } from './src/App';
-import { enableScreens as enblScrn } from 'react-native-screens';
+import { enableScreens } from 'react-native-screens';
 import { AppRegistry } from 'react-native';
 import { appName } from './app.json';
-import { registerWidgetTaskHandler as rgsWdTsHd } from 'react-native-android-widget';
-import { widgetTaskHandler as wdgtTskHdl } from './src/widgetTaskHandler.tsx';
+import { registerWidgetTaskHandler } from 'react-native-android-widget';
+import { widgetTaskHandler } from './src/widgetTaskHandler.tsx';
 
-enblScrn();
+enableScreens();
 AppRegistry.registerComponent(appName, () => App);
-rgsWdTsHd(wdgtTskHdl);
+registerWidgetTaskHandler(widgetTaskHandler);

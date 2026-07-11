@@ -1,6 +1,6 @@
 // ExportReacts.tsx
 
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+// -------------------------------------------------------------------------------------------------
 export {
 	createContext,
 	createRef,
@@ -33,7 +33,7 @@ export type {
 } from "react-native-android-widget";
 export {
 	FlexWidget,
-	ImageWidget,
+	SvgWidget,
 	TextWidget,
 } from "react-native-android-widget";
 

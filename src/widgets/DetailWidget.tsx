@@ -1,9 +1,9 @@
 // Detail.tsx
 
 import type { ColorProp } from "@exports/ExportReacts";
-import { FlexWidget, ImageWidget, TextWidget } from "@exports/ExportReacts";
+import { FlexWidget, SvgWidget, TextWidget } from "@exports/ExportReacts";
 
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+// -------------------------------------------------------------------------------------------------
 declare interface DetailWidgetRecordProps {
 	activeView: string;
 	clientLanguage: string;
@@ -13,12 +13,12 @@ declare interface DetailWidgetRecordProps {
 	clientTime: string;
 	clientDay: string;
 }
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+// -------------------------------------------------------------------------------------------------
 declare interface ActiveRecordProps {
 	isActive: boolean;
 	iconName: string;
 }
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+// -------------------------------------------------------------------------------------------------
 declare interface ExerciseRecordProps {
 	widgetHeight: number;
 	clientLanguage: string;
@@ -29,7 +29,7 @@ declare interface ExerciseRecordProps {
 		exercise_record_total_scale: any;
 	};
 }
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+// -------------------------------------------------------------------------------------------------
 declare interface FoodRecordProps {
 	widgetHeight: number;
 	clientLanguage: string;
@@ -40,7 +40,7 @@ declare interface FoodRecordProps {
 		food_record_total_fat: any;
 	};
 }
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+// -------------------------------------------------------------------------------------------------
 declare interface MoneyRecordProps {
 	widgetHeight: number;
 	clientLanguage: string;
@@ -50,7 +50,7 @@ declare interface MoneyRecordProps {
 		money_record_total_expense: any;
 	};
 }
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+// -------------------------------------------------------------------------------------------------
 declare interface SleepRecordProps {
 	widgetHeight: number;
 	clientLanguage: string;
@@ -61,39 +61,39 @@ declare interface SleepRecordProps {
 	};
 }
 
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
-const insertComma = (str: string) => {
+// -------------------------------------------------------------------------------------------------
+const insertComma = (value: string) => {
 	// 'x'인 경우 그대로 반환
-	if (str === `x`) {
-		return str;
+	if (value === `x`) {
+		return value;
 	}
 
 	// 숫자로 변환 가능한지 체크
-	let num = Number.parseFloat(str);
+	let numericValue = Number.parseFloat(value);
 
 	// 변환이 실패하면 그대로 반환
-	if (isNaN(num)) {
-		return str;
+	if (isNaN(numericValue)) {
+		return value;
 	}
 
 	// 소수점 존재하는 경우 소수점 삭제
-	num = Math.floor(num);
+	numericValue = Math.floor(numericValue);
 
 	// 3자리마다 콤마 추가하여 반환
-	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, `,`);
+	return numericValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, `,`);
 };
 
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
-const SlctSec = ({ isActive, iconName }: ActiveRecordProps) => {
-	let imageLink;
+// -------------------------------------------------------------------------------------------------
+const SelectSection = ({ isActive, iconName }: ActiveRecordProps) => {
+	let svgLink;
 	if (iconName === `exercise`) {
-		imageLink = require(`../assets/images/exercise1.webp`);
+		svgLink = require(`../assets/svg/exercise1.svg`);
 	} else if (iconName === `food`) {
-		imageLink = require(`../assets/images/food1.webp`);
+		svgLink = require(`../assets/svg/food1.svg`);
 	} else if (iconName === `money`) {
-		imageLink = require(`../assets/images/money1.webp`);
+		svgLink = require(`../assets/svg/money1.svg`);
 	} else if (iconName === `sleep`) {
-		imageLink = require(`../assets/images/sleep1.webp`);
+		svgLink = require(`../assets/svg/sleep1.svg`);
 	}
 	return (
 		<FlexWidget
@@ -119,16 +119,22 @@ const SlctSec = ({ isActive, iconName }: ActiveRecordProps) => {
 					backgroundColor: isActive ? `#b3e5fc` : `#ffffff`,
 				}}
 			>
-				<ImageWidget image={imageLink} imageHeight={25} imageWidth={25} />
+				<SvgWidget
+					svg={svgLink}
+					style={{
+						width: 25,
+						height: 25,
+					}}
+				/>
 			</FlexWidget>
 		</FlexWidget>
 	);
 };
 
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
-const ExerSec = ({
+// -------------------------------------------------------------------------------------------------
+const ExerciseSection = ({
 	widgetHeight,
-	clientLanguage: clntLang,
+	clientLanguage,
 	clientUnit,
 	exercise,
 }: ExerciseRecordProps) => {
@@ -141,8 +147,8 @@ const ExerSec = ({
 	};
 
 	// 1. volume
-	const exeReTtVo = {
-		text: clntLang === `ko` ? `볼륨` : `Volume`,
+	const exerciseTotalVolume = {
+		text: clientLanguage === `ko` ? `볼륨` : `Volume`,
 		value: [`x`].includes(exercise.exercise_record_total_volume)
 			? `x`
 			: exercise.exercise_record_total_volume,
@@ -153,8 +159,8 @@ const ExerSec = ({
 	};
 
 	// 2. cardio
-	const exeReTtCr = {
-		text: clntLang === `ko` ? `유산소` : `Cardio`,
+	const exerciseTotalCardio = {
+		text: clientLanguage === `ko` ? `유산소` : `Cardio`,
 		value: [`x`].includes(exercise.exercise_record_total_cardio)
 			? `x`
 			: exercise.exercise_record_total_cardio,
@@ -165,8 +171,8 @@ const ExerSec = ({
 	};
 
 	// 3. scale
-	const exeReTtSc = {
-		text: clntLang === `ko` ? `체중` : `BodyWeight`,
+	const exerciseTotalScale = {
+		text: clientLanguage === `ko` ? `체중` : `BodyWeight`,
 		value: [`x`].includes(exercise.exercise_record_total_scale)
 			? `x`
 			: exercise.exercise_record_total_scale,
@@ -196,23 +202,23 @@ const ExerSec = ({
 					alignItems: `center`,
 				}}
 			>
-				<ImageWidget
-					image={require(`../assets/images/exercise3.webp`)}
-					imageWidth={20}
-					imageHeight={20}
+				<SvgWidget
+					svg={require(`../assets/svg/exercise3.svg`)}
 					style={{
+						width: 20,
+						height: 20,
 						marginRight: 10,
 					}}
 				/>
 				<TextWidget
 					style={{
 						textAlign: `center`,
-						fontSize: fontSize(exeReTtVo.text),
+						fontSize: fontSize(exerciseTotalVolume.text),
 						fontWeight: `500`,
 						marginRight: 10,
 						color: `#000000`,
 					}}
-					text={`${exeReTtVo.text} : `}
+					text={`${exerciseTotalVolume.text} : `}
 				/>
 				<TextWidget
 					style={{
@@ -220,9 +226,9 @@ const ExerSec = ({
 						fontSize: 16,
 						fontWeight: `500`,
 						marginRight: 10,
-						color: exeReTtVo.color as ColorProp,
+						color: exerciseTotalVolume.color as ColorProp,
 					}}
-					text={insertComma(exeReTtVo.value)}
+					text={insertComma(exerciseTotalVolume.value)}
 				/>
 				<TextWidget
 					style={{
@@ -232,7 +238,7 @@ const ExerSec = ({
 						marginRight: 0,
 						color: `#434343`,
 					}}
-					text={exeReTtVo.end}
+					text={exerciseTotalVolume.end}
 				/>
 			</FlexWidget>
 			{/* exercise 2 */}
@@ -245,23 +251,23 @@ const ExerSec = ({
 					alignItems: `center`,
 				}}
 			>
-				<ImageWidget
-					image={require(`../assets/images/exercise4.webp`)}
-					imageWidth={20}
-					imageHeight={20}
+				<SvgWidget
+					svg={require(`../assets/svg/exercise4.svg`)}
 					style={{
+						width: 20,
+						height: 20,
 						marginRight: 10,
 					}}
 				/>
 				<TextWidget
 					style={{
 						textAlign: `center`,
-						fontSize: fontSize(exeReTtCr.text),
+						fontSize: fontSize(exerciseTotalCardio.text),
 						fontWeight: `500`,
 						marginRight: 10,
 						color: `#000000`,
 					}}
-					text={`${exeReTtCr.text} : `}
+					text={`${exerciseTotalCardio.text} : `}
 				/>
 				<TextWidget
 					style={{
@@ -269,9 +275,9 @@ const ExerSec = ({
 						fontSize: 16,
 						fontWeight: `500`,
 						marginRight: 10,
-						color: exeReTtCr.color as ColorProp,
+						color: exerciseTotalCardio.color as ColorProp,
 					}}
-					text={`${exeReTtCr.value}`}
+					text={`${exerciseTotalCardio.value}`}
 				/>
 				<TextWidget
 					style={{
@@ -281,7 +287,7 @@ const ExerSec = ({
 						marginRight: 0,
 						color: `#434343`,
 					}}
-					text={exeReTtCr.end}
+					text={exerciseTotalCardio.end}
 				/>
 			</FlexWidget>
 			{/* exercise 3 */}
@@ -294,23 +300,23 @@ const ExerSec = ({
 					alignItems: `center`,
 				}}
 			>
-				<ImageWidget
-					image={require(`../assets/images/exercise5.webp`)}
-					imageWidth={20}
-					imageHeight={20}
+				<SvgWidget
+					svg={require(`../assets/svg/exercise5.svg`)}
 					style={{
+						width: 20,
+						height: 20,
 						marginRight: 10,
 					}}
 				/>
 				<TextWidget
 					style={{
 						textAlign: `center`,
-						fontSize: fontSize(exeReTtSc.text),
+						fontSize: fontSize(exerciseTotalScale.text),
 						fontWeight: `500`,
 						marginRight: 10,
 						color: `#000000`,
 					}}
-					text={`${exeReTtSc.text} : `}
+					text={`${exerciseTotalScale.text} : `}
 				/>
 				<TextWidget
 					style={{
@@ -318,9 +324,9 @@ const ExerSec = ({
 						fontSize: 16,
 						fontWeight: `500`,
 						marginRight: 10,
-						color: exeReTtSc.color as ColorProp,
+						color: exerciseTotalScale.color as ColorProp,
 					}}
-					text={insertComma(exeReTtSc.value)}
+					text={insertComma(exerciseTotalScale.value)}
 				/>
 				<TextWidget
 					style={{
@@ -330,17 +336,17 @@ const ExerSec = ({
 						marginRight: 0,
 						color: `#434343`,
 					}}
-					text={exeReTtSc.end}
+					text={exerciseTotalScale.end}
 				/>
 			</FlexWidget>
 		</FlexWidget>
 	);
 };
 
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+// -------------------------------------------------------------------------------------------------
 const FoodSection = ({
 	widgetHeight,
-	clientLanguage: clntLang,
+	clientLanguage,
 	food,
 }: FoodRecordProps) => {
 	// 0. height
@@ -352,8 +358,8 @@ const FoodSection = ({
 	};
 
 	// 1. kcal
-	const fdRecTtlKcl = {
-		text: clntLang === `ko` ? `칼로리` : `Kcal`,
+	const foodTotalKcal = {
+		text: clientLanguage === `ko` ? `칼로리` : `Kcal`,
 		value: [`x`].includes(food.food_record_total_kcal)
 			? `x`
 			: food.food_record_total_kcal,
@@ -364,8 +370,8 @@ const FoodSection = ({
 	};
 
 	// 2. carb
-	const fdRecTtlCrb = {
-		text: clntLang === `ko` ? `탄수화물` : `Carb`,
+	const foodTotalCarb = {
+		text: clientLanguage === `ko` ? `탄수화물` : `Carb`,
 		value: [`x`].includes(food.food_record_total_carb)
 			? `x`
 			: food.food_record_total_carb,
@@ -376,8 +382,8 @@ const FoodSection = ({
 	};
 
 	// 3. protein
-	const fdRecTtlPrtn = {
-		text: clntLang === `ko` ? `단백질` : `Protein`,
+	const foodTotalProtein = {
+		text: clientLanguage === `ko` ? `단백질` : `Protein`,
 		value: [`x`].includes(food.food_record_total_protein)
 			? `x`
 			: food.food_record_total_protein,
@@ -388,8 +394,8 @@ const FoodSection = ({
 	};
 
 	// 4. fat
-	const fdRecTtlFt = {
-		text: clntLang === `ko` ? `지방` : `Fat`,
+	const foodTotalFat = {
+		text: clientLanguage === `ko` ? `지방` : `Fat`,
 		value: [`x`].includes(food.food_record_total_fat)
 			? `x`
 			: food.food_record_total_fat,
@@ -419,23 +425,23 @@ const FoodSection = ({
 					alignItems: `center`,
 				}}
 			>
-				<ImageWidget
-					image={require(`../assets/images/food2.webp`)}
-					imageWidth={20}
-					imageHeight={20}
+				<SvgWidget
+					svg={require(`../assets/svg/food2.svg`)}
 					style={{
+						width: 20,
+						height: 20,
 						marginRight: 10,
 					}}
 				/>
 				<TextWidget
 					style={{
 						textAlign: `center`,
-						fontSize: fontSize(fdRecTtlKcl.text),
+						fontSize: fontSize(foodTotalKcal.text),
 						fontWeight: `500`,
 						marginRight: 10,
 						color: `#000000`,
 					}}
-					text={`${fdRecTtlKcl.text} : `}
+					text={`${foodTotalKcal.text} : `}
 				/>
 				<TextWidget
 					style={{
@@ -443,9 +449,9 @@ const FoodSection = ({
 						fontSize: 16,
 						fontWeight: `500`,
 						marginRight: 10,
-						color: fdRecTtlKcl.color as ColorProp,
+						color: foodTotalKcal.color as ColorProp,
 					}}
-					text={insertComma(fdRecTtlKcl.value)}
+					text={insertComma(foodTotalKcal.value)}
 				/>
 				<TextWidget
 					style={{
@@ -455,7 +461,7 @@ const FoodSection = ({
 						marginRight: 0,
 						color: `#434343`,
 					}}
-					text={fdRecTtlKcl.end}
+					text={foodTotalKcal.end}
 				/>
 			</FlexWidget>
 			{/* food 2 */}
@@ -468,23 +474,23 @@ const FoodSection = ({
 					alignItems: `center`,
 				}}
 			>
-				<ImageWidget
-					image={require(`../assets/images/food3.webp`)}
-					imageWidth={20}
-					imageHeight={20}
+				<SvgWidget
+					svg={require(`../assets/svg/food3.svg`)}
 					style={{
+						width: 20,
+						height: 20,
 						marginRight: 10,
 					}}
 				/>
 				<TextWidget
 					style={{
 						textAlign: `center`,
-						fontSize: fontSize(fdRecTtlCrb.text),
+						fontSize: fontSize(foodTotalCarb.text),
 						fontWeight: `500`,
 						marginRight: 10,
 						color: `#000000`,
 					}}
-					text={`${fdRecTtlCrb.text} : `}
+					text={`${foodTotalCarb.text} : `}
 				/>
 				<TextWidget
 					style={{
@@ -492,9 +498,9 @@ const FoodSection = ({
 						fontSize: 16,
 						fontWeight: `500`,
 						marginRight: 10,
-						color: fdRecTtlCrb.color as ColorProp,
+						color: foodTotalCarb.color as ColorProp,
 					}}
-					text={insertComma(fdRecTtlCrb.value)}
+					text={insertComma(foodTotalCarb.value)}
 				/>
 				<TextWidget
 					style={{
@@ -504,7 +510,7 @@ const FoodSection = ({
 						marginRight: 0,
 						color: `#434343`,
 					}}
-					text={fdRecTtlCrb.end}
+					text={foodTotalCarb.end}
 				/>
 			</FlexWidget>
 			{/* food 3 */}
@@ -517,23 +523,23 @@ const FoodSection = ({
 					alignItems: `center`,
 				}}
 			>
-				<ImageWidget
-					image={require(`../assets/images/food4.webp`)}
-					imageWidth={20}
-					imageHeight={20}
+				<SvgWidget
+					svg={require(`../assets/svg/food4.svg`)}
 					style={{
+						width: 20,
+						height: 20,
 						marginRight: 10,
 					}}
 				/>
 				<TextWidget
 					style={{
 						textAlign: `center`,
-						fontSize: fontSize(fdRecTtlPrtn.text),
+						fontSize: fontSize(foodTotalProtein.text),
 						fontWeight: `500`,
 						marginRight: 10,
 						color: `#000000`,
 					}}
-					text={`${fdRecTtlPrtn.text} : `}
+					text={`${foodTotalProtein.text} : `}
 				/>
 				<TextWidget
 					style={{
@@ -541,9 +547,9 @@ const FoodSection = ({
 						fontSize: 16,
 						fontWeight: `500`,
 						marginRight: 10,
-						color: fdRecTtlPrtn.color as ColorProp,
+						color: foodTotalProtein.color as ColorProp,
 					}}
-					text={insertComma(fdRecTtlPrtn.value)}
+					text={insertComma(foodTotalProtein.value)}
 				/>
 				<TextWidget
 					style={{
@@ -553,7 +559,7 @@ const FoodSection = ({
 						marginRight: 0,
 						color: `#434343`,
 					}}
-					text={fdRecTtlPrtn.end}
+					text={foodTotalProtein.end}
 				/>
 			</FlexWidget>
 			{/* food 4 */}
@@ -566,23 +572,23 @@ const FoodSection = ({
 					alignItems: `center`,
 				}}
 			>
-				<ImageWidget
-					image={require(`../assets/images/food5.webp`)}
-					imageWidth={20}
-					imageHeight={20}
+				<SvgWidget
+					svg={require(`../assets/svg/food5.svg`)}
 					style={{
+						width: 20,
+						height: 20,
 						marginRight: 10,
 					}}
 				/>
 				<TextWidget
 					style={{
 						textAlign: `center`,
-						fontSize: fontSize(fdRecTtlFt.text),
+						fontSize: fontSize(foodTotalFat.text),
 						fontWeight: `500`,
 						marginRight: 10,
 						color: `#000000`,
 					}}
-					text={`${fdRecTtlFt.text} : `}
+					text={`${foodTotalFat.text} : `}
 				/>
 				<TextWidget
 					style={{
@@ -590,9 +596,9 @@ const FoodSection = ({
 						fontSize: 16,
 						fontWeight: `500`,
 						marginRight: 10,
-						color: fdRecTtlFt.color as ColorProp,
+						color: foodTotalFat.color as ColorProp,
 					}}
-					text={insertComma(fdRecTtlFt.value)}
+					text={insertComma(foodTotalFat.value)}
 				/>
 				<TextWidget
 					style={{
@@ -602,18 +608,18 @@ const FoodSection = ({
 						marginRight: 0,
 						color: `#434343`,
 					}}
-					text={fdRecTtlFt.end}
+					text={foodTotalFat.end}
 				/>
 			</FlexWidget>
 		</FlexWidget>
 	);
 };
 
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+// -------------------------------------------------------------------------------------------------
 const MoneySection = ({
 	widgetHeight,
-	clientLanguage: clntLang,
-	clientCurrency: clntCrrn,
+	clientLanguage,
+	clientCurrency,
 	money,
 }: MoneyRecordProps) => {
 	// 0. height
@@ -625,27 +631,27 @@ const MoneySection = ({
 	};
 
 	// 1. income
-	const mnyReTtIn = {
-		text: clntLang === `ko` ? `수입` : `Income`,
+	const moneyTotalIncome = {
+		text: clientLanguage === `ko` ? `수입` : `Income`,
 		value: [`x`].includes(money.money_record_total_income)
 			? `x`
 			: money.money_record_total_income,
 		color: [`x`, `0`].includes(money.money_record_total_income)
 			? `#9CA3AF`
 			: `#000000`,
-		end: [`x`].includes(money.money_record_total_income) ? `` : clntCrrn,
+		end: [`x`].includes(money.money_record_total_income) ? `` : clientCurrency,
 	};
 
 	// 2. expense
-	const mnyReTtEx = {
-		text: clntLang === `ko` ? `지출` : `Expense`,
+	const moneyTotalExpense = {
+		text: clientLanguage === `ko` ? `지출` : `Expense`,
 		value: [`x`].includes(money.money_record_total_expense)
 			? `x`
 			: money.money_record_total_expense,
 		color: [`x`, `0`].includes(money.money_record_total_expense)
 			? `#9CA3AF`
 			: `#000000`,
-		end: [`x`].includes(money.money_record_total_expense) ? `` : clntCrrn,
+		end: [`x`].includes(money.money_record_total_expense) ? `` : clientCurrency,
 	};
 
 	return (
@@ -668,23 +674,23 @@ const MoneySection = ({
 					alignItems: `center`,
 				}}
 			>
-				<ImageWidget
-					image={require(`../assets/images/money2.webp`)}
-					imageWidth={20}
-					imageHeight={20}
+				<SvgWidget
+					svg={require(`../assets/svg/money2.svg`)}
 					style={{
+						width: 20,
+						height: 20,
 						marginRight: 10,
 					}}
 				/>
 				<TextWidget
 					style={{
 						textAlign: `center`,
-						fontSize: fontSize(mnyReTtIn.text),
+						fontSize: fontSize(moneyTotalIncome.text),
 						fontWeight: `500`,
 						marginRight: 10,
 						color: `#000000`,
 					}}
-					text={`${mnyReTtIn.text} : `}
+					text={`${moneyTotalIncome.text} : `}
 				/>
 				<TextWidget
 					style={{
@@ -692,9 +698,9 @@ const MoneySection = ({
 						fontSize: 16,
 						fontWeight: `500`,
 						marginRight: 10,
-						color: mnyReTtIn.color as ColorProp,
+						color: moneyTotalIncome.color as ColorProp,
 					}}
-					text={insertComma(mnyReTtIn.value)}
+					text={insertComma(moneyTotalIncome.value)}
 				/>
 				<TextWidget
 					style={{
@@ -704,7 +710,7 @@ const MoneySection = ({
 						marginRight: 0,
 						color: `#434343`,
 					}}
-					text={mnyReTtIn.end}
+					text={moneyTotalIncome.end}
 				/>
 			</FlexWidget>
 			{/* money 2 */}
@@ -717,23 +723,23 @@ const MoneySection = ({
 					alignItems: `center`,
 				}}
 			>
-				<ImageWidget
-					image={require(`../assets/images/money2.webp`)}
-					imageWidth={20}
-					imageHeight={20}
+				<SvgWidget
+					svg={require(`../assets/svg/money2.svg`)}
 					style={{
+						width: 20,
+						height: 20,
 						marginRight: 10,
 					}}
 				/>
 				<TextWidget
 					style={{
 						textAlign: `center`,
-						fontSize: fontSize(mnyReTtEx.text),
+						fontSize: fontSize(moneyTotalExpense.text),
 						fontWeight: `500`,
 						marginRight: 10,
 						color: `#000000`,
 					}}
-					text={`${mnyReTtEx.text} : `}
+					text={`${moneyTotalExpense.text} : `}
 				/>
 				<TextWidget
 					style={{
@@ -741,9 +747,9 @@ const MoneySection = ({
 						fontSize: 16,
 						fontWeight: `500`,
 						marginRight: 10,
-						color: mnyReTtEx.color as ColorProp,
+						color: moneyTotalExpense.color as ColorProp,
 					}}
-					text={insertComma(mnyReTtEx.value)}
+					text={insertComma(moneyTotalExpense.value)}
 				/>
 				<TextWidget
 					style={{
@@ -753,17 +759,17 @@ const MoneySection = ({
 						marginRight: 0,
 						color: `#434343`,
 					}}
-					text={mnyReTtEx.end}
+					text={moneyTotalExpense.end}
 				/>
 			</FlexWidget>
 		</FlexWidget>
 	);
 };
 
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+// -------------------------------------------------------------------------------------------------
 const SleepSection = ({
 	widgetHeight,
-	clientLanguage: clntLang,
+	clientLanguage,
 	sleep,
 }: SleepRecordProps) => {
 	// 0. height
@@ -775,8 +781,8 @@ const SleepSection = ({
 	};
 
 	// 1. bedTime
-	const slpRecBdTm = {
-		text: clntLang === `ko` ? `취침` : `Bed`,
+	const sleepBedTime = {
+		text: clientLanguage === `ko` ? `취침` : `Bed`,
 		value: [`x`].includes(sleep.sleep_record_bedTime)
 			? `x`
 			: sleep.sleep_record_bedTime,
@@ -787,8 +793,8 @@ const SleepSection = ({
 	};
 
 	// 2. wakeTime
-	const slpRecWkTm = {
-		text: clntLang === `ko` ? `기상` : `Wake`,
+	const sleepWakeTime = {
+		text: clientLanguage === `ko` ? `기상` : `Wake`,
 		value: [`x`].includes(sleep.sleep_record_wakeTime)
 			? `x`
 			: sleep.sleep_record_wakeTime,
@@ -799,8 +805,8 @@ const SleepSection = ({
 	};
 
 	// 3. sleepTime
-	const slpRecSlpTm = {
-		text: clntLang === `ko` ? `수면` : `Sleep`,
+	const sleepDuration = {
+		text: clientLanguage === `ko` ? `수면` : `Sleep`,
 		value: [`x`].includes(sleep.sleep_record_sleepTime)
 			? `x`
 			: sleep.sleep_record_sleepTime,
@@ -830,23 +836,23 @@ const SleepSection = ({
 					alignItems: `center`,
 				}}
 			>
-				<ImageWidget
-					image={require(`../assets/images/sleep2.webp`)}
-					imageWidth={20}
-					imageHeight={20}
+				<SvgWidget
+					svg={require(`../assets/svg/sleep2.svg`)}
 					style={{
+						width: 20,
+						height: 20,
 						marginRight: 10,
 					}}
 				/>
 				<TextWidget
 					style={{
 						textAlign: `center`,
-						fontSize: fontSize(slpRecBdTm.text),
+						fontSize: fontSize(sleepBedTime.text),
 						fontWeight: `500`,
 						marginRight: 10,
 						color: `#000000`,
 					}}
-					text={`${slpRecBdTm.text} : `}
+					text={`${sleepBedTime.text} : `}
 				/>
 				<TextWidget
 					style={{
@@ -854,9 +860,9 @@ const SleepSection = ({
 						fontSize: 16,
 						fontWeight: `500`,
 						marginRight: 10,
-						color: slpRecBdTm.color as ColorProp,
+						color: sleepBedTime.color as ColorProp,
 					}}
-					text={`${slpRecBdTm.value}`}
+					text={`${sleepBedTime.value}`}
 				/>
 				<TextWidget
 					style={{
@@ -866,7 +872,7 @@ const SleepSection = ({
 						marginRight: 0,
 						color: `#434343`,
 					}}
-					text={slpRecBdTm.end}
+					text={sleepBedTime.end}
 				/>
 			</FlexWidget>
 			{/* sleep 2 */}
@@ -879,23 +885,23 @@ const SleepSection = ({
 					alignItems: `center`,
 				}}
 			>
-				<ImageWidget
-					image={require(`../assets/images/sleep3.webp`)}
-					imageWidth={20}
-					imageHeight={20}
+				<SvgWidget
+					svg={require(`../assets/svg/sleep3.svg`)}
 					style={{
+						width: 20,
+						height: 20,
 						marginRight: 10,
 					}}
 				/>
 				<TextWidget
 					style={{
 						textAlign: `center`,
-						fontSize: fontSize(slpRecWkTm.text),
+						fontSize: fontSize(sleepWakeTime.text),
 						fontWeight: `500`,
 						marginRight: 10,
 						color: `#000000`,
 					}}
-					text={`${slpRecWkTm.text} : `}
+					text={`${sleepWakeTime.text} : `}
 				/>
 				<TextWidget
 					style={{
@@ -903,9 +909,9 @@ const SleepSection = ({
 						fontSize: 16,
 						fontWeight: `500`,
 						marginRight: 10,
-						color: slpRecWkTm.color as ColorProp,
+						color: sleepWakeTime.color as ColorProp,
 					}}
-					text={`${slpRecWkTm.value}`}
+					text={`${sleepWakeTime.value}`}
 				/>
 				<TextWidget
 					style={{
@@ -915,7 +921,7 @@ const SleepSection = ({
 						marginRight: 0,
 						color: `#434343`,
 					}}
-					text={slpRecWkTm.end}
+					text={sleepWakeTime.end}
 				/>
 			</FlexWidget>
 			{/* sleep 3 */}
@@ -928,23 +934,23 @@ const SleepSection = ({
 					alignItems: `center`,
 				}}
 			>
-				<ImageWidget
-					image={require(`../assets/images/sleep4.webp`)}
-					imageWidth={20}
-					imageHeight={20}
+				<SvgWidget
+					svg={require(`../assets/svg/sleep4.svg`)}
 					style={{
+						width: 20,
+						height: 20,
 						marginRight: 10,
 					}}
 				/>
 				<TextWidget
 					style={{
 						textAlign: `center`,
-						fontSize: fontSize(slpRecSlpTm.text),
+						fontSize: fontSize(sleepDuration.text),
 						fontWeight: `500`,
 						marginRight: 10,
 						color: `#000000`,
 					}}
-					text={`${slpRecSlpTm.text} : `}
+					text={`${sleepDuration.text} : `}
 				/>
 				<TextWidget
 					style={{
@@ -952,9 +958,9 @@ const SleepSection = ({
 						fontSize: 16,
 						fontWeight: `500`,
 						marginRight: 10,
-						color: slpRecSlpTm.color as ColorProp,
+						color: sleepDuration.color as ColorProp,
 					}}
-					text={`${slpRecSlpTm.value}`}
+					text={`${sleepDuration.value}`}
 				/>
 				<TextWidget
 					style={{
@@ -964,19 +970,19 @@ const SleepSection = ({
 						marginRight: 0,
 						color: `#434343`,
 					}}
-					text={slpRecSlpTm.end}
+					text={sleepDuration.end}
 				/>
 			</FlexWidget>
 		</FlexWidget>
 	);
 };
 
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+// -------------------------------------------------------------------------------------------------
 export const DetailWidget = ({
 	widgetHeight,
 	activeView,
-	clientLanguage: clntLang,
-	clientCurrency: clntCrrn,
+	clientLanguage,
+	clientCurrency,
 	clientUnit,
 	clientDate,
 	clientDay,
@@ -1018,22 +1024,22 @@ export const DetailWidget = ({
 					paddingHorizontal: 10,
 				}}
 			>
-				<SlctSec
+				<SelectSection
 					key={activeView}
 					iconName={`exercise`}
 					isActive={activeView === `exercise`}
 				/>
-				<SlctSec
+				<SelectSection
 					key={activeView}
 					iconName={`food`}
 					isActive={activeView === `food`}
 				/>
-				<SlctSec
+				<SelectSection
 					key={activeView}
 					iconName={`money`}
 					isActive={activeView === `money`}
 				/>
-				<SlctSec
+				<SelectSection
 					key={activeView}
 					iconName={`sleep`}
 					isActive={activeView === `sleep`}
@@ -1063,12 +1069,12 @@ export const DetailWidget = ({
 						paddingHorizontal: 20,
 					}}
 				>
-					<ImageWidget
-						image={require(`../assets/images/search.webp`)}
-						imageWidth={20}
-						imageHeight={20}
+					<SvgWidget
+						svg={require(`../assets/svg/search.svg`)}
 						clickAction={`OPEN_APP`}
 						style={{
+							width: 20,
+							height: 20,
 							marginRight: 15,
 						}}
 					/>
@@ -1105,10 +1111,12 @@ export const DetailWidget = ({
 						}}
 						text={clientTime}
 					/>
-					<ImageWidget
-						image={require(`../assets/images/refresh.webp`)}
-						imageWidth={16}
-						imageHeight={16}
+					<SvgWidget
+						svg={require(`../assets/svg/refresh.svg`)}
+						style={{
+							width: 16,
+							height: 16,
+						}}
 						clickAction={
 							activeView === `exercise`
 								? `exercise`
@@ -1137,9 +1145,9 @@ export const DetailWidget = ({
 					}}
 				>
 					{activeView === `exercise` && (
-						<ExerSec
+						<ExerciseSection
 							widgetHeight={widgetHeight}
-							clientLanguage={clntLang}
+							clientLanguage={clientLanguage}
 							clientUnit={clientUnit}
 							exercise={exercise}
 						/>
@@ -1147,22 +1155,22 @@ export const DetailWidget = ({
 					{activeView === `food` && (
 						<FoodSection
 							widgetHeight={widgetHeight}
-							clientLanguage={clntLang}
+							clientLanguage={clientLanguage}
 							food={food}
 						/>
 					)}
 					{activeView === `money` && (
 						<MoneySection
 							widgetHeight={widgetHeight}
-							clientLanguage={clntLang}
-							clientCurrency={clntCrrn}
+							clientLanguage={clientLanguage}
+							clientCurrency={clientCurrency}
 							money={money}
 						/>
 					)}
 					{activeView === `sleep` && (
 						<SleepSection
 							widgetHeight={widgetHeight}
-							clientLanguage={clntLang}
+							clientLanguage={clientLanguage}
 							sleep={sleep}
 						/>
 					)}

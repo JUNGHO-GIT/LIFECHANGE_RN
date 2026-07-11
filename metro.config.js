@@ -9,7 +9,7 @@ const config = {
 	resolver: {
 		extraNodeModules: {
 			"@assets": `${__dirname}/src/assets`,
-			"@images": `${__dirname}/src/assets/images`,
+			"@svgs": `${__dirname}/src/assets/svg`,
 			"@types": `${__dirname}/src/assets/types`,
 			"@schemas": `${__dirname}/src/schemas`,
 			"@containers": `${__dirname}/src/containers`,

@@ -5966,3 +5966,582 @@
 ## \[ 1.2.1 \]
 
 - 2026-05-30 (19:34:42)
+
+## versionCode = 1897
+
+- versionName = 1.1.897
+- 2026-07-09 (21:11:01)
+
+## versionCode = 1898
+
+- versionName = 1.1.898
+- 2026-07-09 (21:11:11)
+
+## versionCode = 1899
+
+- versionName = 1.1.899
+- 2026-07-09 (21:11:53)
+
+## versionCode = 1900
+
+- versionName = 1.1.900
+- 2026-07-09 (21:19:38)
+
+## versionCode = 1901
+
+- versionName = 1.1.901
+- 2026-07-09 (21:19:43)
+
+## versionCode = 1902
+
+- versionName = 1.1.902
+- 2026-07-09 (21:19:54)
+
+## versionCode = 1903
+
+- versionName = 1.1.903
+- 2026-07-09 (21:19:57)
+
+## versionCode = 1904
+
+- versionName = 1.1.904
+- 2026-07-09 (21:19:58)
+
+## versionCode = 1905
+
+- versionName = 1.1.905
+- 2026-07-09 (21:23:15)
+
+## versionCode = 1906
+
+- versionName = 1.1.906
+- 2026-07-09 (21:23:19)
+
+## versionCode = 1907
+
+- versionName = 1.1.907
+- 2026-07-09 (21:24:22)
+
+## versionCode = 1908
+
+- versionName = 1.1.908
+- 2026-07-09 (21:24:27)
+
+## versionCode = 1909
+
+- versionName = 1.1.909
+- 2026-07-09 (21:38:09)
+
+## versionCode = 1910
+
+- versionName = 1.1.910
+- 2026-07-09 (21:38:09)
+
+## versionCode = 1911
+
+- versionName = 1.1.911
+- 2026-07-09 (21:38:20)
+
+## versionCode = 1912
+
+- versionName = 1.1.912
+- 2026-07-09 (21:44:52)
+
+## versionCode = 1913
+
+- versionName = 1.1.913
+- 2026-07-09 (21:44:55)
+
+## versionCode = 1914
+
+- versionName = 1.1.914
+- 2026-07-09 (21:45:06)
+
+## versionCode = 1915
+
+- versionName = 1.1.915
+- 2026-07-09 (21:45:11)
+
+## versionCode = 1916
+
+- versionName = 1.1.916
+- 2026-07-09 (21:49:15)
+
+## versionCode = 1917
+
+- versionName = 1.1.917
+- 2026-07-09 (21:49:41)
+
+## versionCode = 1918
+
+- versionName = 1.1.918
+- 2026-07-09 (21:50:10)
+
+## versionCode = 1919
+
+- versionName = 1.1.919
+- 2026-07-09 (21:52:08)
+
+## versionCode = 1920
+
+- versionName = 1.1.920
+- 2026-07-09 (21:52:31)
+
+## versionCode = 1921
+
+- versionName = 1.1.921
+- 2026-07-09 (21:53:09)
+
+## versionCode = 1922
+
+- versionName = 1.1.922
+- 2026-07-09 (21:53:45)
+
+## versionCode = 1923
+
+- versionName = 1.1.923
+- 2026-07-09 (21:55:06)
+
+## versionCode = 1924
+
+- versionName = 1.1.924
+- 2026-07-09 (21:56:20)
+
+## versionCode = 1925
+
+- versionName = 1.1.925
+- 2026-07-09 (21:57:16)
+
+## versionCode = 1926
+
+- versionName = 1.1.926
+- 2026-07-09 (21:58:09)
+
+## versionCode = 1927
+
+- versionName = 1.1.927
+- 2026-07-09 (21:58:20)
+
+## versionCode = 1928
+
+- versionName = 1.1.928
+- 2026-07-09 (21:58:40)
+
+## versionCode = 1929
+
+- versionName = 1.1.929
+- 2026-07-09 (21:59:23)
+
+## versionCode = 1930
+
+- versionName = 1.1.930
+- 2026-07-09 (21:59:29)
+
+## versionCode = 1931
+
+- versionName = 1.1.931
+- 2026-07-09 (21:59:56)
+
+## versionCode = 1932
+
+- versionName = 1.1.932
+- 2026-07-09 (22:00:05)
+
+## versionCode = 1933
+
+- versionName = 1.1.933
+- 2026-07-09 (22:02:17)
+
+## versionCode = 1934
+
+- versionName = 1.1.934
+- 2026-07-09 (22:02:25)
+
+## versionCode = 1935
+
+- versionName = 1.1.935
+- 2026-07-09 (22:02:48)
+
+## versionCode = 1936
+
+- versionName = 1.1.936
+- 2026-07-09 (22:02:54)
+
+## versionCode = 1937
+
+- versionName = 1.1.937
+- 2026-07-09 (22:05:59)
+
+## versionCode = 1938
+
+- versionName = 1.1.938
+- 2026-07-09 (22:06:06)
+
+## versionCode = 1939
+
+- versionName = 1.1.939
+- 2026-07-09 (22:06:21)
+
+## versionCode = 1940
+
+- versionName = 1.1.940
+- 2026-07-09 (22:06:40)
+
+## versionCode = 1941
+
+- versionName = 1.1.941
+- 2026-07-09 (22:09:35)
+
+## versionCode = 1942
+
+- versionName = 1.1.942
+- 2026-07-09 (22:10:02)
+
+## versionCode = 1943
+
+- versionName = 1.1.943
+- 2026-07-09 (22:10:44)
+
+## versionCode = 1944
+
+- versionName = 1.1.944
+- 2026-07-09 (22:11:13)
+
+## versionCode = 1945
+
+- versionName = 1.1.945
+- 2026-07-09 (22:12:06)
+
+## versionCode = 1946
+
+- versionName = 1.1.946
+- 2026-07-09 (22:14:17)
+
+## versionCode = 1947
+
+- versionName = 1.1.947
+- 2026-07-09 (22:18:09)
+
+## versionCode = 1948
+
+- versionName = 1.1.948
+- 2026-07-09 (22:20:14)
+
+## versionCode = 1949
+
+- versionName = 1.1.949
+- 2026-07-11 (11:01:09)
+
+## versionCode = 1950
+
+- versionName = 1.1.950
+- 2026-07-11 (11:01:12)
+
+## versionCode = 1951
+
+- versionName = 1.1.951
+- 2026-07-11 (11:02:49)
+
+## versionCode = 1952
+
+- versionName = 1.1.952
+- 2026-07-11 (11:03:27)
+
+## versionCode = 1953
+
+- versionName = 1.1.953
+- 2026-07-11 (18:59:24)
+
+## versionCode = 1954
+
+- versionName = 1.1.954
+- 2026-07-11 (20:29:16)
+
+## versionCode = 1955
+
+- versionName = 1.1.955
+- 2026-07-11 (20:30:32)
+
+## versionCode = 1956
+
+- versionName = 1.1.956
+- 2026-07-11 (20:31:47)
+
+## versionCode = 1957
+
+- versionName = 1.1.957
+- 2026-07-11 (20:48:08)
+
+## versionCode = 1958
+
+- versionName = 1.1.958
+- 2026-07-11 (20:51:05)
+
+## versionCode = 1959
+
+- versionName = 1.1.959
+- 2026-07-11 (20:52:07)
+
+## versionCode = 1960
+
+- versionName = 1.1.960
+- 2026-07-11 (20:52:39)
+
+## versionCode = 1961
+
+- versionName = 1.1.961
+- 2026-07-11 (20:53:41)
+
+## versionCode = 1962
+
+- versionName = 1.1.962
+- 2026-07-11 (20:53:49)
+
+## versionCode = 1963
+
+- versionName = 1.1.963
+- 2026-07-11 (20:53:59)
+
+## versionCode = 1964
+
+- versionName = 1.1.964
+- 2026-07-11 (20:54:22)
+
+## versionCode = 1965
+
+- versionName = 1.1.965
+- 2026-07-11 (20:54:27)
+
+## versionCode = 1966
+
+- versionName = 1.1.966
+- 2026-07-11 (20:55:19)
+
+## versionCode = 1967
+
+- versionName = 1.1.967
+- 2026-07-11 (20:55:57)
+
+## versionCode = 1968
+
+- versionName = 1.1.968
+- 2026-07-11 (20:58:24)
+
+## versionCode = 1969
+
+- versionName = 1.1.969
+- 2026-07-11 (20:58:39)
+
+## versionCode = 1970
+
+- versionName = 1.1.970
+- 2026-07-11 (21:02:32)
+
+## versionCode = 1971
+
+- versionName = 1.1.971
+- 2026-07-11 (21:14:26)
+
+## versionCode = 1972
+
+- versionName = 1.1.972
+- 2026-07-11 (21:14:58)
+
+## versionCode = 1973
+
+- versionName = 1.1.973
+- 2026-07-11 (21:17:06)
+
+## versionCode = 1974
+
+- versionName = 1.1.974
+- 2026-07-11 (21:17:16)
+
+## versionCode = 1975
+
+- versionName = 1.1.975
+- 2026-07-11 (21:17:29)
+
+## versionCode = 1976
+
+- versionName = 1.1.976
+- 2026-07-11 (21:21:17)
+
+## versionCode = 1977
+
+- versionName = 1.1.977
+- 2026-07-11 (21:25:13)
+
+## versionCode = 1978
+
+- versionName = 1.1.978
+- 2026-07-11 (21:27:25)
+
+## versionCode = 1979
+
+- versionName = 1.1.979
+- 2026-07-11 (21:27:36)
+
+## versionCode = 1980
+
+- versionName = 1.1.980
+- 2026-07-11 (21:27:55)
+
+## versionCode = 1981
+
+- versionName = 1.1.981
+- 2026-07-11 (21:28:07)
+
+## versionCode = 1982
+
+- versionName = 1.1.982
+- 2026-07-11 (21:28:28)
+
+## versionCode = 1983
+
+- versionName = 1.1.983
+- 2026-07-11 (21:28:44)
+
+## versionCode = 1984
+
+- versionName = 1.1.984
+- 2026-07-11 (21:29:10)
+
+## versionCode = 1985
+
+- versionName = 1.1.985
+- 2026-07-11 (21:33:45)
+
+## versionCode = 1986
+
+- versionName = 1.1.986
+- 2026-07-11 (21:33:55)
+
+## versionCode = 1987
+
+- versionName = 1.1.987
+- 2026-07-11 (21:34:14)
+
+## versionCode = 1988
+
+- versionName = 1.1.988
+- 2026-07-11 (21:34:29)
+
+## versionCode = 1989
+
+- versionName = 1.1.989
+- 2026-07-11 (21:43:01)
+
+## versionCode = 1990
+
+- versionName = 1.1.990
+- 2026-07-11 (21:50:25)
+
+## versionCode = 1991
+
+- versionName = 1.1.991
+- 2026-07-11 (21:53:11)
+
+## versionCode = 1992
+
+- versionName = 1.1.992
+- 2026-07-11 (21:53:19)
+
+## versionCode = 1993
+
+- versionName = 1.1.993
+- 2026-07-11 (21:53:57)
+
+## versionCode = 1994
+
+- versionName = 1.1.994
+- 2026-07-11 (21:54:19)
+
+## versionCode = 1995
+
+- versionName = 1.1.995
+- 2026-07-11 (21:54:35)
+
+## versionCode = 1996
+
+- versionName = 1.1.996
+- 2026-07-11 (21:57:42)
+
+## versionCode = 1997
+
+- versionName = 1.1.997
+- 2026-07-11 (21:58:32)
+
+## versionCode = 1998
+
+- versionName = 1.1.998
+- 2026-07-11 (22:23:33)
+
+## versionCode = 1999
+
+- versionName = 1.1.999
+- 2026-07-11 (22:23:35)
+
+## versionCode = 2000
+
+- versionName = 1.2.000
+- 2026-07-11 (22:23:58)
+
+## versionCode = 2001
+
+- versionName = 1.2.001
+- 2026-07-11 (22:24:14)
+
+## versionCode = 2002
+
+- versionName = 1.2.002
+- 2026-07-11 (22:29:07)
+
+## versionCode = 2003
+
+- versionName = 1.2.003
+- 2026-07-11 (22:29:19)
+
+## versionCode = 2004
+
+- versionName = 1.2.004
+- 2026-07-11 (22:29:39)
+
+## versionCode = 2005
+
+- versionName = 1.2.005
+- 2026-07-11 (22:29:44)
+
+## versionCode = 2006
+
+- versionName = 1.2.006
+- 2026-07-11 (22:29:49)
+
+## versionCode = 2007
+
+- versionName = 1.2.007
+- 2026-07-11 (22:30:05)
+
+## versionCode = 2008
+
+- versionName = 1.2.008
+- 2026-07-11 (22:36:37)
+
+## versionCode = 2009
+
+- versionName = 1.2.009
+- 2026-07-11 (22:56:22)
+
+## versionCode = 2010
+
+- versionName = 1.2.010
+- 2026-07-11 (23:12:46)
+
+## versionCode = 2011
+
+- versionName = 1.2.011
+- 2026-07-11 (23:13:41)
+
+## \[ 1.3.0 \]
+
+- 2026-07-11T14:31:02.478Z

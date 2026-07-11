@@ -11,7 +11,7 @@ declare module "@assets/*" {
   const value: any;
   export default value;
 }
-declare module "@images/*" {
+declare module "@svgs/*" {
   const value: any;
   export default value;
 }

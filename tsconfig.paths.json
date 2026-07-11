@@ -2,13 +2,27 @@
   "$schema": "https://json.schemastore.org/tsconfig.json",
   "compilerOptions": {
     "paths": {
-      "@assets/*": ["./src/assets/*"],
-      "@images/*": ["./src/assets/images/*"],
-      "@types/*": ["./src/assets/types/*"],
-      "@schemas/*": ["./src/schemas/*"],
-      "@containers/*": ["./src/containers/*"],
-      "@widgets/*": ["./src/widgets/*"],
-      "@exports/*": ["./src/exports/*"]
+      "@assets/*": [
+        "./src/assets/*"
+      ],
+      "@svgs/*": [
+        "./src/assets/svg/*"
+      ],
+      "@types/*": [
+        "./src/assets/types/*"
+      ],
+      "@schemas/*": [
+        "./src/schemas/*"
+      ],
+      "@containers/*": [
+        "./src/containers/*"
+      ],
+      "@widgets/*": [
+        "./src/widgets/*"
+      ],
+      "@exports/*": [
+        "./src/exports/*"
+      ]
     },
     "typeRoots": [
       "./node_modules/@types",
@@ -19,7 +33,7 @@
       "alias",
       "global",
       "extension"
-    ],
+    ]
   },
   "include": [
     "index.js",

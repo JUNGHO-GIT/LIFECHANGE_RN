@@ -20,7 +20,7 @@ module.exports = {
 			],
 			alias: {
 				'@assets': './src/assets',
-				'@images': './src/assets/images',
+				'@svgs': './src/assets/svg',
 				'@types': './src/assets/types',
 				'@schemas': './src/schemas',
 				'@containers': './src/containers',

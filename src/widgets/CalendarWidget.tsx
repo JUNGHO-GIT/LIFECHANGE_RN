@@ -1,8 +1,8 @@
 // Calendar.tsx
 
-import { FlexWidget, ImageWidget, TextWidget } from "@exports/ExportReacts";
+import { FlexWidget, SvgWidget, TextWidget } from "@exports/ExportReacts";
 
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+// -------------------------------------------------------------------------------------------------
 declare interface CalendarWidgetProps {
 	clientLanguage: string;
 	clientDate: string;
@@ -12,7 +12,7 @@ declare interface CalendarWidgetProps {
 	clientDay: string;
 }
 
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+// -------------------------------------------------------------------------------------------------
 declare interface CalendarProps {
 	widgetHeight: number;
 	widgetWidth: number;
@@ -37,25 +37,25 @@ declare interface CalendarProps {
 	];
 }
 
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
-const ClndSec = ({
+// -------------------------------------------------------------------------------------------------
+const CalendarSection = ({
 	widgetHeight,
 	widgetWidth,
-	clientLanguage: clntLang,
+	clientLanguage,
 	clientDate,
-	clientMonthStart: clntMnthStrt,
-	clientMonthEnd: clntMnthEnd,
+	clientMonthStart,
+	clientMonthEnd,
 	calendar,
 }: CalendarProps) => {
-	const currentDate = new Date(clntMnthStrt);
+	const currentDate = new Date(clientMonthStart);
 	const currentMonth = currentDate.getMonth();
 	const currentYear = currentDate.getFullYear();
 
 	// 달력 배열 생성
-	const updtClnd = (month: number, year: number) => {
+	const buildCalendarWeeks = (month: number, year: number) => {
 		const daysInMonth = new Date(year, month + 1, 0).getDate();
 		const firstDay = new Date(year, month, 1).getDay();
-		const clndArry = [];
+		const calendarWeeks = [];
 		let week = [];
 
 		// 첫 주 빈 칸 추가
@@ -67,7 +67,7 @@ const ClndSec = ({
 		for (let i = 1; i <= daysInMonth; i++) {
 			week.push(i);
 			if (week.length === 7) {
-				clndArry.push(week);
+				calendarWeeks.push(week);
 				week = [];
 			}
 		}
@@ -76,12 +76,12 @@ const ClndSec = ({
 		while (week.length < 7) {
 			week.push(``);
 		}
-		clndArry.push(week);
+		calendarWeeks.push(week);
 
-		return clndArry;
+		return calendarWeeks;
 	};
 
-	const clndArry = updtClnd(currentMonth, currentYear);
+	const calendarWeeks = buildCalendarWeeks(currentMonth, currentYear);
 
 	return (
 		<FlexWidget
@@ -104,13 +104,13 @@ const ClndSec = ({
 				}}
 			>
 				{[
-					clntLang === `ko` ? `일` : `S`,
-					clntLang === `ko` ? `월` : `M`,
-					clntLang === `ko` ? `화` : `T`,
-					clntLang === `ko` ? `수` : `W`,
-					clntLang === `ko` ? `목` : `T`,
-					clntLang === `ko` ? `금` : `F`,
-					clntLang === `ko` ? `토` : `S`,
+					clientLanguage === `ko` ? `일` : `S`,
+					clientLanguage === `ko` ? `월` : `M`,
+					clientLanguage === `ko` ? `화` : `T`,
+					clientLanguage === `ko` ? `수` : `W`,
+					clientLanguage === `ko` ? `목` : `T`,
+					clientLanguage === `ko` ? `금` : `F`,
+					clientLanguage === `ko` ? `토` : `S`,
 				].map((day, index) => (
 					<TextWidget
 						key={index}
@@ -139,7 +139,7 @@ const ClndSec = ({
 					alignItems: `center`,
 				}}
 			>
-				{clndArry.map((week, weekIndex) => (
+				{calendarWeeks.map((week, weekIndex) => (
 					<FlexWidget
 						key={weekIndex}
 						style={{
@@ -175,12 +175,12 @@ const ClndSec = ({
 	);
 };
 
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
-export const ClndWdgt = ({
-	clientLanguage: clntLang,
+// -------------------------------------------------------------------------------------------------
+export const CalendarWidget = ({
+	clientLanguage,
 	clientDate,
-	clientMonthStart: clntMnthStrt,
-	clientMonthEnd: clntMnthEnd,
+	clientMonthStart,
+	clientMonthEnd,
 	clientTime,
 	calendar,
 	widgetHeight,
@@ -224,10 +224,12 @@ export const ClndWdgt = ({
 							alignItems: `center`,
 						}}
 					>
-						<ImageWidget
-							image={require(`../assets/images/arrowLeft.webp`)}
-							imageWidth={20}
-							imageHeight={20}
+						<SvgWidget
+							svg={require(`../assets/svg/arrowleft.svg`)}
+							style={{
+								width: 20,
+								height: 20,
+							}}
 							clickAction={`PREV_MONTH`}
 						/>
 						<TextWidget
@@ -242,10 +244,12 @@ export const ClndWdgt = ({
 							}}
 							text={clientDate.slice(0, 7)}
 						/>
-						<ImageWidget
-							image={require(`../assets/images/arrowRight.webp`)}
-							imageWidth={20}
-							imageHeight={20}
+						<SvgWidget
+							svg={require(`../assets/svg/arrowright.svg`)}
+							style={{
+								width: 20,
+								height: 20,
+							}}
 							clickAction={`NEXT_MONTH`}
 						/>
 					</FlexWidget>
@@ -269,10 +273,12 @@ export const ClndWdgt = ({
 							}}
 							text={clientTime}
 						/>
-						<ImageWidget
-							image={require(`../assets/images/refresh.webp`)}
-							imageWidth={16}
-							imageHeight={16}
+						<SvgWidget
+							svg={require(`../assets/svg/refresh.svg`)}
+							style={{
+								width: 16,
+								height: 16,
+							}}
 							clickAction={`REFRESH`}
 						/>
 					</FlexWidget>
@@ -289,13 +295,13 @@ export const ClndWdgt = ({
 						paddingHorizontal: 0,
 					}}
 				>
-					<ClndSec
+					<CalendarSection
 						widgetHeight={widgetHeight}
 						widgetWidth={widgetWidth}
-						clientLanguage={clntLang}
+						clientLanguage={clientLanguage}
 						clientDate={clientDate}
-						clientMonthStart={clntMnthStrt}
-						clientMonthEnd={clntMnthEnd}
+						clientMonthStart={clientMonthStart}
+						clientMonthEnd={clientMonthEnd}
 						calendar={calendar}
 					/>
 				</FlexWidget>

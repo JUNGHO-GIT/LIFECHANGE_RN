@@ -8,14 +8,14 @@ import {
 	WebView,
 } from "@exports/ExportReacts";
 
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+// -------------------------------------------------------------------------------------------------
 declare type Props = {
 	onMessage: (event: any) => void;
 	bannerVisible: (newState: any) => void;
 	navigationEnabled: boolean;
 };
 
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+// -------------------------------------------------------------------------------------------------
 const styles = StyleSheet.create({
 	webviewContainer: {
 		flex: 1,
@@ -24,23 +24,23 @@ const styles = StyleSheet.create({
 	},
 });
 
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+// -------------------------------------------------------------------------------------------------
 export const Webviews = forwardRef<WebView, Props>(
-	({ onMessage, bannerVisible: bnnrVis, navigationEnabled: navOn }, ref) => {
+	({ onMessage, bannerVisible: handleBannerVisible, navigationEnabled }, ref) => {
 		const userAgent =
 			"Mozilla/5.0 (Linux; Android 8.0.0; SM-G935S Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36";
 
-		const injcJvScr = /* javascript */ `
+		const injectedJavaScript = /* javascript */ `
 
       // Session storage overrides
-      let ogSessionSetItem = window.sessionStorage.setItem;
-      let ogSessionRemoveItem = window.sessionStorage.removeItem;
+      let originalSessionSetItem = window.sessionStorage.setItem;
+      let originalSessionRemoveItem = window.sessionStorage.removeItem;
       let sessionTitle = window.sessionStorage.getItem('${TITLE}');
       let parsedTitle = JSON.parse(sessionTitle);
       let sessionId = parsedTitle?.setting?.id?.sessionId;
 
       window.sessionStorage.setItem = function (key, value) {
-        ogSessionSetItem.call(window.sessionStorage, key, value);
+        originalSessionSetItem.call(window.sessionStorage, key, value);
         const updatedTitle = JSON.parse(value);
         const updatedSessionId = updatedTitle?.setting?.id?.sessionId;
 
@@ -53,7 +53,7 @@ export const Webviews = forwardRef<WebView, Props>(
         }
       }
       window.sessionStorage.removeItem = function(key) {
-        ogSessionRemoveItem.call(window.sessionStorage, key);
+        originalSessionRemoveItem.call(window.sessionStorage, key);
         if (key === '${TITLE}') {
           sessionId = null;
           window.ReactNativeWebView.postMessage(JSON.stringify({
@@ -64,14 +64,14 @@ export const Webviews = forwardRef<WebView, Props>(
       }
 
       // Local storage overrides
-      let ogLocalSetItem = window.localStorage.setItem;
-      let ogLocalRemoveItem = window.localStorage.removeItem;
+      let originalLocalSetItem = window.localStorage.setItem;
+      let originalLocalRemoveItem = window.localStorage.removeItem;
       let localTitle = window.localStorage.getItem('${TITLE}');
       let parsedLocalTitle = JSON.parse(localTitle);
       let localeSetting = parsedLocalTitle?.setting?.locale;
 
       window.localStorage.setItem = function(key, value) {
-        ogLocalSetItem.call(window.localStorage, key, value);
+        originalLocalSetItem.call(window.localStorage, key, value);
         const updatedTitle = JSON.parse(value);
         const updatedLocaleSetting = updatedTitle?.setting?.locale;
 
@@ -84,7 +84,7 @@ export const Webviews = forwardRef<WebView, Props>(
         }
       }
       window.localStorage.removeItem = function(key) {
-        ogLocalRemoveItem.call(window.localStorage, key);
+        originalLocalRemoveItem.call(window.localStorage, key);
         if (key === '${TITLE}') {
           localeSetting = null;
           window.ReactNativeWebView.postMessage(JSON.stringify({
@@ -107,16 +107,16 @@ export const Webviews = forwardRef<WebView, Props>(
 				cacheEnabled={true}
 				javaScriptEnabled={true}
 				domStorageEnabled={true}
-				injectedJavaScript={injcJvScr}
+				injectedJavaScript={injectedJavaScript}
 				allowsBackForwardNavigationGestures={true}
 				onNavigationStateChange={(newState) => {
-					if (navOn) {
-						bnnrVis(newState);
+					if (navigationEnabled) {
+						handleBannerVisible(newState);
 					}
 				}}
 				onShouldStartLoadWithRequest={(request) => {
-					if (navOn) {
-						bnnrVis(request);
+					if (navigationEnabled) {
+						handleBannerVisible(request);
 						return true;
 					}
 					return false;

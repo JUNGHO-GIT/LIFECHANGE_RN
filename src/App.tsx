@@ -4,14 +4,14 @@ import { Banner, Webviews } from "@exports/ExportContainers";
 import { AsyncStorage } from "@exports/ExportLibs";
 import {
 	BackHandler,
-	SafeAreaProvider as SfArProv,
+	SafeAreaProvider,
 	StyleSheet,
 	useEffect,
 	useRef,
 	useState,
 } from "@exports/ExportReacts";
 
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+// -------------------------------------------------------------------------------------------------
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
@@ -20,18 +20,17 @@ const styles = StyleSheet.create({
 	},
 });
 
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+// -------------------------------------------------------------------------------------------------
 export const App = () => {
-	// ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――--
-	const [bnnrVis, stBnnrVis] = useState<boolean>(false);
-	const [navOn, _stNavOn] = useState<boolean>(true);
+	const [isBannerVisible, setBannerVisible] = useState<boolean>(false);
+	const [navigationEnabled, _setNavigationEnabled] = useState<boolean>(true);
 	const webViewRef = useRef<any>(null);
 
-	// 뒤로가기 버튼 이벤트 ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――--
+	// 뒤로가기 버튼 이벤트 --------------------------------------------------------------------------
 	useEffect(() => {
 		try {
 			const onBackPress = () => {
-				if (webViewRef.current && navOn) {
+				if (webViewRef.current && navigationEnabled) {
 					webViewRef.current.goBack();
 					return true;
 				}
@@ -47,10 +46,10 @@ export const App = () => {
 		} catch (err: any) {
 			console.error(`backHandler error:`, err);
 		}
-	}, [navOn]);
+	}, [navigationEnabled]);
 
-	// ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――--
-	const hdlOnMsg = (event: any) => {
+	// -----------------------------------------------------------------------------------------------
+	const handleMessage = (event: any) => {
 		try {
 			const parsedData = JSON.parse(event.nativeEvent.data);
 
@@ -71,34 +70,34 @@ export const App = () => {
 		}
 	};
 
-	// ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――--
-	const hdlBnnrVis = ({ url }: any) => {
+	// -----------------------------------------------------------------------------------------------
+	const handleBannerVisible = ({ url }: any) => {
 		try {
-			const hdBnnrUrls = [
+			const hiddenBannerUrls = [
 				`user/signup`,
 				`user/login`,
 				`user/resetPw`,
 				`accounts.google.com`,
 			];
-			const shldHdBnnr = hdBnnrUrls.some((hideUrl) =>
+			const shouldHideBanner = hiddenBannerUrls.some((hideUrl) =>
 				url.includes(hideUrl),
 			);
-			stBnnrVis(!shldHdBnnr);
+			setBannerVisible(!shouldHideBanner);
 		} catch (err: any) {
 			console.error(`bannerVisible event error:`, err);
 		}
 	};
 
-	// ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――--
+	// -----------------------------------------------------------------------------------------------
 	return (
-		<SfArProv style={styles.container}>
+		<SafeAreaProvider style={styles.container}>
 			<Webviews
-				onMessage={hdlOnMsg}
-				bannerVisible={hdlBnnrVis}
-				navigationEnabled={navOn}
+				onMessage={handleMessage}
+				bannerVisible={handleBannerVisible}
+				navigationEnabled={navigationEnabled}
 				ref={webViewRef}
 			/>
-			{bnnrVis && <Banner />}
-		</SfArProv>
+			{isBannerVisible && <Banner />}
+		</SafeAreaProvider>
 	);
 };

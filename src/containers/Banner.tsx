@@ -1,6 +1,6 @@
 // Banner.tsx
 
-import { ADMOB_BANNER_ID as ADMB_BNNR_ID } from "@env";
+import { ADMOB_BANNER_ID } from "@env";
 import {
 	BannerAd,
 	BannerAdSize,
@@ -8,7 +8,7 @@ import {
 	View,
 } from "@exports/ExportReacts";
 
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+// -------------------------------------------------------------------------------------------------
 const styles = StyleSheet.create({
 	bannerContainer: {
 		padding: 0,
@@ -20,15 +20,15 @@ const styles = StyleSheet.create({
 	},
 });
 
-// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-
+// -------------------------------------------------------------------------------------------------
 export const Banner = () => {
-	const realId = ADMB_BNNR_ID;
+	const adUnitId = ADMOB_BANNER_ID;
 
 	return (
 		<View style={styles.bannerContainer}>
 			<BannerAd
-				key={`banner-${realId}`}
-				unitId={`${realId}`}
+				key={`banner-${adUnitId}`}
+				unitId={`${adUnitId}`}
 				size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
 			/>
 		</View>
